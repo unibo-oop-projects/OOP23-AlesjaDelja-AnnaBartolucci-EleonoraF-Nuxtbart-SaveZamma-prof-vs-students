@@ -7,11 +7,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public class GamePlayController {
+	
+	public static boolean gameStatus;
+	@FXML
+    public AnchorPane GamePlayRoot;
 
 	 @FXML
 	    private void handleMouseClick(MouseEvent event) {
@@ -28,7 +33,7 @@ public class GamePlayController {
 	        Parent gameMenu = (Parent) fxmlLoader.load();
 	        Stage stage = new Stage();
 	        stage.setScene(new Scene(gameMenu));
-	        //GameMenuController controller = fxmlLoader.<GameMenuController>getController();
+	        MenuController controller = fxmlLoader.<MenuController>getController();
 	        //controller.initData(GamePlayRoot, levelNumber,d,sunCount,allPlants, allZombies, allMowers, timeElapsed, l.getZombieList1(), l.getZombieList2());
 	        stage.show();
 	    }

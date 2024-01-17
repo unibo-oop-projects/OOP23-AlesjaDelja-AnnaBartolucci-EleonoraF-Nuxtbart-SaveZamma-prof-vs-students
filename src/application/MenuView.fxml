@@ -6,24 +6,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="GameMenuRoot" prefHeight="278.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MenuController">
+<AnchorPane fx:id="GameMainMenuRoot" prefHeight="278.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MenuController">
    <children>
       <ImageView fitHeight="296.0" fitWidth="386.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/GameMenu.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="gameMenuButton" fitHeight="92.0" fitWidth="175.0" layoutX="195.0" layoutY="36.0"  pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="gameMenuButton" fitHeight="92.0" fitWidth="175.0" layoutX="195.0" layoutY="36.0" onMouseClicked="#returnMainManu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/gameMenuButton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="saveGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="12.0" layoutY="34.0"  pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="exitGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="12.0" layoutY="34.0"  pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/exitButton.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="replayGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="14.0" layoutY="127.0"  pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="replayGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="14.0" layoutY="127.0"  onMouseClicked="#replayGame" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/replayButton.jpg" />
          </image>

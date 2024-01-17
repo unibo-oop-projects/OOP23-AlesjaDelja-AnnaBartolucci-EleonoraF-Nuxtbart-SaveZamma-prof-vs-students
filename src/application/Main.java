@@ -15,7 +15,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			//addMusic();
+			addMusic();
 			Parent mainPage=FXMLLoader.load(getClass().getResource("GameView.fxml"));
 	        Scene scene = new Scene(mainPage,1024,600);
 	        primaryStage.setTitle("Prof VS Students");
