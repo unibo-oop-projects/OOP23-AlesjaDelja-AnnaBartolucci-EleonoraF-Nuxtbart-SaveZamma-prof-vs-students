@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="GameMenuRoot" prefHeight="278.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MenuController">
+   <children>
+      <ImageView fitHeight="296.0" fitWidth="386.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/GameMenu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="gameMenuButton" fitHeight="92.0" fitWidth="175.0" layoutX="195.0" layoutY="36.0"  pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/gameMenuButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="saveGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="12.0" layoutY="34.0"  pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/exitButton.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="replayGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="14.0" layoutY="127.0"  pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/replayButton.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="GameMenuMessage" layoutX="34.0" layoutY="208.0" prefHeight="51.0" prefWidth="246.0" textFill="#f5881a">
+         <font>
+            <Font name="Comic Sans MS" size="25.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
+<!-- onMouseClicked="#restartGame" -->
+<!-- onMouseClicked="#saveGame" -->
+<!-- onMouseClicked="#showMainMenu" -->
