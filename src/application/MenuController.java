@@ -36,7 +36,10 @@ public class MenuController {
     	
     }
     
-    
+    @FXML
+    void exitGame(MouseEvent event) throws IOException {
+    	System.exit(0);
+    }
     
     @FXML
     void returnMainManu(MouseEvent event) throws IOException {

@@ -38,4 +38,12 @@ public class GamePlayController {
 	        stage.show();
 	    }
 
+	    public void userLost() throws IOException{
+	    	
+	    }
+	    
+	    public void userWin() throws IOException{
+	    	//carico il file fxml con la scritta hai vinto
+	    	
+	    }
 }

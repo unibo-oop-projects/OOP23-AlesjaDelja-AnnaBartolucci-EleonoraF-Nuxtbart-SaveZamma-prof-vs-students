@@ -18,7 +18,7 @@
             <Image url="@../img/gameMenuButton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="exitGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="12.0" layoutY="34.0"  pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="exitGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="12.0" layoutY="34.0" onMouseClicked="#exitGame" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/exitButton.jpg" />
          </image>
@@ -34,6 +34,3 @@
          </font></Label>
    </children>
 </AnchorPane>
-<!-- onMouseClicked="#restartGame" -->
-<!-- onMouseClicked="#saveGame" -->
-<!-- onMouseClicked="#showMainMenu" -->
