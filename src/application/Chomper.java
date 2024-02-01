@@ -15,7 +15,6 @@ public class Chomper extends Professor{
     Timer biteTimer;
     Timer resetTimer;
 
-    //构造方法
     public Chomper(GamePlay gamePlay){
         super(98,110,150,gamePlay);
         state = State.READY;
@@ -28,10 +27,8 @@ public class Chomper extends Professor{
         resetTimer = new Timer(30000,(ActionEvent) -> reset());
     }
 
-    //大嘴花吃僵尸
     public void bite() {
         if (state == State.READY) {
-            //遍历僵尸对象
             Iterator zombiesIterator = gamePlay.getZombieController().getZombieArrayList((this.getY() - 90) / 100 + 1).iterator();
             while (zombiesIterator.hasNext()) {
                 Zombie zombie = (Zombie) zombiesIterator.next();
@@ -65,7 +62,6 @@ public class Chomper extends Professor{
         biteTimer.start();
     }
 
-    //计时器关闭
     public void timerStop(){
         biteTimer.stop();
         resetTimer.stop();
