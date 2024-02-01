@@ -1,7 +1,6 @@
 package application;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import application.GamePlayController;
 
 public class MenuController {
 

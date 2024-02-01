@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 public class GamePlayController {
 	
 	public static boolean gameStatus;
+	public static int TEMPO_TRA_ONDATE = 5; // tempo tra ondate da definire meglio!!!!
 	public GamePlayModel gameModel;
 	public List<Professor> profInGame; // lista dei professori in partita
 	public List<GamePlayModel.Student> studInGame; // lista degli studenti in partita
@@ -39,8 +40,11 @@ public class GamePlayController {
     public void gameMatch(){
     	try {
     		if(gameStatus) {
-    			gameModel.getProfList().forEach(prof->{profInGame.add(prof);});
-    			gameModel.getStudentList().forEach(student->{studInGame.add(student);});
+    			gameModel.getProfList().forEach(prof->{profInGame.add(prof);}); // in teoria da mettere nella Model ??
+    			gameModel.getStudentList().forEach(student->{studInGame.add(student);}); // in teoria da mettere nella Model ??
+    			
+    			// genero la prima ondata di studenti
+                gameModel.generateWave();
     			
     			//update view()?
     			
@@ -65,6 +69,11 @@ public class GamePlayController {
     			    Iterator<GamePlayModel.Student> studentIterator = gameModel.getStudentList().iterator();
     			    while (studentIterator.hasNext()) {
     			        GamePlayModel.Student student = studentIterator.next();
+    			        
+    			        // genero una nuova ondata
+    	                if (gameModel.getTimeTot() % TEMPO_TRA_ONDATE == 0) {
+    	                    gameModel.generateWave();
+    	                }
 
     			        // Check dello studente se è vivo 
     			        if (studInGame.contains(student)) {
@@ -90,7 +99,7 @@ public class GamePlayController {
     			            }
     			        } else {
     			            // Lo studente è morto
-    			            handleStudentKilled(student, gameModel);
+    			        	gameModel.handleStudentKilled(student);
     			            studentIterator.remove(); // Rimuovi lo studente morto dalla lista
     			        }
     			    }
@@ -114,7 +123,7 @@ public class GamePlayController {
     			            }
     			        } else {
     			            // Il professore è morto
-    			            handleProfKilled(prof, gameModel);
+    			        	gameModel.handleProfKilled(prof);
     			            profIterator.remove(); // Rimuovi il professore morto dalla lista
     			        }
     			    }
@@ -187,19 +196,5 @@ public class GamePlayController {
 	        stage.show();
 	    }
 	    
-	    public void handleStudentKilled(GamePlayModel.Student student, GamePlayModel gameModel ) {
-	        gameModel.increaseTimeTot(gameModel.getTimeTot());
-	        gameModel.getStudentList().remove(student);
-	        //gestire la view
-	        //gameView.update(gameModel); ???
-
-	    }
-
-	    public void handleProfKilled(Professor prof, GamePlayModel gameModel ) {
-	        gameModel.decreaseTimeTot(gameModel.getTimeTot());
-	        gameModel.getProfList().remove(prof);
-	        //gestire la view
-	        //update(gameModel);
-
-	    }
+	    
 }

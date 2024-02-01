@@ -2,6 +2,7 @@ package application;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GamePlayModel {
 
@@ -36,7 +37,19 @@ public class GamePlayModel {
 	    }
 
 	    public void generateWave() {
-	        // Creare una nuova ondata di zombie
+	        // Creare una nuova ondata di studenti
+	    	Random rand = new Random();
+
+	        // num di studenti per ondata
+	        int waveSize = rand.nextInt(4) + 1;// posso cambiare, messo per prova meglio se tolgo il numero e metto una variabile
+
+	        for (int i = 0; i < waveSize; i++) {
+	            int randomRow = rand.nextInt(5); // numero casuale tra 0 e 5 per le righe
+	            int col = 8; // gli studenti partono dall ultima colonna e poi avanzano
+
+	            generateNewStudent(col, randomRow);
+	        }
+	    	
 	    }
 
 	    public void generateNewProf() {
@@ -49,10 +62,10 @@ public class GamePlayModel {
 	    	
 	    }
 
-	    public void generateNewStudent() {
+	    public void generateNewStudent(int col, int row) {
 	        // Creare un nuovo studente
 	    	// da implementare correttamente quando verrà implementata la classe Student
-	    	Student student = new Student(1,1);
+	    	Student student = new Student(col,row);
 	    	studentList.add(student);
 	    }
 
@@ -91,7 +104,7 @@ public class GamePlayModel {
 
 	    
 
-	    // Definizione delle classi Student e Prof (da implementare)
+	    // Definizione classe Student (da implementare)
 
 	    public class Student {
 	        public int col;
@@ -121,5 +134,20 @@ public class GamePlayModel {
 	        // ...
 	    }
 
+	    public void handleStudentKilled(Student student) {
+	        increaseTimeTot(getTimeTot());
+	        getStudentList().remove(student);
+	        //gestire la view //penso che si debba gestire nel controller
+	        //gameView.update(gameModel); ???
+
+	    }
+
+	    public void handleProfKilled(Professor prof) {
+	        decreaseTimeTot(getTimeTot());
+	        getProfList().remove(prof);
+	        //gestire la view //penso che si debba gestire nel controller
+	        //update(gameModel);
+
+	    }
 
 }
