@@ -8,6 +8,10 @@ import javafx.scene.layout.Pane;
 import application.GamePlayController;
 
 public class Professor {
+	
+	public int sunUse;
+	protected int WIDTH;
+    protected int HEIGHT;
     private String path;
     GamePlayController gameplay;
     private ImageView imageView;
@@ -15,12 +19,13 @@ public class Professor {
     private int column;
     private int row;
 
-    public Professor(String path, int healthPoints, int column, int row, GamePlay gamePlay) {
+    public Professor(String path, int healthPoints, int column, int row, int sunUse, GamePlayController gameplay) {
         this.path = path;
         this.healthPoints = healthPoints;
         this.column = column;
         this.row = row;
-        this.gamePlay = gamePlay;
+        this.gameplay = gameplay;
+        this.sunUse = sunUse;
         this.imageView = createImageView();
         this.setSize(WIDTH, HEIGHT);
         this.setOpaque(false);
@@ -67,7 +72,7 @@ public class Professor {
     
   //getter
     public GamePlayController getGamePlay() {
-        return gameStatus;
+        return gameplay;
     }
     public int getSunUse() {
         return sunUse;
