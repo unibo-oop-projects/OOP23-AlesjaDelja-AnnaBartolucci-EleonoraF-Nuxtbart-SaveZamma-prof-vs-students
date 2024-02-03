@@ -20,6 +20,7 @@ public class GamePlayController {
 	public static boolean gameStatus;
 	public static int TEMPO_TRA_ONDATE = 5; // tempo tra ondate da definire meglio!!!!
 	public GamePlayModel gameModel;
+	public GamePlayView gamePlayView;
 	public List<Professor> profInGame; // lista dei professori in partita
 	public List<GamePlayModel.Student> studInGame; // lista degli studenti in partita
 	@FXML
@@ -27,6 +28,7 @@ public class GamePlayController {
 	
 
 	public void initialize() throws Exception {
+		gamePlayView.setController(this);
 		gameModel = new GamePlayModel();
 		gameStatus =true;
 		profInGame = new ArrayList();
@@ -34,10 +36,10 @@ public class GamePlayController {
 	
     @FXML
     public void initData() {
-    	gameMatch();
+    	startGame();
     }
 
-    public void gameMatch(){
+    public void startGame(){
     	try {
     		if(gameStatus) {
     			gameModel.getProfList().forEach(prof->{profInGame.add(prof);}); // in teoria da mettere nella Model ??
