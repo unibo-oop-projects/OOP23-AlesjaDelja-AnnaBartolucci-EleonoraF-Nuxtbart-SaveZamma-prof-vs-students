@@ -5,33 +5,39 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+import javax.swing.*;
+import java.awt.*;
+
 import application.GamePlayController;
 
-public class Professor {
+public class Professor{
 	
+	/**
+	 * 
+	 */
 	public int sunUse;
-	protected int WIDTH;
-    protected int HEIGHT;
-    private String path;
-    GamePlayController gameplay;
+	
+	private final int buyThreshold; // Constant cost value for different plants 
+	private int hitThreshold; // Maximum hits a plant can take before it is dead
+	private int xPos; // Grid position x
+	private int yPos; // Grid position y
+	private int healthPoints;
+    GamePlayModel gameplay;
     private ImageView imageView;
-    private int healthPoints;
-    private int column;
-    private int row;
+    private String path;
+   
 
-    public Professor(String path, int healthPoints, int column, int row, int sunUse, GamePlayController gameplay) {
-        this.path = path;
+    public Professor(String path, int hitThreshold, int buyThreshold, int x, int y, int healthPoints) {
         this.healthPoints = healthPoints;
-        this.column = column;
-        this.row = row;
         this.gameplay = gameplay;
         this.sunUse = sunUse;
-        this.imageView = createImageView();
-        this.setSize(WIDTH, HEIGHT);
-        this.setOpaque(false);
-        this.setVisible(true);
-        redrawTimer = new Timer(25, (ActionEvent) -> repaint());
-        redrawTimer.start();
+        this.path = path;
+        this.buyThreshold = buyThreshold;
+		this.hitThreshold = hitThreshold;
+		this.setxPos(x);
+		this.setyPos(y);
+		
+		this.imageView = createImageView();
     }
 
     private ImageView createImageView() {
@@ -42,7 +48,7 @@ public class Professor {
     }
 
     public void addToGrid(GridPane grid) {
-        grid.add(imageView, column, row, 1, 1);
+        grid.add(imageView, xPos, yPos, 1, 1);
     }
 
     public void performAttack(Pane pane) {
@@ -71,10 +77,86 @@ public class Professor {
     }
     
   //getter
-    public GamePlayController getGamePlay() {
+    public GamePlayModel getGamePlay() {
         return gameplay;
     }
     public int getSunUse() {
         return sunUse;
     }
+    
+    /**
+	 * Returns Plant's sunflower cost.
+	 * @return plant cost in sunflower
+	 */
+	public int getBuyThreshold() {
+		return buyThreshold;
+	}
+
+	/**
+	 * Health points or maximum hits plants 
+	 * can take within a game level.
+	 * @return plant maximum hitThreshold before plant dies
+	 */
+	public int getHitThreshold() {
+		return hitThreshold;
+	}
+
+	/**
+	 * Sets the current health of a plant.
+	 * @param currentHP Updates plants health points 
+	 * or the current hit count
+	 */
+	public void setHitThreshold(int currentHP) {
+		this.hitThreshold = currentHP;
+	}
+	
+	
+    /**
+	 * Checks if current bought plants are alive.
+	 * @return true if the plant is dead false if it is still alive
+	 */
+	public boolean isPlantDead() {
+		if (getHitThreshold() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * @return x position
+	 */
+	public int getxPos() {
+		return xPos;
+	}
+	
+	/**
+	 * @return y position
+	 */
+	public int getyPos() {
+		return yPos;
+	}
+	
+	/**
+	 * @param xPos set x to this position 
+	 */
+	public void setxPos(int xPos) {
+		if (xPos >= 0 && xPos <= 8) {
+			this.xPos = xPos;
+		}	
+	}
+	
+	/**
+	 * @param yPos set y to this position
+	 */
+	public void setyPos(int yPos) {
+		if (yPos >= 0 && yPos <= 4) {
+			this.yPos = yPos;
+		}
+	}
+	
+	public Professor clone() throws CloneNotSupportedException {
+		return (Professor) super.clone();
+	}
+	
 }
