@@ -12,6 +12,7 @@ public class GamePlayModel {
 	    private List<Professor> profList; // Lista di prof presenti
 	    private int COST_OF_PROF = 1;
 	    private int HEALTH_POINTS = 5;
+	    private int COL_STUDENT_START = 8;
 	    
 	    public GamePlayModel() {
 	        this.solarEnergy = 0;
@@ -45,9 +46,9 @@ public class GamePlayModel {
 
 	        for (int i = 0; i < waveSize; i++) {
 	            int randomRow = rand.nextInt(5); // numero casuale tra 0 e 5 per le righe
-	            int col = 8; // gli studenti partono dall ultima colonna e poi avanzano
+	            // gli studenti partono dall ultima colonna e poi avanzano
 
-	            generateNewStudent(col, randomRow);
+	            generateNewStudent(COL_STUDENT_START, randomRow);
 	        }
 	    	
 	    }
@@ -56,8 +57,7 @@ public class GamePlayModel {
 	        // Creare un nuovo professore
 	    	for (int row=1; row<5; row++) {
 	    		int col = 0;
-	    		Professor newProf = new Professor("", HEALTH_POINTS, col, row, null);
-	    		profList.add(newProf);
+	    		profList.add(new Professor("", HEALTH_POINTS, col, row, null));
 	    	}
 	    	
 	    }
@@ -65,8 +65,7 @@ public class GamePlayModel {
 	    public void generateNewStudent(int col, int row) {
 	        // Creare un nuovo studente
 	    	// da implementare correttamente quando verrà implementata la classe Student
-	    	Student student = new Student(col,row);
-	    	studentList.add(student);
+	    	studentList.add(new Student(col,row));
 	    }
 
 	    public void increaseSolarEnergy(int amount) {

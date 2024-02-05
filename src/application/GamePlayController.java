@@ -56,7 +56,7 @@ public class GamePlayController {
     			// controllo che sia in vita
     			// se è stato colpito aumento il punteggio del giocatore (se ha ancora punti vita continua sennò muore e si toglie dalla lista studenti)
     			// faccio avanzare man mano in riga
-    			// controllo per vedere se è arrivato nella cella del prof ->se sì HA VINTO-> status : false
+    			// controllo per vedere se è arrivato nella cella del prof ->se sì HA Perso-> status : false
     			
     			// per ogni professore:
     			// controllo che sia in vita
@@ -158,6 +158,7 @@ public class GamePlayController {
     }
 	 @FXML
 	    private void handleMouseClick(MouseEvent event) {
+		 	//con questa funzione dovremmo piantare i professori?
 	        int columnIndex = GridPane.getColumnIndex((Region) event.getSource());
 	        int rowIndex = GridPane.getRowIndex((Region) event.getSource());
 
