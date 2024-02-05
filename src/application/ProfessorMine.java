@@ -2,22 +2,17 @@ package application;
 
 public class ProfessorMine extends ExplosiveProfessor{
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	public static final int POTATOMINE_HIT_THRESHOLD = 15;
-	public static final int POTATOMINE_BUY_THRESHOLD = 75;
+	public static final int PROFESSORMINE_HIT_THRESHOLD = 15;
+	public static final int PROFESSORMINE_BUY_THRESHOLD = 75;
 	public static final int TURNS_UNTIL_EXPLOSION = 3;
-	public static final int POTATOMINE_EXPLOSION_DAMAGE = 10;
-	
+	public static final int PROFESSORMINE_EXPLOSION_DAMAGE = 10;
 	
 	private int countDownStartToExplode;
 	private boolean isPrimed;
 	
 	public ProfessorMine(String path, int x, int y, int healthPoints) {
-		super(path, POTATOMINE_HIT_THRESHOLD, POTATOMINE_BUY_THRESHOLD, x, y, POTATOMINE_EXPLOSION_DAMAGE, healthPoints);
+		super(path, PROFESSORMINE_HIT_THRESHOLD, PROFESSORMINE_BUY_THRESHOLD, x, y, PROFESSORMINE_EXPLOSION_DAMAGE, healthPoints);
 		countDownStartToExplode = TURNS_UNTIL_EXPLOSION;
 		setPrimed(false);
 	}
@@ -59,5 +54,4 @@ public class ProfessorMine extends ExplosiveProfessor{
 		Status = "PM = " + this.getHitThreshold();
 		return Status;
 	}
-
 }

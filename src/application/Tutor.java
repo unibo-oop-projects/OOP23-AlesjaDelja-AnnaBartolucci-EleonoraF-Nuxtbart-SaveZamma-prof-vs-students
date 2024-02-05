@@ -3,6 +3,7 @@ package application;
 //tutor cerbottana
 public class Tutor extends ShooterProfessor{
 
+	private static final long serialVersionUID = 1L;
 	public static final int TUTOR_HIT_THRESHOLD = 10;
 	public static final int TUTOR_BUY_THRESHOLD = 100;
 	public static final int TUTOR_HIT_VALUE = 2;

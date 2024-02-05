@@ -21,6 +21,8 @@ public class Professor implements Serializable{
 	/**
 	 * 
 	 */
+	private PlantView plantView;
+	
 	public int sunUse;
 	
 	private final int buyThreshold; // Constant cost value for different plants 
@@ -43,18 +45,18 @@ public class Professor implements Serializable{
 		this.setxPos(x);
 		this.setyPos(y);
 		
-		this.imageView = createImageView();
+		//this.imageView = createImageView();
+		plantView = new PlantView(path);
     }
 
-    private ImageView createImageView() {
-        ImageView image = new ImageView(new Image(path));
-        image.setFitWidth(50); // Imposta la larghezza desiderata
-        image.setFitHeight(50); // Imposta l'altezza desiderata
-        return image;
-    }
+	/*
+	 * private ImageView createImageView() { ImageView image = new ImageView(new
+	 * Image(path)); image.setFitWidth(50); // Imposta la larghezza desiderata
+	 * image.setFitHeight(50); // Imposta l'altezza desiderata return image; }
+	 */
 
     public void addToGrid(GridPane grid) {
-        grid.add(imageView, xPos, yPos, 1, 1);
+        grid.add(plantView, xPos, yPos, 1, 1);
     }
 
     public void performAttack(Pane pane) {

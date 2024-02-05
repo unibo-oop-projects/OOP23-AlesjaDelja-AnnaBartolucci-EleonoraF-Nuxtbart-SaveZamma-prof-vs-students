@@ -1,8 +1,6 @@
 package application;
 
 public class ExplosiveProfessor extends Professor{
-
-	
 	/**
 	 * 
 	 */
