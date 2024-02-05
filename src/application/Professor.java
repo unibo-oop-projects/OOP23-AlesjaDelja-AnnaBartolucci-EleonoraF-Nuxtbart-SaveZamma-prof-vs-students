@@ -7,11 +7,17 @@ import javafx.scene.layout.Pane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
 import application.GamePlayController;
 
-public class Professor{
+public class Professor implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 
 	 */
@@ -155,8 +161,9 @@ public class Professor{
 		}
 	}
 	
-	public Professor clone() throws CloneNotSupportedException {
-		return (Professor) super.clone();
-	}
+	/*
+	 * public Professor clone() throws CloneNotSupportedException { return
+	 * (Professor) super.clone(); }
+	 */
 	
 }
