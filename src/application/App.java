@@ -13,7 +13,7 @@ import javafx.util.Duration;
 public class App extends Application {
 	public static MediaPlayer mediaPlayer;
 	private GridPane gridPane;
-    private PlantView plantView;
+    private ProfessorView plantView;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -22,7 +22,7 @@ public class App extends Application {
         // Ipotizziamo che tu abbia un'istanza di PlantView chiamata plantView
         // e che imagePath sia il percorso dell'immagine associata alla nuova pianta
      // Crea un'istanza di PlantView
-        plantView = new PlantView("path_to_default_plant_image");
+        plantView = new ProfessorView("path_to_default_plant_image");
 
      // Aggiungi la PlantView alla griglia
         gridPane.add(plantView, 0, 0);
@@ -75,7 +75,7 @@ public class App extends Application {
 	
 	// Metodo per aggiungere un personaggio alla griglia
     private void addCharacter(String characterName, String imagePath) {
-        PlantView characterView = new PlantView(imagePath);
+        ProfessorView characterView = new ProfessorView(imagePath);
         gridPane.add(characterView, 0, 0);
 
         // Aggiungi un gestore eventi per il clic del mouse su questo personaggio

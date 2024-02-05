@@ -21,7 +21,7 @@ public class Professor implements Serializable{
 	/**
 	 * 
 	 */
-	private PlantView plantView;
+	private ProfessorView plantView;
 	
 	public int sunUse;
 	
@@ -46,7 +46,7 @@ public class Professor implements Serializable{
 		this.setyPos(y);
 		
 		//this.imageView = createImageView();
-		plantView = new PlantView(path);
+		plantView = new ProfessorView(path);
     }
 
 	/*

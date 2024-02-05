@@ -5,10 +5,10 @@ import java.awt.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class PlantView extends Pane {
+public class ProfessorView extends Pane {
     private ImageView imageView;
 
-    public PlantView(String imagePath) {
+    public ProfessorView(String imagePath) {
         imageView = new ImageView(new Image(imagePath));
         imageView.setFitWidth(50);
         imageView.setFitHeight(50);

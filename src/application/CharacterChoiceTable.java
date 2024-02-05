@@ -10,9 +10,9 @@ import javafx.scene.layout.VBox;
 public class CharacterChoiceTable extends VBox{
 
 	 private TableView<CharacterEntry> tableView;
-	    private PlantView plantView;
+	    private ProfessorView plantView;
 
-	    public CharacterChoiceTable(PlantView plantView) {
+	    public CharacterChoiceTable(ProfessorView plantView) {
 	        this.plantView = plantView;
 
 	        // Creazione della TableView
