@@ -156,14 +156,14 @@ public class GamePlayController {
 			e.printStackTrace();
 		}
     }
-	 @FXML
+	 /*@FXML
 	    private void handleMouseClick(MouseEvent event) {
 		 	//con questa funzione dovremmo piantare i professori?
 	        int columnIndex = GridPane.getColumnIndex((Region) event.getSource());
 	        int rowIndex = GridPane.getRowIndex((Region) event.getSource());
 
 	        System.out.println("Clicked at column " + columnIndex + " and row " + rowIndex);
-	    }
+	    }*/
 	 
 
 	    @FXML
