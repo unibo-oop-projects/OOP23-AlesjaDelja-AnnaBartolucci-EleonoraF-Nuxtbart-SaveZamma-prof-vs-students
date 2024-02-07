@@ -166,16 +166,16 @@ public class GamePlayController {
 	    }*/
 	 
 
-	    @FXML
-	    void GameMenu(MouseEvent event) throws IOException {
-	        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
-	        Parent gameMenu = (Parent) fxmlLoader.load();
-	        Stage stage = new Stage();
-	        stage.setScene(new Scene(gameMenu));
-	        MenuController controller = fxmlLoader.<MenuController>getController();
-	        //controller.initData(GamePlayRoot, levelNumber,d,sunCount,allPlants, allZombies, allMowers, timeElapsed, l.getZombieList1(), l.getZombieList2());
-	        stage.show();
-	    }
+    /*@FXML  MESSA nella View ??
+    void GameMenu(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
+        Parent gameMenu = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(gameMenu));
+        MenuController controller = fxmlLoader.<MenuController>getController();
+        //controller.initData(GamePlayRoot, levelNumber,d,sunCount,allPlants, allZombies, allMowers, timeElapsed, l.getZombieList1(), l.getZombieList2());
+        stage.show();
+    }*/
 
 	    public void userLost() throws IOException{
 	    	//carico il file fxml con la scritta hai perso

@@ -2,14 +2,19 @@ package application;
 
 import java.util.Iterator;
 import java.util.List;
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
 public class GamePlayView {
 	// per gestire la griglia di gioco, popolarla con le immagini degli studenti, professori, ecc.,
@@ -34,6 +39,7 @@ public class GamePlayView {
     private GridPane lawnGrid;
 
     public GamePlayController gameController;
+    public GamePlayModel gamePlayModel;
     public List<Professor> profInGrid;
 
     public void setController(GamePlayController gameController) {
@@ -69,16 +75,29 @@ public class GamePlayView {
         //				se SI: pianto il prof nella cella selezionata e lo aggiungo alla lista dei profInGrid
         //				se NO: nulla, esco dagli if annidati
 	    if(ProfChoose.getIDProfChoosen()!=-1) {
-	    	if(columnIndex!=null && rowIndex!=null && !profInGrid(columnIndex, rowIndex)) {
+	    	if(columnIndex!=null && rowIndex!=null && !isProfInGrid(columnIndex, rowIndex)) {
 	    		/*if(ProfChoose.getProf(ProfChoose.getIDProfChoosen())).getTimeCost<=TimeTot) {
-	    			piazzo il professore
-	    			diminuisco il tempo totale
+	    		    creo nuovo prof con columnIndex e rowIndex --> Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex);
+	    			piazzo il professore nella griglia --> ?
+	    			aggiungo il prof in lista --> profInGrid.add(p);
+	    			diminuisco il tempo totale o la moneta --> gamePlayModel.decreaseTimeTot(p.TimeCost);
 	    		}*/
 	    	}
 	    }
     }
+    
+    @FXML
+    void GameMenu(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
+        Parent gameMenu = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(gameMenu));
+        MenuController controller = fxmlLoader.<MenuController>getController();
+        //controller.initData(GamePlayRoot, levelNumber,d,sunCount,allPlants, allZombies, allMowers, timeElapsed, l.getZombieList1(), l.getZombieList2());
+        stage.show();
+    }
 
-	private boolean profInGrid(int columnIndex, int rowIndex) {
+	private boolean isProfInGrid(int columnIndex, int rowIndex) {
 		// controllo se c'è un professore in quella cella della griglia
 		// se c'è restituisco TRUE se non c'è restituisco FALSE
 		return profInGrid.stream().anyMatch(p -> p.getxPos() == columnIndex && p.getyPos() == rowIndex);
