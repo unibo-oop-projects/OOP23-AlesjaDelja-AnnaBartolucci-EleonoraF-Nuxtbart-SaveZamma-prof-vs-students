@@ -64,7 +64,7 @@ public class GamePlayModel {
 	    public void generateNewStudent(int col, int row) {
 	        // Creare un nuovo studente
 	    	// da implementare correttamente quando verrà implementata la classe Student
-	    	Student student = new Student(col,row);
+	    	Student student = new Student(col,row, "");
 	    	studentList.add(student);
 	    }
 
@@ -108,10 +108,20 @@ public class GamePlayModel {
 	    public class Student {
 	        public int col;
 	        public int row;
+	        private String pathImg;
 	        
-			public Student(int col, int row) {
+			public Student(int col, int row, String pathImg) {
 				this.col = col;
 				this.row = row;
+				this.pathImg = pathImg;
+			}
+
+			public String getPathImg() {
+				return pathImg;
+			}
+
+			public void setPathImg(String pathImg) {
+				this.pathImg = pathImg;
 			}
 
 			public int getCol() {

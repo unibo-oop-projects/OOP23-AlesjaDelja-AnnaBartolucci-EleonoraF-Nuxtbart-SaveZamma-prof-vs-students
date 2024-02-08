@@ -62,9 +62,20 @@ public class GamePlayView {
         // ...
     	// per ogni studente in studentInGrid
     	//	prendo le coordinate e metto sulla griglia la foto corrispondente
+    	for(Student stud : studentInGrid) {
+    		ImageView studentImg = new ImageView(stud.getPathImg()); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
+    		GridPane.setConstraints(studentImg, stud.getCol(), stud.getRow());
+    		lawnGrid.getChildren().add(studentImg);
+    	}
     	
     	// per ogni prof in studentInGrid
     	//	prendo le coordinate e metto sulla griglia la foto corrispondente
+    	for(Professor prof : profInGrid) {
+    		// prof.addToGrid(lawnGrid);??
+    		/*ImageView profImg = new ImageView(prof.getPathImg());
+    		GridPane.setConstraints(profImg, prof.getxPos(), prof.getyPos());
+    		lawnGrid.getChildren().add(profImg);*/
+    	}
     }
 
     @FXML
