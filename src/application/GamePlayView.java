@@ -2,6 +2,9 @@ package application;
 
 import java.util.Iterator;
 import java.util.List;
+
+import application.GamePlayModel.Student;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
@@ -41,6 +44,7 @@ public class GamePlayView {
     public GamePlayController gameController;
     public GamePlayModel gamePlayModel;
     public List<Professor> profInGrid;
+    private List<Student> studentInGrid; // Lista di studenti presenti
 
     public void setController(GamePlayController gameController) {
         this.gameController = gameController;
@@ -49,12 +53,18 @@ public class GamePlayView {
     public void initialize() {
         // Inizializza la griglia di gioco, impostando le immagini iniziali, ecc.
     	ProfChoose.getProfTypes(gamePlayRoot);
-    	profInGrid = new ArrayList();
+    	profInGrid = gamePlayModel.getProfList();
+    	studentInGrid = gamePlayModel.getStudentList();
     }
     
     public void update(GamePlayModel model) {
         // aggiornamento della vista in base allo stato del modello
         // ...
+    	// per ogni studente in studentInGrid
+    	//	prendo le coordinate e metto sulla griglia la foto corrispondente
+    	
+    	// per ogni prof in studentInGrid
+    	//	prendo le coordinate e metto sulla griglia la foto corrispondente
     }
 
     @FXML
@@ -78,8 +88,8 @@ public class GamePlayView {
 	    	if(columnIndex!=null && rowIndex!=null && !isProfInGrid(columnIndex, rowIndex)) {
 	    		/*if(ProfChoose.getProf(ProfChoose.getIDProfChoosen())).getTimeCost<=TimeTot) {
 	    		    creo nuovo prof con columnIndex e rowIndex --> Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex);
-	    			piazzo il professore nella griglia --> ?
-	    			aggiungo il prof in lista --> profInGrid.add(p);
+	    		    aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
+	    			piazzo il professore nella griglia --> con la call ad updateView(gamePlayModel) che mi mette a video le immagini
 	    			diminuisco il tempo totale o la moneta --> gamePlayModel.decreaseTimeTot(p.TimeCost);
 	    		}*/
 	    	}
