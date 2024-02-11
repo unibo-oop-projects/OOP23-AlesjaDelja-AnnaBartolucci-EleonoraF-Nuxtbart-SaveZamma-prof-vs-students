@@ -36,13 +36,10 @@ public class GamePlayModel {
 	        return profList;
 	    }
 
-	    public void generateWave() {
+	    public void generateWave(int waveSize) {
 	        // Creare una nuova ondata di studenti
 	    	Random rand = new Random();
-
-	        // num di studenti per ondata
-	        int waveSize = rand.nextInt(4) + 1;// posso cambiare, messo per prova meglio se tolgo il numero e metto una variabile
-
+	    	
 	        for (int i = 0; i < waveSize; i++) {
 	            int randomRow = rand.nextInt(5); // numero casuale tra 0 e 5 per le righe
 	            int col = 8; // gli studenti partono dall ultima colonna e poi avanzano

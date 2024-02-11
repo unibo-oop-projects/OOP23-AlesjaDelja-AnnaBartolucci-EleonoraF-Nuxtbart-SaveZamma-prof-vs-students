@@ -19,6 +19,7 @@ public class GamePlayController {
 	
 	public static boolean gameStatus;
 	public static int TEMPO_TRA_ONDATE = 5; // tempo tra ondate da definire meglio!!!!
+	public static int NUM_STUD_ONDATA = 4;
 	public GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
 	public List<Professor> profInGame; // lista dei professori in partita
@@ -46,7 +47,7 @@ public class GamePlayController {
     			gameModel.getStudentList().forEach(student->{studInGame.add(student);}); // in teoria da mettere nella Model ??
     			
     			// genero la prima ondata di studenti
-                gameModel.generateWave();
+                gameModel.generateWave(NUM_STUD_ONDATA);
     			
     			//update view()?
     			
@@ -74,7 +75,8 @@ public class GamePlayController {
     			        
     			        // genero una nuova ondata
     	                if (gameModel.getTimeTot() % TEMPO_TRA_ONDATE == 0) {
-    	                    gameModel.generateWave();
+    	                	NUM_STUD_ONDATA+=2; // ogni tot tempo aumento di due il num di studenti per ondata
+    	                    gameModel.generateWave(NUM_STUD_ONDATA);
     	                }
 
     			        // Check dello studente se è vivo 
