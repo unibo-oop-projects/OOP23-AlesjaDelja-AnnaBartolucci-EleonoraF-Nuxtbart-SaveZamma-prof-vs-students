@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
 public class GamePlayController {
 	
 	public static boolean gameStatus;
-	public static int TEMPO_TRA_ONDATE = 5; // tempo tra ondate da definire meglio!!!!
+	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!!
 	public static int NUM_STUD_ONDATA = 4;
 	public GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
@@ -26,18 +27,26 @@ public class GamePlayController {
 	public List<GamePlayModel.Student> studInGame; // lista degli studenti in partita
 	@FXML
     public AnchorPane GamePlayRoot;
-	
+	@FXML
+    private ImageView GameMenuLoaderButton;
 
 	public void initialize() throws Exception {
-		gamePlayView.setController(this);
+		//gamePlayView.setController(this);
 		gameModel = new GamePlayModel();
 		gameStatus =true;
 		profInGame = new ArrayList();
 	}
 	
-    @FXML
-    public void initData() {
-    	startGame();
+    
+    public void initData(GamePlayView gamePlayView) {
+    	
+    	gameStatus =true;
+		profInGame = new ArrayList();
+		studInGame = gameModel.getStudentList();
+		gameModel = new GamePlayModel();
+		this.gamePlayView = gamePlayView;
+		
+		startGame();
     }
 
     public void startGame(){
@@ -50,6 +59,7 @@ public class GamePlayController {
                 gameModel.generateWave(NUM_STUD_ONDATA);
     			
     			//update view()?
+                gamePlayView.update(gameModel);
     			
 				// finchè stiamo giocando 
     			
@@ -69,15 +79,18 @@ public class GamePlayController {
     			
     			while (gameStatus) {
     			    // Logica per studenti
+    				// genero una nuova ondata
+	                if (gameModel.getTimeTot() % TEMPO_TRA_ONDATE == 0) {
+	                	NUM_STUD_ONDATA+=2; // ogni tot tempo aumento di due il num di studenti per ondata
+	                    gameModel.generateWave(NUM_STUD_ONDATA);
+	                }
+	                gamePlayView.update(gameModel);
+	                
     			    Iterator<GamePlayModel.Student> studentIterator = gameModel.getStudentList().iterator();
     			    while (studentIterator.hasNext()) {
     			        GamePlayModel.Student student = studentIterator.next();
     			        
-    			        // genero una nuova ondata
-    	                if (gameModel.getTimeTot() % TEMPO_TRA_ONDATE == 0) {
-    	                	NUM_STUD_ONDATA+=2; // ogni tot tempo aumento di due il num di studenti per ondata
-    	                    gameModel.generateWave(NUM_STUD_ONDATA);
-    	                }
+    			        
 
     			        // Check dello studente se è vivo 
     			        if (studInGame.contains(student)) {
@@ -103,9 +116,10 @@ public class GamePlayController {
     			            }
     			        } else {
     			            // Lo studente è morto
-    			        	gameModel.handleStudentKilled(student);
+    			        	//gameModel.handleStudentKilled(student);
     			            studentIterator.remove(); // Rimuovi lo studente morto dalla lista
     			        }
+    			        
     			    }
 
     			    // Logica per professore
@@ -168,7 +182,7 @@ public class GamePlayController {
 	    }
 	 
 
-    /*@FXML  MESSA nella View ??
+    /*@FXML  //MESSA nella View ??
     void GameMenu(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
         Parent gameMenu = (Parent) fxmlLoader.load();
