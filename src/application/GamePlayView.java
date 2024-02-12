@@ -49,10 +49,13 @@ public class GamePlayView {
     public void setController(GamePlayController gameController) {
         this.gameController = gameController;
     }
-
+    @FXML
     public void initialize() {
         // Inizializza la griglia di gioco, impostando le immagini iniziali, ecc.
-    	ProfChoose.getProfTypes(gamePlayRoot);
+    	gamePlayModel = new GamePlayModel();
+    	gameController = new GamePlayController();
+    	gameController.initData(this);
+    	//ProfChoose.getProfTypes(gamePlayRoot);
     	profInGrid = gamePlayModel.getProfList();
     	studentInGrid = gamePlayModel.getStudentList();
     }
@@ -62,6 +65,7 @@ public class GamePlayView {
         // ...
     	// per ogni studente in studentInGrid
     	//	prendo le coordinate e metto sulla griglia la foto corrispondente
+    	studentInGrid = gamePlayModel.getStudentList();
     	for(Student stud : studentInGrid) {
     		ImageView studentImg = new ImageView(stud.getPathImg()); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
     		GridPane.setConstraints(studentImg, stud.getCol(), stud.getRow());
@@ -70,12 +74,13 @@ public class GamePlayView {
     	
     	// per ogni prof in studentInGrid
     	//	prendo le coordinate e metto sulla griglia la foto corrispondente
+    	/*profInGrid = gamePlayModel.getProfList();
     	for(Professor prof : profInGrid) {
     		// prof.addToGrid(lawnGrid);??
-    		/*ImageView profImg = new ImageView(prof.getPathImg());
+    		ImageView profImg = new ImageView(prof.getPathImg());
     		GridPane.setConstraints(profImg, prof.getxPos(), prof.getyPos());
-    		lawnGrid.getChildren().add(profImg);*/
-    	}
+    		lawnGrid.getChildren().add(profImg);
+    	}*/
     }
 
     @FXML
