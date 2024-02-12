@@ -61,7 +61,7 @@ public class GamePlayModel {
 	    public void generateNewStudent(int col, int row) {
 	        // Creare un nuovo studente
 	    	// da implementare correttamente quando verrà implementata la classe Student
-	    	Student student = new Student(col,row, "");
+	    	Student student = new Student(col,row, "../img/student.jpg");
 	    	studentList.add(student);
 	    }
 
