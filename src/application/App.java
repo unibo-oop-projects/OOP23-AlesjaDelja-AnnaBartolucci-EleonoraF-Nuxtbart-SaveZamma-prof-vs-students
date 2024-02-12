@@ -22,7 +22,7 @@ public class App extends Application {
         // Ipotizziamo che tu abbia un'istanza di PlantView chiamata plantView
         // e che imagePath sia il percorso dell'immagine associata alla nuova pianta
      // Crea un'istanza di PlantView
-       plantView = new ProfessorView("path_to_default_plant_image");
+    /*   plantView = new ProfessorView("path_to_default_plant_image");
 
      // Aggiungi la PlantView alla griglia
         gridPane.add(plantView, 0, 0);
@@ -38,7 +38,7 @@ public class App extends Application {
             String selectedCharacter = "Character 2";  // Cambia questo valore in base alla tua logica di selezione
             changeCharacter(selectedCharacter);
         });
-        
+        */
         Scene scenes = new Scene(gridPane, 800, 600);
         primaryStage.setScene(scenes);
         primaryStage.show();
@@ -47,12 +47,19 @@ public class App extends Application {
 		
 		try {
 			addMusic();
-			Parent mainPage=FXMLLoader.load(getClass().getResource("GameView.fxml"));
+			
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
+			Parent mainPage = fxmlLoader.load();
+			GamePlayView gamePlayView = fxmlLoader.getController();
+			
+			gamePlayView.initialize();
+
+			//Parent mainPage=FXMLLoader.load(getClass().getResource("GameView.fxml"));
 	        Scene scene = new Scene(mainPage,1024,600);
 	        primaryStage.setTitle("Prof VS Students");
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
-			
+	        
 			/*BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
