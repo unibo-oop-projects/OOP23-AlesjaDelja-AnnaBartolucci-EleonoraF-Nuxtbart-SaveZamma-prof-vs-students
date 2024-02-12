@@ -1,6 +1,7 @@
 package application;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import java.util.HashMap;
 /*
@@ -75,7 +76,7 @@ public class ProfChoose extends Elements {
 	    	return this.timeCost;
 	    }
 	    
-	    public static void getProfTypes(Pane pane) {
+	    public static void getProfTypes(AnchorPane pane) {
 	    	// setto le diverse tipologie di prof nella barra laterale e posso selezionarne uno con il click --> settando  setIDProfChoosen(ID)
 	    	// mi restituisce le tipologie di professori che posso prendere dalla scelta messa a disposizione
 	    	for(ProfType type : ProfType.values()){
