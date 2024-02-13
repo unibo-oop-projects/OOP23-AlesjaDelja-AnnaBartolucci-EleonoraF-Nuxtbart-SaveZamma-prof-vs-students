@@ -24,7 +24,7 @@ public class GamePlayController {
 	public GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
 	public List<Professor> profInGame; // lista dei professori in partita
-	public List<GamePlayModel.Student> studInGame; // lista degli studenti in partita
+	public List<GamePlayModel.Student> studInGame =new ArrayList<>(); // lista degli studenti in partita
 	@FXML
     public AnchorPane GamePlayRoot;
 	@FXML
@@ -32,16 +32,17 @@ public class GamePlayController {
 
 	public void initialize() throws Exception {
 		//gamePlayView.setController(this);
-		gameModel = new GamePlayModel();
-		gameStatus =true;
-		profInGame = new ArrayList();
+		//gameModel = new GamePlayModel();
+		/*gameStatus =true;
+		profInGame = new ArrayList();*/
 	}
 	
     
     public void initData(GamePlayView gamePlayView) {
     	
     	gameStatus =true;
-		profInGame = new ArrayList();
+    	gameModel = new GamePlayModel();
+		profInGame = new ArrayList<>();
 		studInGame = gameModel.getStudentList();
 		gameModel = new GamePlayModel();
 		this.gamePlayView = gamePlayView;
@@ -52,14 +53,14 @@ public class GamePlayController {
     public void startGame(){
     	try {
     		if(gameStatus) {
-    			gameModel.getProfList().forEach(prof->{profInGame.add(prof);}); // in teoria da mettere nella Model ??
-    			gameModel.getStudentList().forEach(student->{studInGame.add(student);}); // in teoria da mettere nella Model ??
+    			//gameModel.getProfList().forEach(prof->{profInGame.add(prof);}); // in teoria da mettere nella Model ??
+    			//gameModel.getStudentList().forEach(student->{studInGame.add(student);}); // in teoria da mettere nella Model ??
     			
     			// genero la prima ondata di studenti
                 gameModel.generateWave(NUM_STUD_ONDATA);
-    			
+                studInGame = gameModel.getStudentList();
     			//update view()?
-                gamePlayView.update(gameModel);
+                gamePlayView.updatePosition(gameModel);
     			
 				// finchè stiamo giocando 
     			
@@ -84,8 +85,9 @@ public class GamePlayController {
 	                	NUM_STUD_ONDATA+=2; // ogni tot tempo aumento di due il num di studenti per ondata
 	                    gameModel.generateWave(NUM_STUD_ONDATA);
 	                }
-	                gamePlayView.update(gameModel);
+	                gamePlayView.updatePosition(gameModel);
 	                
+	                gamePlayView.removePosition(gameModel);
     			    Iterator<GamePlayModel.Student> studentIterator = gameModel.getStudentList().iterator();
     			    while (studentIterator.hasNext()) {
     			        GamePlayModel.Student student = studentIterator.next();
@@ -106,7 +108,7 @@ public class GamePlayController {
     			                userWin();
     			                break;
     			            }
-
+    			            
     			            // Controllo se è arrivato nella cella del professore
     			            if (student.getCol() == 0) {
     			                // Utente ha vinto, aggiorna lo stato del gioco
@@ -148,13 +150,13 @@ public class GamePlayController {
 
     			    // Aggiornamento della view
     			    // ...
-
+    			    gamePlayView.updatePosition(gameModel);
     			    // Aggiornamento del tempo totale ??
     			    // ...
 
     			    // Introdotto un ritardo per la visibilità del gioco
     			    try {
-    			        Thread.sleep(0,001);
+    			        Thread.sleep(100);
     			    } catch (InterruptedException e) {
     			        e.printStackTrace();
     			    }
