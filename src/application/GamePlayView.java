@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import application.GamePlayModel.Student;
-
+import javafx.scene.image.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
@@ -39,12 +39,12 @@ public class GamePlayView {
     private ImageView gameMenuButton;
     
     @FXML
-    private GridPane lawnGrid;
+    private GridPane lawn_grid;
 
     public GamePlayController gameController;
     public GamePlayModel gamePlayModel;
     public List<Professor> profInGrid;
-    private List<Student> studentInGrid; // Lista di studenti presenti
+    private List<GamePlayModel.Student> studentInGrid=new ArrayList<>(); // Lista di studenti presenti
 
     public void setController(GamePlayController gameController) {
         this.gameController = gameController;
@@ -60,16 +60,17 @@ public class GamePlayView {
     	studentInGrid = gamePlayModel.getStudentList();
     }
     
-    public void update(GamePlayModel model) {
+    public void updatePosition(GamePlayModel model) {
         // aggiornamento della vista in base allo stato del modello
         // ...
     	// per ogni studente in studentInGrid
     	//	prendo le coordinate e metto sulla griglia la foto corrispondente
-    	studentInGrid = gamePlayModel.getStudentList();
+    	studentInGrid = model.getStudentList();
     	for(Student stud : studentInGrid) {
-    		ImageView studentImg = new ImageView(stud.getPathImg()); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
+    		ImageView studentImg = new ImageView(); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
+    		studentImg.setImage(new Image(getClass().getResource(stud.getPathImg()).toString()));
     		GridPane.setConstraints(studentImg, stud.getCol(), stud.getRow());
-    		lawnGrid.getChildren().add(studentImg);
+    		lawn_grid.getChildren().add(studentImg);
     	}
     	
     	// per ogni prof in studentInGrid
@@ -83,6 +84,22 @@ public class GamePlayView {
     	}*/
     }
 
+    public void removePosition(GamePlayModel model) {
+        // aggiornamento della vista in base allo stato del modello
+        // ...
+    	// per ogni studente in studentInGrid
+    	//	prendo le coordinate e tolgo dalla griglia la foto corrispondente
+    	studentInGrid = model.getStudentList();
+    	for(Student stud : studentInGrid) {
+    		ImageView studentImg = new ImageView(); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
+    		studentImg.setImage(new Image(getClass().getResource(stud.getPathImg()).toString()));
+    		GridPane.setConstraints(studentImg, stud.getCol(), stud.getRow());
+    		lawn_grid.getChildren().remove(studentImg);
+    	}
+    	
+    	// per ogni prof in studentInGrid
+    	// ...
+    }
     @FXML
     private void handleMouseClick(MouseEvent event) {
         // Gestisci l'evento di clic sulla griglia
