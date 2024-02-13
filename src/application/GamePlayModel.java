@@ -28,12 +28,12 @@ public class GamePlayModel {
 	        return timeTot;
 	    }
 
-	    public List<Student> getStudentList() {
-	        return studentList;
+	    public List<GamePlayModel.Student> getStudentList() {
+	        return this.studentList;
 	    }
 
 	    public List<Professor> getProfList() {
-	        return profList;
+	        return this.profList;
 	    }
 
 	    public void generateWave(int waveSize) {
@@ -61,8 +61,8 @@ public class GamePlayModel {
 	    public void generateNewStudent(int col, int row) {
 	        // Creare un nuovo studente
 	    	// da implementare correttamente quando verrà implementata la classe Student
-	    	Student student = new Student(col,row, "../img/student.jpg");
-	    	studentList.add(student);
+	    	Student student = new Student(col,row, "/img/sun.png");
+	    	this.studentList.add(student);
 	    }
 
 	    public void increaseSolarEnergy(int amount) {
