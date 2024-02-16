@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,34 +20,21 @@ public class GamePlayController {
 	
 	public static boolean gameStatus;
 	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!!
-	public static int NUM_STUD_ONDATA = 4;
+	public static int NUM_STUD_ONDATA = 1;
 	public GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
 	public List<Professor> profInGame; // lista dei professori in partita
 	public List<GamePlayModel.Student> studInGame =new ArrayList<>(); // lista degli studenti in partita
-	@FXML
-    public AnchorPane GamePlayRoot;
-	@FXML
-    private ImageView GameMenuLoaderButton;
-
-	public void initialize() throws Exception {
-		//gamePlayView.setController(this);
-		//gameModel = new GamePlayModel();
-		/*gameStatus =true;
-		profInGame = new ArrayList();*/
-	}
 	
-    
+
     public void initData(GamePlayView gamePlayView) {
-    	
-    	gameStatus =true;
-    	gameModel = new GamePlayModel();
-		profInGame = new ArrayList<>();
-		studInGame = gameModel.getStudentList();
-		gameModel = new GamePlayModel();
-		this.gamePlayView = gamePlayView;
-		
-		startGame();
+    	gameStatus = true;
+        gameModel = new GamePlayModel();
+        profInGame = new ArrayList<>();
+        studInGame = gameModel.getStudentList();
+        this.gamePlayView = gamePlayView; // Assegna il riferimento dell'oggetto passato al metodo alla variabile gamePlayView
+        
+        startGame();
     }
 
     public void startGame(){
@@ -55,12 +42,20 @@ public class GamePlayController {
     		if(gameStatus) {
     			//gameModel.getProfList().forEach(prof->{profInGame.add(prof);}); // in teoria da mettere nella Model ??
     			//gameModel.getStudentList().forEach(student->{studInGame.add(student);}); // in teoria da mettere nella Model ??
-    			
+    			try {
+			        Thread.sleep(100);
+			    } catch (InterruptedException e) {
+			        e.printStackTrace();
+			    }
     			// genero la prima ondata di studenti
                 gameModel.generateWave(NUM_STUD_ONDATA);
                 studInGame = gameModel.getStudentList();
     			//update view()?
-                gamePlayView.updatePosition(gameModel);
+                
+                
+                synchronized(studInGame){
+                    gamePlayView.updatePosition(studInGame);
+                }
     			
 				// finchè stiamo giocando 
     			
@@ -80,14 +75,17 @@ public class GamePlayController {
     			
     			while (gameStatus) {
     			    // Logica per studenti
-    				// genero una nuova ondata
-	                if (gameModel.getTimeTot() % TEMPO_TRA_ONDATE == 0) {
-	                	NUM_STUD_ONDATA+=2; // ogni tot tempo aumento di due il num di studenti per ondata
-	                    gameModel.generateWave(NUM_STUD_ONDATA);
-	                }
-	                gamePlayView.updatePosition(gameModel);
 	                
-	                gamePlayView.removePosition(gameModel);
+	                try {
+    			        Thread.sleep(100);
+    			    } catch (InterruptedException e) {
+    			        e.printStackTrace();
+    			    }
+	                
+	                synchronized(studInGame){
+                    	gamePlayView.removePosition(studInGame);
+                    }
+	                
     			    Iterator<GamePlayModel.Student> studentIterator = gameModel.getStudentList().iterator();
     			    while (studentIterator.hasNext()) {
     			        GamePlayModel.Student student = studentIterator.next();
@@ -125,7 +123,7 @@ public class GamePlayController {
     			    }
 
     			    // Logica per professore
-    			    Iterator<Professor> profIterator = gameModel.getProfList().iterator();
+    			   /* Iterator<Professor> profIterator = gameModel.getProfList().iterator();
     			    while (profIterator.hasNext()) {
     			        Professor prof = profIterator.next();
 
@@ -146,14 +144,33 @@ public class GamePlayController {
     			        	gameModel.handleProfKilled(prof);
     			            profIterator.remove(); // Rimuovi il professore morto dalla lista
     			        }
-    			    }
+    			    }*/
 
-    			    // Aggiornamento della view
+    			    
+    			    // genero una nuova ondata
+	                /*if (gameModel.getTimeTot() % TEMPO_TRA_ONDATE == 0) {
+	                	NUM_STUD_ONDATA+=2; // ogni tot tempo aumento di due il num di studenti per ondata
+	                    gameModel.generateWave(NUM_STUD_ONDATA);
+	                }*/
+	                
+	                // Aggiornamento della view
     			    // ...
-    			    gamePlayView.updatePosition(gameModel);
+	                /*Platform.runLater(new Runnable() {
+	                    @Override
+	                    public void run() {
+	                        // Update UI
+	                        synchronized(studInGame){
+	                            gamePlayView.updatePosition(studInGame);
+	                        }
+	                    }
+	                });*/
+	                synchronized(studInGame){
+                        gamePlayView.updatePosition(studInGame);
+                    }
     			    // Aggiornamento del tempo totale ??
     			    // ...
 
+    			    
     			    // Introdotto un ritardo per la visibilità del gioco
     			    try {
     			        Thread.sleep(100);
@@ -161,9 +178,6 @@ public class GamePlayController {
     			        e.printStackTrace();
     			    }
     			}
-    			
-    			//handleStudentKilled(student); // chiamato quando uno studente viene ucciso
-                //handleProfKilled(prof); // chiamato quando un professore viene ucciso
     			
     		}else {
     			
@@ -183,18 +197,6 @@ public class GamePlayController {
 	        System.out.println("Clicked at column " + columnIndex + " and row " + rowIndex);
 	    }
 	 
-
-    /*@FXML  //MESSA nella View ??
-    void GameMenu(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
-        Parent gameMenu = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(gameMenu));
-        MenuController controller = fxmlLoader.<MenuController>getController();
-        //controller.initData(GamePlayRoot, levelNumber,d,sunCount,allPlants, allZombies, allMowers, timeElapsed, l.getZombieList1(), l.getZombieList2());
-        stage.show();
-    }*/
-
 	    public void userLost() throws IOException{
 	    	//carico il file fxml con la scritta hai perso
 	    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LostGameView.fxml"));

@@ -4,11 +4,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.DataTable;
+import sample.GamePlayController;
 
 public class App extends Application {
 	public static MediaPlayer mediaPlayer;
@@ -17,7 +20,7 @@ public class App extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-		gridPane = new GridPane();
+		//gridPane = new GridPane();
 
         // Ipotizziamo che tu abbia un'istanza di PlantView chiamata plantView
         // e che imagePath sia il percorso dell'immagine associata alla nuova pianta
@@ -39,32 +42,21 @@ public class App extends Application {
             changeCharacter(selectedCharacter);
         });
         */
-        Scene scenes = new Scene(gridPane, 800, 600);
+       /* Scene scenes = new Scene(gridPane, 800, 600);
         primaryStage.setScene(scenes);
-        primaryStage.show();
+        primaryStage.show();*/
         
         
 		
 		try {
 			addMusic();
 			
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
-			Parent mainPage = fxmlLoader.load();
-			GamePlayView gamePlayView = fxmlLoader.getController();
-			
-			gamePlayView.initialize();
-
-			//Parent mainPage=FXMLLoader.load(getClass().getResource("GameView.fxml"));
+			Parent mainPage=FXMLLoader.load(getClass().getResource("MainMenuView.fxml"));
 	        Scene scene = new Scene(mainPage,1024,600);
-	        primaryStage.setTitle("Prof VS Students");
+	        primaryStage.setTitle("Plants VS Zombies");
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
-	        
-			/*BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();*/
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class GamePlayModel {
 
 	    private int solarEnergy; // Energia solare
@@ -113,6 +116,11 @@ public class GamePlayModel {
 				this.pathImg = pathImg;
 			}
 
+			public ImageView getImageStud(Student stud) {
+				ImageView studentImg = new ImageView(); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
+	    		studentImg.setImage(new Image(getClass().getResource(stud.getPathImg()).toString()));
+	    		return studentImg;
+			}
 			public String getPathImg() {
 				return pathImg;
 			}

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import application.GamePlayModel.GameModel;
+import  main.java.application.GamePlayModel;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -92,7 +92,7 @@ public class GamePlayController {
 	        stage.show();
 	    }
 	    
-	    public void handleStudentKilled(GameModel.Student student, GameModel gameModel ) {
+	    public void handleStudentKilled(GamePlayModel.Student student, GamePlayModel gameModel ) {
 	        gameModel.increaseTimeTot(gameModel.getTimeTot());
 	        gameModel.getStudentList().remove(student);
 	        //gestire la view
@@ -100,7 +100,7 @@ public class GamePlayController {
 
 	    }
 
-	    public void handleProfKilled(GameModel.Prof prof, GameModel gameModel ) {
+	    public void handleProfKilled(GamePlayModel.Prof prof, GamePlayModel gameModel ) {
 	        gameModel.decreaseTimeTot(gameModel.getTimeTot());
 	        gameModel.getProfList().remove(prof);
 	        //gestire la view

@@ -9,7 +9,7 @@ public class ProfessorView extends Pane {
     private ImageView imageView;
 
     public ProfessorView(String imagePath) {
-        imageView = new ImageView(new Image(imagePath));
+        //imageView = new ImageView(new Image(imagePath));
         imageView.setFitWidth(50);
         imageView.setFitHeight(50);
         getChildren().add(imageView);
@@ -17,6 +17,6 @@ public class ProfessorView extends Pane {
     
  // Aggiungi questo metodo per cambiare l'immagine della pianta
     public void setPlantImage(String imagePath) {
-        imageView.setImage(new Image(imagePath));
+        //imageView.setImage(new Image(imagePath));
     }
 }
