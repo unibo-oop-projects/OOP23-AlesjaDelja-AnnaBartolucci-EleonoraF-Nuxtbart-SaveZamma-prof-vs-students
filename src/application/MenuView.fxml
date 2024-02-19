@@ -23,11 +23,12 @@
             <Image url="@../img/exitButton.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="replayGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="14.0" layoutY="127.0"  onMouseClicked="#replayGame" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="replayGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="14.0" layoutY="127.0" onMouseClicked="#replayGame" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/replayButton.jpg" />
          </image>
       </ImageView>
+      <Button fx:id="resumeButton" text="Riprendi" onAction="#resumeGame" />
       <Label fx:id="GameMenuMessage" layoutX="34.0" layoutY="208.0" prefHeight="51.0" prefWidth="246.0" textFill="#f5881a">
          <font>
             <Font name="Comic Sans MS" size="25.0" />
