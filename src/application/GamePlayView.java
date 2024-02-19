@@ -1,12 +1,12 @@
 package application;
 
-import java.util.Iterator;
 import java.util.List;
 
 import application.GamePlayModel.Student;
-import javafx.scene.image.Image;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,7 +52,7 @@ public class GamePlayView {
     @FXML
     public void initialize() {
         // Inizializza la griglia di gioco, impostando le immagini iniziali, ecc.
-    	
+    	//lawn_grid.setVisible(true);
     	//ProfChoose.getProfTypes(gamePlayRoot);
     	/*gamePlayModel = new GamePlayModel();
     	profInGrid = gamePlayModel.getProfList();
@@ -63,8 +63,9 @@ public class GamePlayView {
     }
     
     public void updatePosition(List<GamePlayModel.Student> studentList){//GamePlayModel model) {
-        // aggiornamento della vista in base allo stato del modello
-        // ...
+    	Platform.runLater(() -> {
+    	// aggiornamento della vista in base allo stato del modello
+    	// ...
     	lawn_grid.getChildren().removeIf(node -> node instanceof ImageView);
     	// per ogni studente in studentInGrid
     	//	prendo le coordinate e metto sulla griglia la foto corrispondente
@@ -77,9 +78,11 @@ public class GamePlayView {
     	
     	// per ogni prof 
     	// ...
+    	});
     }
 
     public void removePosition(List<GamePlayModel.Student> studentList) {
+    	Platform.runLater(() -> {
         // aggiornamento della vista in base allo stato del modello
         // ...
     	lawn_grid.getChildren().removeIf(node -> node instanceof ImageView);
@@ -92,6 +95,7 @@ public class GamePlayView {
     	
     	// per ogni prof 
     	// ...
+    	});
     }
     @FXML
     private void handleMouseClick(MouseEvent event) {
@@ -124,6 +128,7 @@ public class GamePlayView {
     
     @FXML
     void GameMenu(MouseEvent event) throws IOException {
+    	GamePlayController.gameStatus = false;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
         Parent gameMenu = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
