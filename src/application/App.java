@@ -10,8 +10,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import sample.DataTable;
-import sample.GamePlayController;
 
 public class App extends Application {
 	public static MediaPlayer mediaPlayer;
