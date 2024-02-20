@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 public class GamePlayController {
 	
+	private static GamePlayController instance;
 	public static boolean gameStatus;
 	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!!
 	public static int NUM_STUD_ONDATA;
@@ -43,7 +44,7 @@ public class GamePlayController {
 		}
         
         if (!studInGame.isEmpty()) {
-            startGame();
+            startGame(gamePlayView);
         }
     }
 
@@ -66,7 +67,7 @@ public class GamePlayController {
     }
    
    
-    public void startGame(){
+    public void startGame(GamePlayView gamePlayView){
     	if(gameStatus) {
 			// finchè stiamo giocando 
 			
@@ -228,4 +229,43 @@ public class GamePlayController {
 	    }
 	}
 	
+	// per restiruire l'istanta corrente del GamePlayController
+	public static GamePlayController getInstance() {
+        if (instance == null) {
+            instance = new GamePlayController();
+        }
+        return instance;
+    }
+	
+	public void setGameStatus(boolean status) {
+        gameStatus = status;
+    }
+	
+	public GamePlayView getGamePlayView() {
+        return gamePlayView;
+    }
+
+	public GamePlayModel getGameModel() {
+		return gameModel;
+	}
+
+	public void setGameModel(GamePlayModel gameModel) {
+		this.gameModel = gameModel;
+	}
+
+	public List<Professor> getProfInGame() {
+		return profInGame;
+	}
+
+	public void setProfInGame(List<Professor> profInGame) {
+		this.profInGame = profInGame;
+	}
+
+	public List<GamePlayModel.Student> getStudInGame() {
+		return studInGame;
+	}
+
+	public void setStudInGame(List<GamePlayModel.Student> studInGame) {
+		this.studInGame = studInGame;
+	}
 }
