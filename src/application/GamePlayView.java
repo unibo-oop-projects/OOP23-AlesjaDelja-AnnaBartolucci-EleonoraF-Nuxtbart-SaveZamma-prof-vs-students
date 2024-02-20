@@ -128,12 +128,12 @@ public class GamePlayView {
     
     @FXML
     void GameMenu(MouseEvent event) throws IOException {
-    	GamePlayController.gameStatus = false;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
         Parent gameMenu = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(gameMenu));
         MenuController controller = fxmlLoader.<MenuController>getController();
+        controller.initData();
         //controller.initData(GamePlayRoot, levelNumber,d,sunCount,allPlants, allZombies, allMowers, timeElapsed, l.getZombieList1(), l.getZombieList2());
         stage.show();
     }
