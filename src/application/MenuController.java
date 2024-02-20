@@ -34,7 +34,7 @@ public class MenuController {
     
     @FXML
     public void initData() {
-    	
+    	GamePlayController.gameStatus = false; // Per mettere in pausa quando apro il menu
     }
     
     @FXML
@@ -62,41 +62,47 @@ public class MenuController {
 
     @FXML
     void replayGame(MouseEvent event) throws IOException {
-        /*System.out.println("replayGame succedded");
-        Stage stage = (Stage) replayGameButton.getScene().getWindow();
-        stage.close();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
-        AnchorPane game=fxmlLoader.load();
-        GamePlayView gamePlayView = fxmlLoader.<GamePlayView>getController();
-        GamePlayController gamePlayController = new GamePlayController();
-        gamePlayController.initData(gamePlayView);
-        MainMenuController.MainMenu.getChildren().setAll(game);*/
     	
-        // DA SISTEMARE!!
-        GamePlayController.gameStatus = false;
-        Stage stage = (Stage) replayGameButton.getScene().getWindow();
-        stage.close();
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
-        AnchorPane game = fxmlLoader.load();
-
-        GamePlayView gamePlayView = fxmlLoader.<GamePlayView>getController();
-        GamePlayController gamePlayController = new GamePlayController();
-
-        // prendo il riferimento al MainMenu dalla scena corrente
-        Scene scene = replayGameButton.getScene();
-        AnchorPane MainMenu = (AnchorPane) scene.lookup("#MainMenu");
-
-        gamePlayController.initData(gamePlayView, MainMenu);
+    	// chiudo tutte le finestre e la finestra del menù piccolina
+        Stage menuSceene = (Stage) replayGameButton.getScene().getWindow();
+        menuSceene.close();
+        closeAllWindows();
         
-        MainMenu.getChildren().setAll(game);
+        // per il riferimento al MainMenu e il MainMenuController
+        FXMLLoader mainMenuLoader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
+        mainMenuLoader.load();
+        MainMenuController mainMenuController = mainMenuLoader.getController();
+        
+        AnchorPane mainMenu = mainMenuController.getMainMenu();
+
+        // carico la scena del campo da gioco 
+        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
+        AnchorPane game = gameLoader.load();
+        GamePlayView gamePlayView = gameLoader.getController();
+        GamePlayController gamePlayController = new GamePlayController();
+        gamePlayController.initData(gamePlayView, mainMenu);
+
+       
+        // setto la scena da gioco
+        Scene gameScene = new Scene(game);
+        Stage newGameStage = new Stage();
+        newGameStage.setScene(gameScene);
+        newGameStage.show();
+
     }
 
     @FXML
     void resumeGame(ActionEvent event) {
         // Riprendi il gioco
-        GamePlayController.gameStatus = true; // Imposta lo stato del gioco su attivo
-        // Aggiungi qui altre operazioni necessarie per riprendere il gioco
+    	GamePlayController gameController = GamePlayController.getInstance();
+        gameController.setGameStatus(true);
+        //GamePlayController.gameStatus = true; // Imposta lo stato del gioco su attivo
+
+        //chiudo la finestra del menù
+        Stage currentStage = (Stage) gameMenuButton.getScene().getWindow();
+        currentStage.close();
+        
+        gameController.startGame(gameController.getGamePlayView());
     }
     
     private void closeAllWindows() {
