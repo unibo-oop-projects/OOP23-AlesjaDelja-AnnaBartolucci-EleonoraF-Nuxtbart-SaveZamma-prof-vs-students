@@ -24,6 +24,9 @@ public class MenuController {
     private AnchorPane GameMainMenuRoot;
 	
 	@FXML
+    private AnchorPane LostGame;
+	
+	@FXML
     private ImageView gameMenuButton;
 
     @FXML
@@ -44,7 +47,7 @@ public class MenuController {
     
     @FXML
     void returnMainManu(MouseEvent event) throws IOException {
-        GamePlayController.gameStatus = false;
+        //GamePlayController.gameStatus = false;
         Stage currentStage = (Stage) gameMenuButton.getScene().getWindow();
         currentStage.close();
 
@@ -64,8 +67,8 @@ public class MenuController {
     void replayGame(MouseEvent event) throws IOException {
     	
     	// chiudo tutte le finestre e la finestra del menù piccolina
-        Stage menuSceene = (Stage) replayGameButton.getScene().getWindow();
-        menuSceene.close();
+        Stage menuScene = (Stage) replayGameButton.getScene().getWindow();
+        menuScene.close();
         closeAllWindows();
         
         // per il riferimento al MainMenu e il MainMenuController
@@ -122,7 +125,6 @@ public class MenuController {
             }
         }
     }
-    
     
     
 }
