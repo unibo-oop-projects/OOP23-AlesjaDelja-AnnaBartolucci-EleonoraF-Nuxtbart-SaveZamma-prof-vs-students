@@ -6,6 +6,8 @@ import application.GamePlayModel.Student;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.animation.AnimationTimer;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+
 
 public class GamePlayView {
 	// per gestire la griglia di gioco, popolarla con le immagini degli studenti, professori, ecc.,
@@ -40,12 +43,20 @@ public class GamePlayView {
     
     @FXML
     private GridPane lawn_grid;
+    
+    @FXML
+    private Label timeLabel;
 
     public GamePlayController gameController;
     public GamePlayModel gamePlayModel;
     public List<Professor> profInGrid;
     private List<GamePlayModel.Student> studentInGrid=new ArrayList<>(); // Lista di studenti presenti
-
+    public AnimationTimer  timer;
+    public int timeTot ;// Partiamo da 2 minuti, quindi 120 secondi
+    public long lastTimeUpdate = 0;
+    public long ONE_SECOND = 1_000_000_000;
+    public boolean timerStop = false;
+    
     public void setController(GamePlayController gameController) {
         this.gameController = gameController;
     }
@@ -60,9 +71,40 @@ public class GamePlayView {
     	
     	gameController = new GamePlayController();
     	gameController.initData(this);*/
+    	gamePlayModel = GamePlayController.getGameModel();
+		timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+            	if (!timerStop) {
+                    if (now - lastTimeUpdate >= ONE_SECOND) { // check se è passato un secondo
+                    	timeTot = gamePlayModel.getTimeTot();
+                    	if (timeTot > 0) {
+                    		updateTempoLabel();
+                            lastTimeUpdate = now;
+                    	}else {
+                        	timer.stop();
+                    	}
+                    }
+            	}else{
+            		timer.stop();
+            	}
+           }
+        };
+        timer.start();
     }
     
-    public void updatePosition(List<GamePlayModel.Student> studentList){//GamePlayModel model) {
+    private void updateTempoLabel() {
+    	// funzione che mi aggiorna il tempo che scorre
+    	timeTot--;
+        int min = timeTot / 60;
+        int sec = timeTot % 60;
+        
+        timeLabel.setText(String.format("%02d:%02d", min, sec));
+        gamePlayModel.setTimeTot(timeTot);
+        
+	}
+    
+	public void updatePosition(List<GamePlayModel.Student> studentList){//GamePlayModel model) {
     	Platform.runLater(() -> {
     	// aggiornamento della vista in base allo stato del modello
     	// ...
@@ -119,7 +161,7 @@ public class GamePlayView {
 	    		/*if(ProfChoose.getProf(ProfChoose.getIDProfChoosen())).getTimeCost<=TimeTot) {
 	    		    creo nuovo prof con columnIndex e rowIndex --> Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex);
 	    		    aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
-	    			piazzo il professore nella griglia --> con la call ad updateView(gamePlayModel) che mi mette a video le immagini
+	    			piazzo il professore nella griglia --> con la call ad updatePosition(gamePlayModel) che mi mette a video le immagini
 	    			diminuisco il tempo totale o la moneta --> gamePlayModel.decreaseTimeTot(p.TimeCost);
 	    		}*/
 	    	}
@@ -128,6 +170,8 @@ public class GamePlayView {
     
     @FXML
     void GameMenu(MouseEvent event) throws IOException {
+    	timerStop = true;// stoppo il timer quando apro il menù
+    	GamePlayController.getInstance().setGameStatus(false);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
         Parent gameMenu = (Parent) fxmlLoader.load();
         Stage stage = new Stage();

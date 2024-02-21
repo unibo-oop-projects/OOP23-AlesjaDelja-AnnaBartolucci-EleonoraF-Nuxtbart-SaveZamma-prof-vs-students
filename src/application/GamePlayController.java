@@ -21,8 +21,9 @@ public class GamePlayController {
 	private static GamePlayController instance;
 	public static boolean gameStatus;
 	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!!
+	public static int TEMPO_TOT_INI = 3; // sarebbe da mettere 120 che sono 2 minuti, per ora 10 sec per fare le prove
 	public static int NUM_STUD_ONDATA;
-	public GamePlayModel gameModel;
+	public static GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
 	public List<Professor> profInGame; // lista dei professori in partita
 	public List<GamePlayModel.Student> studInGame =new ArrayList<>(); // lista degli studenti in partita
@@ -32,6 +33,7 @@ public class GamePlayController {
     	NUM_STUD_ONDATA = 1;
     	gameStatus = true;
         gameModel = new GamePlayModel();
+        gameModel.setTimeTot(TEMPO_TOT_INI);
         profInGame = new ArrayList<>();
         studInGame = gameModel.getStudentList();
         this.gamePlayView = gamePlayView; // Assegna il riferimento dell'oggetto passato al metodo alla variabile gamePlayView
@@ -44,7 +46,9 @@ public class GamePlayController {
 		}
         
         if (!studInGame.isEmpty()) {
+        	gamePlayView.initialize();// avvio il tempo
             startGame(gamePlayView);
+            
         }
     }
 
@@ -62,7 +66,7 @@ public class GamePlayController {
 		        gamePlayView.updatePosition(studInGame);
 		    }
 		    
-		    System.out.println("settato il campo da gioco");
+		    System.out.println("settato nuvo gruppo di studenti");
 		}
     }
    
@@ -88,7 +92,18 @@ public class GamePlayController {
 		    new Thread(() -> {
 				while (gameStatus) {
 				    // Logica per studenti
-			        
+					
+					// controllo se è scaduto il tempo tot
+					if (gameModel.getTimeTot()==0) {
+				    	gameStatus = false;
+		                try {
+							userLost();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+		                break;
+				    }
+					
 					sleep(2000);
 			        
 			        synchronized(studInGame){
@@ -130,7 +145,7 @@ public class GamePlayController {
 				                break;
 				            }
 				        } else {
-				            // Lo studente è morto
+				            // Lo studente è morto, gestito da chi fa lo studente
 				        	//gameModel.handleStudentKilled(student);
 				            studentIterator.remove(); // Rimuovi lo studente morto dalla lista
 				        }
@@ -159,7 +174,7 @@ public class GamePlayController {
 				                break;
 				            }
 				        } else {
-				            // Il professore è morto
+				            // Il professore è morto, gestito da chi fa i prof
 				        	//gameModel.handleProfKilled(prof);
 				            profIterator.remove(); // Rimuovi il professore morto dalla lista
 				        }
@@ -168,9 +183,6 @@ public class GamePlayController {
 			        synchronized(studInGame){
 			            gamePlayView.updatePosition(studInGame);
 			        }
-				    // Aggiornamento del tempo totale ??
-				    // ...
-	
 				    
 				    // Introdotto un ritardo per la visibilità del gioco
 			        sleep(2000);
@@ -197,6 +209,7 @@ public class GamePlayController {
 		        Stage stage = new Stage();
 		        stage.setScene(new Scene(lostGame));
 		        MenuController controller = fxmlLoader.<MenuController>getController(); //controller uguale a quello del menu perchè ho gli stessi pulsanti
+		        controller.initData();
 		        stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -213,7 +226,9 @@ public class GamePlayController {
 		        Stage stage = new Stage();
 		        stage.setScene(new Scene(lostGame));
 		        MenuController controller = fxmlLoader.<MenuController>getController(); //controller uguale a quello del menu perchè ho gli stessi pulsanti
+		        controller.initData();
 		        stage.show();
+		        
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -222,11 +237,15 @@ public class GamePlayController {
     
 	// ritardo per la visibilità del gioco    
 	private void sleep(int num) {
-		try {
-	        Thread.sleep(num);
-	    } catch (InterruptedException e) {
-	        e.printStackTrace();
-	    }
+		if(gameModel.getTimeTot()>0) {//controllo che il timer non sia a zero sennò mi faceva aspettare lo stesso
+			try {
+		        Thread.sleep(num);
+		    } catch (InterruptedException e) {
+		        e.printStackTrace();
+		    }
+		}
+		
+		
 	}
 	
 	// per restiruire l'istanta corrente del GamePlayController
@@ -245,12 +264,8 @@ public class GamePlayController {
         return gamePlayView;
     }
 
-	public GamePlayModel getGameModel() {
+	public static GamePlayModel getGameModel() {
 		return gameModel;
-	}
-
-	public void setGameModel(GamePlayModel gameModel) {
-		this.gameModel = gameModel;
 	}
 
 	public List<Professor> getProfInGame() {

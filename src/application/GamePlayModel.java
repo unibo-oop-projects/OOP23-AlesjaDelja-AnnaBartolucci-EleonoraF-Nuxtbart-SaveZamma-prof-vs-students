@@ -31,6 +31,9 @@ public class GamePlayModel {
 	        return timeTot;
 	    }
 
+	    public void setTimeTot(int time) {
+	    	timeTot=time;
+	    }
 	    public List<GamePlayModel.Student> getStudentList() {
 	        return this.studentList;
 	    }
@@ -52,7 +55,7 @@ public class GamePlayModel {
 	    	
 	    }
 
-	    public Professor generateNewProf(int col, int row) {
+	   public Professor generateNewProf(int col, int row) {
 	        // Creare un nuovo professore
 	    	
     		col = 0;
@@ -80,16 +83,16 @@ public class GamePlayModel {
 	        }
 	    }
 	    
-	    public void increaseTimeTot(int amount) {
+	    public void increaseTimeTot(double amount) {
 	    	timeTot += amount;
 	    }
 
-	    public void decreaseTimeTot(int amount) {
+	    public boolean decreaseTimeTot(double amount) {
 	        if (timeTot >= amount) {
 	        	timeTot -= amount;
-	        } else {
-	            // Manca tempo
-	        }
+	        	return true;
+	        } 
+	        return false;
 	    }
 
 	    public void profKilled(Professor prof) {
