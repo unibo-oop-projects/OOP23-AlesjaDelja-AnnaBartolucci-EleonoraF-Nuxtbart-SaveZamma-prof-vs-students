@@ -25,6 +25,8 @@ public class MenuController {
 	
 	@FXML
     private AnchorPane LostGame;
+	@FXML
+    private AnchorPane WonGame;
 	
 	@FXML
     private ImageView gameMenuButton;
@@ -37,7 +39,7 @@ public class MenuController {
     
     @FXML
     public void initData() {
-    	GamePlayController.gameStatus = false; // Per mettere in pausa quando apro il menu
+    	GamePlayController.getInstance().setGameStatus(false); // Per mettere in pausa quando apro il menu
     }
     
     @FXML
