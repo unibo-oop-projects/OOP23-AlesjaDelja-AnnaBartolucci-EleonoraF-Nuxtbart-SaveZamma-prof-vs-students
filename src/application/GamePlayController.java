@@ -19,9 +19,9 @@ import javafx.stage.Stage;
 public class GamePlayController {
 	
 	private static GamePlayController instance;
-	public static boolean gameStatus;
+	public boolean gameStatus;
 	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!!
-	public static int TEMPO_TOT_INI = 3; // sarebbe da mettere 120 che sono 2 minuti, per ora 10 sec per fare le prove
+	public static int TEMPO_TOT_INI = 120; // sarebbe da mettere 120 che sono 2 minuti, per ora 10 sec per fare le prove
 	public static int NUM_STUD_ONDATA;
 	public static GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
@@ -52,7 +52,11 @@ public class GamePlayController {
         }
     }
 
-    public void initGamePlay() throws IOException {
+    public boolean isGameStatus() {
+		return gameStatus;
+	}
+
+	public void initGamePlay() throws IOException {
     	
     	if(gameStatus) {
     		sleep(100);
@@ -117,14 +121,26 @@ public class GamePlayController {
 				        // Check dello studente se è vivo 
 				        if (studInGame.contains(student)) {
 				        	// guardo se è stato colpito
-				        	// ... ??
+				        	// se colpito aumento il tempo tot, se non ha più vita muore
+				        	/*
+				        	 * if(studente.colpito()){
+				        	 * 		gameModel.increaseTimeTot(NUM_AUMENTO_TEMPO);
+				        	 * 		if(studente.morto()){
+				        	 * 				gestire morte chi implementa lo studente
+				        	 * 				studentIterator.remove();
+				        	 * 		}
+				        	 * }
+				        	 */
 				        	
 				            // Avanzamento in riga (diminuzione colonna)
 				            if (student.getCol() > 0) {
 				                student.setCol(student.getCol() - 1);
 				            } else {
 				                // Lo studente è arrivato alla colonna 0, utente ha vinto
+				            	// se nessun prof è presente in quella posizione ha vinto
+				            	// sennò si colpice il prof 
 				                gameStatus = false;
+				                gamePlayView.setTimerStop(true);
 				                try {
 									userWin();
 								} catch (IOException e) {
@@ -135,8 +151,12 @@ public class GamePlayController {
 				            
 				            // Controllo se è arrivato nella cella del professore
 				            if (student.getCol() == 0) {
+				            	 // Lo studente è arrivato alla colonna 0, utente ha vinto
+				            	 // se nessun prof è presente in quella posizione ha vinto
+				            	 // sennò si colpice il prof 
 				                // Utente ha vinto, aggiorna lo stato del gioco
 				                gameStatus = false;
+				                gamePlayView.setTimerStop(true);
 				                try {
 									userWin();
 								} catch (IOException e) {
@@ -161,9 +181,21 @@ public class GamePlayController {
 				        if (prof.getHealthPoints() > 0) { // oppure profInGame.contains(prof)
 				            // "Sparo" ogni tot
 				            // ...
+				        	
+				        	// se prof viene colpito deve diminuire la sua vita e il tempoTot, controllo poi se è morto
+				        	/*if(prof.colpito()){
+				        	 * 		gameModel.decreaseTimeTot(NUM_DIMINUZIONE_TEMPO);
+				        	 * 		prof.decreaseVita();
+				        	 * 		
+				        	 * 		if(prof.senzaVite()){
+				        	 * 			rimozione prof da view, gestione morte
+				        	 * 		}
+				        	 * }
+				        	 * 
+				        	 * */
 	
-				            // Controllo se sono in vita ancora tutti gli studenti
-				            if (gameModel.getStudentList().isEmpty()) {
+				            // Controllo se sono in vita ancora tutti i prof
+				            if (gameModel.getProfList().isEmpty()) {
 				                // Utente ha perso, aggiorna lo stato del gioco
 				                gameStatus = false;
 				                try {

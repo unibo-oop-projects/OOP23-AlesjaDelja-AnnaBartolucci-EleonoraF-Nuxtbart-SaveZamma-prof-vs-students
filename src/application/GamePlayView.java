@@ -93,7 +93,13 @@ public class GamePlayView {
         timer.start();
     }
     
-    private void updateTempoLabel() {
+    public boolean isTimerStop() {
+		return timerStop;
+	}
+	public void setTimerStop(boolean timerStop) {
+		this.timerStop = timerStop;
+	}
+	private void updateTempoLabel() {
     	// funzione che mi aggiorna il tempo che scorre
     	timeTot--;
         int min = timeTot / 60;
