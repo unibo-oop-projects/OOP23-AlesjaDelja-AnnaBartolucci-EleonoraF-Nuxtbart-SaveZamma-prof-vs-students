@@ -156,26 +156,26 @@ public class GamePlayController {
 			e.printStackTrace();
 		}
     }
-	 @FXML
+	 /*@FXML
 	    private void handleMouseClick(MouseEvent event) {
 		 	//con questa funzione dovremmo piantare i professori?
 	        int columnIndex = GridPane.getColumnIndex((Region) event.getSource());
 	        int rowIndex = GridPane.getRowIndex((Region) event.getSource());
 
 	        System.out.println("Clicked at column " + columnIndex + " and row " + rowIndex);
-	    }
+	    }*/
 	 
 
-	    @FXML
-	    void GameMenu(MouseEvent event) throws IOException {
-	        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
-	        Parent gameMenu = (Parent) fxmlLoader.load();
-	        Stage stage = new Stage();
-	        stage.setScene(new Scene(gameMenu));
-	        MenuController controller = fxmlLoader.<MenuController>getController();
-	        //controller.initData(GamePlayRoot, levelNumber,d,sunCount,allPlants, allZombies, allMowers, timeElapsed, l.getZombieList1(), l.getZombieList2());
-	        stage.show();
-	    }
+    /*@FXML  MESSA nella View ??
+    void GameMenu(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
+        Parent gameMenu = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(gameMenu));
+        MenuController controller = fxmlLoader.<MenuController>getController();
+        //controller.initData(GamePlayRoot, levelNumber,d,sunCount,allPlants, allZombies, allMowers, timeElapsed, l.getZombieList1(), l.getZombieList2());
+        stage.show();
+    }*/
 
 	    public void userLost() throws IOException{
 	    	//carico il file fxml con la scritta hai perso

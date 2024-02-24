@@ -21,8 +21,13 @@ public class App extends Application {
 
         // Ipotizziamo che tu abbia un'istanza di PlantView chiamata plantView
         // e che imagePath sia il percorso dell'immagine associata alla nuova pianta
+<<<<<<< HEAD
         // Crea un'istanza di PlantView
         plantView = new ProfessorView("path_to_default_plant_image");
+=======
+     // Crea un'istanza di PlantView
+       plantView = new ProfessorView("path_to_default_plant_image");
+>>>>>>> 2f7f039fae828f3ab4f2e311d6cb8bad6c7257ee
 
         // Aggiungi la PlantView alla griglia
         gridPane.add(plantView, 0, 0);

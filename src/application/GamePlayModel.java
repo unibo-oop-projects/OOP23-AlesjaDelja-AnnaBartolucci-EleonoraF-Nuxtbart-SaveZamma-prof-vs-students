@@ -52,14 +52,13 @@ public class GamePlayModel {
 	    	
 	    }
 
-	    public void generateNewProf() {
+	    public Professor generateNewProf(int col, int row) {
 	        // Creare un nuovo professore
-	    	for (int row=1; row<5; row++) {
-	    		int col = 0;
-	    		Professor newProf = new Professor("", HEALTH_POINTS, col, row, null);
-	    		profList.add(newProf);
-	    	}
 	    	
+    		col = 0;
+    		Professor newProf = new Professor("", HEALTH_POINTS, col, row, null);
+    		profList.add(newProf);
+    		return newProf;
 	    }
 
 	    public void generateNewStudent(int col, int row) {
