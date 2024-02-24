@@ -17,6 +17,7 @@ public class ProfessorView extends Pane {
     
  // Aggiungi questo metodo per cambiare l'immagine della pianta
     public void setPlantImage(String imagePath) {
-        imageView.setImage(new Image(imagePath));
+        Image image = new Image(imagePath);
+        setImage(image);
     }
 }
