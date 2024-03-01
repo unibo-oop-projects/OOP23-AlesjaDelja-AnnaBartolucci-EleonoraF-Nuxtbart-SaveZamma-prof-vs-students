@@ -12,6 +12,7 @@ public class MainMenuController {
 	 */
 	
 	public void newGame(ActionEvent e) {
+		//TO-DO Farlo andare all'inizio del gioco dell'Anna
 		System.out.println("New Game");
 	}
 	
@@ -30,6 +31,7 @@ public class MainMenuController {
 	 * @param e Listens to when the player click on this buttons
 	 */
 	public void sounds(ActionEvent e) {
+		//TO-DO Cambiare il coso dell'Anna per il suono e metterlo tutto da parte in modo che sia più comprensibile
 		System.out.println("Sounds");
 	}
 	
@@ -42,6 +44,7 @@ public class MainMenuController {
 	 * @param e Listens to when the player click on this buttons
 	 */
 	public void exitGame(ActionEvent e) {
+		//TO-DO Uscire dal gioco
 		System.out.println("Exit Game");
 	}
 	
