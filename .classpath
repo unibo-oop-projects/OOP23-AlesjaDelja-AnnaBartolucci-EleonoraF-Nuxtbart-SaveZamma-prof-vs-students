@@ -37,9 +37,11 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
 		<attributes>
+			<attribute name="module" value="true"/>
 			<attribute name="gradle.buildServer" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFx"/>
 	<classpathentry kind="lib" path="C:/Users/elefa/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/15/df61e6a8cfba8e36f598e3fa4d40fd51561efdf8/javafx-base-15-win.jar" sourcepath="C:/Users/elefa/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/15/52ad22ad530ec53f386dd257555613485ebdd5ec/javafx-base-15-sources.jar">
 		<attributes>
 			<attribute name="gradle.buildServer" value="true"/>
