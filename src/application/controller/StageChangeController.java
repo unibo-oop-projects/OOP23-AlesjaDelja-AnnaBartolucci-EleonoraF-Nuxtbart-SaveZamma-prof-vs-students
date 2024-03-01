@@ -26,4 +26,14 @@ public class StageChangeController {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	/**
+	 * Goes Back to Main Menu
+	 * @param e Listens to when the player click on this buttons
+	 * @throws IOException
+	 */
+	
+	public void mainMenu(ActionEvent e ) throws IOException {
+		changeScene(e , "../view/MainMenuView.fxml");
+	}
 }
