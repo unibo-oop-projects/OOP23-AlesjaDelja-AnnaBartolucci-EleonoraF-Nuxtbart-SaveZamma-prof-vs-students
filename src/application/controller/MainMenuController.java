@@ -32,7 +32,7 @@ public class MainMenuController {
 	public void sounds(ActionEvent e) {
 		System.out.println("Sounds");
 	}
-	//TO-DO
+	
 	public void leaderboard(ActionEvent e) throws IOException {
 		StageChangeController stageChanger = new StageChangeController();
         stageChanger.changeScene(e, "../view/LeaderBoard.fxml");
