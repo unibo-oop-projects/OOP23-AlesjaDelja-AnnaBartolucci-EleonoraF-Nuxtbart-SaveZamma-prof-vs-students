@@ -63,6 +63,7 @@ public class Students extends Application {
             blockX--;
         } else {
             // If block reaches the start of the grid, reset its position to a random row and the last column
+            //Da mettere apposto
             Random random = new Random();
             blockX = GRID_SIZE - 1;
             blockY = random.nextInt(GRID_SIZE);
