@@ -1,4 +1,4 @@
-package application;
+package _OOP_develop_gradle;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
