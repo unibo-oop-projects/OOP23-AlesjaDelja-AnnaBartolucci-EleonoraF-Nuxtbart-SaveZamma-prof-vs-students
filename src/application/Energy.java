@@ -32,7 +32,15 @@ class EnergiaImplementazione implements Energy {
     }
     
     //TO-DO metodo che fa incrementare l'energia in game avanzato quando i prof uccidono gli studenti
+    public void increase() {
+    	this.livelloEnergia = this.livelloEnergia + 10;
+    }
     //TO-DO metodo che fa diminuire l'energia in game avanzato quando gli studenti uccidono i prof
+    public void decrease() {
+    	this.livelloEnergia = this.livelloEnergia - 10;
+    }
     //TO-DO metodo che fa diminuire l'enrgia a seconda dei diversi spawn dei prof
-    
+    public void profDecrease(int livel) {
+    	this.livelloEnergia = this.livelloEnergia - livel;
+    }
 }
