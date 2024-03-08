@@ -1,5 +1,4 @@
 package _OOP_develop_gradle;
-
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,11 +7,8 @@ import javafx.scene.layout.Pane;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.Serializable;
 
-import _OOP_develop_gradle.GamePlayController;
-
-public class Professor implements Serializable{
+public class Professor{
 	
 	/**
 	 * 
@@ -24,30 +20,36 @@ public class Professor implements Serializable{
 	 */
 	private ProfessorView plantView;
 	
-	public int sunUse;
+	public static final int PLANT_COST = 100;
 	
+	private final double damage;
+	private final Elements<Integer, Integer> position;
+	private double healthPoints;//remainingLife;
+	
+	public int sunUse;
 	private final int buyThreshold; // Constant cost value for different plants 
 	private int hitThreshold; // Maximum hits a plant can take before it is dead
-	private int xPos; // Grid position x
-	private int yPos; // Grid position y
-	private int healthPoints;
-    GamePlayModel gameplay;
+	/*
+	 * private int xPos; // Grid position x private int yPos; // Grid position y
+	 */   
+	GamePlayModel gameplay;
     private ImageView imageView;
     private String path;
    
 
-    public Professor(String path, int hitThreshold, int buyThreshold, int x, int y, int healthPoints) {
-        this.healthPoints = healthPoints;
-        this.gameplay = gameplay;
-        this.sunUse = sunUse;
-        this.path = path;
-        this.buyThreshold = buyThreshold;
-		this.hitThreshold = hitThreshold;
-		this.setxPos(x);
-		this.setyPos(y);
+    public Professor(double damage, double healthPoints, Elements<Integer, Integer> position) {
+    	this.damage = damage;
+    	this.healthPoints = healthPoints;
+    	this.position = position;
+    	
+		/*
+		 * this.gameplay = gameplay; this.sunUse = sunUse; this.path = path;
+		 * this.buyThreshold = buyThreshold; this.hitThreshold = hitThreshold;
+		 * this.setxPos(x); this.setyPos(y);
+		 */
 		
 		//this.imageView = createImageView();
-		plantView = new ProfessorView(path);
+		//plantView = new ProfessorView(path);
     }
 
 	/*
@@ -57,14 +59,14 @@ public class Professor implements Serializable{
 	 */
 
     public void addToGrid(GridPane grid) {
-        grid.add(plantView, xPos, yPos, 1, 1);
+        grid.add(plantView, position, 1, 1);
     }
 
     public void performAttack(Pane pane) {
         // Implementa la logica di attacco qui
     }
 
-    public int getHealthPoints() {
+    public double getHealthPoints() {
         return healthPoints;
     }
 
@@ -75,23 +77,15 @@ public class Professor implements Serializable{
         }
     }
 
-    public void endAnimation(Timeline timeline) {
-        timeline.stop();
-    }
 
-    private void removeProfessorFromGrid() {
-        // Implementa la logica di rimozione dalla griglia qui
-        imageView.setVisible(false);
-        imageView.setDisable(true);
-    }
-    
-  //getter
-    public GamePlayModel getGamePlay() {
-        return gameplay;
-    }
-    public int getSunUse() {
-        return sunUse;
-    }
+	/*
+	 * private void removeProfessorFromGrid() { // Implementa la logica di rimozione
+	 * dalla griglia qui imageView.setVisible(false); imageView.setDisable(true); }
+	 */    
+	/*
+	 * //getter public GamePlayModel getGamePlay() { return gameplay; } public int
+	 * getSunUse() { return sunUse; }
+	 */
     
     /**
 	 * Returns Plant's sunflower cost.
@@ -132,19 +126,25 @@ public class Professor implements Serializable{
 		}
 	}
 	
-	/**
-	 * @return x position
-	 */
-	public int getxPos() {
-		return xPos;
-	}
+	 public double getDamage() {
+	        return damage;
+	 }
+	 
+	public Elements<Integer, Integer> getPosition() {
+        return position;
+    }
 	
-	/**
-	 * @return y position
-	 */
-	public int getyPos() {
-		return yPos;
-	}
+	public boolean isAlive() {
+        return healthPoints > 0;
+    }
+	
+	public void receiveDamage(double damageReceived) {
+		healthPoints -= damageReceived;
+    }
+
+    public int getPlantCost() {
+        return PLANT_COST;
+    }
 	
 	/**
 	 * @param xPos set x to this position 
