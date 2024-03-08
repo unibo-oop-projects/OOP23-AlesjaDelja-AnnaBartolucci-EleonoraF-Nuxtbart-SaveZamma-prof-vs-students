@@ -1,8 +1,8 @@
-package application;
+package _OOP_develop_gradle;
 
 import java.util.List;
 
-import application.GamePlayModel.Student;
+import _OOP_develop_gradle.GamePlayModel.Student;
 import java.io.IOException;
 import java.util.ArrayList;
 

@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class App2 extends Application {
 	public static MediaPlayer mediaPlayer;

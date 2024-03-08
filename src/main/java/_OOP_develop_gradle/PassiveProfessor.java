@@ -1,4 +1,4 @@
-package application;
+package _OOP_develop_gradle;
 
 public class PassiveProfessor extends Professor{
 

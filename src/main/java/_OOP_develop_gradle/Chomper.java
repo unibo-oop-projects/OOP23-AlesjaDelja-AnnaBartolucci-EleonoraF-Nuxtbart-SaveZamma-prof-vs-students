@@ -1,6 +1,5 @@
 package _OOP_develop_gradle;
 
-import Zombie.Zombie;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.Iterator;

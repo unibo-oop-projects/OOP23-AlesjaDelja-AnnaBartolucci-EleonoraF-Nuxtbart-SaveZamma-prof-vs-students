@@ -19,13 +19,17 @@ repositories {
 }
 
 ext {
-    javaFXModules = ["base", "controls", "fxml", "swing", "graphics"]
+    javaFXModules = ["base", "controls", "fxml", "swing", "graphics", "media"]
     supportedPlatforms = ["linux", "mac", "win"] // All required for OOP
     jUnitVersion = "5.10.2"
     javaFxVersion = "15"
 }
 
 dependencies {
+
+	// Dipendenza per javafx.media
+    //implementation 'org.openjfx:javafx-media:$javaFxVersion:$platform'
+    
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 
@@ -63,7 +67,7 @@ tasks.named('test') {
 }
 
 application {
-    mainClass = '_OOP_develop_gradle.App'
+    mainClass = '_OOP_develop_gradle.Main'
 }
 
 jar {
@@ -73,7 +77,7 @@ jar {
     }
     manifest {
         attributes(
-            'Main-Class': '_OOP_develop_gradle.App'
+            'Main-Class': '_OOP_develop_gradle.Main'
         )
     }
 }

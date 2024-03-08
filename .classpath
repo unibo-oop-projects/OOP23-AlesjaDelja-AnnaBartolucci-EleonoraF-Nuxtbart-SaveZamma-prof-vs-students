@@ -28,35 +28,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17/"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="lib" path="C:/Users/annab/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/15/bf3dbf773ac685672ea3aa57bc47631d9b6298c5/javafx-graphics-15-linux.jar" sourcepath="C:/Users/annab/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/15/cce8c8eefe238812dffca99a2944184477ad0dbb/javafx-graphics-15-sources.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/annab/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/15/f96c068c972f0f0d4237d3ed786bc02edc647b7d/javafx-base-15-linux.jar" sourcepath="C:/Users/annab/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/15/52ad22ad530ec53f386dd257555613485ebdd5ec/javafx-base-15-sources.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/annab/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/15/8161a55249d01a2eaf10fed95ce53964c7706540/javafx-controls-15-linux.jar" sourcepath="C:/Users/annab/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/15/80862717ae87e9c6953f959c2b2a6fd070db2b9f/javafx-controls-15-sources.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/annab/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/15/33126161b0ffa09973f66d93c59b9110d2c78c26/javafx-graphics-15-mac.jar" sourcepath="C:/Users/annab/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/15/cce8c8eefe238812dffca99a2944184477ad0dbb/javafx-graphics-15-sources.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/annab/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/15/979ac3da4288de1e8103c2b38eb7aa74d32fe1b8/javafx-graphics-15-win.jar" sourcepath="C:/Users/annab/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/15/cce8c8eefe238812dffca99a2944184477ad0dbb/javafx-graphics-15-sources.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>

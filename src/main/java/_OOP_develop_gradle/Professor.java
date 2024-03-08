@@ -1,4 +1,5 @@
-package application;
+package _OOP_develop_gradle;
+
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Serializable;
 
-import application.GamePlayController;
+import _OOP_develop_gradle.GamePlayController;
 
 public class Professor implements Serializable{
 	

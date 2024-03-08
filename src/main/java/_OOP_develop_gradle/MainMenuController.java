@@ -1,4 +1,4 @@
-package application;
+package _OOP_develop_gradle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
