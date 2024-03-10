@@ -34,6 +34,7 @@ public class GamePlayModel {
 	    public void setTimeTot(int time) {
 	    	timeTot=time;
 	    }
+	    
 	    public List<GamePlayModel.Student> getStudentList() {
 	        return this.studentList;
 	    }
