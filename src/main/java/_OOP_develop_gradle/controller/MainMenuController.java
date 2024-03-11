@@ -9,11 +9,13 @@ public class MainMenuController {
 	/**
 	 * Starts a default game
 	 * @param e Listens to when the player click on this buttons
+	 * @throws IOException 
 	 */
 	
-	public void newGame(ActionEvent e) {
-		//TO-DO Farlo andare all'inizio del gioco dell'Anna
-		System.out.println("New Game");
+	public void newGame(ActionEvent e) throws IOException {
+		StageChangeController stageChanger = new StageChangeController();
+		stageChanger.changeScene(e, "../GameView.fxml");
+		//CONTROLLARE SE SERVE ANCORA MAIN MENUVIEW.FXML E MAIN MENU CONTROLLER DELL'ANNA
 	}
 	
 	/**
@@ -34,7 +36,11 @@ public class MainMenuController {
 		//TO-DO Cambiare il coso dell'Anna per il suono e metterlo tutto da parte in modo che sia più comprensibile
 		System.out.println("Sounds");
 	}
-	
+	/**
+	 * Changes from the main menu to the leaderboard menu.
+	 * @param e
+	 * @throws IOException
+	 */
 	public void leaderboard(ActionEvent e) throws IOException {
 		StageChangeController stageChanger = new StageChangeController();
         stageChanger.changeScene(e, "../view/LeaderBoard.fxml");
