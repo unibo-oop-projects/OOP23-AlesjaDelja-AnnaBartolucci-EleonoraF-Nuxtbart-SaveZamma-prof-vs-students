@@ -9,9 +9,11 @@ interface Energy {
 
 class EnergiaImplementazione implements Energy {
     private int livelloEnergia;
+    private int DEFAULT_ENERGY = 10;
 
     public EnergiaImplementazione() {
-        this.livelloEnergia = 0;
+    	//The energy is init to 100
+        this.livelloEnergia = 100;
         avviaIncrementoPeriodico();
     }
 
@@ -20,7 +22,6 @@ class EnergiaImplementazione implements Energy {
         livelloEnergia++;
         System.out.println("Livello di energia incrementato a " + livelloEnergia);
     }
-
     
     //incremento dell'enegia ogni minuto che passa
     private void avviaIncrementoPeriodico() {
@@ -33,15 +34,22 @@ class EnergiaImplementazione implements Energy {
         }, 0, 60000); // 60000 millisecondi = 1 minuto
     }
     
-    //TO-DO metodo che fa incrementare l'energia in game avanzato quando i prof uccidono gli studenti
+    /**
+     * Increses the energy by the deafult value when a student is killed.
+     */
     public void increase() {
-    	this.livelloEnergia = this.livelloEnergia + 10;
+    	this.livelloEnergia = this.livelloEnergia + DEFAULT_ENERGY;
     }
-    //TO-DO metodo che fa diminuire l'energia in game avanzato quando gli studenti uccidono i prof
+    /**
+     * Decreases the energy by the deafult value when a prof is killed.
+     */
     public void decrease() {
-    	this.livelloEnergia = this.livelloEnergia - 10;
+    	this.livelloEnergia = this.livelloEnergia - DEFAULT_ENERGY;
     }
-    //TO-DO metodo che fa diminuire l'enrgia a seconda dei diversi spawn dei prof
+    /**
+     * Decreases the energy by the papameter 'livel' when a prof is spawned.
+     * @param livel Value of needed energy that will be decreased
+     */
     public void profDecrease(int livel) {
     	this.livelloEnergia = this.livelloEnergia - livel;
     }
