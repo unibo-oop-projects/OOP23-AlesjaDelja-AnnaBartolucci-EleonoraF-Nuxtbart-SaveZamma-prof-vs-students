@@ -1,16 +1,21 @@
 package _OOP_develop_gradle;
 
 //tutor cerbottana
-public class Tutor extends ShooterProfessor{
-
-	private static final long serialVersionUID = 1L;
-	public static final int TUTOR_HIT_THRESHOLD = 10;
-	public static final int TUTOR_BUY_THRESHOLD = 100;
-	public static final int TUTOR_HIT_VALUE = 2;
-	private int hitValue;
+public class Tutor extends Professor{
 	
-	public Tutor(String path, int x, int y) {
-		super(path, TUTOR_HIT_THRESHOLD, TUTOR_BUY_THRESHOLD, x, y, TUTOR_HIT_VALUE, y);
+	public static final int TUTOR_HIT_DAMAGE = 25; //DANNO CHE INFLIGGO ALLO STUDENTE
+	public static final int TUTOR_BUY_COST = 10;
+	public static final int TUTOR_HEALTHPOINTS = 100;
+	public static final String TUTOR_IMG_PATH = "img/professor.png";
+	public static final String tutorBulletName = "tutorBullet";
+	public Bullet tutorBullet;
+	//public static final int TUTOR_HIT_VALUE = 2;
+	private int hitValue;
+	private int bulletSpeed=1;
+	
+	public Tutor(int col, int row) {
+		super(TUTOR_HIT_DAMAGE, TUTOR_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), TUTOR_IMG_PATH, TUTOR_BUY_COST);
+		tutorBullet = new Bullet(bulletSpeed, TUTOR_HIT_DAMAGE, new Elements<Integer, Integer>(col, row), tutorBulletName);
 	}
 
 	/**
@@ -26,9 +31,4 @@ public class Tutor extends ShooterProfessor{
         this.hitValue = -hitValue;
     }
 	
-	public String toString() {
-		String Status= "";
-		Status = "P = " + this.getHitThreshold();
-		return Status;
-	}
 }

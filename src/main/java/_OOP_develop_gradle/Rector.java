@@ -1,6 +1,6 @@
 package _OOP_develop_gradle;
 //fungo ipnotico
-public class Rector extends PassiveProfessor{
+public class Rector extends Professor{
 	
 	private static final long serialVersionUID = 1L;
 	public static final int HYPNOSHROOM_HIT_THRESHOLD = 1;
