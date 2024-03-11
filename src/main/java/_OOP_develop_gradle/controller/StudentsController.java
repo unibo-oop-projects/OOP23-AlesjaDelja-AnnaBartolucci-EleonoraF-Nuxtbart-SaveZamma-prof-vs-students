@@ -1,4 +1,4 @@
-package _OOP_develop_gradle;
+package _OOP_develop_gradle.controller;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import java.util.Random;
 
-public class Students extends Application {
+public class StudentsController extends Application {
 
     private static final int GRID_SIZE = 3;
     private static final int CELL_SIZE = 100;
