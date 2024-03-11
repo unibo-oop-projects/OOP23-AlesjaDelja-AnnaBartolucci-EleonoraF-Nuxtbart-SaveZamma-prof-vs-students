@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 
 
 public class MainMenu extends Application {
@@ -15,14 +18,26 @@ public class MainMenu extends Application {
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			primaryStage.setOnCloseRequest(event -> {
+				//so when we click on cancel it return to the main menu
+				event.consume();
+				exitGame(primaryStage);
+				});
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	// DA CAMBIARE E FARLO PARTIRE DA QUI IL GIOCO
-	//launch of the main menu of the game
-	//public static void main(String[] args) {
-		//launch(args);
-	//}
+	public void exitGame(Stage stage) {
+		
+		//Insert an alert that makes sure that the user is sure about exiting the game
+		Alert exitAlert = new Alert(AlertType.CONFIRMATION);
+		exitAlert.setTitle("Exit");
+		exitAlert.setHeaderText("You are going to exit the game!");
+		exitAlert.setContentText("Are you sure?");
+		if(exitAlert.showAndWait().get() == ButtonType.OK) {
+			stage.close();
+		}
+	}
 }
