@@ -73,8 +73,4 @@ public class Students extends Application {
 
         block.relocate(blockX * CELL_SIZE, blockY * CELL_SIZE);
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

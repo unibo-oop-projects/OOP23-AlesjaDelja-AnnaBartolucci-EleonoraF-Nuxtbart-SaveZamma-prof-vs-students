@@ -20,9 +20,9 @@ public class MainMenu extends Application {
 		}
 	}
 	
-	
+	// DA CAMBIARE E FARLO PARTIRE DA QUI IL GIOCO
 	//launch of the main menu of the game
-	public static void main(String[] args) {
-		launch(args);
-	}
+	//public static void main(String[] args) {
+		//launch(args);
+	//}
 }
