@@ -41,6 +41,7 @@ public class Professor {
 		this.damage = damage;
 		this.healthPoints = healthPoints;
 		this.position = position;
+		this.buyThreshold = 0;
 
 		/*
 		 * this.gameplay = gameplay; this.sunUse = sunUse; this.path = path;
