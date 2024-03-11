@@ -40,6 +40,10 @@ public class Student {
 		this.damage = damage;
 	}
 	
+	private void destroy() {
+		//TO-DO Distruzione 
+	}
+	
 	/**
 	 * Updates the health when he gets attacked by a prof.
 	 * If the health is less or equal to 0 then the students is destroyed.
@@ -52,6 +56,4 @@ public class Student {
 			destroy();
 		}
 	}
-	
-	
 }

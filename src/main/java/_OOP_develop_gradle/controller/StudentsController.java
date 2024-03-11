@@ -11,7 +11,13 @@ import java.util.Random;
 
 public class StudentsController extends Application {
 
-    private static final int GRID_SIZE = 3;
+   /*
+    * MIGLIORARE QUESTA PARTE
+    * 
+    * 
+    * 
+    * 
+    *  private static final int GRID_SIZE = 3;
     private static final int CELL_SIZE = 100;
     private static final int SPEED = 1;
 
@@ -72,5 +78,16 @@ public class StudentsController extends Application {
         }
 
         block.relocate(blockX * CELL_SIZE, blockY * CELL_SIZE);
-    }
+    } */
+	
+	public void showStudents() {
+		//TO DO Aggiungere la parte in cui si rende visibile lo studente
+	}
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
