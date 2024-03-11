@@ -1,14 +1,5 @@
 package _OOP_develop_gradle;
 
-import javafx.animation.Timeline;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-
-import javax.swing.*;
-import java.awt.*;
-
 public class Professor {
 
 	private ProfessorView ProfessorView;
