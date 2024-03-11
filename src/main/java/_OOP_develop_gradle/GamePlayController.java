@@ -74,7 +74,10 @@ public class GamePlayController {
 		}
     }
    
-   
+   /**
+    * 
+    * @param gamePlayView
+    */
     public void startGame(GamePlayView gamePlayView){
     	if(gameStatus) {
 			// finchè stiamo giocando 
@@ -119,25 +122,27 @@ public class GamePlayController {
 				        GamePlayModel.Student student = studentIterator.next();
 				        
 				        // Check dello studente se è vivo 
-				        if (studInGame.contains(student)) {
-				        	// guardo se è stato colpito
+				        if (studInGame.contains(student)) { //health
+				        	// guardo se è stato colpito 
 				        	// se colpito aumento il tempo tot, se non ha più vita muore
 				        	/*
 				        	 * if(studente.colpito()){
-				        	 * 		gameModel.increaseTimeTot(NUM_AUMENTO_TEMPO);
+				        	 * 		Student.takedamage(Professor.getDamage());
+				        	 * 		gameModel.increaseTimeTot(NUM_AUMENTO_TEMPO); 
 				        	 * 		if(studente.morto()){
-				        	 * 				gestire morte chi implementa lo studente
+				        	 * 				gestire morte chi implementa lo studente DESTROY
 				        	 * 				studentIterator.remove();
 				        	 * 		}
 				        	 * }
 				        	 */
 				        	
 				            // Avanzamento in riga (diminuzione colonna)
+				        	// prof può essere messo ovunque sulla griglia --> gestire se ci sono entrambi
 				            if (student.getCol() > 0) {
 				                student.setCol(student.getCol() - 1);
 				            } else {
-				                // Lo studente è arrivato alla colonna 0, utente ha vinto
-				            	// se nessun prof è presente in quella posizione ha vinto
+				                // Lo studente è arrivato alla colonna 0
+				            	// se nessun prof è presente in quella posizione ha perso
 				            	// sennò si colpice il prof 
 				                gameStatus = false;
 				                gamePlayView.setTimerStop(true);
@@ -151,10 +156,10 @@ public class GamePlayController {
 				            
 				            // Controllo se è arrivato nella cella del professore
 				            if (student.getCol() == 0) {
-				            	 // Lo studente è arrivato alla colonna 0, utente ha vinto
-				            	 // se nessun prof è presente in quella posizione ha vinto
+				            	 // Lo studente è arrivato alla colonna 0, utente ha perso
+				            	 // se nessun prof è presente in quella posizione ha perso
 				            	 // sennò si colpice il prof 
-				                // Utente ha vinto, aggiorna lo stato del gioco
+				                // Utente ha perso, aggiorna lo stato del gioco
 				                gameStatus = false;
 				                gamePlayView.setTimerStop(true);
 				                try {
@@ -178,14 +183,14 @@ public class GamePlayController {
 				        Professor prof = profIterator.next();
 	
 				        // Check se professor è in vita
-				        if (prof.getHealthPoints() > 0) { // oppure profInGame.contains(prof)
+				        if (prof.getHealthPoints() > 0) { // oppure profInGame.contains(prof) Professer.isAlive()
 				            // "Sparo" ogni tot
 				            // ...
 				        	
-				        	// se prof viene colpito deve diminuire la sua vita e il tempoTot, controllo poi se è morto
-				        	/*if(prof.colpito()){
-				        	 * 		gameModel.decreaseTimeTot(NUM_DIMINUZIONE_TEMPO);
-				        	 * 		prof.decreaseVita();
+				        	// se prof viene colpito deve diminuire la sua vita e il punteggio, controllo poi se è morto
+				        	/*if(prof.colpito()){ 
+				        	 * 		gameModel.decreaseTimeTot(NUM_DIMINUZIONE_TEMPO); 
+				        	 * 		prof.decreaseVita(); --> receiveDamage(getDamage())
 				        	 * 		
 				        	 * 		if(prof.senzaVite()){
 				        	 * 			rimozione prof da view, gestione morte

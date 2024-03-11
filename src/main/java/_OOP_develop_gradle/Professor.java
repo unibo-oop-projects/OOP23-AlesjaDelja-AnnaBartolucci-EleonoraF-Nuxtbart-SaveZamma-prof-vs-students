@@ -124,6 +124,9 @@ public class Professor {
 		}
 	}
 
+	/*
+	 * Ti restituisce danno che il prf causa 
+	 */
 	public double getDamage() {
 		return damage;
 	}
@@ -135,7 +138,10 @@ public class Professor {
 	public boolean isAlive() {
 		return healthPoints > 0;
 	}
-
+	
+	/*
+	 * Quando prof riceve un danno
+	 */
 	public void receiveDamage(double damageReceived) {
 		healthPoints -= damageReceived;
 	}
