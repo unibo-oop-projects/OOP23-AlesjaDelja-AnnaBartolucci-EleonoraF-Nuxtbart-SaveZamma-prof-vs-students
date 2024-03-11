@@ -1,5 +1,8 @@
 package _OOP_develop_gradle;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Professor {
 
 	private ProfessorView ProfessorView;
@@ -23,6 +26,13 @@ public class Professor {
 	 * Image(path)); image.setFitWidth(50); // Imposta la larghezza desiderata
 	 * image.setFitHeight(50); // Imposta l'altezza desiderata return image; }
 	 */
+	// Metodo per ottenere l'ImageView della pianta
+    public ImageView getImageProf(Professor prof) {
+    	ImageView profImg = new ImageView();
+    	profImg.setImage(new Image(getClass().getResource(prof.getPathImg()).toString()));
+		return profImg;
+    }
+
 	public String getPathImg() {
 		return pathImg;
 	}
