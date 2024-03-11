@@ -41,6 +41,7 @@ public class Professor {
 		this.damage = damage;
 		this.healthPoints = healthPoints;
 		this.position = position;
+		this.buyThreshold = 0;
 
 		/*
 		 * this.gameplay = gameplay; this.sunUse = sunUse; this.path = path;
@@ -124,6 +125,9 @@ public class Professor {
 		}
 	}
 
+	/*
+	 * Ti restituisce danno che il prf causa 
+	 */
 	public double getDamage() {
 		return damage;
 	}
@@ -135,7 +139,10 @@ public class Professor {
 	public boolean isAlive() {
 		return healthPoints > 0;
 	}
-
+	
+	/*
+	 * Quando prof riceve un danno
+	 */
 	public void receiveDamage(double damageReceived) {
 		healthPoints -= damageReceived;
 	}
