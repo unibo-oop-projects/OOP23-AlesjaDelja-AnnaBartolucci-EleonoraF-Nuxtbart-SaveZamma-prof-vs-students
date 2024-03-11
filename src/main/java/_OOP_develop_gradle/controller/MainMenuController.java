@@ -2,6 +2,7 @@ package _OOP_develop_gradle.controller;
 
 import java.io.IOException;
 
+import application.controller.StageChangeController;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -26,12 +27,12 @@ public class MainMenuController {
 	}
 	
 	/**
-	 * Changes to the view when the player can decide how he/she wants to play and it's difficulty
+	 * Changes to the view help the playes on how it's played the game
 	 * @param e Listens to when the player click on this buttons
 	 */
-	public void costumeGame(ActionEvent e) throws IOException {
+	public void helpGame(ActionEvent e) throws IOException {
 		StageChangeController stageChanger = new StageChangeController();
-        stageChanger.changeScene(e, "../view/CustomeGameView.fxml");
+        stageChanger.changeScene(e, "../view/HelpGameView.fxml");
 	}
 	
 	/**
