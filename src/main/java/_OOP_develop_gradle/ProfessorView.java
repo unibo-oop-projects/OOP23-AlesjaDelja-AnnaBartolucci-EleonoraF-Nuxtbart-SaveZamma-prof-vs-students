@@ -1,20 +1,26 @@
 package _OOP_develop_gradle;
 
-import java.awt.Image;
+
+import javafx.scene.image.Image;
+import java.awt.event.MouseEvent;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class ProfessorView {
 	private ImageView imageView;
     private boolean isVisible;
 
-    public PlantCharacter() {
+    public ProfessorView() {
         // Inizialmente la pianta non è visibile
         isVisible = false;
         // Carica l'immagine della pianta
-        Image plantImage = new Image("plant.png");
-        imageView = new ImageView(plantImage);
+		/*
+		 * Image plantImage = new
+		 * Image(getClass().getResourceAsStream("../img/prof.png")); imageView = new
+		 * ImageView(plantImage);
+		 */
         // Imposta un gestore di eventi per fare clic sulla griglia
         imageView.setOnMouseClicked(this::placePlant);
     }
@@ -36,8 +42,10 @@ public class ProfessorView {
     }
 
     // Metodo per ottenere l'ImageView della pianta
-    public ImageView getImageView() {
-        return imageView;
+    public ImageView getImageProf(Professor prof) {
+    	ImageView profImg = new ImageView(); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
+    	profImg.setImage(new Image(getClass().getResource(prof.getPathImg()).toString()));
+		return profImg;
     }
 
     // Metodo per verificare se la pianta è visibile o meno
