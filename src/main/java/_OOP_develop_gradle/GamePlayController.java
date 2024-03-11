@@ -176,14 +176,14 @@ public class GamePlayController {
 				        }
 				        
 				    }
-	
+				    
 				    // Logica per professore
 				   Iterator<Professor> profIterator = gameModel.getProfList().iterator();
 				    while (profIterator.hasNext()) {
 				        Professor prof = profIterator.next();
 	
 				        // Check se professor è in vita
-				        if (prof.getHealthPoints() > 0) { // oppure profInGame.contains(prof) Professer.isAlive()
+				        if (prof.getHealthPoints() > 0) { // oppure profInGame.contains(prof) Professor.isAlive()
 				            // "Sparo" ogni tot
 				            // ...
 				        	
