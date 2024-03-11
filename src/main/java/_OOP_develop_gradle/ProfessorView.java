@@ -42,11 +42,11 @@ public class ProfessorView {
     }
 
     // Metodo per ottenere l'ImageView della pianta
-    public ImageView getImageProf(Professor prof) {
-    	ImageView profImg = new ImageView(); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
+    /*public ImageView getImageProf(Professor prof) {
+    	ImageView profImg = new ImageView();
     	profImg.setImage(new Image(getClass().getResource(prof.getPathImg()).toString()));
 		return profImg;
-    }
+    }*/
 
     // Metodo per verificare se la pianta è visibile o meno
     public boolean isVisible() {
