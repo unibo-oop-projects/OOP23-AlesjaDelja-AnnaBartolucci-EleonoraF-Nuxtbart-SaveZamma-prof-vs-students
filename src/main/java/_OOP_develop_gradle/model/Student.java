@@ -15,32 +15,32 @@ public class Student {
 	 * Gets the health of a student
 	 * @return the health of the student
 	 */
-	public int getHealth() {
+	public int getHealthStudent() {
 		return health;
 	}
 	/**
 	 * Gets the damage of a student
 	 * @return the damage of the student
 	 */
-	public int getDamage() {
+	public int getDamageStudent() {
 		return damage;
 	}
 	/**
 	 * Sets the health of a student
 	 * @param health Value of the health
 	 */
-	public void setHealth(int health) {
+	public void setHealthStudent(int health) {
 		this.health = health;
 	}
 	/**
 	 * Sets the damage of a student
 	 * @param damage
 	 */
-	public void setDamage(int damage) {
+	public void setDamageStudent(int damage) {
 		this.damage = damage;
 	}
 	
-	private void destroy() {
+	private void destroyStudents() {
 		//TO-DO Distruzione 
 	}
 	
@@ -50,10 +50,10 @@ public class Student {
 	 * @param damageTaken Value of the damage of the prof.
 	 */
 	
-	public void takeDamage(int damageTaken) {
+	public void takeDamageStudents(int damageTaken) {
 		health -= damageTaken;
 		if (health <= 0) {
-			destroy();
+			destroyStudents();
 		}
 	}
 }
