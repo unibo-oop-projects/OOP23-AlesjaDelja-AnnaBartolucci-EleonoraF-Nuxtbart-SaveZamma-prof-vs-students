@@ -1,4 +1,4 @@
-package _OOP_develop_gradle;
+package _OOP_develop_gradle.model;
 
 import java.util.Timer;
 import java.util.TimerTask;
