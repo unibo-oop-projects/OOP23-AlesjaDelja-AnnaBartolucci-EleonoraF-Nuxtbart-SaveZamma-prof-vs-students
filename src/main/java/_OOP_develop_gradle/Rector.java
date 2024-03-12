@@ -12,9 +12,10 @@ public class Rector extends Professor{
 	public static final String RECTOR_IMG_PATH = "img/professor.png";
 	public static final String tutorBulletName = "rectorBullet";
 	public Bullet rectorBullet;
+	public static final int rectorName = 3;
 	//public static final int TUTOR_HIT_VALUE = 2;
 	private int hitValue;
-	private int bulletSpeed=1;
+	private int bulletSpeed=3;
 	
 	public Rector(int col, int row) {
 		super(RECTOR_HIT_DAMAGE, RECTOR_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), RECTOR_IMG_PATH, RECTOR_BUY_COST);

@@ -31,7 +31,7 @@ public class Professor {
 	// Metodo per ottenere l'ImageView della pianta
     public ImageView getImageProf(Professor prof) {
     	ImageView profImg = new ImageView();
-    	profImg.setImage(new Image(getClass().getResource(prof.getPathImg()).toString()));
+    	profImg.setImage(new Image(getClass().getResource(prof.getPathImgProf()).toString()));
 		return profImg;
     }
 
