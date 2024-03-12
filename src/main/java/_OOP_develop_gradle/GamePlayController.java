@@ -23,11 +23,13 @@ public class GamePlayController {
 	
 	private static GamePlayController instance;
 	public boolean gameStatus;
+	public static int SCORE_INIT = 20;
 	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!!
-	public static int TEMPO_TOT_INI = 120; // sarebbe da mettere 120 che sono 2 minuti, per ora 10 sec per fare le prove
+	public static int TEMPO_TOT_INIT = 120; // sarebbe da mettere 120 che sono 2 minuti, per ora 10 sec per fare le prove
 	public static int NUM_STUD_ONDATA;
 	public static GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
+	public List<Bullet> bulletList = new ArrayList<>(); // lista dei buller in gioco
 	public List<Professor> profInGame = new ArrayList<>(); // lista dei professori in partita
 	public List<Student> studInGame = new ArrayList<>(); // lista degli studenti in partita
 	private AnchorPane mainMenu;
@@ -36,7 +38,8 @@ public class GamePlayController {
     	NUM_STUD_ONDATA = 1;
     	gameStatus = true;
         gameModel = new GamePlayModel();
-        gameModel.setTimeTot(TEMPO_TOT_INI);
+        gameModel.setTimeTot(TEMPO_TOT_INIT);
+        gameModel.setMatchScore(SCORE_INIT);
         profInGame = gameModel.getProfList();
         studInGame = gameModel.getStudentList();
         this.gamePlayView = gamePlayView; // Assegna il riferimento dell'oggetto passato al metodo alla variabile gamePlayView
@@ -125,56 +128,51 @@ public class GamePlayController {
 				        
 				        // Check dello studente se è vivo 
 				        if (student.getHealthStudent() > 0) { // studInGame.contains(student)
-				        	// guardo se è stato colpito 
-				        	// se colpito aumento il tempo tot, se non ha più vita muore
-				        	/*
-				        	 * if(student.isHitten()){
-				        	 * 		student.takedamage(Professor.getDamage());
-				        	 * 		student.setDamageStudent();
-				        	 * 		gameModel.increaseMatchScore(student.getCost()); 
-				        	 * 		if(student.getHealthStudent() <= 0){
-				        	 * 				student.destroyStudents();
-				        	 * 				studentIterator.remove();
-				        	 * 		}
-				        	 * }
-				        	 */
+				        	// guardo se è stato colpito dal bullet
+				        	// se colpito aumento il punteggio tot, se non ha più vita muore
 				        	
-				            // Avanzamento in riga (diminuzione colonna)
+				        	if (collisionBulletAndStudent(student, bulletList)) {
+				        		if (student.getHealthStudent() <= 0) {
+				        			student.destroyStudents();
+				        			studentIterator.remove();
+				        		}
+				        	}
+				        	
 				        	// prof può essere messo ovunque sulla griglia --> gestire se ci sono entrambi
-				            if (student.getCol() > 0) {
-				                student.setCol(student.getCol() - 1);
-				            } else {
-				                // Lo studente è arrivato alla colonna 0
-				            	// se nessun prof è presente in quella posizione ha perso
-				            	// sennò si colpice il prof 
-				                gameStatus = false;
-				                gamePlayView.setTimerStop(true);
-				                try {
-									userWin();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-				                break;
-				            }
+				        	//controllo se prof è presente nella cella dove sono
+				        	//se sì faccio collision e colpisco il prof
+				        	//sennò avanzo 
+				        	if (collisionProfAndStudent(student,profInGame, gameModel.getMatchScore())) {
+				        		//chiamo la view per infliggere attacco dello studente
+				        		
+				        	}else {
+				        		// Avanzamento in riga (diminuzione colonna)
+					            if (student.getCol() > 0) {
+					                student.setCol(student.getCol() - 1);
+					            }
+				        	}
 				            
-				            // Controllo se è arrivato nella cella del professore
+				            
+				            // Controllo se è arrivato nella cella finale
 				            if (student.getCol() == 0) {
-				            	 // Lo studente è arrivato alla colonna 0, utente ha perso
 				            	 // se nessun prof è presente in quella posizione ha perso
 				            	 // sennò si colpice il prof 
+				            	if (collisionProfAndStudent(student, profInGame, gameModel.getMatchScore())) {
+				            		break;
+				            	}
 				                // Utente ha perso, aggiorna lo stato del gioco
 				                gameStatus = false;
 				                gamePlayView.setTimerStop(true);
 				                try {
-									userWin();
+									userLost();
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
 				                break;
 				            }
 				        } else {
-				            // Lo studente è morto, gestito da chi fa lo studente
-				        	student.destroyStudents();
+				            
+				        	student.destroyStudents(); // Lo studente è morto
 				            studentIterator.remove(); // Rimuovi lo studente morto dalla lista
 				        }
 				        
@@ -186,21 +184,15 @@ public class GamePlayController {
 				        Professor prof = profIterator.next();
 	
 				        // Check se professor è in vita
-				        if (prof.getHealthPoints() > 0) { // oppure profInGame.contains(prof) Professor.isAlive()
+				        if (profInGame.contains(prof)) { // oppure  Professor.isAlive()
 				            // "Sparo" ogni tot
-				            // ...
+				            // MUOVERE IL BULLET
 				        	
-				        	// se prof viene colpito deve diminuire la sua vita e il punteggio, controllo poi se è morto
-				        	if(prof.hittedProfessor()){ 
-				        			gameModel.decreaseMatchScore(NUM_AUMENTO_SCORE);  
-				        	  		prof.receiveDamage(student.getDamageStudent()); // --> receiveDamage(getDamage())
-				        	  		
-				        	  		if(prof.getHealthPoints() <= 0){
-				        	  			prof.destroy();
-				        	  		}
-				        	  }
-				        	  
-				        	 
+				        	// il prof che viene colpito lo faccio già nel ciclo degli studenti
+		        	  		if(prof.getHealthPointsProf() <= 0){
+		        	  			prof.destroyProf();
+		        	  			profIterator.remove();
+		        	  		}
 	
 				            // Controllo se sono in vita ancora tutti i prof
 				            if (gameModel.getProfList().isEmpty()) {
@@ -214,8 +206,8 @@ public class GamePlayController {
 				                break;
 				            }
 				        } else {
-				            // Il professore è morto, gestito da chi fa i prof
-				        	prof.destroy();
+				            
+				        	prof.destroyProf();    // Il professore è morto
 				            profIterator.remove(); // Rimuovi il professore morto dalla lista
 				        }
 				    }
@@ -286,7 +278,6 @@ public class GamePlayController {
 		        e.printStackTrace();
 		    }
 		}
-		
 	}
 	
 	// per restiruire l'istanta corrente del GamePlayController
@@ -329,11 +320,46 @@ public class GamePlayController {
 		this.studInGame = studInGame;
 	}
 	
+	public boolean collisionBulletAndStudent(Student currentStud, List<Bullet> bulletList) {
+		//passo uno studente e controllo che in quella cella non ci sia un bullet se c'è setto a true e sparisce il bullet(destroy)
+		/* Questo modo qui sotto prende solo il primo proiettile che trova nella posizione dello studente, quella dop invece prende TUTTI i proiettili nella posizione dello studente
+		 * return bulletList.stream()
+				.filter(bullet -> bullet.getPosition().equals(currentStud.getPosition()))
+				.peek(bullet -> {
+	                currentStud.takeDamageStudents(bullet.getBulletDamage());
+	                gameModel.increaseMatchScore(currentStud.getCost());
+	            })
+				.peek(Bullet::destroyBullet)
+				.findFirst()
+				.isPresent();*/
+		return bulletList.stream()
+	            .filter(bullet -> bullet.getPosition().equals(currentStud.getPosition()))
+	            .peek(bullet -> {
+	                currentStud.takeDamageStudents(bullet.getBulletDamage());
+	                gameModel.increaseMatchScore(currentStud.getCost());
+	                bullet.destroyBullet();
+	            })
+	            .count() > 0;
+	}
+	
+	 
+	public boolean collisionProfAndStudent(Student currentStud, List<Professor> profList, int currentMatchScore) {
+		 return profList.stream()
+		            .filter(prof -> prof.getPositionProf().equals(currentStud.getPosition()))
+		            .map(prof -> {
+		                prof.receiveDamageProf(currentStud.getDamageStudent());
+		                currentMatchScore -= prof.getDamageProf(); //aggiorno punteggio tot
+		                gameModel.setMatchScore(currentMatchScore);
+		                return prof;})
+		            .findFirst()
+		            .isPresent();
+	}
+	
 	/**
 	 * Devi muovere il bullet
 	 * Due funzioni collision:
-	 * una tra studente e bullet che mi va a diminuire la vita dello studente e aumenta il punteggio
-	 * una tra student e professor che mi diminuise vita prof e punteggio se prof muore
+	 * una tra studente e bullet che mi va a diminuire la vita dello studente e aumenta il punteggio OK
+	 * una tra student e professor che mi diminuisce vita prof e punteggio se prof muore OK
 	 * Da capire come far a capire se è una tipologia di prof piuttosto che un altra
 	 * potrei usare il metodo getIDProf() o setter()
 	 */
