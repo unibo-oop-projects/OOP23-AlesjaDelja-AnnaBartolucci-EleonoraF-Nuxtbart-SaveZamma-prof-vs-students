@@ -133,7 +133,7 @@ public class GamePlayController {
 				        	
 				        	if (collisionBulletAndStudent(student, bulletList)) {
 				        		if (student.getHealthStudent() <= 0) {
-				        			student.destroyStudents();
+				        			gameModel.setMatchScore(student.destroyStudents(gameModel.getMatchScore()));
 				        			studentIterator.remove();
 				        		}
 				        	}
@@ -144,17 +144,17 @@ public class GamePlayController {
 				        	//sennò avanzo 
 				        	if (collisionProfAndStudent(student, profInGame)) {
 				        		//chiamo la view per infliggere attacco dello studente
-				        		
+				        		// TODO metodo dell'ale
 				        	}else {
 				        		// Avanzamento in riga (diminuzione colonna)
-					            if (student.getCol() > 0) {
-					                student.setCol(student.getCol() - 1);
+					            if (student.getPositionStudent().getY() > 0) {
+					            	student.setPositionStudent(new Elements<Integer, Integer> (student.getPositionStudent().getX(),student.getPositionStudent().getY() - 1));
 					            }
 				        	}
 				            
 				            
 				            // Controllo se è arrivato nella cella finale
-				            if (student.getCol() == 0) {
+				            if (student.getPositionStudent().getY() == 0) {
 				            	 // se nessun prof è presente in quella posizione ha perso
 				            	 // sennò si colpice il prof 
 				            	if (collisionProfAndStudent(student, profInGame)) {
@@ -172,7 +172,7 @@ public class GamePlayController {
 				            }
 				        } else {
 				            
-				        	student.destroyStudents(); // Lo studente è morto
+				        	gameModel.setMatchScore(student.destroyStudents(gameModel.getMatchScore())); // Lo studente è morto
 				            studentIterator.remove(); // Rimuovi lo studente morto dalla lista
 				        }
 				        
@@ -201,7 +201,7 @@ public class GamePlayController {
 		        	  			prof.destroyProf();
 		        	  			profIterator.remove();
 		        	  		}else {
-		        	  			// se è in vita ed è tempo di sparare: SPARO
+		        	  			// se è in vita ed è tempo di sparare: creo nuovo bullet e sparo
 		        	  			if(prof.getcostProfessor() % 4 == 0) {
 		        	  				
 		        	  			}
@@ -340,16 +340,14 @@ public class GamePlayController {
 				.filter(bullet -> bullet.getPosition().equals(currentStud.getPosition()))
 				.peek(bullet -> {
 	                currentStud.takeDamageStudents(bullet.getBulletDamage());
-	                gameModel.increaseMatchScore(currentStud.getCost());
 	            })
 				.peek(Bullet::destroyBullet)
 				.findFirst()
 				.isPresent();*/
 		return bulletList.stream()
-	            .filter(bullet -> bullet.getPosition().equals(currentStud.getPosition()))
+	            .filter(bullet -> bullet.getPosition().equals(currentStud.getPositionStudent()))
 	            .peek(bullet -> {
 	                currentStud.takeDamageStudents(bullet.getBulletDamage());
-	                gameModel.increaseMatchScore(currentStud.getCost());
 	                bullet.destroyBullet();
 	            })
 	            .count() > 0;
@@ -358,7 +356,7 @@ public class GamePlayController {
 	 
 	public boolean collisionProfAndStudent(Student currentStud, List<Professor> profList) {
 		 return profList.stream()
-		            .filter(prof -> prof.getPositionProf().equals(currentStud.getPosition()))
+		            .filter(prof -> prof.getPositionProf().equals(currentStud.getPositionStudent()))
 		            .map(prof -> {
 		                prof.receiveDamageProf(currentStud.getDamageStudent());
 		                return prof;})
