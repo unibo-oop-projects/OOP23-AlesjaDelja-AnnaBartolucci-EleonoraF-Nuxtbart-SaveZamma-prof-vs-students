@@ -40,7 +40,7 @@ public class Student {
 		this.damage = damage;
 	}
 	
-	private void destroyStudents() {
+	public void destroyStudents() {
 		//TO-DO Distruzione 
 	}
 	
@@ -52,8 +52,5 @@ public class Student {
 	
 	public void takeDamageStudents(int damageTaken) {
 		health -= damageTaken;
-		if (health <= 0) {
-			destroyStudents();
-		}
 	}
 }
