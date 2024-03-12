@@ -73,12 +73,19 @@ public class GamePlayController {
 		    gameModel.generateWave(NUM_STUD_ONDATA);
 		    studInGame = gameModel.getStudentList();
 		    profInGame = gameModel.getProfList();
+		    bulletNormalList = gameModel.getBulletListNormal();
+	        bulletDiagonalList = gameModel.getBulletListDiagonal();
 		    
 		    //update view
-		    synchronized(studInGame){
-		        gamePlayView.updatePosition(studInGame, profInGame);
-		    }
-		    
+		    /*synchronized(studInGame){
+		    	// TODO sync con tutti gli altri ??
+		        gamePlayView.updatePositions(studInGame, profInGame, bulletNormalList, bulletDiagonalList);
+		    }*/
+		    // Sincronizza l'accesso alle liste condivise
+            synchronizeLists(() -> {
+                gamePlayView.updatePositions(studInGame, profInGame, bulletNormalList, bulletDiagonalList);
+            });
+            
 		    System.out.println("settato nuvo gruppo di studenti");
 		}
     }
@@ -89,21 +96,7 @@ public class GamePlayController {
     */
     public void startGame(GamePlayView gamePlayView){
     	if(gameStatus) {
-			// finchè stiamo giocando 
 			
-			// per ogni studente:
-			// controllo che sia in vita
-			// se è stato colpito aumento il punteggio del giocatore (se ha ancora punti vita continua sennò muore e si toglie dalla lista studenti)
-			// faccio avanzare man mano in riga
-			// controllo per vedere se è arrivato nella cella del prof ->se sì HA Perso-> status : false
-			
-			// per ogni professore:
-			// controllo che sia in vita
-			// se è stato attaccato dagli studenti diminuisco il punteggio (se ha ancora punti vita continua sennò muore e si toglie dalla lista professore)
-			// faccio "sparare" ogni tot
-			// controllo se sono in vita ancora tutti gli studenti, se no ->Utente ha perso-> status: false
-			
-			// devo sempre fare l'update della view()
 			// Avvio del thread per l'aggiornamento dell'interfaccia utente
 		    new Thread(() -> {
 				while (gameStatus) {
@@ -122,13 +115,11 @@ public class GamePlayController {
 					
 					sleep(2000);
 			        
-					synchronized(studInGame){
-				    	 synchronized(profInGame) {
-				    		 // TODO sync anche con le liste dei bullet ??
-				    		 // TODO la updateVIew anche dei bullet
-				    		 gamePlayView.updatePosition(studInGame, profInGame);
-				    	 }
-				    }
+					// Sincronizza l'accesso alle liste condivise
+	                synchronizeLists(() -> {
+	                	advanceBullets(); // così dovrebbero andare più veloci
+	                    gamePlayView.updatePositions(studInGame, profInGame, bulletNormalList, bulletDiagonalList);
+	                });
 					
 				    Iterator<Student> studentIterator = gameModel.getStudentList().iterator();
 				    while (studentIterator.hasNext()) {
@@ -187,15 +178,7 @@ public class GamePlayController {
 				        
 				    }
 				    
-				    // Faccio avanzare i bullet
-				    Iterator<Bullet> bulletNormalIterator = gameModel.getBulletListNormal().iterator();
-				    while (bulletNormalIterator.hasNext()){
-				    	bulletNormalIterator.next().move();
-				    }
-				    Iterator<Bullet> bulletDiagonalIterator = gameModel.getBulletListDiagonal().iterator();
-				    while (bulletDiagonalIterator.hasNext()){
-				    	bulletDiagonalIterator.next().move();
-				    }
+				    advanceBullets();
 				    
 				    // Logica per professore
 				   Iterator<Professor> profIterator = gameModel.getProfList().iterator();
@@ -212,7 +195,8 @@ public class GamePlayController {
 		        	  			profIterator.remove();
 		        	  		}else {
 		        	  			// se è in vita ed è tempo di sparare: creo nuovo bullet e sparo
-		        	  			if(prof.getcostProfessor() % 4 == 0) {
+		        	  			// TODO decidere ogni quanto far sparare --> per ora ogni 7 sec
+		        	  			if(gameModel.getTimeTot() % 7 == 0) {
 		        	  				if(prof.getIDProf() == TUTOR_ID || prof.getIDProf() == NORMALPROF_ID) {
 		        	  					//generi un bullet normale e lo aggiungi alla lista
 		        	  					// TODO ELE deve aggiungere getter e setter nei prof tipo tutor della speed e del bulletName 
@@ -244,11 +228,10 @@ public class GamePlayController {
 				        }
 				    }
 	
-				    synchronized(studInGame){
-				    	 synchronized(profInGame) {
-				    		 gamePlayView.updatePosition(studInGame, profInGame);
-				    	 }
-				    }
+				    // Sincronizza l'accesso alle liste condivise
+	                synchronizeLists(() -> {
+	                    gamePlayView.updatePositions(studInGame, profInGame, bulletNormalList, bulletDiagonalList);
+	                });
 				    
 				    // Introdotto un ritardo per la visibilità del gioco
 			        sleep(2000);
@@ -266,6 +249,38 @@ public class GamePlayController {
 			
 		}
     }
+    
+    /**
+     * Executes an action within a synchronized section, ensuring safe access to the 
+     * shared lists {@code studInGame}, {@code profInGame}, {@code bulletNormalList}, 
+     * and {@code bulletDiagonalList}.
+     *
+     * @param action the action to be performed within the synchronized section
+     */
+    private void synchronizeLists(Runnable action) {
+        synchronized (studInGame) {
+            synchronized (profInGame) {
+                synchronized (bulletNormalList) {
+                    synchronized (bulletDiagonalList) {
+                        action.run();
+                    }
+                }
+            }
+        }
+    }
+    
+    private void advanceBullets() {
+    	// Faccio avanzare i bullet
+	    Iterator<Bullet> bulletNormalIterator = gameModel.getBulletListNormal().iterator();
+	    while (bulletNormalIterator.hasNext()){
+	    	bulletNormalIterator.next().move();
+	    }
+	    Iterator<Bullet> bulletDiagonalIterator = gameModel.getBulletListDiagonal().iterator();
+	    while (bulletDiagonalIterator.hasNext()){
+	    	bulletDiagonalIterator.next().move();
+	    }
+    }
+    
     public void userLost() throws IOException{
     	Platform.runLater(() -> {
             try {
@@ -383,12 +398,4 @@ public class GamePlayController {
 		            .isPresent();
 	}
 	
-	/**
-	 * Devi muovere il bullet
-	 * Due funzioni collision:
-	 * una tra studente e bullet che mi va a diminuire la vita dello studente e aumenta il punteggio OK
-	 * una tra student e professor che mi diminuisce vita prof e punteggio se prof muore OK
-	 * Da capire come far a capire se è una tipologia di prof piuttosto che un altra
-	 * potrei usare il metodo getIDProf() o setter()
-	 */
 }
