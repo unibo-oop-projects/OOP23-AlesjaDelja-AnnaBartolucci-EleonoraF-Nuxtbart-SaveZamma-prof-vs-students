@@ -3,11 +3,13 @@ package _OOP_develop_gradle.model;
 public class Student {
 	private int health;
 	private int damage;
+	private int DEFAULT_HEALTH = 100;
+	private int DEFAULT_DAMAGE = 25;
 	
 	//Costruttore
-	public Student(int health , int damage) {
-		this.health = health;
-		this.damage = damage;
+	public Student() {
+		this.health = DEFAULT_HEALTH;
+		this.damage = DEFAULT_DAMAGE;
 	}
 	
 	//Now we make the method that gets and sets the health and damage
