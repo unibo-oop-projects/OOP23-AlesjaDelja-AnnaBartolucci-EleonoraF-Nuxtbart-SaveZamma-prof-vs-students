@@ -9,6 +9,7 @@ public class Student {
 	private int damage;
 	private int DEFAULT_HEALTH = 100;
 	private int DEFAULT_DAMAGE = 25;
+	privaye int DEFAULT_SCORE = 100;
 	private final Elements<Integer, Integer> position;
 	//Costruttore
 	public Student() {
@@ -58,8 +59,17 @@ public class Student {
 		this.damage = damage;
 	}
 	
-	public void destroyStudents() {
+	/**
+	 * Destroys the student
+	 * @param score The score at the moment
+	 * @return The new Score after the student is Killed
+	 */
+	
+	public int destroyStudents(int score) {
 		//TO-DO Distruzione 
+		int newScore = score + DEFAULT_SCORE;
+		//distruggere immagine
+		return newScore;
 	}
 	
 	/**
