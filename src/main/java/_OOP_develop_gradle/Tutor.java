@@ -15,7 +15,7 @@ public class Tutor extends Professor{
 	//public static final int TUTOR_HIT_VALUE = 2;
 	private int hitValue;
 	private int bulletSpeed=1;
-	
+	private Elements<Integer, Integer> currentPosition;
 	public Tutor(int col, int row) {
 		super(TUTOR_HIT_DAMAGE, TUTOR_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), TUTOR_IMG_PATH, TUTOR_BUY_COST);
 		tutorBullet = new Bullet(bulletSpeed, TUTOR_HIT_DAMAGE, new Elements<Integer, Integer>(col, row), tutorBulletName);
@@ -34,4 +34,14 @@ public class Tutor extends Professor{
         this.hitValue = -hitValue;
     }
 	
+    public void shootDiagonal(int col, int rowDia) {
+	    // Calcola la posizione del proiettile in diagonale rispetto alla posizione corrente del rettore
+	    int bulletCol = currentPosition.getX() + bulletSpeed;
+	    int bulletRow = currentPosition.getY() + bulletSpeed;
+	    // Crea un nuovo proiettile sparato in diagonale
+	    if (bulletCol >= 0 && bulletCol < col && bulletRow >= 0 && bulletRow < row) {
+	        // Crea un nuovo proiettile sparato in diagonale
+	    	tutorBullet = new Bullet(bulletSpeed, RECTOR_HIT_DAMAGE, new Elements<>(bulletCol, bulletRow), tutorBulletName);
+	    }
+	}
 }

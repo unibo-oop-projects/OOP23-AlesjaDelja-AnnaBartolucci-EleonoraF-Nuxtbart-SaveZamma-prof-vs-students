@@ -14,6 +14,7 @@ public class GamePlayModel {
 	    private int timeTot; // Tempo di gioco
 	    private List<Student> studentList; // Lista di studenti presenti
 	    private List<Professor> profList; // Lista di prof presenti
+	    private List<Bullet> bulletList;
 	    //private int COST_OF_PROF = 1;
 	    
 	    public GamePlayModel() {
@@ -21,10 +22,21 @@ public class GamePlayModel {
 	        this.timeTot = 0;
 	        this.studentList = new ArrayList<>();
 	        this.profList = new ArrayList<>();
+	        this.bulletList = new ArrayList<>();
 	    }
 
 		
-	    public int getMatchScore() {
+	    public List<Bullet> getBulletList() {
+			return bulletList;
+		}
+
+
+		public void setBulletList(List<Bullet> bulletList) {
+			this.bulletList = bulletList;
+		}
+
+
+		public int getMatchScore() {
 			return matchScore;
 		}
 
