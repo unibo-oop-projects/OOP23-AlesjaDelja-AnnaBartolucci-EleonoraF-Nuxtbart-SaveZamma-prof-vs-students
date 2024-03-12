@@ -142,7 +142,7 @@ public class GamePlayController {
 				        	//controllo se prof è presente nella cella dove sono
 				        	//se sì faccio collision e colpisco il prof
 				        	//sennò avanzo 
-				        	if (collisionProfAndStudent(student,profInGame)) {
+				        	if (collisionProfAndStudent(student, profInGame)) {
 				        		//chiamo la view per infliggere attacco dello studente
 				        		
 				        	}else {

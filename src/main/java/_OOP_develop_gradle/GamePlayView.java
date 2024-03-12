@@ -184,7 +184,6 @@ public class GamePlayView {
 	    				costProfessor = new Tutor(columnIndex, rowIndex).getcostProfessor();
 	    				Tutor tutornew = new Tutor(columnIndex, rowIndex);
 	    				Bullet tutorBullet = tutornew.tutorBullet;
-	    				tutorBullet.move();
 	    				if(costProfessor <= gamePlayModel.getMatchScore()) {
 	    	    		    // creo nuovo prof con columnIndex e rowIndex
 	    	    		    Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex, null, null, costProfessor);
