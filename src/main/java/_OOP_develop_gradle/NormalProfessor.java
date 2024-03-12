@@ -1,5 +1,7 @@
 package _OOP_develop_gradle;
 
+import _OOP_develop_gradle.model.Professor;
+
 public class NormalProfessor extends Professor{
 
 	public static final int NORMALPROF_HIT_DAMAGE = 50; //DANNO CHE INFLIGGO ALLO STUDENTE

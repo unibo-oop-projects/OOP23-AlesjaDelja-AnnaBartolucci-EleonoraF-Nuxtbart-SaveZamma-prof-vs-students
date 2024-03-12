@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
+import _OOP_develop_gradle.model.Professor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

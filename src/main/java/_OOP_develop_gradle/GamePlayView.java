@@ -3,6 +3,8 @@ package _OOP_develop_gradle;
 import java.util.List;
 
 import _OOP_develop_gradle.GamePlayModel.Student;
+import _OOP_develop_gradle.model.Professor;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
