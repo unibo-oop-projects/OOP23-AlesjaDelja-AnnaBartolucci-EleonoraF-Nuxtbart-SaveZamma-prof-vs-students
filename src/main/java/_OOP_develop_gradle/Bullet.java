@@ -45,4 +45,8 @@ public final class Bullet {
     public void move() {
         this.currentPosition = new Elements<>(currentPosition.getX() + bulletSpeed, currentPosition.getY());
     }
+    
+    public void destroyBullet() { 
+		//TODO
+	}
 }
