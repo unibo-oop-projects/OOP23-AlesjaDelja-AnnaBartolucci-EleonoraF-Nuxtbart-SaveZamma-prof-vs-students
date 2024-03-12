@@ -1,17 +1,33 @@
 package _OOP_develop_gradle.model;
 
+import java.util.Random;
+
+import _OOP_develop_gradle.Elements;
+
 public class Student {
 	private int health;
 	private int damage;
 	private int DEFAULT_HEALTH = 100;
 	private int DEFAULT_DAMAGE = 25;
-	
+	private final Elements<Integer, Integer> position;
 	//Costruttore
 	public Student() {
+		this.position=getPosition();
 		this.health = DEFAULT_HEALTH;
 		this.damage = DEFAULT_DAMAGE;
 	}
 	
+	/**
+	 * Creates a new Students in the end of the grid in a random row
+	 * @return the rows and colum of the student created
+	 */
+	
+	private Elements<Integer, Integer> getPosition() {
+		Random random = new Random();
+	    int randomY = random.nextInt(7); // Genera un numero casuale tra 0 e 6 inclusi
+	    return new Elements<>(0, randomY);
+	}
+
 	//Now we make the method that gets and sets the health and damage
 	/**
 	 * Gets the health of a student
