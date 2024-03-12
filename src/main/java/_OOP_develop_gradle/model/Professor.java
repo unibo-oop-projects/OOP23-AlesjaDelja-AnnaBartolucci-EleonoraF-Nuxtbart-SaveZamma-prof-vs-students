@@ -109,7 +109,7 @@ public class Professor {
 		return false;
 	}
 
-	private void destroy() {
+	public void destroy() {
 		// TODO Auto-generated method stub
 		
 	}

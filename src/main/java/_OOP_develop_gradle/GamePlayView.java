@@ -2,9 +2,13 @@ package _OOP_develop_gradle;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import _OOP_develop_gradle.GamePlayModel.Student;
 import _OOP_develop_gradle.model.Professor;
 
+=======
+import _OOP_develop_gradle.model.Student;
+>>>>>>> a30e45794952f749d1e3ee394513131ab0fdec76
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -51,10 +55,11 @@ public class GamePlayView {
 
     public GamePlayController gameController;
     public GamePlayModel gamePlayModel;
-    public List<Professor> profInGrid;
-    private List<GamePlayModel.Student> studentInGrid=new ArrayList<>(); // Lista di studenti presenti
+    public List<Professor> profInGrid = new ArrayList<>();
+    private List<Student> studentInGrid = new ArrayList<>(); // Lista di studenti presenti
     public AnimationTimer  timer;
     public int timeTot ;// Partiamo da 2 minuti, quindi 120 secondi
+    public int matchScore ;
     public long lastTimeUpdate = 0;
     public long ONE_SECOND = 1_000_000_000;
     public boolean timerStop = false;
@@ -112,70 +117,115 @@ public class GamePlayView {
         
 	}
     
-	public void updatePosition(List<GamePlayModel.Student> studentList){//GamePlayModel model) {
+	public void updatePosition(List<Student> studentList, List<Professor> profList){
     	Platform.runLater(() -> {
-    	// aggiornamento della vista in base allo stato del modello
-    	// ...
-    	lawn_grid.getChildren().removeIf(node -> node instanceof ImageView);
-    	// per ogni studente in studentInGrid
-    	//	prendo le coordinate e metto sulla griglia la foto corrispondente
-    	studentInGrid =studentList;// model.getStudentList();
-    	for(Student stud : studentInGrid) {
-    		ImageView studentImg = stud.getImageStud(stud);
-    		GridPane.setConstraints(studentImg, stud.getCol(), stud.getRow());
-    		lawn_grid.getChildren().add(studentImg);
-    	}
     	
-    	// per ogni prof 
-    	// ...
+	    	lawn_grid.getChildren().removeIf(node -> node instanceof ImageView);
+	    	
+	    	// per ogni studente in studentInGrid
+	    	//	prendo le coordinate e metto sulla griglia la foto corrispondente
+	    	studentInGrid =studentList;// model.getStudentList();
+	    	for(Student stud : studentInGrid) {
+	    		ImageView studentImg = stud.getImageStud(stud);
+	    		GridPane.setConstraints(studentImg, stud.getCol(), stud.getRow());
+	    		lawn_grid.getChildren().add(studentImg);
+	    	}
+	    	
+	    	// per ogni prof
+	    	// prendo le coordinate e metto sulla griglia la foto corrispondente
+	    	profInGrid = profList;
+	    	for(Professor prof : profInGrid) {
+	    		ImageView profImg = prof.getImageProf(prof);
+	    		GridPane.setConstraints(profImg, prof.getPosition().getX(), prof.getPosition().getY());
+	    		lawn_grid.getChildren().add(profImg);
+	    	}
     	});
     }
 
-    public void removePosition(List<GamePlayModel.Student> studentList) {
+    public void removePosition(List<Student> studentList, List<Professor> profList) {
     	Platform.runLater(() -> {
-        // aggiornamento della vista in base allo stato del modello
-        // ...
-    	lawn_grid.getChildren().removeIf(node -> node instanceof ImageView);
-    	// per ogni studente in studentInGrid
-    	//	prendo le coordinate e tolgo dalla griglia la foto corrispondente
-    	studentInGrid = studentList;//model.getStudentList();
-    	for(Student stud : studentInGrid) {
-    		lawn_grid.getChildren().remove(stud.getImageStud(stud));
-    	}
-    	
-    	// per ogni prof 
-    	// ...
+    		
+	    	lawn_grid.getChildren().removeIf(node -> node instanceof ImageView);
+	    	
+	    	// per ogni studente in studentInGrid
+	    	//	prendo le coordinate e tolgo dalla griglia la foto corrispondente
+	    	studentInGrid = studentList;//model.getStudentList();
+	    	for(Student stud : studentInGrid) {
+	    		lawn_grid.getChildren().remove(stud.getImageStud(stud));
+	    	}
+	    	
+	    	// per ogni prof 
+	    	// prendo le coordinate e tolgo dalla griglia la foto corrispondente
+	    	profInGrid = profList;
+	    	for(Professor prof : profInGrid) {
+	    		lawn_grid.getChildren().remove(prof.getImageProf(prof));
+	    	}
     	});
     }
+    
+    /**
+     * Function that handle the choice of a professor type and put it on the lawn grid
+     * @param event
+     */
     @FXML
     private void handleMouseClick(MouseEvent event) {
         // Gestisci l'evento di clic sulla griglia
-        // Ottenere le coordinate della griglia dalla sorgente dell'evento e agire di conseguenza
     	// cioè se clicco su una tipologia di professore poi clicco sulla cella in cui lo voglio mettere e compare lì
     	
-	 	//con questa funzione dovremmo piantare i professori?
         Integer columnIndex = GridPane.getRowIndex((Region) event.getSource());
         Integer rowIndex = GridPane.getRowIndex((Region) event.getSource());
 
         System.out.println("Clicked at column " + columnIndex + " and row " + rowIndex);
-        
+        int costProfessor = 0;
         // se ho selezionato un elemento nella barra laterale 
-        // 		se la cella cliccata dopo è nella griglia ed è vuota (cioè NON c'è già un altro professore)
+        // 		se la cella cliccata dopo è nella griglia ed è vuota la cella selezionata (cioè NON c'è già un altro professore)
         //			controllo di avere abbastanza tempo/moneta per quel prof selezionato
         //				se SI: pianto il prof nella cella selezionata e lo aggiungo alla lista dei profInGrid
         //				se NO: nulla, esco dagli if annidati
-	    if(ProfChoose.getIDProfChoosen()!=-1) {
-	    	if(columnIndex!=null && rowIndex!=null && !isProfInGrid(columnIndex, rowIndex)) {
-	    		/*if(ProfChoose.getProf(ProfChoose.getIDProfChoosen())).getTimeCost<=TimeTot) {
-	    		    creo nuovo prof con columnIndex e rowIndex --> Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex);
-	    		    aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
-	    			piazzo il professore nella griglia --> con la call ad updatePosition(gamePlayModel) che mi mette a video le immagini
-	    			diminuisco il tempo totale o la moneta --> gamePlayModel.decreaseTimeTot(p.TimeCost);
+	    if(Professor.getIDProfChoosen()!=-1) {
+	    	if(columnIndex!=null && rowIndex!=null && !isProfInCell(columnIndex, rowIndex)) {
+	    		switch(Professor.getIDProfChoosen()) {
+	    			case 0:
+	    				costProfessor = new Tutor(columnIndex, rowIndex).getcostProfessor();
+	    				if(costProfessor <= gamePlayModel.getMatchScore()) {
+	    	    		    // creo nuovo prof con columnIndex e rowIndex
+	    	    		    Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex, null, null, costProfessor);
+	    	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
+	    	    			// piazzo il professore nella griglia --> con la call 
+	    	    			updatePosition(studList, profList);
+	    	    			// diminuisco la moneta tot 
+	    	    			gamePlayModel.decreaseMatchScore(p.getcostProfessor());
+	    	    		}
+	    				break;
+	    			case 1:
+	    				costProfessor = new NormalProfessor(columnIndex, rowIndex).getcostProfessor();
+	    				break;
+	    			case 2:
+	    				costProfessor = new Rector(columnIndex, rowIndex).getcostProfessor();
+	    				break;
+	    			default:
+	    		        System.out.println("Il numero non è né 1, né 2, né 3");
+	    		        break;
+	    		 }
+	    		/*if(costProfessor <= gamePlayModel.getMatchScore()) {
+	    		    // creo nuovo prof con columnIndex e rowIndex
+	    		    Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex, null, null, costProfessor);
+	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
+	    			// piazzo il professore nella griglia --> con la call 
+	    			updatePosition(studList, profList);
+	    			// diminuisco la moneta tot 
+	    			gamePlayModel.decreaseMatchScore(p.getcostProfessor());
 	    		}*/
+	    		
 	    	}
 	    }
     }
     
+    /**
+     * Function that opens the Game Menu 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void GameMenu(MouseEvent event) throws IOException {
     	timerStop = true;// stoppo il timer quando apro il menù
@@ -186,14 +236,18 @@ public class GamePlayView {
         stage.setScene(new Scene(gameMenu));
         MenuController controller = fxmlLoader.<MenuController>getController();
         controller.initData();
-        //controller.initData(GamePlayRoot, levelNumber,d,sunCount,allPlants, allZombies, allMowers, timeElapsed, l.getZombieList1(), l.getZombieList2());
+        
         stage.show();
     }
 
-	private boolean isProfInGrid(int columnIndex, int rowIndex) {
-		// controllo se c'è un professore in quella cella della griglia
-		// se c'è restituisco TRUE se non c'è restituisco FALSE
-		return profInGrid.stream().anyMatch(p -> p.getxPos() == columnIndex && p.getyPos() == rowIndex);
+    /**
+     * Check if the professor is in the cell with columnIndex and rowIndex
+     * @param columnIndex
+     * @param rowIndex
+     * @return TRUE if prof is in the cell otherwise FALSE
+     */
+	private boolean isProfInCell(int columnIndex, int rowIndex) {
+		return profInGrid.stream().anyMatch(p -> p.getPosition().getX() == columnIndex && p.getPosition().getY() == rowIndex);
 	}
 
     

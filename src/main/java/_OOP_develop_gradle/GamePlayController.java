@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+<<<<<<< HEAD
 import _OOP_develop_gradle.model.Professor;
+=======
+import _OOP_develop_gradle.model.Student;
+>>>>>>> a30e45794952f749d1e3ee394513131ab0fdec76
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,8 +31,8 @@ public class GamePlayController {
 	public static int NUM_STUD_ONDATA;
 	public static GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
-	public List<Professor> profInGame; // lista dei professori in partita
-	public List<GamePlayModel.Student> studInGame =new ArrayList<>(); // lista degli studenti in partita
+	public List<Professor> profInGame = new ArrayList<>(); // lista dei professori in partita
+	public List<Student> studInGame = new ArrayList<>(); // lista degli studenti in partita
 	private AnchorPane mainMenu;
 
     public void initData(GamePlayView gamePlayView, AnchorPane mainMenu) {
@@ -36,7 +40,7 @@ public class GamePlayController {
     	gameStatus = true;
         gameModel = new GamePlayModel();
         gameModel.setTimeTot(TEMPO_TOT_INI);
-        profInGame = new ArrayList<>();
+        profInGame = gameModel.getProfList();
         studInGame = gameModel.getStudentList();
         this.gamePlayView = gamePlayView; // Assegna il riferimento dell'oggetto passato al metodo alla variabile gamePlayView
         this.mainMenu = mainMenu; // Salva il riferimento a MainMenu
@@ -54,10 +58,6 @@ public class GamePlayController {
         }
     }
 
-    public boolean isGameStatus() {
-		return gameStatus;
-	}
-
 	public void initGamePlay() throws IOException {
     	
     	if(gameStatus) {
@@ -66,10 +66,11 @@ public class GamePlayController {
 			NUM_STUD_ONDATA+=1;
 		    gameModel.generateWave(NUM_STUD_ONDATA);
 		    studInGame = gameModel.getStudentList();
-			
+		    profInGame = gameModel.getProfList();
+		    
 		    //update view
 		    synchronized(studInGame){
-		        gamePlayView.updatePosition(studInGame);
+		        gamePlayView.updatePosition(studInGame, profInGame);
 		    }
 		    
 		    System.out.println("settato nuvo gruppo di studenti");
@@ -115,24 +116,27 @@ public class GamePlayController {
 					
 					sleep(2000);
 			        
-			        synchronized(studInGame){
-			        	gamePlayView.removePosition(studInGame);
-			        }
-			        
-				    Iterator<GamePlayModel.Student> studentIterator = gameModel.getStudentList().iterator();
+					synchronized(studInGame){
+				    	 synchronized(profInGame) {
+				    		 gamePlayView.updatePosition(studInGame, profInGame);
+				    	 }
+				    }
+					
+				    Iterator<Student> studentIterator = gameModel.getStudentList().iterator();
 				    while (studentIterator.hasNext()) {
-				        GamePlayModel.Student student = studentIterator.next();
+				        Student student = studentIterator.next();
 				        
 				        // Check dello studente se è vivo 
-				        if (studInGame.contains(student)) { //health
+				        if (student.getHealthStudent() > 0) { // studInGame.contains(student)
 				        	// guardo se è stato colpito 
 				        	// se colpito aumento il tempo tot, se non ha più vita muore
 				        	/*
-				        	 * if(studente.colpito()){
-				        	 * 		Student.takedamage(Professor.getDamage());
-				        	 * 		gameModel.increaseTimeTot(NUM_AUMENTO_TEMPO); 
-				        	 * 		if(studente.morto()){
-				        	 * 				gestire morte chi implementa lo studente DESTROY
+				        	 * if(student.isHitten()){
+				        	 * 		student.takedamage(Professor.getDamage());
+				        	 * 		student.setDamageStudent();
+				        	 * 		gameModel.increaseMatchScore(student.getCost()); 
+				        	 * 		if(student.getHealthStudent() <= 0){
+				        	 * 				student.destroyStudents();
 				        	 * 				studentIterator.remove();
 				        	 * 		}
 				        	 * }
@@ -173,7 +177,7 @@ public class GamePlayController {
 				            }
 				        } else {
 				            // Lo studente è morto, gestito da chi fa lo studente
-				        	//gameModel.handleStudentKilled(student);
+				        	student.destroyStudents();
 				            studentIterator.remove(); // Rimuovi lo studente morto dalla lista
 				        }
 				        
@@ -190,16 +194,16 @@ public class GamePlayController {
 				            // ...
 				        	
 				        	// se prof viene colpito deve diminuire la sua vita e il punteggio, controllo poi se è morto
-				        	/*if(prof.colpito()){ 
-				        	 * 		gameModel.decreaseTimeTot(NUM_DIMINUZIONE_TEMPO); 
-				        	 * 		prof.decreaseVita(); --> receiveDamage(getDamage())
-				        	 * 		
-				        	 * 		if(prof.senzaVite()){
-				        	 * 			rimozione prof da view, gestione morte
-				        	 * 		}
-				        	 * }
-				        	 * 
-				        	 * */
+				        	if(prof.hittedProfessor()){ 
+				        			gameModel.decreaseMatchScore(NUM_AUMENTO_SCORE);  
+				        	  		prof.receiveDamage(student.getDamageStudent()); // --> receiveDamage(getDamage())
+				        	  		
+				        	  		if(prof.getHealthPoints() <= 0){
+				        	  			prof.destroy();
+				        	  		}
+				        	  }
+				        	  
+				        	 
 	
 				            // Controllo se sono in vita ancora tutti i prof
 				            if (gameModel.getProfList().isEmpty()) {
@@ -214,14 +218,16 @@ public class GamePlayController {
 				            }
 				        } else {
 				            // Il professore è morto, gestito da chi fa i prof
-				        	//gameModel.handleProfKilled(prof);
+				        	prof.destroy();
 				            profIterator.remove(); // Rimuovi il professore morto dalla lista
 				        }
 				    }
 	
-			        synchronized(studInGame){
-			            gamePlayView.updatePosition(studInGame);
-			        }
+				    synchronized(studInGame){
+				    	 synchronized(profInGame) {
+				    		 gamePlayView.updatePosition(studInGame, profInGame);
+				    	 }
+				    }
 				    
 				    // Introdotto un ritardo per la visibilità del gioco
 			        sleep(2000);
@@ -284,7 +290,6 @@ public class GamePlayController {
 		    }
 		}
 		
-		
 	}
 	
 	// per restiruire l'istanta corrente del GamePlayController
@@ -294,6 +299,10 @@ public class GamePlayController {
         }
         return instance;
     }
+	
+	public boolean isGameStatus() {
+		return gameStatus;
+	}
 	
 	public void setGameStatus(boolean status) {
         gameStatus = status;
@@ -315,11 +324,11 @@ public class GamePlayController {
 		this.profInGame = profInGame;
 	}
 
-	public List<GamePlayModel.Student> getStudInGame() {
+	public List<Student> getStudInGame() {
 		return studInGame;
 	}
 
-	public void setStudInGame(List<GamePlayModel.Student> studInGame) {
+	public void setStudInGame(List<Student> studInGame) {
 		this.studInGame = studInGame;
 	}
 }

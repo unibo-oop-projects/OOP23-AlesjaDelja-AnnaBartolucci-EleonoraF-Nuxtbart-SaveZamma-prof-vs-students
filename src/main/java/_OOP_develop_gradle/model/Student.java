@@ -40,7 +40,7 @@ public class Student {
 		this.damage = damage;
 	}
 	
-	private void destroyStudents() {
+	public void destroyStudents() {
 		//TO-DO Distruzione 
 	}
 	
