@@ -21,7 +21,7 @@ public class Rector extends Professor{
 		this.currentPosition = new Elements<Integer, Integer>(col, row);
 	}
 	//funzione per sparare in diagonale
-	public void shootDiagonal(int col, int row) {
+	public void shootDiagonal(int col, int rowDia) {
 	    // Calcola la posizione del proiettile in diagonale rispetto alla posizione corrente del rettore
 	    int bulletCol = currentPosition.getX() + bulletSpeed;
 	    int bulletRow = currentPosition.getY() + bulletSpeed;
