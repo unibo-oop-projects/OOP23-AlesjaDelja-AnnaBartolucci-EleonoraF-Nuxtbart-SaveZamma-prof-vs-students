@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
+<<<<<<< HEAD
+import _OOP_develop_gradle.model.Professor;
+=======
 import _OOP_develop_gradle.model.Student;
+>>>>>>> a30e45794952f749d1e3ee394513131ab0fdec76
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

@@ -1,5 +1,7 @@
 package _OOP_develop_gradle;
 
+import _OOP_develop_gradle.model.Professor;
+
 public class ExplosiveProfessor extends Professor{
 	/**
 	 * 

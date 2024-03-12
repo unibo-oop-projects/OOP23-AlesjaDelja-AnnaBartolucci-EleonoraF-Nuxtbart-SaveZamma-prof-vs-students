@@ -1,5 +1,7 @@
 package _OOP_develop_gradle;
 
+import _OOP_develop_gradle.model.Professor;
+
 //tutor cerbottana
 public class Tutor extends Professor{
 	
@@ -9,6 +11,7 @@ public class Tutor extends Professor{
 	public static final String TUTOR_IMG_PATH = "img/professor.png";
 	public static final String tutorBulletName = "tutorBullet";
 	public Bullet tutorBullet;
+	public static final int tutorName = 1;
 	//public static final int TUTOR_HIT_VALUE = 2;
 	private int hitValue;
 	private int bulletSpeed=1;

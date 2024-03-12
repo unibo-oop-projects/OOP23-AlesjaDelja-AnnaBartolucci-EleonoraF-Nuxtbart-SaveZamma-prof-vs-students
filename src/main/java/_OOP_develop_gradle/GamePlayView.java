@@ -2,7 +2,13 @@ package _OOP_develop_gradle;
 
 import java.util.List;
 
+<<<<<<< HEAD
+import _OOP_develop_gradle.GamePlayModel.Student;
+import _OOP_develop_gradle.model.Professor;
+
+=======
 import _OOP_develop_gradle.model.Student;
+>>>>>>> a30e45794952f749d1e3ee394513131ab0fdec76
 import java.io.IOException;
 import java.util.ArrayList;
 
