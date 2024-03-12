@@ -29,10 +29,8 @@ public class Professor {
 	 * image.setFitHeight(50); // Imposta l'altezza desiderata return image; }
 	 */
 	// Metodo per ottenere l'ImageView della pianta
-    public ImageView getImageProf(Professor prof) {
-    	ImageView profImg = new ImageView();
-    	profImg.setImage(new Image(getClass().getResource(prof.getPathImgProf()).toString()));
-		return profImg;
+    public ProfessorView getImageProf(Professor prof) {
+    	return new ProfessorView(pathImg);
     }
 
 	public String getPathImgProf() {
