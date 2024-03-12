@@ -7,14 +7,12 @@ import java.util.HashMap;
 /*
  *	Classe che ho cfreato per gestire la selezione dei prof messi nella barra laterale 
  */
-public class ProfChoose extends Elements {
+public class ProfChoose extends Professor {
 	
 		public enum ProfType{
-			PROFMINE("", 1, 1, 1),
-			PROFPASSIVE("", 1, 1, 2),
 			RECTOR("", 1, 1, 3),
 			TUTOR("", 1, 1, 4),
-			PROFSHOOTER("", 1, 1, 5);
+			NORMALPROF("", 1, 1, 5);
 			
 			String path;
 	    	int x;
@@ -65,15 +63,15 @@ public class ProfChoose extends Elements {
 		private static int idChoosenProf = -1;
 		private static ImageView choosenProf;
 		private static HashMap<Integer, ProfChoose> profList = new HashMap<>();//lista di tutti i prof tra cui scegliere
-		private double timeCost;
+		private int scoreCost;
 
-	    public ProfChoose(int x, int y, String path, int width, int height, double timeCost) {
-	        super(x, y, path, width, height);
-	        this.timeCost=timeCost;// tempo che costa un professore, una tipologia
+	    public ProfChoose(int x, int y, String path, int width, int height, int scoreCost) {
+	        super(scoreCost, healthPoints, position, path, scoreCost);
+	        this.scoreCost=scoreCost; // punteggio che costa un professore
 	    }
 	    
-	    public double getTimeCost() {
-	    	return this.timeCost;
+	    public int getScoreCost() {
+	    	return this.scoreCost;
 	    }
 	    
 	    public static void getProfTypes(AnchorPane pane) {

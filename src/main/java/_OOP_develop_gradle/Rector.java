@@ -1,18 +1,36 @@
 package _OOP_develop_gradle;
-//fungo ipnotico
-public class Rector extends Professor{
-	
-	private static final long serialVersionUID = 1L;
-	public static final int HYPNOSHROOM_HIT_THRESHOLD = 1;
-	public static final int HYPNOSHROOM_BUY_THRESHOLD = 125;
 
-	public Rector(String path, int x, int y, int healthPoints) {
-		super(path, HYPNOSHROOM_BUY_THRESHOLD, HYPNOSHROOM_HIT_THRESHOLD, x, y, healthPoints);
-	}
+import _OOP_develop_gradle.model.Professor;
+
+public class Rector extends Professor{
+
+	private Elements<Integer, Integer> currentPosition;
 	
-	public String toString() {
-		String Status= "";
-		Status = "HS = " + this.getHitThreshold();
-		return Status;
+	public static final int RECTOR_HIT_DAMAGE = 25; //DANNO CHE INFLIGGO ALLO STUDENTE
+	public static final int RECTOR_BUY_COST = 10;
+	public static final int RECTOR_HEALTHPOINTS = 100;
+	public static final String RECTOR_IMG_PATH = "img/professor.png";
+	public static final String tutorBulletName = "rectorBullet";
+	public Bullet rectorBullet;
+	public static final int rectorName = 3;
+	//public static final int TUTOR_HIT_VALUE = 2;
+	private int hitValue;
+	private int bulletSpeed=3;
+	
+	public Rector(int col, int row) {
+		super(RECTOR_HIT_DAMAGE, RECTOR_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), RECTOR_IMG_PATH, RECTOR_BUY_COST);
+		this.currentPosition = new Elements<Integer, Integer>(col, row);
 	}
+	//funzione per sparare in diagonale
+	public void shootDiagonal(int col, int rowDia) {
+	    // Calcola la posizione del proiettile in diagonale rispetto alla posizione corrente del rettore
+	    int bulletCol = currentPosition.getX() + bulletSpeed;
+	    int bulletRow = currentPosition.getY() + bulletSpeed;
+	    // Crea un nuovo proiettile sparato in diagonale
+	    if (bulletCol >= 0 && bulletCol < col && bulletRow >= 0 && bulletRow < row) {
+	        // Crea un nuovo proiettile sparato in diagonale
+	        rectorBullet = new Bullet(bulletSpeed, RECTOR_HIT_DAMAGE, new Elements<>(bulletCol, bulletRow), tutorBulletName);
+	    }
+	}
+
 }

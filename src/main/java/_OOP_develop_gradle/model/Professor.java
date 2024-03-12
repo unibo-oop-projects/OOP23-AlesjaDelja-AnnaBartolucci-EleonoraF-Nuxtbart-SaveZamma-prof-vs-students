@@ -1,4 +1,9 @@
-package _OOP_develop_gradle;
+package _OOP_develop_gradle.model;
+
+import _OOP_develop_gradle.Elements;
+import _OOP_develop_gradle.ProfessorView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Professor {
 
@@ -23,11 +28,16 @@ public class Professor {
 	 * Image(path)); image.setFitWidth(50); // Imposta la larghezza desiderata
 	 * image.setFitHeight(50); // Imposta l'altezza desiderata return image; }
 	 */
-	public String getPathImg() {
+	// Metodo per ottenere l'ImageView della pianta
+    public ProfessorView getImageProf(Professor prof) {
+    	return new ProfessorView(pathImg);
+    }
+
+	public String getPathImgProf() {
 		return pathImg;
 	}
 	
-	public void setPathImg(String pathImg) {
+	public void setPathImgProf(String pathImg) {
 		this.pathImg = pathImg;
 	}
 
@@ -37,12 +47,12 @@ public class Professor {
 		
 	}
 
-	public double getHealthPoints() {
+	public double getHealthPointsProf() {
 		return healthPoints;
 	}
 
 	
-	 public void setHealthPoints(int healthPoints) 
+	 public void setHealthPointsProf(int healthPoints) 
 	 { 
 		 this.healthPoints = healthPoints; 
 	 }
@@ -64,29 +74,29 @@ public class Professor {
 	/*
 	 * Ti restituisce danno che il prf causa 
 	 */
-	public double getDamage() {
+	public double getDamageProf() {
 		return damage;
 	}
 	
-	public void setDamage(int damage) {
+	public void setDamagProf (int damage) {
 		this.damage = damage;
 	}
 
-	public Elements<Integer, Integer> getPosition() {
+	public Elements<Integer, Integer> getPositionProf() {
 		return position;
 	}
 
-	public boolean isAlive() {
+	public boolean isAliveProf() {
 		return healthPoints > 0;
 	}
 	
 	/*
 	 * Quando prof riceve un danno
 	 */
-	public void receiveDamage(double damageReceived) {
+	public void receiveDamageProf(double damageReceived) {
 		healthPoints -= damageReceived;
 		if (healthPoints <= 0) {
-			destroy();
+			destroyProf();
 		}
 	}
 	
@@ -97,7 +107,7 @@ public class Professor {
 		return false;
 	}
 
-	private void destroy() {
+	public void destroyProf() {
 		// TODO Auto-generated method stub
 		
 	}

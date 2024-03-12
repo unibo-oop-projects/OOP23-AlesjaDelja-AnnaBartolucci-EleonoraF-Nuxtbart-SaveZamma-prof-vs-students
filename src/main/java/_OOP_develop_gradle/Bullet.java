@@ -4,7 +4,7 @@ public final class Bullet {
 
     private Elements<Integer, Integer> currentPosition;
     private final int bulletSpeed;
-    private final double bulletDamage;
+    private final int bulletDamage;
     private final String bulletName;
 
     /**
@@ -15,7 +15,7 @@ public final class Bullet {
      * @param pos    the position of the bullet
      * @param name   the name of the bullet
      */
-    public Bullet(int speed, double damage, Elements<Integer, Integer> pos, String name) {
+    public Bullet(int speed, int damage, Elements<Integer, Integer> pos, String name) {
         this.bulletSpeed = speed;
         this.bulletDamage = damage;
         this.currentPosition = pos;
@@ -38,7 +38,7 @@ public final class Bullet {
         return this.bulletSpeed;
     }
 
-    public double getBulletDamage() {
+    public int getBulletDamage() {
         return this.bulletDamage;
     }
 

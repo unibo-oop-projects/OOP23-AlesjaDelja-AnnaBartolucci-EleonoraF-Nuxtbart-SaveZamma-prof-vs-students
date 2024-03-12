@@ -1,5 +1,7 @@
 package _OOP_develop_gradle;
 
+import _OOP_develop_gradle.model.Professor;
+
 public class NormalProfessor extends Professor{
 
 	public static final int NORMALPROF_HIT_DAMAGE = 50; //DANNO CHE INFLIGGO ALLO STUDENTE
@@ -7,6 +9,7 @@ public class NormalProfessor extends Professor{
 	public static final int NORMALPROF_HEALTHPOINTS = 150;
 	public static final String NORMALPROF_IMG_PATH = "img/professor.png";
 	public static final String tutorBulletName = "tutorBullet";
+	public static final int NormalProfName = 2;
 	public Bullet tutorBullet;
 	public int bulletSpeed=2;
 	
