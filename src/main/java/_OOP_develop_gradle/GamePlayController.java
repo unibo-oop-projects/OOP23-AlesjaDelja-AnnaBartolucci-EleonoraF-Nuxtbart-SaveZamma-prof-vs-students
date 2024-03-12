@@ -327,4 +327,13 @@ public class GamePlayController {
 	public void setStudInGame(List<Student> studInGame) {
 		this.studInGame = studInGame;
 	}
+	
+	/**
+	 * Devi muovere il bullet
+	 * Due funzioni collision:
+	 * una tra studente e bullet che mi va a diminuire la vita dello studente e aumenta il punteggio
+	 * una tra student e professor che mi diminuise vita prof e punteggio se prof muore
+	 * Da capire come far a capire se è una tipologia di prof piuttosto che un altra
+	 * potrei usare il metodo getIDProf() o setter()
+	 */
 }
