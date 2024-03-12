@@ -2,7 +2,6 @@ package _OOP_develop_gradle;
 
 import java.util.List;
 
-
 import _OOP_develop_gradle.model.Professor;
 import _OOP_develop_gradle.model.Student;
 import java.io.IOException;
@@ -132,7 +131,7 @@ public class GamePlayView {
 	    	profInGrid = profList;
 	    	for(Professor prof : profInGrid) {
 	    		ImageView profImg = prof.getImageProf(prof);
-	    		GridPane.setConstraints(profImg, prof.getPosition().getX(), prof.getPosition().getY());
+	    		GridPane.setConstraints(profImg, prof.getPositionProf().getX(), prof.getPositionProf().getY());
 	    		lawn_grid.getChildren().add(profImg);
 	    	}
     	});
@@ -243,7 +242,7 @@ public class GamePlayView {
      * @return TRUE if prof is in the cell otherwise FALSE
      */
 	private boolean isProfInCell(int columnIndex, int rowIndex) {
-		return profInGrid.stream().anyMatch(p -> p.getPosition().getX() == columnIndex && p.getPosition().getY() == rowIndex);
+		return profInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex);
 	}
 
     
