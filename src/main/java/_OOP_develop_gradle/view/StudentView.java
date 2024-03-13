@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 public class StudentView extends ElementView {
 
 	private String PATH_STUDENT = "../img/student.png";
+	private String PATH_ATTACK = "../img/attack.png";
     public StudentView(GridPane gridPane) {
         super(gridPane);
     }
@@ -25,12 +26,12 @@ public class StudentView extends ElementView {
         Image originalImage = imageView.getImage();
 
         // Carica l'immagine per l'attacco
-        Image attackImage = new Image(getClass().getResourceAsStream("../img/attack.png"));
+        Image attackImage = new Image(getClass().getResourceAsStream(PATH_ATTACK));
         imageView.setImage(attackImage);
 
         // Crea una Timeline per ritornare all'immagine originale dopo 2 secondi
         Timeline timeline = new Timeline(
-            new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
+            new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     // Ritorna all'immagine originale dopo 2 secondi
