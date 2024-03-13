@@ -12,10 +12,31 @@ public class NormalProfessor extends Professor{
 	public static final int NormalProfName = 2;
 	public Bullet tutorBullet;
 	public int bulletSpeed=2;
+	private String pathImgNP;
 	
 	public NormalProfessor(int col, int row) {
 		super(NORMALPROF_HIT_DAMAGE, NORMALPROF_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), NORMALPROF_IMG_PATH, NORMALPROF_BUY_COST, NormalProfName);
-		tutorBullet = new Bullet(bulletSpeed, NORMALPROF_HIT_DAMAGE, new Elements<Integer, Integer>(col, row), tutorBulletName);
+		tutorBullet = new Bullet(bulletSpeed, NORMALPROF_HIT_DAMAGE, new Elements<Integer, Integer>(col, row), tutorBulletName, pathImgNP);
+	}
+
+	public Bullet getTutorBullet() {
+		return tutorBullet;
+	}
+
+	public void setTutorBullet(Bullet tutorBullet) {
+		this.tutorBullet = tutorBullet;
+	}
+
+	public int getBulletSpeed() {
+		return bulletSpeed;
+	}
+
+	public void setBulletSpeed(int bulletSpeed) {
+		this.bulletSpeed = bulletSpeed;
+	}
+
+	public static String getTutorbulletname() {
+		return tutorBulletName;
 	}
 
 }

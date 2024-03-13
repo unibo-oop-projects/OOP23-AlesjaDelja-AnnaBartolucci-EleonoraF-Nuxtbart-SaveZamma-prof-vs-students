@@ -12,6 +12,11 @@ public class Rector extends Professor{
 	public static final String RECTOR_IMG_PATH = "img/professor.png";
 	public static final String tutorBulletName = "rectorBullet";
 	public Bullet rectorBullet;
+	public String pathImgR;
+	
+	public static String getTutorbulletname() {
+		return tutorBulletName;
+	}
 	public static final int rectorName = 3;
 	//public static final int TUTOR_HIT_VALUE = 2;
 	private int hitValue;
@@ -22,15 +27,28 @@ public class Rector extends Professor{
 		this.currentPosition = new Elements<Integer, Integer>(col, row);
 	}
 	//funzione per sparare in diagonale
-	public void shootDiagonal(int col, int rowDia) {
+	public void shootDiagonal(int col, int row) {
 	    // Calcola la posizione del proiettile in diagonale rispetto alla posizione corrente del rettore
 	    int bulletCol = currentPosition.getX() + bulletSpeed;
 	    int bulletRow = currentPosition.getY() + bulletSpeed;
 	    // Crea un nuovo proiettile sparato in diagonale
 	    if (bulletCol >= 0 && bulletCol < col && bulletRow >= 0 && bulletRow < row) {
 	        // Crea un nuovo proiettile sparato in diagonale
-	        rectorBullet = new Bullet(bulletSpeed, RECTOR_HIT_DAMAGE, new Elements<>(bulletCol, bulletRow), tutorBulletName);
+	        rectorBullet = new Bullet(bulletSpeed, RECTOR_HIT_DAMAGE, new Elements<>(bulletCol, bulletRow), tutorBulletName, pathImgR);
 	    }
+	}
+	
+	public Bullet getRectorBullet() {
+		return rectorBullet;
+	}
+	public void setRectorBullet(Bullet rectorBullet) {
+		this.rectorBullet = rectorBullet;
+	}
+	public int getBulletSpeed() {
+		return bulletSpeed;
+	}
+	public void setBulletSpeed(int bulletSpeed) {
+		this.bulletSpeed = bulletSpeed;
 	}
 
 }
