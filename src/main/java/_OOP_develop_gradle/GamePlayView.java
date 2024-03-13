@@ -5,6 +5,7 @@ import java.util.List;
 import _OOP_develop_gradle.model.Professor;
 import _OOP_develop_gradle.model.Student;
 import _OOP_develop_gradle.view.StudentView;
+import _OOP_develop_gradle.view.TutorView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -161,10 +162,10 @@ public class GamePlayView {
 	    	// per ogni prof
 	    	// prendo le coordinate e metto sulla griglia la foto corrispondente
 			tutorInGrid = tutorList;
-	    	for(Professor prof : tutorList) {
-	    		ImageView profImg = prof.getImageProf(prof);
-	    		GridPane.setConstraints(profImg, prof.getPositionProf().getX(), prof.getPositionProf().getY());
-	    		lawn_grid.getChildren().add(profImg);
+	    	for(Tutor prof : tutorList) {
+	    		TutorView tutor = new TutorView(lawn_grid);
+	    		tutorViewList.add(tutor);
+	    		tutor.displayElement(prof.getPositionProf());
 	    	}
 	}
 	
