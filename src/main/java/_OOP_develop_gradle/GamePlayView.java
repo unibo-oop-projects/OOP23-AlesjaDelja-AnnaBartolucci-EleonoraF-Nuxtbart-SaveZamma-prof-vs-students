@@ -229,6 +229,10 @@ public class GamePlayView {
         //			controllo di avere abbastanza tempo/moneta per quel prof selezionato
         //				se SI: pianto il prof nella cella selezionata e lo aggiungo alla lista dei profInGrid
         //				se NO: nulla, esco dagli if annidati
+        
+        
+        
+        
 	    if(Professor.getIDProf()!=-1) {
 	    	if(columnIndex!=null && rowIndex!=null && !isProfInCell(columnIndex, rowIndex)) {
 	    		switch(Professor.getIDProf()) {
