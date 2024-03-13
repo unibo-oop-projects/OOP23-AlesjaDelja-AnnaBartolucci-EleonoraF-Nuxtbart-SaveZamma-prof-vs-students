@@ -12,7 +12,7 @@ public class Student {
 	private int DEFAULT_HEALTH = 100;
 	private int DEFAULT_DAMAGE = 25;
 	private int DEFAULT_SCORE = 100;
-	private StudentView studentView =;
+	private StudentView studentView;
 	private Elements<Integer, Integer> positionStudent;
 	//Costruttore
 	public Student(AnchorPane anchorPane) {
