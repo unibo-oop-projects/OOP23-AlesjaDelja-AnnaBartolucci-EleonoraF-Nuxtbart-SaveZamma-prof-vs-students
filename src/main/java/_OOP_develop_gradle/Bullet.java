@@ -1,11 +1,16 @@
 package _OOP_develop_gradle;
 
+import _OOP_develop_gradle.model.Professor;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public final class Bullet {
 
     private Elements<Integer, Integer> currentPosition;
     private final int bulletSpeed;
     private final int bulletDamage;
     private final String bulletName;
+	private String pathImgB;
 
     /**
      * Constructor for BulletEntity.
@@ -15,11 +20,12 @@ public final class Bullet {
      * @param pos    the position of the bullet
      * @param name   the name of the bullet
      */
-    public Bullet(int speed, int damage, Elements<Integer, Integer> pos, String name) {
+    public Bullet(int speed, int damage, Elements<Integer, Integer> pos, String name, String pathImgB) {
         this.bulletSpeed = speed;
         this.bulletDamage = damage;
         this.currentPosition = pos;
         this.bulletName = name;
+        this.pathImgB = pathImgB;
     }
 
     public Elements<Integer, Integer> getPosition() {
@@ -44,5 +50,15 @@ public final class Bullet {
 
     public void move() {
         this.currentPosition = new Elements<>(currentPosition.getX() + bulletSpeed, currentPosition.getY());
+    }
+    
+    public String getPathImgBullet() {
+		return pathImgB;
+	}
+    
+    public ImageView getImageBullet(Bullet bullet) {
+    	ImageView profImg = new ImageView();
+    	profImg.setImage(new Image(getClass().getResource(bullet.getPathImgBullet()).toString()));
+		return profImg;
     }
 }
