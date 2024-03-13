@@ -1,42 +1,43 @@
 package _OOP_develop_gradle.view;
 
-import _OOP_develop_gradle.Elements;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
+import javafx.scene.layout.GridPane;
 
-public class StudentView {
-	private AnchorPane anchorPane;
-	private ImageView imageView;// DA METTERE L'ID PRESENTE IN QUELLO DELL'ANNA
-	
-	 public StudentView(AnchorPane anchorPane) {
-	        this.anchorPane = anchorPane;
-	    }
-	
-	 /**
-	 * Sets the image of the student when it will appear to the player
-	 * @param positionStudent 
-	 */
-	
-	public void displayStudent(Elements<Integer, Integer> positionStudent) {
-        Image image = new Image(getClass().getResourceAsStream("../img/student.png"));
+public class StudentView extends ElementView {
 
-        imageView = new ImageView(image);
-        // Imposta le dimensioni dell'ImageView DA METTERE APPOSTO
-        imageView.setFitWidth(200); // Imposta la larghezza desiderata
-        imageView.setFitHeight(200); // Imposta l'altezza desiderata
-        
-     // Imposta la posizione dell'ImageView
-        imageView.setLayoutX(positionStudent.getX()); // Imposta la coordinata X
-        imageView.setLayoutY(positionStudent.getY()); // Imposta la coordinata Y
-        
-        anchorPane.getChildren().add(imageView);
+    public StudentView(GridPane gridPane) {
+        super(gridPane);
     }
-	
-	/**
-	 * Removes the image that is not needed for a student that is dead
-	 */
-	public void removeStudent() {
-		anchorPane.getChildren().remove(imageView);
-	}
+
+    @Override
+    protected String getImagePath() {
+        return "../img/student.png"; // Ritorna il percorso dell'immagine dello studente
+    }
+
+    public void attackStudents() {
+        // Salva l'immagine attuale
+        Image originalImage = imageView.getImage();
+
+        // Carica l'immagine per l'attacco
+        Image attackImage = new Image(getClass().getResourceAsStream("../img/attack.png"));
+        imageView.setImage(attackImage);
+
+        // Crea una Timeline per ritornare all'immagine originale dopo 2 secondi
+        Timeline timeline = new Timeline(
+            new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    // Ritorna all'immagine originale dopo 2 secondi
+                    imageView.setImage(originalImage);
+                }
+            })
+        );
+        timeline.play(); // Avvia la Timeline
+    }
+
 }

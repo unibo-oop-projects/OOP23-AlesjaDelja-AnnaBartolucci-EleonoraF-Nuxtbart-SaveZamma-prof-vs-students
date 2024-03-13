@@ -293,6 +293,20 @@ public class GamePlayView {
         stage.show();
     }
 
+    @FXML
+    public int handleTutorCardClick(){
+    	return 1;
+    }
+    
+    @FXML
+    public int handleNormalCardClick(){
+    	return 1;
+    }
+    
+    @FXML
+    public int handleRectorCardClick(){
+    	return 1;
+    }
     /**
      * Check if the professor is in the cell with columnIndex and rowIndex
      * @param columnIndex
