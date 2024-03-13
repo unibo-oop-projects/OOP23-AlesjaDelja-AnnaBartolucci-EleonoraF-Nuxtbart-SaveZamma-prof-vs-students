@@ -9,37 +9,41 @@ import javafx.util.Duration;
 import javafx.scene.layout.GridPane;
 
 public class StudentView extends ElementView {
-
+	
+	//Variabe used to memorize relative path of the images of Students and when it attacks
 	private String PATH_STUDENT = "../img/student.png";
 	private String PATH_ATTACK = "../img/attack.png";
+	//Costructs
     public StudentView(GridPane gridPane) {
         super(gridPane);
     }
 
     @Override
     protected String getImagePath() {
-        return PATH_STUDENT; // Ritorna il percorso dell'immagine dello studente
+        return PATH_STUDENT;
     }
-
+    
+    /**
+     * Changes the image from students to attack and after 1s return to the original png.
+     */
     public void attackStudents() {
-        // Salva l'immagine attuale
+        // Saves the current image.
         Image originalImage = imageView.getImage();
 
-        // Carica l'immagine per l'attacco
+        // Changes the image so it attacks.
         Image attackImage = new Image(getClass().getResourceAsStream(PATH_ATTACK));
         imageView.setImage(attackImage);
 
-        // Crea una Timeline per ritornare all'immagine originale dopo 2 secondi
+        // Creates a new Timeline so it can return to the original after 1 second.
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    // Ritorna all'immagine originale dopo 2 secondi
                     imageView.setImage(originalImage);
                 }
             })
         );
-        timeline.play(); // Avvia la Timeline
+        timeline.play(); // Starts the Timeline.
     }
 
 }
