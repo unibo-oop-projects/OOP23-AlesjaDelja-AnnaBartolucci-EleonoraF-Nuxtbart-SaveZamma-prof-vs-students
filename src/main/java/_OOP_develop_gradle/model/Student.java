@@ -4,6 +4,7 @@ import java.util.Random;
 
 import _OOP_develop_gradle.Elements;
 import _OOP_develop_gradle.view.StudentView;
+import javafx.scene.layout.AnchorPane;
 
 public class Student {
 	private int health;
@@ -11,14 +12,15 @@ public class Student {
 	private int DEFAULT_HEALTH = 100;
 	private int DEFAULT_DAMAGE = 25;
 	private int DEFAULT_SCORE = 100;
-	private String pathStudentImg;
+	private StudentView studentView;
 	private Elements<Integer, Integer> positionStudent;
 	//Costruttore
-	public Student(String pathStudentImg) {
-		this.pathStudentImg = pathStudentImg; // TODO da mettere apposto con la foto che mi serve
+	public Student(AnchorPane anchorPane) {
 		this.health = DEFAULT_HEALTH;
 		this.damage = DEFAULT_DAMAGE;
-		generateRandomPosition();
+		this.studentView = new StudentView(anchorPane);
+        generateRandomPosition();
+        studentView.displayStudent(positionStudent);
 	}
 	
 	
@@ -70,7 +72,7 @@ public class Student {
 	 */
 	
 	public int destroyStudents(int score) { 
-		StudentView studentView = new StudentView();
+		
 		studentView.removeStudent();
 		int newScore = score + DEFAULT_SCORE;
 		return newScore;
@@ -99,23 +101,4 @@ public class Student {
 	public void setPositionStudent(Elements<Integer, Integer> position) {
         this.positionStudent = position;
     }
-
-
-	public String getPathStudentImg() {
-		return pathStudentImg;
-	}
-
-
-	public void setPathStudentImg(String pathStudentImg) {
-		this.pathStudentImg = pathStudentImg;
-	}
-	/* TODO Crearlo anche per lo studente
-	 * private ImageView createImageView() { ImageView image = new ImageView(new
-	 * Image(path)); image.setFitWidth(50); // Imposta la larghezza desiderata
-	 * image.setFitHeight(50); // Imposta l'altezza desiderata return image; }
-	 */
-	/* Metodo per ottenere l'ImageView della pianta
-    public ProfessorView getImageProf(Professor prof) {
-    	return new ProfessorView(pathImg);
-    }*/
 }
