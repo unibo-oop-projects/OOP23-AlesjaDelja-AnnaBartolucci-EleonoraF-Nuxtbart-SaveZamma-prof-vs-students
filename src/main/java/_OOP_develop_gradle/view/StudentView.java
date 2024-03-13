@@ -3,15 +3,15 @@ package _OOP_develop_gradle.view;
 import _OOP_develop_gradle.Elements;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
 public class StudentView {
-	private AnchorPane anchorPane;
+	private GridPane gridPane;
 	private ImageView imageView;// DA METTERE L'ID PRESENTE IN QUELLO DELL'ANNA
 	
 	//Costructor
-	 public StudentView(AnchorPane anchorPane) {
-	        this.anchorPane = anchorPane;
+	 public StudentView(GridPane gridPane) {
+	        this.gridPane = gridPane;
 	    }
 	
 	 /**
@@ -28,16 +28,13 @@ public class StudentView {
         imageView.setFitHeight(200); 
         
      // Sets the position of student
-        imageView.setLayoutX(positionStudent.getX()); 
-        imageView.setLayoutY(positionStudent.getY()); 
-        
-        anchorPane.getChildren().add(imageView);
+        gridPane.add(imageView, positionStudent.getX(),positionStudent.getY());
     }
 	
 	/**
 	 * Removes the image that is not needed for a student that is dead
 	 */
 	public void removeStudent() {
-		anchorPane.getChildren().remove(imageView);
+		gridPane.getChildren().remove(imageView);
 	}
 }

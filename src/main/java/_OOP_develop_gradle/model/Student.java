@@ -10,7 +10,6 @@ public class Student {
 	private int damage;
 	private int DEFAULT_HEALTH = 100;
 	private int DEFAULT_DAMAGE = 25;
-	private int DEFAULT_SCORE = 100;
 	private Elements<Integer, Integer> positionStudent;
 	//Costructor
 	public Student(AnchorPane anchorPane) {
@@ -59,17 +58,6 @@ public class Student {
 	 */
 	public void setDamageStudent(int damage) {
 		this.damage = damage;
-	}
-	
-	/**
-	 * Destroys the student
-	 * @param score The score at the moment
-	 * @return The new Score after the student is Killed
-	 */
-	
-	public int destroyStudents(int score) { 
-		int newScore = score + DEFAULT_SCORE;
-		return newScore;
 	}
 	
 	/**
