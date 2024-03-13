@@ -242,7 +242,9 @@ public class GamePlayView {
 	    				Bullet tutorBullet = tutornew.tutorBullet;
 	    				
 	    				if(tutornew.getcostProfessor() <= gamePlayModel.getMatchScore()) {
-	    					
+	    					gamePlayModel.getTutorList().add(tutornew);
+	    					tutorInGrid.add(tutornew);
+	    					gamePlayModel.getBulletListNormal().add(tutorBullet);
 	    	    		    // creo nuovo prof con columnIndex e rowIndex
 	    	    		    //Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex, null, null, costProfessor);
 	    	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
@@ -253,10 +255,13 @@ public class GamePlayView {
 	    	    		}
 	    				break;
 	    			case 2:
-	    				Tutor normalProfNew = new Tutor(columnIndex, rowIndex);
-	    				Bullet nProfBullet = tutornew.tutorBullet;
+	    				NormalProfessor normalProfNew = new NormalProfessor(columnIndex, rowIndex);
+	    				Bullet nProfBullet = normalProfNew.normalProfBullet;
 	    				
 	    				if(normalProfNew.getcostProfessor() <= gamePlayModel.getMatchScore()) {
+	    					gamePlayModel.getNormalProfList().add(normalProfNew);
+	    					normalProfInGrid.add(normalProfNew);
+	    					gamePlayModel.getBulletListNormal().add(nProfBullet);
 	    	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
 	    	    			// piazzo il professore nella griglia --> con la call 
 	    	    			updatePosition(studList, profList);
@@ -266,10 +271,12 @@ public class GamePlayView {
 	    				break;
 	    			case 3:
 	    				Rector rectornew = new Rector(columnIndex, rowIndex);
-	    				Bullet rectorBullet = tutornew.tutorBullet;
+	    				Bullet rectorBullet = rectornew.rectorBullet;
 	    				
 	    				if(rectornew.getcostProfessor() <= gamePlayModel.getMatchScore()) {
 	    					gamePlayModel.getRectorList().add(rectornew);
+	    					rectorInGrid.add(rectornew);
+	    					gamePlayModel.getBulletListDiagonal().add(rectorBullet);
 	    	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
 	    	    			// piazzo il professore nella griglia --> con la call 
 	    	    			updatePosition(studList, profList);

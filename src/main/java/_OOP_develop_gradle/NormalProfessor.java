@@ -10,7 +10,7 @@ public class NormalProfessor extends Professor{
 	public static final String NORMALPROF_IMG_PATH = "img/professor.png";
 	public static final String tutorBulletName = "tutorBullet";
 	public static final int NormalProfName = 2;
-	public Bullet tutorBullet;
+	public Bullet normalProfBullet;
 	public int bulletSpeed=2;
 	private String pathImgNP;
 	
