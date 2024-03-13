@@ -1,6 +1,5 @@
 package _OOP_develop_gradle.view;
 
-
 import javafx.scene.image.Image;
 import java.awt.event.MouseEvent;
 
