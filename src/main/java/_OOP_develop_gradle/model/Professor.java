@@ -1,7 +1,6 @@
 package _OOP_develop_gradle.model;
 
 import _OOP_develop_gradle.Elements;
-import _OOP_develop_gradle.view.ProfessorView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -10,7 +9,6 @@ import javafx.scene.layout.Pane;
 public class Professor {
 	private Pane pane; // Riferimento al pannello che contiene l'immagine del professore
 
-	private ProfessorView ProfessorView;
 	private int costProfessor;
 	private int damage;
 	private final Elements<Integer, Integer> position;

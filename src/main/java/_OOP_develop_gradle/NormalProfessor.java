@@ -16,15 +16,15 @@ public class NormalProfessor extends Professor{
 	
 	public NormalProfessor(int col, int row) {
 		super(NORMALPROF_HIT_DAMAGE, NORMALPROF_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), NORMALPROF_IMG_PATH, NORMALPROF_BUY_COST, NormalProfName);
-		tutorBullet = new Bullet(bulletSpeed, NORMALPROF_HIT_DAMAGE, new Elements<Integer, Integer>(col, row), tutorBulletName, pathImgNP);
+		normalProfBullet = new Bullet(bulletSpeed, NORMALPROF_HIT_DAMAGE, new Elements<Integer, Integer>(col, row), tutorBulletName, pathImgNP);
 	}
 
 	public Bullet getTutorBullet() {
-		return tutorBullet;
+		return normalProfBullet;
 	}
 
 	public void setTutorBullet(Bullet tutorBullet) {
-		this.tutorBullet = tutorBullet;
+		this.normalProfBullet = tutorBullet;
 	}
 
 	public int getBulletSpeed() {

@@ -51,7 +51,7 @@ public class ProfessorMine extends ExplosiveProfessor{
 	 */
 	public String toString() {
 		String Status= "";
-		Status = "PM = " + this.getHitThreshold();
+		//Status = "PM = " + this.getHitThreshold();
 		return Status;
 	}
 }
