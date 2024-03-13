@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class ElementView  {
+public class ElementView {
 	private GridPane gridPane;
 	protected ImageView imageView;// DA METTERE L'ID PRESENTE IN QUELLO DELL'ANNA
 	
