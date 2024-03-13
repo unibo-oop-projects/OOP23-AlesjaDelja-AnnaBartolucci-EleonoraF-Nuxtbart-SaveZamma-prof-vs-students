@@ -31,7 +31,7 @@ class EnergiaImplementazione implements Energy {
             public void run() {
                 incrementaConPassareDelTempo();
             }
-        }, 0, 60000); // 60000 millisecondi = 1 minuto
+        }, 0, 20000); //20s
     }
     
     /**
