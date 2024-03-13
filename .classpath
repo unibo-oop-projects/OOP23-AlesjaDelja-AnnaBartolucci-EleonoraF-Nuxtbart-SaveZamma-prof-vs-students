@@ -33,5 +33,15 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/elefa/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/15/df61e6a8cfba8e36f598e3fa4d40fd51561efdf8/javafx-base-15-win.jar" sourcepath="C:/Users/elefa/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/15/52ad22ad530ec53f386dd257555613485ebdd5ec/javafx-base-15-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/elefa/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-fxml/15/a5a853b7f1f821c98bc49819dbe6c3792e4f3e1a/javafx-fxml-15-win.jar" sourcepath="C:/Users/elefa/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-fxml/15/135ffb87a13647283c1d689a8ab585af9cc772d/javafx-fxml-15-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>
