@@ -1,5 +1,6 @@
 package _OOP_develop_gradle;
 
+import _OOP_develop_gradle.view.ProfessorView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
