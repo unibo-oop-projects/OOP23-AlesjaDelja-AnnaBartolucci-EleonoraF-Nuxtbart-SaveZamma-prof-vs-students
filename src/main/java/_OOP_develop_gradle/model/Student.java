@@ -3,7 +3,6 @@ package _OOP_develop_gradle.model;
 import java.util.Random;
 
 import _OOP_develop_gradle.Elements;
-import _OOP_develop_gradle.view.StudentView;
 import javafx.scene.layout.AnchorPane;
 
 public class Student {
@@ -12,15 +11,12 @@ public class Student {
 	private int DEFAULT_HEALTH = 100;
 	private int DEFAULT_DAMAGE = 25;
 	private int DEFAULT_SCORE = 100;
-	private StudentView studentView;
 	private Elements<Integer, Integer> positionStudent;
-	//Costruttore
+	//Costructor
 	public Student(AnchorPane anchorPane) {
 		this.health = DEFAULT_HEALTH;
 		this.damage = DEFAULT_DAMAGE;
-		this.studentView = new StudentView(anchorPane);
         generateRandomPosition();
-        studentView.displayStudent(positionStudent);
 	}
 	
 	
@@ -72,8 +68,6 @@ public class Student {
 	 */
 	
 	public int destroyStudents(int score) { 
-		
-		studentView.removeStudent();
 		int newScore = score + DEFAULT_SCORE;
 		return newScore;
 	}

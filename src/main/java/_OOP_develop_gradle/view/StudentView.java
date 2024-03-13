@@ -9,6 +9,7 @@ public class StudentView {
 	private AnchorPane anchorPane;
 	private ImageView imageView;// DA METTERE L'ID PRESENTE IN QUELLO DELL'ANNA
 	
+	//Costructor
 	 public StudentView(AnchorPane anchorPane) {
 	        this.anchorPane = anchorPane;
 	    }
@@ -22,13 +23,13 @@ public class StudentView {
         Image image = new Image(getClass().getResourceAsStream("../img/student.png"));
 
         imageView = new ImageView(image);
-        // Imposta le dimensioni dell'ImageView DA METTERE APPOSTO
-        imageView.setFitWidth(200); // Imposta la larghezza desiderata
-        imageView.setFitHeight(200); // Imposta l'altezza desiderata
+        // Impostare le dimensioni che siano addatte a quello che serve
+        imageView.setFitWidth(200); 
+        imageView.setFitHeight(200); 
         
-     // Imposta la posizione dell'ImageView
-        imageView.setLayoutX(positionStudent.getX()); // Imposta la coordinata X
-        imageView.setLayoutY(positionStudent.getY()); // Imposta la coordinata Y
+     // Sets the position of student
+        imageView.setLayoutX(positionStudent.getX()); 
+        imageView.setLayoutY(positionStudent.getY()); 
         
         anchorPane.getChildren().add(imageView);
     }
