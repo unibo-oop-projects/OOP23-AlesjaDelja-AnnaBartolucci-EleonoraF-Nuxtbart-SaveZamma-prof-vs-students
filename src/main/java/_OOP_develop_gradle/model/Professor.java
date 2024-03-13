@@ -2,8 +2,8 @@ package _OOP_develop_gradle.model;
 
 import _OOP_develop_gradle.Elements;
 import _OOP_develop_gradle.ProfessorView;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 
 public class Professor {
 
@@ -37,7 +37,7 @@ public class Professor {
 	 */
 	
 	public ImageView getImageProf(Professor prof) {
-    	ImageView profImg = new ImageView();
+    	ImageView profImg = new ImageView(); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
     	profImg.setImage(new Image(getClass().getResource(prof.getPathImgProf()).toString()));
 		return profImg;
     }
