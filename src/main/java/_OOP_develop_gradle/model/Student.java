@@ -12,7 +12,7 @@ public class Student {
 	private int DEFAULT_DAMAGE = 25;
 	private Elements<Integer, Integer> positionStudent;
 	//Costructor
-	public Student(AnchorPane anchorPane) {
+	public Student() {
 		this.health = DEFAULT_HEALTH;
 		this.damage = DEFAULT_DAMAGE;
         generateRandomPosition();
