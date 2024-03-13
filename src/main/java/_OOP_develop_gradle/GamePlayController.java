@@ -24,6 +24,8 @@ public class GamePlayController {
 	
 	private static GamePlayController instance;
 	public boolean gameStatus;
+	public static String PATH_BULLET_NORM = ""; // TODO aggiungere path a bullet
+	public static String PATH_BULLET_DIAG = ""; // TODO aggiungere path a bullet
 	public static int TUTOR_ID = 1;
 	public static int NORMALPROF_ID = 2;
 	public static int SCORE_INIT = 20;
@@ -200,11 +202,11 @@ public class GamePlayController {
 		        	  				if(prof.getIDProf() == TUTOR_ID || prof.getIDProf() == NORMALPROF_ID) {
 		        	  					//generi un bullet normale e lo aggiungi alla lista
 		        	  					// TODO ELE deve aggiungere getter e setter nei prof tipo tutor della speed e del bulletName 
-		        	  					bulletNormalList.add(new Bullet(1, prof.getDamageProf(), prof.getPositionProf(), "bulletName"));
+		        	  					bulletNormalList.add(new Bullet(1, prof.getDamageProf(), prof.getPositionProf(), "bulletName", PATH_BULLET_NORM));
 		        	  					gameModel.setBulletListNormal(bulletNormalList);
 		        	  				}else {
 		        	  					// generi un bullet diagonal e lo aggiungi alla sua lista
-		        	  					bulletDiagonalList.add(new Bullet(1, prof.getDamageProf(), prof.getPositionProf(), "bulletName"));
+		        	  					bulletDiagonalList.add(new Bullet(1, prof.getDamageProf(), prof.getPositionProf(), "bulletName", PATH_BULLET_DIAG));
 		        	  					gameModel.setBulletListDiagonal(bulletDiagonalList);
 		        	  				}
 		        	  			}
@@ -382,7 +384,8 @@ public class GamePlayController {
 	            .filter(bullet -> bullet.getPosition().equals(currentStud.getPositionStudent()))
 	            .peek(bullet -> {
 	                currentStud.takeDamageStudents(bullet.getBulletDamage());
-	                bullet.destroyBullet();
+	                //bullet.destroyBullet(); // TODO ELE da aggiungere
+	                System.out.println("detruy bullet");
 	            })
 	            .count() > 0;
 	}
