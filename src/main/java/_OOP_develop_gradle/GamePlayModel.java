@@ -11,7 +11,9 @@ public class GamePlayModel {
 	    private int matchScore; // Punteggio partita
 	    private int timeTot; // Tempo di gioco
 	    private List<Student> studentList; // Lista di studenti presenti
-	    private List<Professor> profList; // Lista di prof presenti
+	    private List<Tutor> tutorList; // Lista di tutor presenti
+	    private List<NormalProfessor> normalProfList; // Lista di normal p presenti
+	    private List<Rector> rectorList; // Lista di rector presenti
 	    private List<Bullet> bulletListNormal;
 	    private List<Bullet> bulletListDiagonal;
 	    
@@ -19,7 +21,9 @@ public class GamePlayModel {
 	        this.matchScore = 0;
 	        this.timeTot = 0;
 	        this.studentList = new ArrayList<>();
-	        this.profList = new ArrayList<>();
+	        this.tutorList = new ArrayList<>();
+	        this.normalProfList = new ArrayList<>();
+	        this.rectorList = new ArrayList<>();
 	        this.bulletListNormal = new ArrayList<>();
 	        this.bulletListDiagonal = new ArrayList<>();
 	    }
@@ -61,9 +65,6 @@ public class GamePlayModel {
 	        return this.studentList;
 	    }
 
-	    public List<Professor> getProfList() {
-	        return this.profList;
-	    }
 
 	    public void generateWave(int waveSize) {
 	        // Creare una nuova ondata di studenti
@@ -73,11 +74,50 @@ public class GamePlayModel {
 	    	
 	    }
 
+	   public List<Tutor> getTutorList() {
+			return tutorList;
+		}
 
-	   public Professor generateNewProf(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor, int idProf) {
-    		Professor newProf = new Professor(damage, healthPoints, position, pathImg, costProfessor, idProf);
-    		profList.add(newProf);
-    		return newProf;
+		public void setTutorList(List<Tutor> tutorList) {
+			this.tutorList = tutorList;
+		}
+
+		public List<NormalProfessor> getNormalProfList() {
+			return normalProfList;
+		}
+
+		public void setNormalProfList(List<NormalProfessor> normalProfList) {
+			this.normalProfList = normalProfList;
+		}
+
+		public List<Rector> getRectorList() {
+			return rectorList;
+		}
+
+		public void setRectorList(List<Rector> rectorList) {
+			this.rectorList = rectorList;
+		}
+
+		public void setStudentList(List<Student> studentList) {
+			this.studentList = studentList;
+		}
+
+		public Tutor generateNewTutor(Elements<Integer, Integer> position) {
+			Tutor newTutor = new Tutor(position.getX(), position.getY());
+    		tutorList.add(newTutor);
+    		return newTutor;
+	    }
+		
+		public NormalProfessor generateNewNormalP(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor, int idProf) {
+			NormalProfessor newnormalProf = new NormalProfessor(position.getX(), position.getY());
+			normalProfList.add(newnormalProf);
+    		return newnormalProf;
+	    }
+		
+		public Rector generateNewRector(Elements<Integer, Integer> position ) {
+			Rector newRector = new Rector(position.getX(), position.getY());
+    		rectorList.add(newRector);
+    		return newRector;
 	    }
 
 	    public void generateNewStudent() {
