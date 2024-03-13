@@ -1,9 +1,14 @@
 package _OOP_develop_gradle.view;
 
 import _OOP_develop_gradle.Elements;
+import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.animation.KeyFrame;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
 
 public class StudentView {
 	private GridPane gridPane;
@@ -37,4 +42,25 @@ public class StudentView {
 	public void removeStudent() {
 		gridPane.getChildren().remove(imageView);
 	}
+	
+	 public void attackStudents() {
+	        // Salva l'immagine attuale
+	        Image originalImage = imageView.getImage();
+
+	        // Carica l'immagine per l'attacco
+	        Image attackImage = new Image(getClass().getResourceAsStream("../img/attack.png")); //
+	        imageView.setImage(attackImage);
+
+	        // Crea una Timeline per ritornare all'immagine originale dopo 2 secondi
+	        Timeline timeline = new Timeline(
+	            new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
+	                @Override
+	                public void handle(ActionEvent event) {
+	                    // Ritorna all'immagine originale dopo 2 secondi
+	                    imageView.setImage(originalImage);
+	                }
+	            })
+	        );
+	        timeline.play(); // Avvia la Timeline
+	    }
 }
