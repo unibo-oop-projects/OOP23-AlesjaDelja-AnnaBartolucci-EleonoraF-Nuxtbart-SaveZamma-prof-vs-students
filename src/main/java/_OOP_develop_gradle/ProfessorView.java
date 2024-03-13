@@ -8,11 +8,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-public class ProfessorView extends ImageView{
-	//private ImageView imageView;
+public class ProfessorView {
+	private ImageView imageView;
     private boolean isVisible;
 
-    public ProfessorView(String imagePath) {
+    public ProfessorView() {
         // Inizialmente la pianta non è visibile
         isVisible = false;
         // Carica l'immagine della pianta
@@ -22,27 +22,21 @@ public class ProfessorView extends ImageView{
 		 * ImageView(plantImage);
 		 */
         // Imposta un gestore di eventi per fare clic sulla griglia
-        //imageView.setOnMouseClicked(this::placePlant);
-        setImage(new Image(ProfessorView.class.getResource(imagePath).toString()));
-        setFitWidth(50);
-        setFitHeight(50);
-
-        // Aggiungi un gestore per il click per posizionare il professore sulla griglia
-        setOnMouseClicked(this::placeProfessor);
+        imageView.setOnMouseClicked(this::placePlant);
     }
 
     // Metodo per posizionare la pianta sulla griglia quando viene cliccata
-    private void placePlant(MouseEvent event) {
+    private void placeProfessor(int col, int row) {
         if (!isVisible) {
             // Ottenere le coordinate del clic
             int col = (int) (event.getX() / 50); // Supponiamo che ogni cella sia larga 50 pixel
             int row = (int) (event.getY() / 50); // Supponiamo che ogni cella sia alta 50 pixel
 
-            // Imposta la posizione del professor sulla griglia
-            GridPane.setColumnIndex(this, col);
-            GridPane.setRowIndex(this, row);
+            // Imposta la posizione del professore sulla griglia
+            GridPane.setColumnIndex(imageView, col);
+            GridPane.setRowIndex(imageView, row);
 
-            // Rendi il professor visibile
+            // Rendi la pianta visibile
             isVisible = true;
         }
     }

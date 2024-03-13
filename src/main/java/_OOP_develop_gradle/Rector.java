@@ -18,7 +18,7 @@ public class Rector extends Professor{
 	private int bulletSpeed=3;
 	
 	public Rector(int col, int row) {
-		super(RECTOR_HIT_DAMAGE, RECTOR_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), RECTOR_IMG_PATH, RECTOR_BUY_COST);
+		super(RECTOR_HIT_DAMAGE, RECTOR_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), RECTOR_IMG_PATH, RECTOR_BUY_COST, rectorName);
 		this.currentPosition = new Elements<Integer, Integer>(col, row);
 	}
 	//funzione per sparare in diagonale

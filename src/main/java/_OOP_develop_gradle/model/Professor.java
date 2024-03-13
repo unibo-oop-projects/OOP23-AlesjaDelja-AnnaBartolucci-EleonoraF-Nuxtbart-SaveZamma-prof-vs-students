@@ -12,15 +12,17 @@ public class Professor {
 	private int damage;
 	private final Elements<Integer, Integer> position;
 	private double healthPoints;
-	private String pathImg;
+	public String pathImgP;
 	private boolean hitted = false;
+	public int id;
 
-	public Professor(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor) {
+	public Professor(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImgP, int costProfessor, int id) {
 		this.damage = damage;
 		this.healthPoints = healthPoints;
 		this.position = position;
-		this.pathImg = pathImg;
+		this.pathImgP = pathImgP;
 		this.costProfessor = costProfessor;
+		this.id = id;
 	}
 
 	/*
@@ -29,16 +31,23 @@ public class Professor {
 	 * image.setFitHeight(50); // Imposta l'altezza desiderata return image; }
 	 */
 	// Metodo per ottenere l'ImageView della pianta
-    public ProfessorView getImageProf(Professor prof) {
-    	return new ProfessorView(pathImg);
+	/*
+	 * public ProfessorView getImageProf(Professor prof) { return new
+	 * ProfessorView(pathImg); }
+	 */
+	
+	public ImageView getImageProf(Professor prof) {
+    	ImageView profImg = new ImageView();
+    	profImg.setImage(new Image(getClass().getResource(prof.getPathImgProf()).toString()));
+		return profImg;
     }
 
 	public String getPathImgProf() {
-		return pathImg;
+		return pathImgP;
 	}
 	
 	public void setPathImgProf(String pathImg) {
-		this.pathImg = pathImg;
+		this.pathImgP = pathImg;
 	}
 
 	public boolean performAttack(Pane pane) {
@@ -107,8 +116,9 @@ public class Professor {
 		return false;
 	}
 
-	public void destroyProf() {
-		// TODO Auto-generated method stub
-		
+	public void destroyProf(int score) {
+		int newScore = score + DEFAULT_SCORE;
+		// TODO distruggere immagine
+		return newScore;
 	}
 }
