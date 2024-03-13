@@ -52,7 +52,6 @@ public final class Bullet {
         this.currentPosition = new Elements<>(currentPosition.getX() + bulletSpeed, currentPosition.getY());
     }
     
-<<<<<<< HEAD
     public String getPathImgBullet() {
 		return pathImgB;
 	}
@@ -62,9 +61,4 @@ public final class Bullet {
     	profImg.setImage(new Image(getClass().getResource(bullet.getPathImgBullet()).toString()));
 		return profImg;
     }
-=======
-    public void destroyBullet() { 
-		//TODO
-	}
->>>>>>> af62eb1aee311b03aa6dbab9b416192142fbf5c3
 }
