@@ -246,12 +246,8 @@ public class GamePlayView {
 	    					gamePlayModel.getTutorList().add(tutornew);
 	    					tutorInGrid.add(tutornew);
 	    					gamePlayModel.getBulletListNormal().add(tutorBullet);
-	    	    		    // creo nuovo prof con columnIndex e rowIndex
-	    	    		    //Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex, null, null, costProfessor);
-	    	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
-	    	    			// piazzo il professore nella griglia --> con la call 
 	    	    			updatePosition(studList, profList);
-	    	    			// diminuisco la moneta tot 
+	    	    			
 	    	    			gamePlayModel.decreaseMatchScore(tutornew.getcostProfessor());
 	    	    		}
 	    				break;
@@ -262,11 +258,9 @@ public class GamePlayView {
 	    				if(normalProfNew.getcostProfessor() <= gamePlayModel.getMatchScore()) {
 	    					gamePlayModel.getNormalProfList().add(normalProfNew);
 	    					normalProfInGrid.add(normalProfNew);
-	    					gamePlayModel.getBulletListNormal().add(nProfBullet);
-	    	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
-	    	    			// piazzo il professore nella griglia --> con la call 
+	    					gamePlayModel.getBulletListNormal().add(nProfBullet); 
 	    	    			updatePosition(studList, profList);
-	    	    			// diminuisco la moneta tot 
+	    	    			
 	    	    			gamePlayModel.decreaseMatchScore(normalProfNew.getcostProfessor());
 	    	    		}
 	    				break;
@@ -278,8 +272,6 @@ public class GamePlayView {
 	    					gamePlayModel.getRectorList().add(rectornew);
 	    					rectorInGrid.add(rectornew);
 	    					gamePlayModel.getBulletListDiagonal().add(rectorBullet);
-	    	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
-	    	    			// piazzo il professore nella griglia --> con la call 
 	    	    			updatePosition(studList, profList);
 	    	    			// diminuisco la moneta tot 
 	    	    			gamePlayModel.decreaseMatchScore(rectornew.getcostProfessor());
@@ -289,16 +281,6 @@ public class GamePlayView {
 	    		        System.out.println("Il numero non è né 1, né 2, né 3");
 	    		        break;
 	    		 }
-	    		/*if(costProfessor <= gamePlayModel.getMatchScore()) {
-	    		    // creo nuovo prof con columnIndex e rowIndex
-	    		    Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex, null, null, costProfessor);
-	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
-	    			// piazzo il professore nella griglia --> con la call 
-	    			updatePosition(studList, profList);
-	    			// diminuisco la moneta tot 
-	    			gamePlayModel.decreaseMatchScore(p.getcostProfessor());
-	    		}*/
-	    		
 	    	}
 	    }
     }
