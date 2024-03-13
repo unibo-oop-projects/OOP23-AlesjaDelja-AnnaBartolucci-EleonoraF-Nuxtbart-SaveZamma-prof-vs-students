@@ -8,17 +8,11 @@ import java.util.Optional;
 
 import _OOP_develop_gradle.model.Professor;
 import _OOP_develop_gradle.model.Student;
-import _OOP_develop_gradle.Bullet;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public class GamePlayController {
@@ -38,8 +32,6 @@ public class GamePlayController {
 	public List<NormalProfessor> normalPInGame = new ArrayList<>(); 
 	public List<Rector> rectorInGame = new ArrayList<>(); 
 	public List<Student> studInGame = new ArrayList<>(); // lista degli studenti in partita
-	private AnchorPane mainMenu;
-
 	private List<List<? extends Professor>> allProfessors = new ArrayList<>();
 	
 	public void addAllLists(List<Tutor> tutorInGame, List<NormalProfessor> normalPInGame, List<Rector> rectorInGame) {
@@ -66,7 +58,6 @@ public class GamePlayController {
         addAllLists(tutorInGame, normalPInGame, rectorInGame);
         
         this.gamePlayView = gamePlayView; // Assegna il riferimento dell'oggetto passato al metodo alla variabile gamePlayView
-        this.mainMenu = mainMenu; // Salva il riferimento a MainMenu
         
         try {
 			initGamePlay();
@@ -155,7 +146,9 @@ public class GamePlayController {
 				        	
 				        	if (collisionBulletAndStudent(student, bulletNormalList) || collisionBulletAndStudent(student, bulletDiagonalList)) {
 				        		if (student.getHealthStudent() <= 0) {
-				        			gameModel.setMatchScore(student.destroyStudents(gameModel.getMatchScore()));
+				        			// TODO 
+				        			System.out.println("Studente è morto e va tolto dalla View");
+				        			// gameModel.setMatchScore(student.destroyStudents(gameModel.getMatchScore()));
 				        			studentIterator.remove();
 				        		}
 				        	}
@@ -194,23 +187,15 @@ public class GamePlayController {
 				                break;
 				            }
 				        } else {
-				            
-				        	gameModel.setMatchScore(student.destroyStudents(gameModel.getMatchScore())); // Lo studente è morto
+				        	// TODO 
+				        	System.out.println("Studente è morto e va tolto dalla View");
+				        	// gameModel.setMatchScore(student.destroyStudents(gameModel.getMatchScore())); // Lo studente è morto
 				            studentIterator.remove(); // Rimuovi lo studente morto dalla lista
 				        }
 				        
 				    }
 				    
 				    advanceBullets();
-				    
-				    for (List<? extends Professor> professorList : allProfessors) {
-		                Iterator<? extends Professor> profIterator = professorList.iterator();
-		                while (profIterator.hasNext()) {
-		                    Professor prof = profIterator.next();
-		                    // Operazioni necessarie sui professori
-		                }
-		            }
-				    
 				    
 				    addAllLists(gameModel.getTutorList(), gameModel.getNormalProfList(), gameModel.getRectorList());
 				   // Logica per professori
@@ -248,7 +233,7 @@ public class GamePlayController {
 				        	  		}
 			
 						        } else {
-						            
+						            // TODO
 						        	prof.destroyProf();    // Il professore è morto
 						            profIterator.remove(); // Rimuovi il professore morto dalla lista
 						        }
@@ -414,8 +399,9 @@ public class GamePlayController {
 	            .filter(bullet -> bullet.getPosition().equals(currentStud.getPositionStudent()))
 	            .peek(bullet -> {
 	                currentStud.takeDamageStudents(bullet.getBulletDamage());
-	                //bullet.destroyBullet(); // TODO ELE da aggiungere
-	                System.out.println("detruy bullet");
+	                //bullet.destroyBullet(); 
+	                // TODO 
+	                System.out.println("destroy bullet");
 	            })
 	            .count() > 0;
 	}
