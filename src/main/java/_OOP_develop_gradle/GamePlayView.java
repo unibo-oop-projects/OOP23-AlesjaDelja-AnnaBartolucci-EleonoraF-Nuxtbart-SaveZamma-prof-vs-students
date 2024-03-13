@@ -4,6 +4,8 @@ import java.util.List;
 
 import _OOP_develop_gradle.model.Professor;
 import _OOP_develop_gradle.model.Student;
+import _OOP_develop_gradle.view.StudentView;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -55,6 +57,7 @@ public class GamePlayView {
     public GamePlayModel gamePlayModel;
     public List<Professor> profInGrid = new ArrayList<>();
     private List<Student> studentInGrid = new ArrayList<>(); // Lista di studenti presenti
+    private List<StudentView> studentViewList = new ArrayList<>();
     private List<Bullet>  bulletInGrid = new ArrayList<>(); 
     public AnimationTimer  timer;
     public int timeTot ;// Partiamo da 2 minuti, quindi 120 secondi
@@ -126,7 +129,7 @@ public class GamePlayView {
 	public void updatePositions(List<Student> studentList, List<Professor> profList, List<Bullet> bulletListNormal, List<Bullet> bulletList){
 		Platform.runLater(() -> {
 			
-			removeImageViews();
+			removePosition(studentViewList, profList, bulletList, bulletListNormal);
 	        updateStudentPositions(studentList);
 	        updateProfessorPositions(profList);
 	        updateBulletPositions(bulletList);
@@ -143,9 +146,12 @@ public class GamePlayView {
     	//	prendo le coordinate e metto sulla griglia la foto corrispondente
 		studentInGrid =studentList;
     	for(Student stud : studentInGrid) {
-    		ImageView studentImg = stud.getImageStud(stud);
+    		StudentView studView = new StudentView(lawn_grid);
+    		studentViewList.add(studView);
+    		studView.displayStudent(stud.getPositionStudent());
+    		/*ImageView studentImg = stud.getImageStud(stud);
     		GridPane.setConstraints(studentImg, stud.getPositionStudent().getX(), stud.getPositionStudent().getY());
-    		lawn_grid.getChildren().add(studentImg);
+    		lawn_grid.getChildren().add(studentImg);*/
     	}
 	}
 	
@@ -171,20 +177,22 @@ public class GamePlayView {
 	    	}
     }
 
-	// mi sa che non serve.. o serve all ele/alessia
-	public void removePosition(List<Student> studentList, List<Professor> profList, List<Bullet> bulletList) {
+	
+	public void removePosition(List<StudentView> students, List<Professor> profList, List<Bullet> bulletList, List<Bullet> bulletList2) {
 	    Platform.runLater(() -> {
 	        removeImageViews();
-	        removeStudents(studentList);
+	        removeStudents(students);
 	        removeProfessors(profList);
 	        removeBullets(bulletList);
+	        removeBullets(bulletList2);
 	    });
 	}
 
-	private void removeStudents(List<Student> studentList) {
-		studentInGrid = studentList;
-	    for (Student stud : studentList) {
-	        lawn_grid.getChildren().remove(stud.getImageStud(stud));
+	private void removeStudents(List<StudentView> students) {
+		//studentInGrid = studentList;
+	    for (StudentView stud : students) {
+	    	stud.removeStudent();
+	    	//lawn_grid.getChildren().remove(stud.getImageStud(stud));
 	    }
 	}
 
@@ -221,9 +229,9 @@ public class GamePlayView {
         //			controllo di avere abbastanza tempo/moneta per quel prof selezionato
         //				se SI: pianto il prof nella cella selezionata e lo aggiungo alla lista dei profInGrid
         //				se NO: nulla, esco dagli if annidati
-	    if(Professor.getIDProfChoosen()!=-1) {
+	    if(Professor.getIDProf()!=-1) {
 	    	if(columnIndex!=null && rowIndex!=null && !isProfInCell(columnIndex, rowIndex)) {
-	    		switch(Professor.getIDProfChoosen()) {
+	    		switch(Professor.getIDProf()) {
 	    			case 0:
 	    				costProfessor = new Tutor(columnIndex, rowIndex).getcostProfessor();
 	    				Tutor tutornew = new Tutor(columnIndex, rowIndex);
@@ -281,6 +289,20 @@ public class GamePlayView {
         stage.show();
     }
 
+    @FXML
+    public int handleTutorCardClick(){
+    	return 1;
+    }
+    
+    @FXML
+    public int handleNormalCardClick(){
+    	return 1;
+    }
+    
+    @FXML
+    public int handleRectorCardClick(){
+    	return 1;
+    }
     /**
      * Check if the professor is in the cell with columnIndex and rowIndex
      * @param columnIndex

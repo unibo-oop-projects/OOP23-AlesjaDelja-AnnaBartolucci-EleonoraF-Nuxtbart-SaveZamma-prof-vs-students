@@ -43,29 +43,19 @@
             <Font name="Dyuthi" size="35.0" />
          </font>
       </Label> 
-      <ImageView fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="75.0"><!-- onMouseClicked="#sunalmanac" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" --> <!-- ALMANAC -->
+      <ImageView onMouseClicked="#handleTutorCardClick" fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="75.0"><!-- onMouseClicked="#sunalmanac" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" --> <!-- ALMANAC -->
          <image>
             <Image url="@../img/cardSunflower.png" />
          </image>
-      </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="156.0">
+      </ImageView >
+      <ImageView onMouseClicked="#handleNormalCardClick" fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="156.0">
          <image>
             <Image url="@../img/cardWallnut.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="237.0">
+      <ImageView onMouseClicked="#handleRectorCardClick" fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="237.0">
          <image>
             <Image url="@../img/cardJalapeno.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="318.0">
-         <image>
-            <Image url="@../img/cardCherrybomb.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="399.0">
-         <image>
-            <Image url="@../img/cardRepeater.png" />
          </image>
       </ImageView>
       <GridPane fx:id="lawn_grid" layoutX="322.0" layoutY="83.0" prefHeight="489.0" prefWidth="694.0">

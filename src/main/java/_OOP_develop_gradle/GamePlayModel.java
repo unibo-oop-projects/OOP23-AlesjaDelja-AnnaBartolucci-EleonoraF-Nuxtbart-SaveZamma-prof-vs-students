@@ -8,7 +8,6 @@ import _OOP_develop_gradle.model.Student;
 
 public class GamePlayModel {
 
-		private static String STUDENT_PATH ="../../_OOP_develop_gradle/img/student.jpg";
 	    private int matchScore; // Punteggio partita
 	    private int timeTot; // Tempo di gioco
 	    private List<Student> studentList; // Lista di studenti presenti
@@ -69,21 +68,27 @@ public class GamePlayModel {
 	    public void generateWave(int waveSize) {
 	        // Creare una nuova ondata di studenti
 	        for (int i = 0; i < waveSize; i++) {
-	            generateNewStudent(STUDENT_PATH);
+	            generateNewStudent();
 	        }
 	    	
 	    }
 
-	   public Professor generateNewProf(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor) {
+<<<<<<< HEAD
+	   public Professor generateNewProf(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor, int id) {
 	        // Creare un nuovo professore
-    		Professor newProf = new Professor(damage, healthPoints, position, pathImg, costProfessor);
+    		Professor newProf = new Professor(damage, healthPoints, position, pathImg, costProfessor, id);
+=======
+	   public Professor generateNewProf(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor, int idProf) {
+	        // Creare un nuovo professore
+    		Professor newProf = new Professor(damage, healthPoints, position, pathImg, costProfessor, idProf);
+>>>>>>> 776e95837ce2fb8384fea16fb3dda19012d33359
     		profList.add(newProf);
     		return newProf;
 	    }
 
-	    public void generateNewStudent(String pathToImg) {
+	    public void generateNewStudent() {
 	        // Creare un nuovo studente
-	    	Student student = new Student(pathToImg);
+	    	Student student = new Student();
 	    	this.studentList.add(student);
 	    }
 
