@@ -5,21 +5,21 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class ElementView {
+public class ElementView  {
 	private GridPane gridPane;
-	private ImageView imageView;// DA METTERE L'ID PRESENTE IN QUELLO DELL'ANNA
+	protected ImageView imageView;// DA METTERE L'ID PRESENTE IN QUELLO DELL'ANNA
 	
 	//Costructor
-	 public ElementView(GridPane gridPane) {
-	        this.gridPane = gridPane;
-	    }
+	public ElementView(GridPane gridPane) {
+        this.gridPane = gridPane;
+    }
 	
 	 /**
 	 * Sets the image of the element when it will appear to the player
 	 * @param positionStudent 
 	 */
 	
-	public void displayStudent(Elements<Integer, Integer> positionElement) {
+	public void displayElement(Elements<Integer, Integer> positionElement) {
         Image image = new Image(getClass().getResourceAsStream(getImagePath()));
 
         imageView = new ImageView(image);
