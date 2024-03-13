@@ -36,7 +36,10 @@ public class GamePlayController {
 	public GamePlayView gamePlayView;
 	public List<Bullet> bulletNormalList = new ArrayList<>(); // lista dei bullet normali in gioco
 	public List<Bullet> bulletDiagonalList = new ArrayList<>(); // lista dei bullet diagonali in gioco
-	public List<Professor> profInGame = new ArrayList<>(); // lista dei professori in partita
+	//public List<Professor> profInGame = new ArrayList<>(); // lista dei professori in partita
+	public List<Tutor> tutorInGame = new ArrayList<>(); 
+	public List<NormalProfessor> normalPInGame = new ArrayList<>(); 
+	public List<Rector> rectorInGame = new ArrayList<>(); 
 	public List<Student> studInGame = new ArrayList<>(); // lista degli studenti in partita
 	private AnchorPane mainMenu;
 
@@ -48,7 +51,9 @@ public class GamePlayController {
         gameModel.setMatchScore(SCORE_INIT);
         bulletNormalList = gameModel.getBulletListNormal();
         bulletDiagonalList = gameModel.getBulletListDiagonal();
-        profInGame = gameModel.getProfList();
+        tutorInGame = gameModel.getTutorList();
+        normalPInGame = gameModel.getNormalProfList();
+        rectorInGame = gameModel.getRectorList();
         studInGame = gameModel.getStudentList();
         this.gamePlayView = gamePlayView; // Assegna il riferimento dell'oggetto passato al metodo alla variabile gamePlayView
         this.mainMenu = mainMenu; // Salva il riferimento a MainMenu
@@ -74,13 +79,16 @@ public class GamePlayController {
 			NUM_STUD_ONDATA+=1;
 		    gameModel.generateWave(NUM_STUD_ONDATA);
 		    studInGame = gameModel.getStudentList();
-		    profInGame = gameModel.getProfList();
+		    tutorInGame = gameModel.getTutorList();
+	        normalPInGame = gameModel.getNormalProfList();
+	        rectorInGame = gameModel.getRectorList();
 		    bulletNormalList = gameModel.getBulletListNormal();
 	        bulletDiagonalList = gameModel.getBulletListDiagonal();
 		    
 		    //update view
 		    /*synchronized(studInGame){
 		    	// TODO sync con tutti gli altri ??
+		    	 // TODO la sync anche con le liste dei professori vari
 		        gamePlayView.updatePositions(studInGame, profInGame, bulletNormalList, bulletDiagonalList);
 		    }*/
 		    // Sincronizza l'accesso alle liste condivise
@@ -181,7 +189,7 @@ public class GamePlayController {
 				    }
 				    
 				    advanceBullets();
-				    
+				    // TODO Lista unica con dentro le tre liste dei prof diversi
 				    // Logica per professore
 				   Iterator<Professor> profIterator = gameModel.getProfList().iterator();
 				    while (profIterator.hasNext()) {
@@ -351,14 +359,6 @@ public class GamePlayController {
 
 	public static GamePlayModel getGameModel() {
 		return gameModel;
-	}
-
-	public List<Professor> getProfInGame() {
-		return profInGame;
-	}
-
-	public void setProfInGame(List<Professor> profInGame) {
-		this.profInGame = profInGame;
 	}
 
 	public List<Student> getStudInGame() {
