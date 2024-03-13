@@ -1,6 +1,7 @@
 package _OOP_develop_gradle;
 
 import _OOP_develop_gradle.model.Professor;
+import _OOP_develop_gradle.view.StudentView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -60,5 +61,10 @@ public final class Bullet {
     	ImageView profImg = new ImageView(); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
     	profImg.setImage(new Image(getClass().getResource(bullet.getPathImgBullet()).toString()));
 		return profImg;
+    }
+    
+    public int destroyBullets() {
+    	
+    
     }
 }

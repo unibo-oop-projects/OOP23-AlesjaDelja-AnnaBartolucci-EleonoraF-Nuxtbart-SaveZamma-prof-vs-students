@@ -74,9 +74,9 @@ public class GamePlayModel {
 	    	
 	    }
 
-	   public Professor generateNewProf(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor) {
+	   public Professor generateNewProf(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor, int id) {
 	        // Creare un nuovo professore
-    		Professor newProf = new Professor(damage, healthPoints, position, pathImg, costProfessor);
+    		Professor newProf = new Professor(damage, healthPoints, position, pathImg, costProfessor, id);
     		profList.add(newProf);
     		return newProf;
 	    }
