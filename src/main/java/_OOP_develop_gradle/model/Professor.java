@@ -83,7 +83,7 @@ public class Professor {
 	/*
 	 * Ti restituisce danno che il prf causa 
 	 */
-	public double getDamageProf() {
+	public int getDamageProf() {
 		return damage;
 	}
 	

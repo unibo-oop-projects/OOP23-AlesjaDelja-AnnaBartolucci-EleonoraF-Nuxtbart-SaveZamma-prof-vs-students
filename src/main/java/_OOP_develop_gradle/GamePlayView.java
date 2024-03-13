@@ -37,7 +37,10 @@ public class GamePlayView {
     private ImageView sunCountImage;
     
     @FXML
-    private Label sunCountLabel;
+    private Label matchScoreLabel;
+    
+    @FXML
+    private Label energyLabel;
     
     @FXML
     private ImageView gameMenuButton;
@@ -52,6 +55,7 @@ public class GamePlayView {
     public GamePlayModel gamePlayModel;
     public List<Professor> profInGrid = new ArrayList<>();
     private List<Student> studentInGrid = new ArrayList<>(); // Lista di studenti presenti
+    private List<Bullet>  bulletInGrid = new ArrayList<>(); 
     public AnimationTimer  timer;
     public int timeTot ;// Partiamo da 2 minuti, quindi 120 secondi
     public int matchScore ;
@@ -82,6 +86,7 @@ public class GamePlayView {
                     	timeTot = gamePlayModel.getTimeTot();
                     	if (timeTot > 0) {
                     		updateTempoLabel();
+                    		updateMatchScoreLabel(); // TODO update del match con anche il tempo ?
                             lastTimeUpdate = now;
                     	}else {
                         	timer.stop();
@@ -98,9 +103,11 @@ public class GamePlayView {
     public boolean isTimerStop() {
 		return timerStop;
 	}
+    
 	public void setTimerStop(boolean timerStop) {
 		this.timerStop = timerStop;
 	}
+	
 	private void updateTempoLabel() {
     	// funzione che mi aggiorna il tempo che scorre
     	timeTot--;
@@ -111,21 +118,38 @@ public class GamePlayView {
         gamePlayModel.setTimeTot(timeTot);
         
 	}
+	
+	public void updateMatchScoreLabel() {
+		matchScoreLabel.setText(String.format("%d", gamePlayModel.getMatchScore()));
+	}
     
-	public void updatePosition(List<Student> studentList, List<Professor> profList){
-    	Platform.runLater(() -> {
-    	
-	    	lawn_grid.getChildren().removeIf(node -> node instanceof ImageView);
-	    	
-	    	// per ogni studente in studentInGrid
-	    	//	prendo le coordinate e metto sulla griglia la foto corrispondente
-	    	studentInGrid =studentList;// model.getStudentList();
-	    	for(Student stud : studentInGrid) {
-	    		ImageView studentImg = stud.getImageStud(stud);
-	    		GridPane.setConstraints(studentImg, stud.getCol(), stud.getRow());
-	    		lawn_grid.getChildren().add(studentImg);
-	    	}
-	    	
+	public void updatePositions(List<Student> studentList, List<Professor> profList, List<Bullet> bulletListNormal, List<Bullet> bulletList){
+		Platform.runLater(() -> {
+			
+			removeImageViews();
+	        updateStudentPositions(studentList);
+	        updateProfessorPositions(profList);
+	        updateBulletPositions(bulletList);
+	        updateBulletPositions(bulletListNormal);
+	    });
+    }
+	
+	private void removeImageViews() {
+	    lawn_grid.getChildren().removeIf(node -> node instanceof ImageView);
+	}
+	
+	private void updateStudentPositions(List<Student> studentList) {
+		// per ogni studente in studentInGrid
+    	//	prendo le coordinate e metto sulla griglia la foto corrispondente
+		studentInGrid =studentList;
+    	for(Student stud : studentInGrid) {
+    		ImageView studentImg = stud.getImageStud(stud);
+    		GridPane.setConstraints(studentImg, stud.getPositionStudent().getX(), stud.getPositionStudent().getY());
+    		lawn_grid.getChildren().add(studentImg);
+    	}
+	}
+	
+	public void updateProfessorPositions(List<Professor> profList){
 	    	// per ogni prof
 	    	// prendo le coordinate e metto sulla griglia la foto corrispondente
 	    	profInGrid = profList;
@@ -134,29 +158,49 @@ public class GamePlayView {
 	    		GridPane.setConstraints(profImg, prof.getPositionProf().getX(), prof.getPositionProf().getY());
 	    		lawn_grid.getChildren().add(profImg);
 	    	}
-    	});
+	}
+	
+	public void updateBulletPositions(List<Bullet> bulletList){
+	    	// per ogni bullet
+	    	// prendo le coordinate e metto sulla griglia la foto corrispondente
+	    	bulletInGrid = bulletList;
+	    	for(Bullet bullet : bulletInGrid) {
+	    		ImageView bulletImg = bullet.getImageBullet(bullet);
+	    		GridPane.setConstraints(bulletImg, bullet.getPosition().getX(), bullet.getPosition().getY());
+	    		lawn_grid.getChildren().add(bulletImg);
+	    	}
     }
 
-    public void removePosition(List<Student> studentList, List<Professor> profList) {
-    	Platform.runLater(() -> {
-    		
-	    	lawn_grid.getChildren().removeIf(node -> node instanceof ImageView);
-	    	
-	    	// per ogni studente in studentInGrid
-	    	//	prendo le coordinate e tolgo dalla griglia la foto corrispondente
-	    	studentInGrid = studentList;//model.getStudentList();
-	    	for(Student stud : studentInGrid) {
-	    		lawn_grid.getChildren().remove(stud.getImageStud(stud));
-	    	}
-	    	
-	    	// per ogni prof 
-	    	// prendo le coordinate e tolgo dalla griglia la foto corrispondente
-	    	profInGrid = profList;
-	    	for(Professor prof : profInGrid) {
-	    		lawn_grid.getChildren().remove(prof.getImageProf(prof));
-	    	}
-    	});
-    }
+	// mi sa che non serve.. o serve all ele/alessia
+	public void removePosition(List<Student> studentList, List<Professor> profList, List<Bullet> bulletList) {
+	    Platform.runLater(() -> {
+	        removeImageViews();
+	        removeStudents(studentList);
+	        removeProfessors(profList);
+	        removeBullets(bulletList);
+	    });
+	}
+
+	private void removeStudents(List<Student> studentList) {
+		studentInGrid = studentList;
+	    for (Student stud : studentList) {
+	        lawn_grid.getChildren().remove(stud.getImageStud(stud));
+	    }
+	}
+
+	private void removeProfessors(List<Professor> profList) {
+		profInGrid = profList;
+	    for (Professor prof : profList) {
+	        lawn_grid.getChildren().remove(prof.getImageProf(prof));
+	    }
+	}
+
+	private void removeBullets(List<Bullet> bulletList) {
+		bulletInGrid = bulletList;
+	    for (Bullet bullet : bulletList) {
+	        lawn_grid.getChildren().remove(bullet.getImageBullet());
+	    }
+	}
     
     /**
      * Function that handle the choice of a professor type and put it on the lawn grid
@@ -182,6 +226,8 @@ public class GamePlayView {
 	    		switch(Professor.getIDProfChoosen()) {
 	    			case 0:
 	    				costProfessor = new Tutor(columnIndex, rowIndex).getcostProfessor();
+	    				Tutor tutornew = new Tutor(columnIndex, rowIndex);
+	    				Bullet tutorBullet = tutornew.tutorBullet;
 	    				if(costProfessor <= gamePlayModel.getMatchScore()) {
 	    	    		    // creo nuovo prof con columnIndex e rowIndex
 	    	    		    Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex, null, null, costProfessor);
