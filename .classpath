@@ -14,29 +14,23 @@
 	</classpathentry>
 	<classpathentry kind="src" output="bin/test" path="src/test/java">
 		<attributes>
+			<attribute name="test" value="true"/>
 			<attribute name="gradle_scope" value="test"/>
 			<attribute name="gradle_used_by_scope" value="test"/>
-			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="bin/test" path="src/test/resources">
 		<attributes>
+			<attribute name="test" value="true"/>
 			<attribute name="gradle_scope" value="test"/>
 			<attribute name="gradle_used_by_scope" value="test"/>
-			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17/"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17/">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="lib" path="C:/Users/elefa/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/15/979ac3da4288de1e8103c2b38eb7aa74d32fe1b8/javafx-graphics-15-win.jar" sourcepath="C:/Users/elefa/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/15/cce8c8eefe238812dffca99a2944184477ad0dbb/javafx-graphics-15-sources.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/elefa/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-fxml/15/a5a853b7f1f821c98bc49819dbe6c3792e4f3e1a/javafx-fxml-15-win.jar" sourcepath="C:/Users/elefa/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-fxml/15/135ffb87a13647283c1d689a8ab585af9cc772d/javafx-fxml-15-sources.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>

@@ -63,8 +63,4 @@ public final class Bullet {
 		return bulletImg;
     }
     
-    public int destroyBullets() {
-    	
-    
-    }
 }
