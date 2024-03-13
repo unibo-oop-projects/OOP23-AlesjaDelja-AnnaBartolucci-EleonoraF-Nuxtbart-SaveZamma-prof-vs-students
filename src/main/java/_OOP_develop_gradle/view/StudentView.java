@@ -10,13 +10,14 @@ import javafx.scene.layout.GridPane;
 
 public class StudentView extends ElementView {
 
+	private String PATH_STUDENT = "../img/student.png";
     public StudentView(GridPane gridPane) {
         super(gridPane);
     }
 
     @Override
     protected String getImagePath() {
-        return "../img/student.png"; // Ritorna il percorso dell'immagine dello studente
+        return PATH_STUDENT; // Ritorna il percorso dell'immagine dello studente
     }
 
     public void attackStudents() {
