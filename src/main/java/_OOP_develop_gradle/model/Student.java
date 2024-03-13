@@ -3,6 +3,7 @@ package _OOP_develop_gradle.model;
 import java.util.Random;
 
 import _OOP_develop_gradle.Elements;
+import _OOP_develop_gradle.view.StudentView;
 
 public class Student {
 	private int health;
@@ -69,8 +70,9 @@ public class Student {
 	 */
 	
 	public int destroyStudents(int score) { 
+		StudentView studentView = new StudentView();
+		studentView.removeStudent();
 		int newScore = score + DEFAULT_SCORE;
-		// TODO distruggere immagine
 		return newScore;
 	}
 	
