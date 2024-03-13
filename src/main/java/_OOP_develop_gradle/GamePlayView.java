@@ -132,7 +132,7 @@ public class GamePlayView {
 		matchScoreLabel.setText(String.format("%d", gamePlayModel.getMatchScore()));
 	}
     
-	public void updatePositions(List<Student> studentList, List<Professor> profList, List<Bullet> bulletListNormal, List<Bullet> bulletList){
+	public void updatePositions(List<Student> studentList, List<List<? extends Professor>> profList, List<Bullet> bulletListNormal, List<Bullet> bulletList){
 		Platform.runLater(() -> {
 			
 			removePosition(studentViewList, profList, bulletList, bulletListNormal);
@@ -158,7 +158,7 @@ public class GamePlayView {
     	}
 	}
 	
-	public void updateProfessorPositions(List<Tutor> tutorList){
+	public void updateProfessorPositions(List<? extends Professor> profsList){
 	    	// per ogni prof
 	    	// prendo le coordinate e metto sulla griglia la foto corrispondente
 			tutorInGrid = tutorList;
@@ -325,7 +325,7 @@ public class GamePlayView {
      * @return TRUE if prof is in the cell otherwise FALSE
      */
 	private boolean isProfInCell(int columnIndex, int rowIndex) {
-		return profInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex);
+		return rectorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex);
 	}
 
     
