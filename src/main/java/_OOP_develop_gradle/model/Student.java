@@ -14,7 +14,7 @@ public class Student {
 	private Elements<Integer, Integer> positionStudent;
 	//Costruttore
 	public Student(String pathStudentImg) {
-		this.pathStudentImg = pathStudentImg;
+		this.pathStudentImg = pathStudentImg; // TODO da mettere apposto con la foto che mi serve
 		this.health = DEFAULT_HEALTH;
 		this.damage = DEFAULT_DAMAGE;
 		generateRandomPosition();
