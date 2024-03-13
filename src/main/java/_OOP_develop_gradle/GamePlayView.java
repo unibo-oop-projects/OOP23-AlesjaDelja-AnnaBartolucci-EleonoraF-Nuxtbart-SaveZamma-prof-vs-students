@@ -65,6 +65,7 @@ public class GamePlayView {
     public long lastTimeUpdate = 0;
     public long ONE_SECOND = 1_000_000_000;
     public boolean timerStop = false;
+    public int profChoosen;
     
     public void setController(GamePlayController gameController) {
         this.gameController = gameController;
@@ -80,6 +81,7 @@ public class GamePlayView {
     	
     	gameController = new GamePlayController();
     	gameController.initData(this);*/
+    	profChoosen=-1;
     	gamePlayModel = GamePlayController.getGameModel();
 		timer = new AnimationTimer() {
             @Override
@@ -229,28 +231,48 @@ public class GamePlayView {
         //			controllo di avere abbastanza tempo/moneta per quel prof selezionato
         //				se SI: pianto il prof nella cella selezionata e lo aggiungo alla lista dei profInGrid
         //				se NO: nulla, esco dagli if annidati
-	    if(Professor.getIDProf()!=-1) {
+        
+        
+	    if(profChoosen != -1) {
 	    	if(columnIndex!=null && rowIndex!=null && !isProfInCell(columnIndex, rowIndex)) {
-	    		switch(Professor.getIDProf()) {
-	    			case 0:
-	    				costProfessor = new Tutor(columnIndex, rowIndex).getcostProfessor();
+	    		switch(profChoosen) {
+	    			case 1:
 	    				Tutor tutornew = new Tutor(columnIndex, rowIndex);
 	    				Bullet tutorBullet = tutornew.tutorBullet;
-	    				if(costProfessor <= gamePlayModel.getMatchScore()) {
+	    				
+	    				if(tutornew.getcostProfessor() <= gamePlayModel.getMatchScore()) {
 	    	    		    // creo nuovo prof con columnIndex e rowIndex
-	    	    		    Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex, null, null, costProfessor);
+	    	    		    //Professor p = gamePlayModel.generateNewProf(columnIndex, rowIndex, null, null, costProfessor);
 	    	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
 	    	    			// piazzo il professore nella griglia --> con la call 
 	    	    			updatePosition(studList, profList);
 	    	    			// diminuisco la moneta tot 
-	    	    			gamePlayModel.decreaseMatchScore(p.getcostProfessor());
+	    	    			gamePlayModel.decreaseMatchScore(tutornew.getcostProfessor());
 	    	    		}
 	    				break;
-	    			case 1:
-	    				costProfessor = new NormalProfessor(columnIndex, rowIndex).getcostProfessor();
-	    				break;
 	    			case 2:
-	    				costProfessor = new Rector(columnIndex, rowIndex).getcostProfessor();
+	    				Tutor normalProfNew = new Tutor(columnIndex, rowIndex);
+	    				Bullet nProfBullet = tutornew.tutorBullet;
+	    				
+	    				if(normalProfNew.getcostProfessor() <= gamePlayModel.getMatchScore()) {
+	    	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
+	    	    			// piazzo il professore nella griglia --> con la call 
+	    	    			updatePosition(studList, profList);
+	    	    			// diminuisco la moneta tot 
+	    	    			gamePlayModel.decreaseMatchScore(normalProfNew.getcostProfessor());
+	    	    		}
+	    				break;
+	    			case 3:
+	    				Tutor rectornew = new Tutor(columnIndex, rowIndex);
+	    				Bullet rectorBullet = tutornew.tutorBullet;
+	    				
+	    				if(rectornew.getcostProfessor() <= gamePlayModel.getMatchScore()) {
+	    	    		    // aggiungo il prof in lista --> profInGrid.add(p); --> NO lo fa già la generateNewProf()
+	    	    			// piazzo il professore nella griglia --> con la call 
+	    	    			updatePosition(studList, profList);
+	    	    			// diminuisco la moneta tot 
+	    	    			gamePlayModel.decreaseMatchScore(rectornew.getcostProfessor());
+	    	    		}
 	    				break;
 	    			default:
 	    		        System.out.println("Il numero non è né 1, né 2, né 3");
@@ -290,18 +312,18 @@ public class GamePlayView {
     }
 
     @FXML
-    public int handleTutorCardClick(){
-    	return 1;
+    public void handleTutorCardClick(){
+    	profChoosen=1;
     }
     
     @FXML
-    public int handleNormalCardClick(){
-    	return 1;
+    public void handleNormalCardClick(){
+    	profChoosen=2;
     }
     
     @FXML
-    public int handleRectorCardClick(){
-    	return 1;
+    public void handleRectorCardClick(){
+    	profChoosen=3;
     }
     /**
      * Check if the professor is in the cell with columnIndex and rowIndex
