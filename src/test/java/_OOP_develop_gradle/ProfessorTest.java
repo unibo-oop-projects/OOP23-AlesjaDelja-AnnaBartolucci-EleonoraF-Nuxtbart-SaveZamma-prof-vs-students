@@ -1,20 +1,17 @@
 package _OOP_develop_gradle;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.Assert.assertEquals;
-import org.junit.Before;
 
 import _OOP_develop_gradle.model.Professor;
 
-public class ProfessorTest {
+import static org.junit.jupiter.api.Assertions.*;
 
-    private Professor professor;
-    private Elements<Integer, Integer> position;
-    public void setUp() {
-        position = new Elements<>(0, 0);
-        professor = new Professor(50, 100, position, "imagePath", 10, 1);
-    }
+
+class ProfessorTest {
+
+	Elements<Integer, Integer> position= new Elements<>(0, 0);
+    Professor professor = new Professor(50, 100, position, "imagePath", 10, 1);
+    
 
     @Test
     public void testGetPathImgProf() {
