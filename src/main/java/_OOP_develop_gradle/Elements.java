@@ -10,26 +10,12 @@ import java.util.Objects;
 public class Elements<X, Y> {
 	 private final X x;
 	    private final Y y;
-	/*
-	 * protected int x; protected int y; protected transient ImageView img;
-	 * protected String path; protected int width; protected int height;
-	 */
 
 	    public Elements(final X x, final Y y) {
 	        this.x = x;
 	        this.y = y;
-			/*
-			 * this.path = path; // Non è necessario usare
-			 * getClass().getResource(path).toString() this.width = width; this.height =
-			 * height;
-			 */
+			
 	    }
-
-		/*
-		 * public void makeImage(Pane pane) { img = new ImageView(new Image(path, width,
-		 * height, false, false)); img.setX(x); img.setY(y);
-		 * pane.getChildren().add(img); }
-		 */
 
 	    public X getX() {
 	        return this.x;
@@ -48,13 +34,7 @@ public class Elements<X, Y> {
 	    public int hashCode() {
 	        return Objects.hash(this.x, this.y);
 	    }
-
-		/*
-		 * public void setX(int x) { this.x = x; if (img != null) { img.setX(x); } }
-		 * 
-		 * public void setY(int y) { this.y = y; if (img != null) { img.setY(y); } }
-		 */
-	
+	    
 	    @SuppressWarnings("rawtypes")
 	    @Override
 	    public boolean equals(final Object obj) {
