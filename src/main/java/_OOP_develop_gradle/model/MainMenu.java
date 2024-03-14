@@ -9,8 +9,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class MainMenu {
-	public class MainMenu3 extends Application {
+public class MainMenu extends Application {
 		@Override
 		public void start(Stage primaryStage) {
 			try {
@@ -41,4 +40,3 @@ public class MainMenu {
 			}
 		}
 	}
-}
