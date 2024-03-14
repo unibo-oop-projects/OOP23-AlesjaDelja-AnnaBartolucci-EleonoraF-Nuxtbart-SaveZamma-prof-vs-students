@@ -14,7 +14,8 @@ public class Professor {
 	private double healthPoints;
 	public String pathImgP;
 	public int id;
-
+	
+	//Costructor
 	public Professor(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImgP, int costProfessor, int id) {
 		this.damage = damage;
 		this.healthPoints = healthPoints;
