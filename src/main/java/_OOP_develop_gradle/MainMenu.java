@@ -1,4 +1,4 @@
-package _OOP_develop_gradle.model;
+package _OOP_develop_gradle;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,9 @@ public class MainMenu extends Application {
 		@Override
 		public void start(Stage primaryStage) {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("../view/MainMenuView.fxml"));
+				System.out.println(getClass().getResource("/MainMenuView.fxml"));
+			    //Parent root = FXMLLoader.load(ClassLoader.getSystemResource("MainMenuView.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/MainMenuView.fxml"));
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
 				primaryStage.show();
