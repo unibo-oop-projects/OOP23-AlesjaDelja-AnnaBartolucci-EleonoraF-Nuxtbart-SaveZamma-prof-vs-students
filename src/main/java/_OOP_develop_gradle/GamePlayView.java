@@ -266,7 +266,7 @@ public class GamePlayView {
 	    				Tutor tutornew = new Tutor(columnIndex, rowIndex);
 	    				Bullet tutorBullet = tutornew.tutorBullet;
 	    				
-	    				if(tutornew.getCostProfessor() <= gamePlayModel.getMatchScore()) {
+	    				if(tutornew.getCostProfessor() <= gamePlayModel.getEnergy()) {
 	    					gamePlayModel.getTutorList().add(tutornew);
 	    					tutorInGrid.add(tutornew);
 	    					gamePlayModel.getBulletListNormal().add(tutorBullet);
