@@ -10,7 +10,7 @@ public class Professor {
     private int costProfessor;
     private int damage;
     private final Elements<Integer, Integer> position;
-    private double healthPoints;
+    private int healthPoints;
     public String pathImgP;
     public int id;
     
@@ -24,7 +24,7 @@ public class Professor {
      * @param costProfessor The cost to buy the professor.
      * @param id The unique identifier of the professor.
      */
-    public Professor(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImgP, int costProfessor, int id) {
+    public Professor(int damage, int healthPoints, Elements<Integer, Integer> position, String pathImgP, int costProfessor, int id) {
         this.damage = damage;
         this.healthPoints = healthPoints;
         this.position = position;
@@ -53,7 +53,7 @@ public class Professor {
      * Gets the healthpoints of a professor
      * @return the healthpoints of the professor
      */
-    public double getHealthPointsProf() {
+    public int getHealthPointsProf() {
         return healthPoints;
     }
 
