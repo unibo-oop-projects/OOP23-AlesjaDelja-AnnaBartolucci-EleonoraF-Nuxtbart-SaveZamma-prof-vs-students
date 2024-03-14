@@ -57,10 +57,4 @@ public final class Bullet {
 		return pathImgB;
 	}
     
-    public ImageView getImageBullet(Bullet bullet) {
-    	ImageView bulletImg = new ImageView(); // se crea già metodo --> stud.getImg() anche direttamente sotto nel setConstraints() ??
-    	bulletImg.setImage(new Image(getClass().getResource(bullet.getPathImgBullet()).toString()));
-		return bulletImg;
-    }
-    
 }

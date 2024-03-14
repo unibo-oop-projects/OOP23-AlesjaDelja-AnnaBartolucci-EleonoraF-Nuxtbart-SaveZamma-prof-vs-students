@@ -18,8 +18,6 @@ public class Rector extends Professor{
 		return tutorBulletName;
 	}
 	public static final int rectorName = 3;
-	//public static final int TUTOR_HIT_VALUE = 2;
-	private int hitValue;
 	private int bulletSpeed=3;
 	
 	public Rector(int col, int row) {
@@ -30,9 +28,11 @@ public class Rector extends Professor{
 	public Bullet getRectorBullet() {
 		return rectorBullet;
 	}
+	
 	public void setRectorBullet(Bullet rectorBullet) {
 		this.rectorBullet = rectorBullet;
 	}
+	
 	public int getBulletSpeed() {
 		return bulletSpeed;
 	}

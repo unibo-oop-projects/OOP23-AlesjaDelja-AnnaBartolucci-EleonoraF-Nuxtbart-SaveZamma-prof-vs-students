@@ -14,8 +14,6 @@ public class Tutor extends Professor{
 	private int bulletSpeed=1;
 	public static final int tutorName = 1;
 	private String pathImgT;
-	//public static final int TUTOR_HIT_VALUE = 2;
-	private int hitValue;
 	
 	private Elements<Integer, Integer> currentPosition;
 	public Tutor(int col, int row) {
@@ -27,8 +25,6 @@ public class Tutor extends Professor{
 	public Bullet getTutorBullet() {
 		return tutorBullet;
 	}
-
-
 
 	public void setTutorBullet(Bullet tutorBullet) {
 		this.tutorBullet = tutorBullet;
@@ -47,18 +43,5 @@ public class Tutor extends Professor{
 	public static String getTutorbulletname() {
 		return tutorBulletName;
 	}
-
-	/**
-     * Shoots a pea at zombie, if zombie is close enough.
-     * @return hit value to a zombie object without negation
-     */
-    public int shootPea() {
-        return hitValue; // Restituisce il valore senza negarlo
-    }
-
-    // Metodo set per impostare il segno
-    public void setHitValue(int hitValue) {
-        this.hitValue = -hitValue;
-    }
 	
 }
