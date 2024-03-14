@@ -4,10 +4,12 @@ import javafx.scene.control.Label;
 
 public class Score {
 	
+	private static final int DEFAULT_RESET = 0;
+	private static final int DEFAULT_SCORE = 100;
 	private int score;
 	
 
-	private int DEFAULT_SCORE = 100;
+	
 
 	/**
 	 * Getter of score
@@ -41,5 +43,8 @@ public class Score {
 	 */
 	public void updateScore(Label scoreLabel) {
 		scoreLabel.setText("Score: " + score);
+	}
+	public void resetScore() {
+		this.score = DEFAULT_RESET;
 	}
 }
