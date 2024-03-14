@@ -4,10 +4,18 @@ import javafx.scene.layout.GridPane;
 
 public class RectorView extends ElementView{
 
+	/**
+     * Constructor for RectorView.
+     * @param gridPane The GridPane where the rector view will be added.
+     */
 	public RectorView(GridPane gridPane) {
 		super(gridPane);
 	}
 	
+	/**
+     * Retrieves the path to the image file representing the rector.
+     * @return The path to the image file.
+     */
 	@Override
     protected String getImagePath() {
         return "_OOP_develop_gradle/img/rectorNobg.png";

@@ -10,10 +10,18 @@ import javafx.scene.layout.Pane;
 
 public class TutorView extends ElementView{
 	
+	/**
+     * Constructor for TutorView.
+     * @param gridPane The GridPane where the tutor view will be added.
+     */
 	public TutorView(GridPane gridPane) {
         super(gridPane);
     }
 
+	/**
+     * Retrieves the path to the image file representing the tutor.
+     * @return The path to the image file.
+     */
 	@Override
     protected String getImagePath() {
         return "_OOP_develop_gradle/img/tutorNobg.png"; 
