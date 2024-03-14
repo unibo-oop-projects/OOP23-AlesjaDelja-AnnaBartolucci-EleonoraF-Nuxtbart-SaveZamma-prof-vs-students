@@ -209,8 +209,8 @@ public class GamePlayController {
 						        	
 						        	// il prof che viene colpito lo faccio già nel ciclo degli studenti
 				        	  		if(prof.getHealthPointsProf() <= 0){
-						                gameModel.setMatchScore(gameModel.getMatchScore() - prof.getcostProfessor());
-				        	  			prof.destroyProf();
+						                gameModel.setMatchScore(gameModel.getMatchScore() - prof.getCostProfessor());
+				        	  			//TODO prof è morto destroy 
 				        	  			profIterator.remove();
 				        	  		}else {
 				        	  			// se è in vita ed è tempo di sparare: creo nuovo bullet e sparo
@@ -222,11 +222,11 @@ public class GamePlayController {
 				        	  					gameModel.setBulletListNormal(bulletNormalList);
 				        	  				}else if(prof instanceof NormalProfessor) {
 				        	  					NormalProfessor normalProfessor = (NormalProfessor) prof;
-				        	  		            bulletNormalList.add(new Bullet(normalProfessor.getBulletSpeed(), prof.getDamageProf(), prof.getPositionProf(), normalProfessor.getTutorbulletname(), normalProfessor.getTutorBullet().getPathImgBullet()));
+				        	  		            bulletNormalList.add(new Bullet(normalProfessor.getBulletSpeed(), prof.getDamageProf(), prof.getPositionProf(), normalProfessor.getNormalprofbulletname(), normalProfessor.getNormalProfBullet().getPathImgBullet()));
 				        	  		        
 				        	  				}else{
 				        	  					Rector curr = (Rector) prof;
-				        	  					bulletDiagonalList.add(new Bullet(1, prof.getDamageProf(), prof.getPositionProf(), curr.getTutorbulletname(), curr.getRectorBullet().getPathImgBullet()));
+				        	  					bulletDiagonalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf(), curr.getRectorbulletname(), curr.getRectorBullet().getPathImgBullet()));
 				        	  					gameModel.setBulletListDiagonal(bulletDiagonalList);
 				        	  				}
 				        	  			}
@@ -234,7 +234,7 @@ public class GamePlayController {
 			
 						        } else {
 						            // TODO
-						        	prof.destroyProf();    // Il professore è morto
+						        	    // Il professore è morto
 						            profIterator.remove(); // Rimuovi il professore morto dalla lista
 						        }
 						        
