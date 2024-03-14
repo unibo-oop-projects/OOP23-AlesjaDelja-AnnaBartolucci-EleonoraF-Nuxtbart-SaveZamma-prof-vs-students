@@ -11,8 +11,6 @@ public class ProfessorTest {
 
     private Professor professor;
     private Elements<Integer, Integer> position;
-
-    @Before
     public void setUp() {
         position = new Elements<>(0, 0);
         professor = new Professor(50, 100, position, "imagePath", 10, 1);
