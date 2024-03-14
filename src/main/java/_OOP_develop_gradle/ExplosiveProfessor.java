@@ -2,11 +2,11 @@ package _OOP_develop_gradle;
 
 import _OOP_develop_gradle.model.Professor;
 
-public class ExplosiveProfessor extends Professor{
+/*public class ExplosiveProfessor extends Professor{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	/*private static final long serialVersionUID = 1L;
 	private int explosionDamage;
 	private boolean hasExploded;
 	
@@ -27,4 +27,4 @@ public class ExplosiveProfessor extends Professor{
 	public void explode() {
 		hasExploded = true;
 	}
-}
+}*/

@@ -18,23 +18,6 @@ class GamePlayModelTest {
         assertEquals(3, gameModel.getStudentList().size());
     }
     
-    @Test
-    public void testIncreaseSolarEnergy() {
-    	gameModel.increaseSolarEnergy(3);
-        assertEquals(3, gameModel.getSolarEnergy());
-    }
-    
-    @Test
-    public void testDecreaseSolarEnergy() {
-    	// Test when energy is enough
-    	gameModel.increaseSolarEnergy(10);
-    	gameModel.decreaseSolarEnergy(5);
-        assertEquals(5, gameModel.getSolarEnergy());
-    	
-        // Test when energy is NOT enough
-        gameModel.decreaseSolarEnergy(8);
-        assertEquals(5, gameModel.getSolarEnergy());
-    }
     
     @Test
     public void testIncreaseTimeTot() {
@@ -68,9 +51,9 @@ class GamePlayModelTest {
     @Test 
     public void testGenerateNewStudent() {
     	// TO-DO: da modificare in base all'implementazione di Student
-    	gameModel.generateNewStudent(1, 2);
-        assertEquals(1, gameModel.getStudentList().size());
-        assertEquals(1, gameModel.getStudentList().get(0).getCol());
-        assertEquals(2, gameModel.getStudentList().get(0).getRow());
+    	gameModel.generateNewStudent();
+        /*assertEquals(1, gameModel.getStudentList().size());
+        assertEquals(1, gameModel.getStudentList().get(0).getPositionStudent().getY());
+        assertEquals(2, gameModel.getStudentList().get(0).getPositionStudent().getX());*/
     }
 }

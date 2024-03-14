@@ -4,30 +4,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import _OOP_develop_gradle.model.Professor;
 import _OOP_develop_gradle.model.Student;
-import _OOP_develop_gradle.Bullet;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public class GamePlayController {
 	
 	private static GamePlayController instance;
 	public boolean gameStatus;
-	public static String PATH_BULLET_NORM = ""; // TODO aggiungere path a bullet
-	public static String PATH_BULLET_DIAG = ""; // TODO aggiungere path a bullet
-	public static int TUTOR_ID = 1;
-	public static int NORMALPROF_ID = 2;
 	public static int SCORE_INIT = 20;
 	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!!
 	public static int TEMPO_TOT_INIT = 120; // sarebbe da mettere 120 che sono 2 minuti, per ora 10 sec per fare le prove
@@ -41,8 +32,16 @@ public class GamePlayController {
 	public List<NormalProfessor> normalPInGame = new ArrayList<>(); 
 	public List<Rector> rectorInGame = new ArrayList<>(); 
 	public List<Student> studInGame = new ArrayList<>(); // lista degli studenti in partita
-	private AnchorPane mainMenu;
-
+	private List<List<? extends Professor>> allProfessors = new ArrayList<>();
+	
+	public void addAllLists(List<Tutor> tutorInGame, List<NormalProfessor> normalPInGame, List<Rector> rectorInGame) {
+		allProfessors.clear();
+	    allProfessors.add(tutorInGame);
+    	allProfessors.add(tutorInGame);
+        allProfessors.add(normalPInGame);
+        allProfessors.add(rectorInGame);
+    }
+	
     public void initData(GamePlayView gamePlayView, AnchorPane mainMenu) {
     	NUM_STUD_ONDATA = 1;
     	gameStatus = true;
@@ -55,8 +54,10 @@ public class GamePlayController {
         normalPInGame = gameModel.getNormalProfList();
         rectorInGame = gameModel.getRectorList();
         studInGame = gameModel.getStudentList();
+        
+        addAllLists(tutorInGame, normalPInGame, rectorInGame);
+        
         this.gamePlayView = gamePlayView; // Assegna il riferimento dell'oggetto passato al metodo alla variabile gamePlayView
-        this.mainMenu = mainMenu; // Salva il riferimento a MainMenu
         
         try {
 			initGamePlay();
@@ -71,6 +72,7 @@ public class GamePlayController {
         }
     }
 
+    
 	public void initGamePlay() throws IOException {
     	
     	if(gameStatus) {
@@ -85,6 +87,8 @@ public class GamePlayController {
 		    bulletNormalList = gameModel.getBulletListNormal();
 	        bulletDiagonalList = gameModel.getBulletListDiagonal();
 		    
+	        
+	        addAllLists(tutorInGame, normalPInGame, rectorInGame);
 		    //update view
 		    /*synchronized(studInGame){
 		    	// TODO sync con tutti gli altri ??
@@ -93,7 +97,7 @@ public class GamePlayController {
 		    }*/
 		    // Sincronizza l'accesso alle liste condivise
             synchronizeLists(() -> {
-                gamePlayView.updatePositions(studInGame, profInGame, bulletNormalList, bulletDiagonalList);
+                gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
             });
             
 		    System.out.println("settato nuvo gruppo di studenti");
@@ -128,7 +132,7 @@ public class GamePlayController {
 					// Sincronizza l'accesso alle liste condivise
 	                synchronizeLists(() -> {
 	                	advanceBullets(); // così dovrebbero andare più veloci
-	                    gamePlayView.updatePositions(studInGame, profInGame, bulletNormalList, bulletDiagonalList);
+	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                });
 					
 				    Iterator<Student> studentIterator = gameModel.getStudentList().iterator();
@@ -142,7 +146,9 @@ public class GamePlayController {
 				        	
 				        	if (collisionBulletAndStudent(student, bulletNormalList) || collisionBulletAndStudent(student, bulletDiagonalList)) {
 				        		if (student.getHealthStudent() <= 0) {
-				        			gameModel.setMatchScore(student.destroyStudents(gameModel.getMatchScore()));
+				        			// TODO 
+				        			System.out.println("Studente è morto e va tolto dalla View");
+				        			// gameModel.setMatchScore(student.destroyStudents(gameModel.getMatchScore()));
 				        			studentIterator.remove();
 				        		}
 				        	}
@@ -151,7 +157,7 @@ public class GamePlayController {
 				        	//controllo se prof è presente nella cella dove sono
 				        	//se sì faccio collision e colpisco il prof
 				        	//sennò avanzo 
-				        	if (collisionProfAndStudent(student, profInGame)) {
+				        	if (collisionProfAndStudent(student, allProfessors)) {
 				        		//chiamo la view per infliggere attacco dello studente
 				        		// TODO metodo dell'ale
 				        	}else {
@@ -166,7 +172,7 @@ public class GamePlayController {
 				            if (student.getPositionStudent().getY() == 0) {
 				            	 // se nessun prof è presente in quella posizione ha perso
 				            	 // sennò si colpice il prof 
-				            	if (collisionProfAndStudent(student, profInGame)) {
+				            	if (collisionProfAndStudent(student, allProfessors)) {
 				            		// TODO metodo dell'ale
 				            		break;
 				            	}
@@ -181,66 +187,75 @@ public class GamePlayController {
 				                break;
 				            }
 				        } else {
-				            
-				        	gameModel.setMatchScore(student.destroyStudents(gameModel.getMatchScore())); // Lo studente è morto
+				        	// TODO 
+				        	System.out.println("Studente è morto e va tolto dalla View");
+				        	// gameModel.setMatchScore(student.destroyStudents(gameModel.getMatchScore())); // Lo studente è morto
 				            studentIterator.remove(); // Rimuovi lo studente morto dalla lista
 				        }
 				        
 				    }
 				    
 				    advanceBullets();
-				    // TODO Lista unica con dentro le tre liste dei prof diversi
-				    // Logica per professore
-				   Iterator<Professor> profIterator = gameModel.getProfList().iterator();
-				    while (profIterator.hasNext()) {
-				        Professor prof = profIterator.next();
-	
-				        // Check se professor è in vita
-				        if (profInGame.contains(prof)) {
-				        	
-				        	// il prof che viene colpito lo faccio già nel ciclo degli studenti
-		        	  		if(prof.getHealthPointsProf() <= 0){
-				                gameModel.setMatchScore(gameModel.getMatchScore() - prof.getcostProfessor());
-		        	  			prof.destroyProf();
-		        	  			profIterator.remove();
-		        	  		}else {
-		        	  			// se è in vita ed è tempo di sparare: creo nuovo bullet e sparo
-		        	  			// TODO decidere ogni quanto far sparare --> per ora ogni 7 sec
-		        	  			if(gameModel.getTimeTot() % 7 == 0) {
-		        	  				if(prof.getIDProf() == TUTOR_ID || prof.getIDProf() == NORMALPROF_ID) {
-		        	  					//generi un bullet normale e lo aggiungi alla lista
-		        	  					// TODO ELE deve aggiungere getter e setter nei prof tipo tutor della speed e del bulletName 
-		        	  					bulletNormalList.add(new Bullet(1, prof.getDamageProf(), prof.getPositionProf(), "bulletName", PATH_BULLET_NORM));
-		        	  					gameModel.setBulletListNormal(bulletNormalList);
-		        	  				}else {
-		        	  					// generi un bullet diagonal e lo aggiungi alla sua lista
-		        	  					bulletDiagonalList.add(new Bullet(1, prof.getDamageProf(), prof.getPositionProf(), "bulletName", PATH_BULLET_DIAG));
-		        	  					gameModel.setBulletListDiagonal(bulletDiagonalList);
-		        	  				}
-		        	  			}
-		        	  		}
-	
-				            // Controllo se sono in vita ancora tutti i prof
-				            if (gameModel.getProfList().isEmpty()) {
-				                // Utente ha perso, aggiorna lo stato del gioco
-				                gameStatus = false;
-				                try {
-									userLost();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-				                break;
-				            }
-				        } else {
-				            
-				        	prof.destroyProf();    // Il professore è morto
-				            profIterator.remove(); // Rimuovi il professore morto dalla lista
-				        }
-				    }
-	
+				    
+				    addAllLists(gameModel.getTutorList(), gameModel.getNormalProfList(), gameModel.getRectorList());
+				   // Logica per professori
+				   for (List<? extends Professor> professorList : allProfessors) {
+		                Iterator<? extends Professor> profIterator = professorList.iterator();
+						    while (profIterator.hasNext()) {
+						        Professor prof = profIterator.next();
+			
+						        // Check se professor è in vita
+						        if (prof.isAliveProf()) {
+						        	
+						        	// il prof che viene colpito lo faccio già nel ciclo degli studenti
+				        	  		if(prof.getHealthPointsProf() <= 0){
+						                gameModel.setMatchScore(gameModel.getMatchScore() - prof.getcostProfessor());
+				        	  			prof.destroyProf();
+				        	  			profIterator.remove();
+				        	  		}else {
+				        	  			// se è in vita ed è tempo di sparare: creo nuovo bullet e sparo
+				        	  			// TODO decidere ogni quanto far sparare --> per ora ogni 7 sec
+				        	  			if(gameModel.getTimeTot() % 7 == 0) {
+				        	  				if(prof instanceof Tutor ) {
+				        	  					Tutor curr = (Tutor) prof;
+				        	  					bulletNormalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf(), Tutor.getTutorbulletname(), curr.getTutorBullet().getPathImgBullet()));
+				        	  					gameModel.setBulletListNormal(bulletNormalList);
+				        	  				}else if(prof instanceof NormalProfessor) {
+				        	  					NormalProfessor normalProfessor = (NormalProfessor) prof;
+				        	  		            bulletNormalList.add(new Bullet(normalProfessor.getBulletSpeed(), prof.getDamageProf(), prof.getPositionProf(), normalProfessor.getTutorbulletname(), normalProfessor.getTutorBullet().getPathImgBullet()));
+				        	  		        
+				        	  				}else{
+				        	  					Rector curr = (Rector) prof;
+				        	  					bulletDiagonalList.add(new Bullet(1, prof.getDamageProf(), prof.getPositionProf(), curr.getTutorbulletname(), curr.getRectorBullet().getPathImgBullet()));
+				        	  					gameModel.setBulletListDiagonal(bulletDiagonalList);
+				        	  				}
+				        	  			}
+				        	  		}
+			
+						        } else {
+						            // TODO
+						        	prof.destroyProf();    // Il professore è morto
+						            profIterator.remove(); // Rimuovi il professore morto dalla lista
+						        }
+						        
+						        // Controlla se sono in vita ancora tutti i professori
+						        if (allProfessors.isEmpty()) {
+						            // Utente ha perso, aggiorna lo stato del gioco
+						            gameStatus = false;
+						            try {
+						                userLost();
+						            } catch (IOException e) {
+						                e.printStackTrace();
+						            }
+						            break;
+						        }
+						        
+						    }
+				   }
+				}
 				    // Sincronizza l'accesso alle liste condivise
 	                synchronizeLists(() -> {
-	                    gamePlayView.updatePositions(studInGame, profInGame, bulletNormalList, bulletDiagonalList);
+	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                });
 				    
 				    // Introdotto un ritardo per la visibilità del gioco
@@ -253,12 +268,12 @@ public class GamePlayController {
 					}
 				    
 				    sleep(2000);
-				}
+				
+    	
 			}).start();
-		    
-			
-		}
-    }
+	   }
+	}
+    	
     
     /**
      * Executes an action within a synchronized section, ensuring safe access to the 
@@ -269,7 +284,7 @@ public class GamePlayController {
      */
     private void synchronizeLists(Runnable action) {
         synchronized (studInGame) {
-            synchronized (profInGame) {
+            synchronized (allProfessors) {
                 synchronized (bulletNormalList) {
                     synchronized (bulletDiagonalList) {
                         action.run();
@@ -384,21 +399,26 @@ public class GamePlayController {
 	            .filter(bullet -> bullet.getPosition().equals(currentStud.getPositionStudent()))
 	            .peek(bullet -> {
 	                currentStud.takeDamageStudents(bullet.getBulletDamage());
-	                //bullet.destroyBullet(); // TODO ELE da aggiungere
-	                System.out.println("detruy bullet");
+	                //bullet.destroyBullet(); 
+	                // TODO 
+	                System.out.println("destroy bullet");
 	            })
 	            .count() > 0;
 	}
 	
 	 
-	public boolean collisionProfAndStudent(Student currentStud, List<Professor> profList) {
-		 return profList.stream()
-		            .filter(prof -> prof.getPositionProf().equals(currentStud.getPositionStudent()))
-		            .map(prof -> {
-		                prof.receiveDamageProf(currentStud.getDamageStudent());
-		                return prof;})
-		            .findFirst()
-		            .isPresent();
+	public boolean collisionProfAndStudent(Student currentStud, List<List<? extends Professor>> profList) {
+		for (List<? extends Professor> professors : profList) {
+	        Optional<? extends Professor> result = professors.stream()
+	                .filter(prof -> prof.getPositionProf().equals(currentStud.getPositionStudent()))
+	                .findFirst();
+	        if (result.isPresent()) {
+	            Professor professor = result.get();
+	            professor.receiveDamageProf(currentStud.getDamageStudent());
+	            return true;
+	        }
+	    }
+	    return false;
 	}
 	
 }

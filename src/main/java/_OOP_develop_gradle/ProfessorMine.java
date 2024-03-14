@@ -1,6 +1,6 @@
 package _OOP_develop_gradle;
 
-public class ProfessorMine extends ExplosiveProfessor{
+public class ProfessorMine {//extends ExplosiveProfessor{
 
 	private static final long serialVersionUID = 1L;
 	public static final int PROFESSORMINE_HIT_THRESHOLD = 15;
@@ -12,7 +12,7 @@ public class ProfessorMine extends ExplosiveProfessor{
 	private boolean isPrimed;
 	
 	public ProfessorMine(String path, int x, int y, int healthPoints) {
-		super(path, PROFESSORMINE_HIT_THRESHOLD, PROFESSORMINE_BUY_THRESHOLD, x, y, PROFESSORMINE_EXPLOSION_DAMAGE, healthPoints);
+		//super(path, PROFESSORMINE_HIT_THRESHOLD, PROFESSORMINE_BUY_THRESHOLD, x, y, PROFESSORMINE_EXPLOSION_DAMAGE, healthPoints);
 		countDownStartToExplode = TURNS_UNTIL_EXPLOSION;
 		setPrimed(false);
 	}
@@ -51,7 +51,7 @@ public class ProfessorMine extends ExplosiveProfessor{
 	 */
 	public String toString() {
 		String Status= "";
-		Status = "PM = " + this.getHitThreshold();
+		//Status = "PM = " + this.getHitThreshold();
 		return Status;
 	}
 }
