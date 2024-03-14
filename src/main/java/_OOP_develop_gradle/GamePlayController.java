@@ -58,7 +58,7 @@ public class GamePlayController {
     	gameStatus = true;
         gameModel = new GamePlayModel();
         gameModel.setTimeTot(TEMPO_TOT_INIT);
-        gameModel.setMatchScore(ENERGY_INIT);
+        gameModel.setEnergy(ENERGY_INIT);
         bulletNormalList = gameModel.getBulletListNormal();
         bulletDiagonalList = gameModel.getBulletListDiagonal();
         tutorInGame = gameModel.getTutorList();
@@ -214,7 +214,7 @@ public class GamePlayController {
 			
 					        	// il prof che viene colpito lo faccio già nel ciclo degli studenti
 			        	  		if(prof.getHealthPointsProf() <= 0){
-					                gameModel.setMatchScore(gameModel.getMatchScore() - prof.getCostProfessor());
+					                gameModel.setEnergy(gameModel.getEnergy() - prof.getCostProfessor());
 			        	  			
 					                removeProfessorView(prof);
 			        	  			profIterator.remove();

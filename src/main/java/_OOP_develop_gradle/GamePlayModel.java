@@ -10,7 +10,7 @@ import _OOP_develop_gradle.model.Student;
  */
 public class GamePlayModel {
 
-	    private int matchScore; // Punteggio partita
+	    private int energy; // Punteggio partita
 	    private int timeTot; // Tempo di gioco
 	    private List<Student> studentList; // Lista di studenti presenti
 	    private List<Tutor> tutorList; // Lista di tutor presenti
@@ -20,7 +20,7 @@ public class GamePlayModel {
 	    private List<Bullet> bulletListDiagonal;
 	    
 	    public GamePlayModel() {
-	        this.matchScore = 0;
+	        this.energy = 0;
 	        this.timeTot = 0;
 	        this.studentList = new ArrayList<>();
 	        this.tutorList = new ArrayList<>();
@@ -63,19 +63,19 @@ public class GamePlayModel {
 		}
 
 		/**
-	     * Retrieves the match score.
-	     * @return The match score.
+	     * Retrieves the energy.
+	     * @return The energy.
 	     */
-		public int getMatchScore() {
-			return matchScore;
+		public int getEnergy() {
+			return energy;
 		}
 
 		 /**
-	     * Sets the match score.
-	     * @param matchScore The match score.
+	     * Sets the energy.
+	     * @param energy The energy.
 	     */
-		public void setMatchScore(int matchScore) {
-			this.matchScore = matchScore;
+		public void setEnergy(int matchScore) {
+			this.energy = matchScore;
 		}
 
 		 /**
@@ -216,17 +216,17 @@ public class GamePlayModel {
 	     * Increases the match score by a specified amount.
 	     * @param amount The amount to increase the match score by.
 	     */
-	    public void increaseMatchScore(int amount) {
-	    	matchScore += amount;
+	    public void increaseEnergy(int amount) {
+	    	energy += amount;
 	    }
 	    /**
 	     * Decreases the match score by a specified amount.
 	     * @param amount The amount to decrease the match score by.
 	     * @return True if the match score was successfully decreased, false otherwise.
 	     */
-	    public boolean decreaseMatchScore(int amount) {
-	        if (matchScore >= amount) {
-	        	matchScore -= amount;
+	    public boolean decreaseEnergy(int amount) {
+	        if (energy >= amount) {
+	        	energy -= amount;
 	        	return true;
 	        } 
 	        return false;
