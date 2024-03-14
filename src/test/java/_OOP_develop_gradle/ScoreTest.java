@@ -8,7 +8,6 @@ import org.junit.Before;
 import javafx.scene.control.Label;
 import org.junit.Test;*/
 import _OOP_develop_gradle.model.Score;
-import javafx.scene.control.Label;
 
 public class ScoreTest {
 
