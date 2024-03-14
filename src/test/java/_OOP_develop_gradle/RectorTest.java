@@ -1,19 +1,13 @@
 package _OOP_develop_gradle;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 import _OOP_develop_gradle.Elements;
 
 public class RectorTest {
 
-    private Rector rector;
-
-    public void setUp() {
-        rector = new Rector(0, 0);
-    }
+    private Rector rector= new Rector(0, 0);
 
     @Test
     public void testGetRectorBullet() {

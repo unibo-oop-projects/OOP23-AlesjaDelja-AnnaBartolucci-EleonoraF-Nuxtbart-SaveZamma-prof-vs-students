@@ -3,6 +3,7 @@ package _OOP_develop_gradle;
 import java.util.List;
 
 import _OOP_develop_gradle.model.Professor;
+import _OOP_develop_gradle.model.Score;
 import _OOP_develop_gradle.model.Student;
 import _OOP_develop_gradle.view.BulletView;
 import _OOP_develop_gradle.view.ElementView;
@@ -60,17 +61,20 @@ public class GamePlayView {
 
     public GamePlayController gameController;
     public GamePlayModel gamePlayModel;
+    
     private List<Tutor> tutorInGrid = new ArrayList<>(); // Lista di tutor presenti
     private List<NormalProfessor> normalProfInGrid = new ArrayList<>(); // Lista di normal p presenti
     private List<Rector> rectorInGrid = new ArrayList<>(); // Lista di rector presenti
     private List<Student> studentInGrid = new ArrayList<>(); // Lista di studenti presenti
+    private List<Bullet>  bulletInGrid = new ArrayList<>();
+    List<List<? extends Professor>> profsInGrid = new ArrayList<>();
+    
     private List<StudentView> studentViewList = new ArrayList<>();
     private List<TutorView> tutorViewList = new ArrayList<>();
     private List<NormalProfView> normalProfessorViewList = new ArrayList<>();
     private List<RectorView> rectorViewList = new ArrayList<>();
     private List<BulletView>  bulletViewList = new ArrayList<>();
-    private List<Bullet>  bulletInGrid = new ArrayList<>();
-    List<List<? extends Professor>> profsInGrid = new ArrayList<>();
+    
     
     public AnimationTimer  timer;
     public int timeTot ;// Partiamo da 2 minuti, quindi 120 secondi
@@ -80,7 +84,37 @@ public class GamePlayView {
     public boolean timerStop = false;
     public int profChoosen;
     
-    public void setController(GamePlayController gameController) {
+    public List<StudentView> getStudentViewList() {
+		return studentViewList;
+	}
+	public void setStudentViewList(List<StudentView> studentViewList) {
+		this.studentViewList = studentViewList;
+	}
+	public List<TutorView> getTutorViewList() {
+		return tutorViewList;
+	}
+	public void setTutorViewList(List<TutorView> tutorViewList) {
+		this.tutorViewList = tutorViewList;
+	}
+	public List<NormalProfView> getNormalProfessorViewList() {
+		return normalProfessorViewList;
+	}
+	public void setNormalProfessorViewList(List<NormalProfView> normalProfessorViewList) {
+		this.normalProfessorViewList = normalProfessorViewList;
+	}
+	public List<RectorView> getRectorViewList() {
+		return rectorViewList;
+	}
+	public void setRectorViewList(List<RectorView> rectorViewList) {
+		this.rectorViewList = rectorViewList;
+	}
+	public List<BulletView> getBulletViewList() {
+		return bulletViewList;
+	}
+	public void setBulletViewList(List<BulletView> bulletViewList) {
+		this.bulletViewList = bulletViewList;
+	}
+	public void setController(GamePlayController gameController) {
         this.gameController = gameController;
     }
     @FXML
@@ -104,7 +138,7 @@ public class GamePlayView {
                     	timeTot = gamePlayModel.getTimeTot();
                     	if (timeTot > 0) {
                     		updateTempoLabel();
-                    		updateMatchScoreLabel(); // TODO update del match con anche il tempo ?
+                    		updateEnergyLabel();
                             lastTimeUpdate = now;
                     	}else {
                         	timer.stop();
@@ -137,10 +171,14 @@ public class GamePlayView {
         
 	}
 	
-	public void updateMatchScoreLabel() {
-		matchScoreLabel.setText(String.format("%d", gamePlayModel.getMatchScore()));
+	public void updateEnergyLabel() {
+		energyLabel.setText(String.format("%d", gamePlayModel.getEnergy()));
 	}
     
+	public void updateMatchScoreLabel(Score score) {
+		score.updateScore(matchScoreLabel);
+		
+	}
 	public void updatePositions(List<Student> studentList, List<List<? extends Professor>> profList, List<Bullet> bulletListNormal, List<Bullet> bulletList){
 		Platform.runLater(() -> {
 			
@@ -201,46 +239,15 @@ public class GamePlayView {
 	    	}
     }
 
-	
-	public void removePosition(List<StudentView> students, List<? extends ElementView> professors, List<BulletView> bulletList, List<BulletView> bulletList2) {
+	public void removePosition(List<? extends ElementView> elementsToRemove) {
 	    Platform.runLater(() -> {
-	        removeStudents(students);
-	        removeProfessors(professors);
-	        removeBullets(bulletList);
-	        removeBullets(bulletList2);
+	        for (ElementView elem : elementsToRemove) {
+	            elem.removeElement();
+	        }
 	    });
 	}
-
-	private void removeStudents(List<StudentView> students) {
-		//studentInGrid = studentList;
-	    for (StudentView stud : students) {
-	    	stud.removeElement();
-	    	//lawn_grid.getChildren().remove(stud.getImageStud(stud));
-	    }
-	}
-
-	private void removeProfessors(List<? extends ElementView> professors) {
-	    for (ElementView elem : professors) {
-	        if (elem instanceof TutorView) {
-	        	TutorView tutor = (TutorView) elem;
-	        	tutor.removeElement();
-	        } else if (elem instanceof NormalProfView) {
-	        	NormalProfView normProf = (NormalProfView) elem;
-	        	normProf.removeElement();
-	        }else if (elem instanceof RectorView) {
-	        	RectorView rector = (RectorView) elem;
-	        	rector.removeElement();
-	        }
-	    }
-	}
 	
-	private void removeBullets(List<BulletView> bulletList) {
-	    for (BulletView bullet : bulletList) {
-	    	bullet.removeElement();
-	    }
-	}
-    
-    /**
+	/**
      * Function that handle the choice of a professor type and put it on the lawn grid
      * @param event
      */
@@ -259,7 +266,7 @@ public class GamePlayView {
 	    				Tutor tutornew = new Tutor(columnIndex, rowIndex);
 	    				Bullet tutorBullet = tutornew.tutorBullet;
 	    				
-	    				if(tutornew.getCostProfessor() <= gamePlayModel.getMatchScore()) {
+	    				if(tutornew.getCostProfessor() <= gamePlayModel.getEnergy()) {
 	    					gamePlayModel.getTutorList().add(tutornew);
 	    					tutorInGrid.add(tutornew);
 	    					gamePlayModel.getBulletListNormal().add(tutorBullet);
@@ -270,14 +277,14 @@ public class GamePlayView {
 	    					
 	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
 	    	    			
-	    	    			gamePlayModel.decreaseMatchScore(tutornew.getCostProfessor());
+	    	    			gamePlayModel.decreaseEnergy(tutornew.getCostProfessor());
 	    	    		}
 	    				break;
 	    			case 2:
 	    				NormalProfessor normalProfNew = new NormalProfessor(columnIndex, rowIndex);
 	    				Bullet nProfBullet = normalProfNew.normalProfBullet;
 	    				
-	    				if(normalProfNew.getCostProfessor() <= gamePlayModel.getMatchScore()) {
+	    				if(normalProfNew.getCostProfessor() <= gamePlayModel.getEnergy()) {
 	    					gamePlayModel.getNormalProfList().add(normalProfNew);
 	    					normalProfInGrid.add(normalProfNew);
 	    					gamePlayModel.getBulletListNormal().add(nProfBullet); 
@@ -289,14 +296,14 @@ public class GamePlayView {
 	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
 	    	    			
 	    	    			
-	    	    			gamePlayModel.decreaseMatchScore(normalProfNew.getCostProfessor());
+	    	    			gamePlayModel.decreaseEnergy(normalProfNew.getCostProfessor());
 	    	    		}
 	    				break;
 	    			case 3:
 	    				Rector rectornew = new Rector(columnIndex, rowIndex);
 	    				Bullet rectorBullet = rectornew.rectorBullet;
 	    				
-	    				if(rectornew.getCostProfessor() <= gamePlayModel.getMatchScore()) {
+	    				if(rectornew.getCostProfessor() <= gamePlayModel.getEnergy()) {
 	    					gamePlayModel.getRectorList().add(rectornew);
 	    					rectorInGrid.add(rectornew);
 	    					gamePlayModel.getBulletListDiagonal().add(rectorBullet);
@@ -308,7 +315,7 @@ public class GamePlayView {
 	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
 	    	    			
 	    	    			// diminuisco la moneta tot 
-	    	    			gamePlayModel.decreaseMatchScore(rectornew.getCostProfessor());
+	    	    			gamePlayModel.decreaseEnergy(rectornew.getCostProfessor());
 	    	    		}
 	    				break;
 	    			default:
@@ -358,7 +365,7 @@ public class GamePlayView {
      * @param rowIndex
      * @return TRUE if prof is in the cell otherwise FALSE
      */
-    // TODO da controllare e da mettere per tutte le tipologie di professori
+    // TODO da controllare e da mettere per tutte le tipologie di professori e se non c'è già uno studente
 	private boolean isProfInCell(int columnIndex, int rowIndex) {
 		return rectorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex);
 	}
