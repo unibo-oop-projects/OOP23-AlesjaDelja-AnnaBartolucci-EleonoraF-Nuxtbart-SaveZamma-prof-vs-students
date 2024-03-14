@@ -14,7 +14,16 @@ public class Professor {
     public String pathImgP;
     public int id;
     
-    // Constructor
+    /**
+     * Constructor for creating a Professor object.
+     *
+     * @param damage The damage inflicted by the professor.
+     * @param healthPoints The health points of the professor.
+     * @param position The position of the professor on the game grid.
+     * @param pathImgP The path to the image representing the professor.
+     * @param costProfessor The cost to buy the professor.
+     * @param id The unique identifier of the professor.
+     */
     public Professor(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImgP, int costProfessor, int id) {
         this.damage = damage;
         this.healthPoints = healthPoints;
