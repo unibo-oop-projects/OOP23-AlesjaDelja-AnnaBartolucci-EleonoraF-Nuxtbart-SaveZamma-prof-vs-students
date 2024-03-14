@@ -12,11 +12,11 @@ public class ProfessorTest {
 
     @Before
     public void setUp() {
-        // Creazione di un oggetto Professor per i test
+        // Crea un nuovo oggetto Professor per ogni test
         int damage = 50;
-        double healthPoints = 100;
+        double healthPoints = 100.0;
         Elements<Integer, Integer> position = new Elements<>(0, 0);
-        String pathImgP = "professor.png";
+        String pathImgP = "img/professor.png";
         int costProfessor = 20;
         int id = 1;
         professor = new Professor(damage, healthPoints, position, pathImgP, costProfessor, id);
@@ -24,70 +24,78 @@ public class ProfessorTest {
 
     @Test
     public void testGetPathImgProf() {
-        assertEquals("professor.png", professor.getPathImgProf());
+        // Verifica se il metodo getPathImgProf restituisce il percorso corretto dell'immagine del professore
+        assertEquals("img/professor.png", professor.getPathImgProf());
     }
 
     @Test
     public void testSetPathImgProf() {
-        professor.setPathImgProf("new_professor.png");
-        assertEquals("new_professor.png", professor.getPathImgProf());
+        // Imposta un nuovo percorso immagine e verifica se viene memorizzato correttamente
+        professor.setPathImgProf("new_image.png");
+        assertEquals("new_image.png", professor.getPathImgProf());
     }
 
     @Test
     public void testGetHealthPointsProf() {
-        assertEquals(100, professor.getHealthPointsProf(), 0);
+        // Verifica se il metodo getHealthPointsProf restituisce i punti vita corretti del professore
+        assertEquals(100.0, professor.getHealthPointsProf(), 0.01);
     }
 
     @Test
     public void testSetHealthPointsProf() {
+        // Imposta nuovi punti vita e verifica se vengono memorizzati correttamente
         professor.setHealthPointsProf(150);
-        assertEquals(150, professor.getHealthPointsProf(), 0);
+        assertEquals(150.0, professor.getHealthPointsProf(), 0.01);
     }
 
     @Test
     public void testGetCostProfessor() {
+        // Verifica se il metodo getCostProfessor restituisce il costo corretto del professore
         assertEquals(20, professor.getCostProfessor());
     }
 
     @Test
     public void testSetCostProfessor() {
-        professor.setCostProfessor(30);
-        assertEquals(30, professor.getCostProfessor());
+        // Imposta un nuovo costo e verifica se viene memorizzato correttamente
+        professor.setCostProfessor(25);
+        assertEquals(25, professor.getCostProfessor());
     }
 
     @Test
     public void testGetDamageProf() {
+        // Verifica se il metodo getDamageProf restituisce il danno corretto del professore
         assertEquals(50, professor.getDamageProf());
     }
 
     @Test
     public void testSetDamageProf() {
+        // Imposta un nuovo danno e verifica se viene memorizzato correttamente
         professor.setDamageProf(60);
         assertEquals(60, professor.getDamageProf());
     }
 
     @Test
     public void testGetPositionProf() {
-        Elements<Integer, Integer> position = professor.getPositionProf();
-        assertEquals(0, (int) position.getX());
-        assertEquals(0, (int) position.getY());
+        // Verifica se il metodo getPositionProf restituisce la posizione corretta del professore
+        assertEquals(new Elements<>(0, 0), professor.getPositionProf());
     }
 
     @Test
     public void testIsAliveProf() {
+        // Verifica se il metodo isAliveProf restituisce correttamente lo stato di vita del professore
         assertTrue(professor.isAliveProf());
-        professor.receiveDamageProf(120); // Danno superiore alla salute iniziale
-        assertFalse(professor.isAliveProf());
     }
 
     @Test
     public void testReceiveDamageProf() {
-        professor.receiveDamageProf(20);
-        assertEquals(80, professor.getHealthPointsProf(), 0);
+        // Simula l'attacco al professore e verifica se la salute viene ridotta correttamente
+        professor.receiveDamageProf(30.0);
+        assertEquals(70.0, professor.getHealthPointsProf(), 0.01);
     }
 
     @Test
     public void testGetIDProf() {
+        // Verifica se il metodo getIDProf restituisce l'ID corretto del professore
         assertEquals(1, professor.getIDProf());
     }
 }

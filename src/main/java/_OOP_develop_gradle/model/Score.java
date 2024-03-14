@@ -7,9 +7,6 @@ public class Score {
 	private static final int DEFAULT_RESET = 0;
 	private static final int DEFAULT_SCORE = 100;
 	private int score;
-	
-
-	
 
 	/**
 	 * Getter of score
