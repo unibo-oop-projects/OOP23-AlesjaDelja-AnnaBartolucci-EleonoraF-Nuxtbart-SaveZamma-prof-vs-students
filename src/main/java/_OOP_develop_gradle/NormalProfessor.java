@@ -8,7 +8,7 @@ public class NormalProfessor extends Professor{
 	public static final int NORMALPROF_BUY_COST = 20;
 	public static final int NORMALPROF_HEALTHPOINTS = 150;
 	public static final String NORMALPROF_IMG_PATH = "img/professor.png";
-	public static final String tutorBulletName = "tutorBullet";
+	public static final String normalProfBulletName = "normalProfBullet";
 	public static final int NormalProfName = 2;
 	public Bullet normalProfBullet;
 	public int bulletSpeed=2;
@@ -26,43 +26,50 @@ public class NormalProfessor extends Professor{
 	}
 
 	/**
-	 * Gets the Bullet of a Tutor
-	 * @return the Bullet of the Tutor
-	 */
-	public Bullet getTutorBullet() {
+     * Gets the bullet used by the NormalProfessor.
+     *
+     * @return The bullet used by the NormalProfessor.
+     */
+	public Bullet getNormalProfBullet() {
 		return normalProfBullet;
 	}
 
 	/**
-	 * Sets the Bullet of a Tutor
-	 * @param Bullet Value of the Tutor
-	 */
-	public void setTutorBullet(Bullet tutorBullet) {
-		this.normalProfBullet = tutorBullet;
+     * Sets the bullet used by the NormalProfessor.
+     *
+     * @param normalProfBullet The bullet to be used by the NormalProfessor.
+     */
+	public void setNormalProfBullet(Bullet normalProfBullet) {
+		this.normalProfBullet = normalProfBullet;
 	}
 
 	/**
-	 * Gets the BulletSpeed of a Tutor
-	 * @return the BulletSpeed of the Tutor
-	 */
+     * Gets the speed of the bullet used by the NormalProfessor.
+     *
+     * @return The speed of the bullet used by the NormalProfessor.
+     */
 	public int getBulletSpeed() {
 		return bulletSpeed;
 	}
 
 	/**
-	 * Sets the BulletSpeed of a Tutor
-	 * @param BulletSpeed Value of the Tutor
-	 */
+     * Sets the speed of the bullet used by the NormalProfessor.
+     *
+     * @param bulletSpeed The speed of the bullet used by the NormalProfessor.
+     */
 	public void setBulletSpeed(int bulletSpeed) {
 		this.bulletSpeed = bulletSpeed;
 	}
 
 	/**
-	 * Gets the BulletName of a Tutor
-	 * @return the BulletName of the Tutor
-	 */
-	public static String getTutorbulletname() {
-		return tutorBulletName;
+     * Gets the name of the bullet used by the NormalProfessor.
+     *
+     * @return The name of the bullet used by the NormalProfessor.
+     */
+	public static String getNormalprofbulletname() {
+		return normalProfBulletName;
 	}
+
+	
 
 }

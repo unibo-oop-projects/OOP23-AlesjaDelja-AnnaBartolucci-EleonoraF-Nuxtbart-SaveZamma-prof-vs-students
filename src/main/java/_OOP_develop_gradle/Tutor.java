@@ -21,25 +21,42 @@ public class Tutor extends Professor{
 		tutorBullet = new Bullet(bulletSpeed, TUTOR_HIT_DAMAGE, new Elements<Integer, Integer>(col, row), tutorBulletName, pathImgT);
 	}
 
-
+	/**
+	 * Gets the Bullet of a Tutor
+	 * @return the Bullet of the Tutor
+	 */
 	public Bullet getTutorBullet() {
 		return tutorBullet;
 	}
 
+	/**
+	 * Sets the Bullet of a Tutor
+	 * @param Bullet Value of the Tutor
+	 */
 	public void setTutorBullet(Bullet tutorBullet) {
 		this.tutorBullet = tutorBullet;
 	}
 
-
-
+	/**
+	 * Gets the BulletSpeed of a Tutor
+	 * @return the BulletSpeed of the Tutor
+	 */
 	public int getBulletSpeed() {
 		return bulletSpeed;
 	}
 
+	/**
+	 * Sets the BulletSpeed of a Tutor
+	 * @param BulletSpeed Value of the Tutor
+	 */
 	public void setBulletSpeed(int bulletSpeed) {
 		this.bulletSpeed = bulletSpeed;
 	}
 
+	/**
+	 * Gets the BulletName of a Tutor
+	 * @return the BulletName of the Tutor
+	 */
 	public static String getTutorbulletname() {
 		return tutorBulletName;
 	}
