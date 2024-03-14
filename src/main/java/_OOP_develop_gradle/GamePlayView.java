@@ -259,7 +259,7 @@ public class GamePlayView {
 	    				Tutor tutornew = new Tutor(columnIndex, rowIndex);
 	    				Bullet tutorBullet = tutornew.tutorBullet;
 	    				
-	    				if(tutornew.getcostProfessor() <= gamePlayModel.getMatchScore()) {
+	    				if(tutornew.getCostProfessor() <= gamePlayModel.getMatchScore()) {
 	    					gamePlayModel.getTutorList().add(tutornew);
 	    					tutorInGrid.add(tutornew);
 	    					gamePlayModel.getBulletListNormal().add(tutorBullet);
@@ -270,14 +270,14 @@ public class GamePlayView {
 	    					
 	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
 	    	    			
-	    	    			gamePlayModel.decreaseMatchScore(tutornew.getcostProfessor());
+	    	    			gamePlayModel.decreaseMatchScore(tutornew.getCostProfessor());
 	    	    		}
 	    				break;
 	    			case 2:
 	    				NormalProfessor normalProfNew = new NormalProfessor(columnIndex, rowIndex);
 	    				Bullet nProfBullet = normalProfNew.normalProfBullet;
 	    				
-	    				if(normalProfNew.getcostProfessor() <= gamePlayModel.getMatchScore()) {
+	    				if(normalProfNew.getCostProfessor() <= gamePlayModel.getMatchScore()) {
 	    					gamePlayModel.getNormalProfList().add(normalProfNew);
 	    					normalProfInGrid.add(normalProfNew);
 	    					gamePlayModel.getBulletListNormal().add(nProfBullet); 
@@ -289,14 +289,14 @@ public class GamePlayView {
 	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
 	    	    			
 	    	    			
-	    	    			gamePlayModel.decreaseMatchScore(normalProfNew.getcostProfessor());
+	    	    			gamePlayModel.decreaseMatchScore(normalProfNew.getCostProfessor());
 	    	    		}
 	    				break;
 	    			case 3:
 	    				Rector rectornew = new Rector(columnIndex, rowIndex);
 	    				Bullet rectorBullet = rectornew.rectorBullet;
 	    				
-	    				if(rectornew.getcostProfessor() <= gamePlayModel.getMatchScore()) {
+	    				if(rectornew.getCostProfessor() <= gamePlayModel.getMatchScore()) {
 	    					gamePlayModel.getRectorList().add(rectornew);
 	    					rectorInGrid.add(rectornew);
 	    					gamePlayModel.getBulletListDiagonal().add(rectorBullet);
@@ -308,7 +308,7 @@ public class GamePlayView {
 	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
 	    	    			
 	    	    			// diminuisco la moneta tot 
-	    	    			gamePlayModel.decreaseMatchScore(rectornew.getcostProfessor());
+	    	    			gamePlayModel.decreaseMatchScore(rectornew.getCostProfessor());
 	    	    		}
 	    				break;
 	    			default:
