@@ -2,6 +2,7 @@ package _OOP_develop_gradle;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 
 import _OOP_develop_gradle.model.Professor;
