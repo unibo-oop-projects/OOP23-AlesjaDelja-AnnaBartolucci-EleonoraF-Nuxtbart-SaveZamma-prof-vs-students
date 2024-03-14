@@ -13,12 +13,6 @@ import javafx.scene.control.Label;
 public class ScoreTest {
 
     private Score score = new Score();;
-
-    /*@Before
-    public void setUp() {
-        score = new Score();
-    }*/
-
     @Test
     public void testGetScore() {
         assertEquals(0, score.getScore());
@@ -34,14 +28,6 @@ public class ScoreTest {
     public void testAddScore() {
         score.addScore();
         assertEquals(100, score.getScore());
-    }
-
-    @Test
-    public void testUpdateScore() {
-        /*Label label = new Label();
-        score.setScore(75);
-        score.updateScore(label);
-        assertEquals("Score: 75", label.getText());*/
     }
 
     @Test
