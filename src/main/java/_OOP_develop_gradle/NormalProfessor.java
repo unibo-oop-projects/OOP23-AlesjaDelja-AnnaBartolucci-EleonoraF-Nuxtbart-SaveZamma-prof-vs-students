@@ -18,7 +18,10 @@ public class NormalProfessor extends Professor{
 		super(NORMALPROF_HIT_DAMAGE, NORMALPROF_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), NORMALPROF_IMG_PATH, NORMALPROF_BUY_COST, NormalProfName);
 		normalProfBullet = new Bullet(bulletSpeed, NORMALPROF_HIT_DAMAGE, new Elements<Integer, Integer>(col, row), tutorBulletName, pathImgNP);
 	}
-
+/**
+ * 
+ * @return
+ */
 	public Bullet getTutorBullet() {
 		return normalProfBullet;
 	}
