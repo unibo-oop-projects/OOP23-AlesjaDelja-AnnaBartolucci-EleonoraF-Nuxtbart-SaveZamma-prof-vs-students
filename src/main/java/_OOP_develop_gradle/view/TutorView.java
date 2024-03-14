@@ -7,7 +7,9 @@ import _OOP_develop_gradle.model.Professor;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
+/**
+ * A view class for displaying a tutor's image.
+ */
 public class TutorView extends ElementView{
 	
 	/**

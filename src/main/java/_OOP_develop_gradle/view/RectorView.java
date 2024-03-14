@@ -1,7 +1,9 @@
 package _OOP_develop_gradle.view;
 
 import javafx.scene.layout.GridPane;
-
+/**
+ * A view class for displaying a rector's image.
+ */
 public class RectorView extends ElementView{
 
 	/**
