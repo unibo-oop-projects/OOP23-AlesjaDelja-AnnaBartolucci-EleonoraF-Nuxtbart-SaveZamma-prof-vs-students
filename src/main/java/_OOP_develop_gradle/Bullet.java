@@ -20,6 +20,7 @@ public final class Bullet {
      * @param damage the damage of the bullet
      * @param pos    the position of the bullet
      * @param name   the name of the bullet
+     * @param pathImg   the name of the bullet
      */
     public Bullet(int speed, int damage, Elements<Integer, Integer> pos, String name, String pathImgB) {
         this.bulletSpeed = speed;
@@ -37,6 +38,7 @@ public final class Bullet {
         return currentPosition;
     }
 
+    //é da togliere???
     public boolean isAlive() {
         return true;
     }
