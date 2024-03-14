@@ -50,62 +50,62 @@ public class Professor {
 		 this.healthPoints = healthPoints; 
 	 }
 	 
-	public int getcostProfessor() {
-		return costProfessor;
-	}
+	 public int getcostProfessor() {
+		 return costProfessor;
+	 }
 	
-	public void setcostProfessor(int costProfessor) {
-		this.costProfessor = costProfessor;
-	}
-
-
-	/**
-	 * Gets the damage of a professor
-	 * @return the damage of the professor
-	 */
-	public int getDamageProf() {
+	 public void setcostProfessor(int costProfessor) {
+		 this.costProfessor = costProfessor;
+	 }
+	
+	
+	 /**
+	  * Gets the damage of a professor
+	  * @return the damage of the professor
+	  */
+	 public int getDamageProf() {
 		return damage;
-	}
+	 }
 	
-	/**
-	 * Sets the damage of a professor
-	 * @param the damage of the professor
-	 */
-	public void setDamagProf (int damage) {
+	 /**
+	  * Sets the damage of a professor
+	  * @param the damage of the professor
+	  */
+	 public void setDamagProf (int damage) {
 		this.damage = damage;
-	}
-
-	/**
-	 * Gets the position of the professors
-	 * @return the current position of the professors
-	 */
-	public Elements<Integer, Integer> getPositionProf() {
-		return position;
-	}
-
-	/**
-	 * Check if the professor is still alive
-	 * @return true if is alive, false if is not
-	 */
-	public boolean isAliveProf() {
-		return healthPoints > 0;
-	}
+	 }
 	
-	/**
-	 * Updates the health when he gets attacked by a student.
-	 * If the health is less or equal to 0 then the students is destroyed.
-	 * @param damageReceived Value of the damage of the student.
-	 */
-	public void receiveDamageProf(double damageReceived) {
-		healthPoints -= damageReceived;
-	}
+	 /**
+	  * Gets the position of the professors
+	  * @return the current position of the professors
+	  */
+	 public Elements<Integer, Integer> getPositionProf() {
+		 return position;
+	 } 
 	
-	/**
-	 * Gets the id of a professor
-	 * @return the id of a prof
-	 */
-	public int getIDProf() {
-		return id;
-	}
+	 /**
+	  * Check if the professor is still alive
+	  * @return true if is alive, false if is not
+	  */
+	 public boolean isAliveProf() {
+	 	return healthPoints > 0;
+	 }
+	
+	 /**
+	  * Updates the health when he gets attacked by a student.
+	  * If the health is less or equal to 0 then the students is destroyed.
+	  * @param damageReceived Value of the damage of the student.
+	  */
+	 public void receiveDamageProf(double damageReceived) {
+	 	healthPoints -= damageReceived;
+	 }
+	
+	 /**
+	  * Gets the id of a professor
+	  * @return the id of a prof
+	  */
+	 public int getIDProf() {
+	 	return id;
+	 }
 
 }
