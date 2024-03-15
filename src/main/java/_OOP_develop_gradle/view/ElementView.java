@@ -24,8 +24,8 @@ public class ElementView {
 
         imageView = new ImageView(image);
         // Impostare le dimensioni che siano addatte a quello che serve
-        imageView.setFitWidth(200); 
-        imageView.setFitHeight(200); 
+        imageView.setFitWidth(100); 
+        imageView.setFitHeight(50); 
         
      // Sets the position of student
         gridPane.add(imageView, positionElement.getX(),positionElement.getY());
