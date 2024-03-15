@@ -20,7 +20,7 @@ public class RectorView extends ElementView{
      */
 	@Override
     protected String getImagePath() {
-        return "_OOP_develop_gradle/img/rectorNobg.png";
+		return "/img/rectorNobg.png";
     }
 
 }

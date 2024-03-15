@@ -22,6 +22,6 @@ public class NormalProfView extends ElementView{
      */
 	@Override
     protected String getImagePath() {
-        return "_OOP_develop_gradle/img/professoressa2Nobg.png"; 
+		return "/img/professoressa2Nobg.png";
     }
 }

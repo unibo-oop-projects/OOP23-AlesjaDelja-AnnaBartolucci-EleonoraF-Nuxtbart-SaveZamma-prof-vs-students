@@ -1,4 +1,4 @@
-package _OOP_develop_gradle;
+package _OOP_develop_gradle.model;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

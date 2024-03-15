@@ -26,7 +26,7 @@ public class TutorView extends ElementView{
      */
 	@Override
     protected String getImagePath() {
-        return "_OOP_develop_gradle/img/tutorNobg.png"; 
+        return "/img/tutorNobg.png"; 
     }
         
 }

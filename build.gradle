@@ -73,7 +73,7 @@ tasks.named('test') {
 }
 
 application {
-    mainClass = '_OOP_develop_gradle.Main'
+    mainClass = '_OOP_develop_gradle.model.Main'
 }
 
 jar {
@@ -83,7 +83,7 @@ jar {
     }
     manifest {
         attributes(
-            'Main-Class': '_OOP_develop_gradle.Main'
+            'Main-Class': '_OOP_develop_gradle.model.Main'
         )
     }
 }

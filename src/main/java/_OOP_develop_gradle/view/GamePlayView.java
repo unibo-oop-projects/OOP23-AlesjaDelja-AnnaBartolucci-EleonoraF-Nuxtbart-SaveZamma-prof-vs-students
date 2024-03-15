@@ -1,8 +1,17 @@
-package _OOP_develop_gradle;
+package _OOP_develop_gradle.view;
 
 import java.util.List;
 
-
+import _OOP_develop_gradle.controller.GamePlayController;
+import _OOP_develop_gradle.controller.MenuController;
+import _OOP_develop_gradle.model.Bullet;
+import _OOP_develop_gradle.model.GamePlayModel;
+import _OOP_develop_gradle.model.NormalProfessor;
+import _OOP_develop_gradle.model.Professor;
+import _OOP_develop_gradle.model.Rector;
+import _OOP_develop_gradle.model.Score;
+import _OOP_develop_gradle.model.Student;
+import _OOP_develop_gradle.model.Tutor;
 
 import java.io.IOException;
 import java.util.ArrayList;
