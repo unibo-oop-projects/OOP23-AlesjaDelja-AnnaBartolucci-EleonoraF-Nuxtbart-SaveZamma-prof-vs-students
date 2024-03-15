@@ -11,6 +11,7 @@ public class Tutor extends Professor{
 	public static final String tutorBulletName = "tutorBullet";
 	public Bullet tutorBullet;
 	private int bulletSpeed=1;
+
 	public static final int tutorName = 1;
 	private String pathImgT;
 	
@@ -55,8 +56,12 @@ public class Tutor extends Professor{
 	 * Gets the BulletName of a Tutor
 	 * @return the BulletName of the Tutor
 	 */
-	public static String getTutorbulletname() {
+	public String getTutorbulletname() {
 		return tutorBulletName;
+	}
+	
+	public int getTutorname() {
+		return tutorName;
 	}
 	
 }
