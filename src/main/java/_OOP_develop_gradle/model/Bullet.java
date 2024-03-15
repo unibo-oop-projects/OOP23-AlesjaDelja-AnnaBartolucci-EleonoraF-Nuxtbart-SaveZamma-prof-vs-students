@@ -75,17 +75,25 @@ public final class Bullet {
         this.currentPosition = new Elements<>(currentPosition.getX() + bulletSpeed, currentPosition.getY());
     }
     
+    /**
+     * Fires a bullet diagonally relative to the current position of the professor.
+     * The method calculates the new position of the bullet by advancing both along the X-axis and Y-axis simultaneously.
+     * The bullet's speed determines how much the bullet will move in both directions.
+     * 
+     * @param professor The professor from which the bullet is fired.
+     * @param studentView The student's view where the bullet will be displayed.
+     */
     public void shootDiagonal(Professor professor, StudentView studentView) {
-        // Ottieni la posizione attuale del professor
+        // Get the current position of the professor
         Elements<Integer, Integer> professorPosition = professor.getPositionProf();
 
-        // Calcola la nuova posizione del proiettile in diagonale
+        // Calculate the new position of the bullet diagonally
         int newBulletX = currentPosition.getX() + bulletSpeed;
         int newBulletY = currentPosition.getY() + bulletSpeed;
 
-        // Verifica che il proiettile non esca dai limiti del campo di gioco
+        // Check that the bullet does not go beyond the boundaries of the game field
         if (newBulletX >= 0 && newBulletX < 8 && newBulletY >= 0 && newBulletY < 8) {
-            // Aggiorna la posizione del proiettile
+            // Update the position of the bullet
             currentPosition = new Elements<>(newBulletX, newBulletY);
         }
     }
