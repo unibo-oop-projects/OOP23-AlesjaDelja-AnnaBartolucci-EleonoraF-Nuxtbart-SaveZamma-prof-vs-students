@@ -26,7 +26,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class GamePlayController {
@@ -66,6 +65,7 @@ public class GamePlayController {
     	gameStatus = true;
     	
         gameModel = new GamePlayModel();
+        gameModel.setScoreMacth(scoreMatch.getScore());
         gameModel.setTimeTot(TEMPO_TOT_INIT);
         gameModel.setEnergy(ENERGY_INIT);
         bulletNormalList = gameModel.getBulletListNormal();
@@ -168,9 +168,13 @@ public class GamePlayController {
 				        	
 				        	if (collisionBulletAndStudent(student, bulletNormalList) || collisionBulletAndStudent(student, bulletDiagonalList)) {
 				        		if (student.getHealthStudent() <= 0) {
-				        			
+				        			scoreMatch.addScore();
+				        	        gameModel.setScoreMacth(scoreMatch.getScore());
 				        			removeStudentView(student);
-						        	studentIterator.remove(); // Rimuovi lo studente morto dalla lista
+				        			Platform.runLater(() -> {
+				        			    studentIterator.remove(); // Rimuovi lo studente morto dalla lista
+				        			});
+						        	//studentIterator.remove(); // Rimuovi lo studente morto dalla lista
 				        		}
 				        		
 				        	}
@@ -276,7 +280,7 @@ public class GamePlayController {
 						    }
 				   }
 				   for (List<? extends Professor> professorList : allProfessors) {
-       	  		    	professorList.removeAll(professorsToRemove);
+					   professorList.removeAll(professorsToRemove);
        	  			}
 				}
 				    // Sincronizza l'accesso alle liste condivise
@@ -465,21 +469,28 @@ public class GamePlayController {
 	}
 	
 	public void removeStudentView(Student student) {
-		System.out.println("Studente è morto e va tolto dalla View");
-		studInGame.remove(student); // Rimuovi lo studente morto dalla lista
-		StudentView studentViewToRemove = gamePlayView.getStudentViewList().get(studInGame.indexOf(student)); // Trova il corrispondente StudentView
-		gamePlayView.getStudentViewList().remove(studentViewToRemove); // Rimuovi lo StudentView dalla lista
-        List<ElementView> elementsToRemove = new ArrayList<>();
-        elementsToRemove.add(studentViewToRemove); // Aggiungi lo StudentView alla lista degli elementi da rimuovere
-        //TODO aggiungere sync prima della remove ?
-        synchronizeLists(() -> {
-        	gamePlayView.removePosition(elementsToRemove); // Rimuovi lo studente morto dalla visualizzazione
-        });
-        
-		
-        scoreMatch.addScore();
-		gamePlayView.updateMatchScoreLabel(scoreMatch);
+	    synchronized (studInGame) {
+	        Iterator<Student> iterator = studInGame.iterator();
+	        while (iterator.hasNext()) {
+	            Student currentStudent = iterator.next();
+	            if (currentStudent.equals(student)) {
+	                iterator.remove();
+	                int studentIndex = gamePlayView.getStudentViewList().indexOf(student);
+	                if (studentIndex != -1) {
+	                    StudentView studentViewToRemove = gamePlayView.getStudentViewList().get(studentIndex);
+	                    gamePlayView.getStudentViewList().remove(studentViewToRemove);
+	                    List<ElementView> elementsToRemove = new ArrayList<>();
+	                    elementsToRemove.add(studentViewToRemove);
+	                    synchronizeLists(() -> {
+	                        gamePlayView.removePosition(elementsToRemove); // Rimuovi lo studente morto dalla visualizzazione
+	                    });
+	                }
+	                break;
+	            }
+	        }
+	    }
 	}
+	
 	
 	public void removeProfessorView(Professor prof) {
 		

@@ -1,10 +1,6 @@
 package _OOP_develop_gradle.model;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 public class Elements<X, Y> {

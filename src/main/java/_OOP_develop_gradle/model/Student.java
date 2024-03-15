@@ -2,13 +2,12 @@ package _OOP_develop_gradle.model;
 
 import java.util.Random;
 
-import _OOP_develop_gradle.model.Elements;
-import javafx.scene.layout.AnchorPane;
 
 public class Student {
 	private int health;
 	private int damage;
-	private int DEFAULT_HEALTH = 100;
+	//  TODO da sistemare
+	private int DEFAULT_HEALTH = 25;
 	private int DEFAULT_DAMAGE = 25;
 	private Elements<Integer, Integer> positionStudent;
 	//Costructor

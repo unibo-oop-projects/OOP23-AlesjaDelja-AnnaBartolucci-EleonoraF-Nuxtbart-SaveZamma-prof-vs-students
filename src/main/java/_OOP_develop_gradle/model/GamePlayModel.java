@@ -2,7 +2,6 @@ package _OOP_develop_gradle.model;
 
 import java.util.List;
 
-import _OOP_develop_gradle.model.Student;
 
 import java.util.ArrayList;
 
@@ -11,6 +10,7 @@ import java.util.ArrayList;
  */
 public class GamePlayModel {
 
+		private int scoreMacth;
 	    private int energy; // Punteggio partita
 	    private int timeTot; // Tempo di gioco
 	    private List<Student> studentList; // Lista di studenti presenti
@@ -21,6 +21,7 @@ public class GamePlayModel {
 	    private List<Bullet> bulletListDiagonal;
 	    
 	    public GamePlayModel() {
+	    	this.scoreMacth = 0;
 	        this.energy = 0;
 	        this.timeTot = 0;
 	        this.studentList = new ArrayList<>();
@@ -31,7 +32,15 @@ public class GamePlayModel {
 	        this.bulletListDiagonal = new ArrayList<>();
 	    }
 
-	    /**
+	    public int getScoreMacth() {
+			return scoreMacth;
+		}
+
+		public void setScoreMacth(int scoreMacth) {
+			this.scoreMacth = scoreMacth;
+		}
+
+		/**
 	     * Retrieves the list of normalProf bullets.
 	     * @return The list of normalProf bullets.
 	     */
