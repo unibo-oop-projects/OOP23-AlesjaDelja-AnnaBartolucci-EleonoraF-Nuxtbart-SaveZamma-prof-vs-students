@@ -1,5 +1,7 @@
 package _OOP_develop_gradle.model;
 
+import java.util.Random;
+
 import _OOP_develop_gradle.model.Professor;
 import _OOP_develop_gradle.view.StudentView;
 import javafx.scene.image.Image;
@@ -76,25 +78,36 @@ public final class Bullet {
     }
     
     /**
-     * Fires a bullet diagonally relative to the current position of the professor.
-     * The method calculates the new position of the bullet by advancing both along the X-axis and Y-axis simultaneously.
-     * The bullet's speed determines how much the bullet will move in both directions.
+     * Fires a bullet diagonally either to the right or to the left randomly based on a random direction.
+     * The method calculates the new position of the bullet by advancing along the diagonal direction.
+     * The bullet's speed determines how much the bullet will move.
      * 
      * @param professor The professor from which the bullet is fired.
-     * @param studentView The student's view where the bullet will be displayed.
      */
     public void shootDiagonal() {
-        // Calculate the new position of the bullet diagonally
-        int newBulletX = currentPosition.getX() + bulletSpeed;
-        int newBulletY = currentPosition.getY() + bulletSpeed;
+    	// Calcola la nuova posizione del proiettile in diagonale
+        Random random = new Random();
+        int direction = random.nextInt(2); // Genera un numero casuale: 0 o 1
 
-        // Check that the bullet does not go beyond the boundaries of the game field
-        //if (newBulletX >= 0 && newBulletX < 8 && newBulletY >= 0 && newBulletY < 8) {
-            // Update the position of the bullet
+        int newBulletX;
+        int newBulletY;
+
+        if (direction == 0) {
+            // Sparare sulla diagonale a destra
+            newBulletX = currentPosition.getX() + bulletSpeed;
+            newBulletY = currentPosition.getY() + bulletSpeed;
+        } else {
+            // Sparare sulla diagonale a sinistra
+            newBulletX = currentPosition.getX() + bulletSpeed;
+            newBulletY = currentPosition.getY() - bulletSpeed;
+        }
+
+        // Verifica che il proiettile non esca dai limiti del campo di gioco
+        if (newBulletX >= 0 && newBulletX < 8 && newBulletY >= 0 && newBulletY < 8) {
+            // Aggiorna la posizione del proiettile
             currentPosition = new Elements<>(newBulletX, newBulletY);
-        //}
+        }
     }
-
     
      //POSSO ELIMINARLO?
     public String getPathImgBullet() {
