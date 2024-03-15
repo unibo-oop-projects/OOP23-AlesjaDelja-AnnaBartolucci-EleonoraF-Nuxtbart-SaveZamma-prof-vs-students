@@ -74,6 +74,23 @@ public final class Bullet {
     public void move() {
         this.currentPosition = new Elements<>(currentPosition.getX() + bulletSpeed, currentPosition.getY());
     }
+    
+    public void shootDiagonal(Professor professor, StudentView studentView) {
+        // Ottieni la posizione attuale del professor
+        Elements<Integer, Integer> professorPosition = professor.getPositionProf();
+
+        // Calcola la nuova posizione del proiettile in diagonale
+        int newBulletX = currentPosition.getX() + bulletSpeed;
+        int newBulletY = currentPosition.getY() + bulletSpeed;
+
+        // Verifica che il proiettile non esca dai limiti del campo di gioco
+        if (newBulletX >= 0 && newBulletX < 8 && newBulletY >= 0 && newBulletY < 8) {
+            // Aggiorna la posizione del proiettile
+            currentPosition = new Elements<>(newBulletX, newBulletY);
+        }
+    }
+
+    
      //POSSO ELIMINARLO?
     public String getPathImgBullet() {
 		return pathImgB;

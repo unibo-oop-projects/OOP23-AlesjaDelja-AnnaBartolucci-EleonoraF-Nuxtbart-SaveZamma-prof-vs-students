@@ -1,7 +1,5 @@
 package _OOP_develop_gradle.model;
 
-import _OOP_develop_gradle.model.Professor;
-
 public class Rector extends Professor{
 
 	private Elements<Integer, Integer> currentPosition;
@@ -84,16 +82,5 @@ public class Rector extends Professor{
      * @param col The total number of columns in the game grid.
      * @param row The total number of rows in the game grid.
      */
-	//funzione per sparare in diagonale
-	public void shootDiagonal(int col, int row) {
-	    // Calcola la posizione del proiettile in diagonale rispetto alla posizione corrente del rettore
-	    int bulletCol = currentPosition.getX() + bulletSpeed;
-	    int bulletRow = currentPosition.getY() + bulletSpeed;
-	    // Crea un nuovo proiettile sparato in diagonale
-	    if (bulletCol >= 0 && bulletCol < col && bulletRow >= 0 && bulletRow < row) {
-	        // Crea un nuovo proiettile sparato in diagonale
-	        rectorBullet = new Bullet(bulletSpeed, RECTOR_HIT_DAMAGE, new Elements<>(bulletCol, bulletRow), rectorBulletName, pathImgR);
-	    }
-	}
 	
 }
