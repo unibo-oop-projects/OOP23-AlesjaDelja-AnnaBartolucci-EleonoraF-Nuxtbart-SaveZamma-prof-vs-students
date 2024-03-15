@@ -2,8 +2,6 @@ package _OOP_develop_gradle.model;
 
 import org.junit.jupiter.api.Test;
 
-import _OOP_develop_gradle.model.Professor;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 

@@ -1,9 +1,7 @@
 package _OOP_develop_gradle;
 
 
-import javax.swing.text.html.ImageView;
 
-import _OOP_develop_gradle.model.Professor;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
