@@ -1,12 +1,7 @@
 package _OOP_develop_gradle.view;
 
-import javafx.scene.image.Image;
-import java.awt.event.MouseEvent;
-
-import _OOP_develop_gradle.model.Professor;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+
 /**
  * A view class for displaying a tutor's image.
  */

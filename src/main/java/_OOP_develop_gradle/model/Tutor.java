@@ -1,6 +1,5 @@
 package _OOP_develop_gradle.model;
 
-import _OOP_develop_gradle.model.Professor;
 
 //tutor cerbottana
 public class Tutor extends Professor{

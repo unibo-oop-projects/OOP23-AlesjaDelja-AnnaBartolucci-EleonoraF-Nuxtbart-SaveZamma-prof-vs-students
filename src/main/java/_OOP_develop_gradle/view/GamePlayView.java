@@ -11,7 +11,6 @@ import _OOP_develop_gradle.model.GamePlayModel;
 import _OOP_develop_gradle.model.NormalProfessor;
 import _OOP_develop_gradle.model.Professor;
 import _OOP_develop_gradle.model.Rector;
-import _OOP_develop_gradle.model.Score;
 import _OOP_develop_gradle.model.Student;
 import _OOP_develop_gradle.model.Tutor;
 

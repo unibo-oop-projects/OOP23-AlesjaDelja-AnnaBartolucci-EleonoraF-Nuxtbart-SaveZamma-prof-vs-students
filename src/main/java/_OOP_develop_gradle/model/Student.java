@@ -2,8 +2,6 @@ package _OOP_develop_gradle.model;
 
 import java.util.Random;
 
-import _OOP_develop_gradle.model.Elements;
-import javafx.scene.layout.AnchorPane;
 
 public class Student {
 	private int health;

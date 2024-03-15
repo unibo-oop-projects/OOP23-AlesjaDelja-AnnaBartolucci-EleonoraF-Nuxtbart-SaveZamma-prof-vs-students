@@ -1,9 +1,5 @@
 package _OOP_develop_gradle.model;
 
-import _OOP_develop_gradle.model.Elements;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
 public class Professor {
     

@@ -2,7 +2,6 @@ package _OOP_develop_gradle.model;
 
 import java.util.List;
 
-import _OOP_develop_gradle.model.Student;
 
 import java.util.ArrayList;
 
