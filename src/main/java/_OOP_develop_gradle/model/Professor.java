@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 public class Professor {
     
     private int costProfessor;
+    private boolean isAttacked;
     private int damage;
     private final Elements<Integer, Integer> position;
     private int healthPoints;
@@ -31,9 +32,18 @@ public class Professor {
         this.pathImgP = pathImgP;
         this.costProfessor = costProfessor;
         this.id = id;
+        this.isAttacked = false;
     }
 
-    /**
+    public boolean isAttacked() {
+		return isAttacked;
+	}
+
+	public void setAttacked(boolean isAttacked) {
+		this.isAttacked = isAttacked;
+	}
+
+	/**
      * Gets the pathImgage of a professor
      * @return the pathImgage of the professor
      */
