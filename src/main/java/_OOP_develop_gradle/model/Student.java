@@ -8,18 +8,31 @@ import javafx.scene.layout.AnchorPane;
 public class Student {
 	private int health;
 	private int damage;
+	private int energy;
 	//  TODO da sistemare
 	private int DEFAULT_HEALTH = 25;
 	private int DEFAULT_DAMAGE = 25;
+	private int DEFAULT_ENERGY = 10;
 	private Elements<Integer, Integer> positionStudent;
 	//Costructor
 	public Student() {
 		this.health = DEFAULT_HEALTH;
 		this.damage = DEFAULT_DAMAGE;
+		this.energy = DEFAULT_ENERGY;
         generateRandomPosition();
 	}
 	
 	
+	public int getEnergy() {
+		return energy;
+	}
+
+
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
+
+
 	/**
 	 * Creates a new Students in the end of the grid in a random row
 	 * @return the rows and colum of the student created

@@ -171,6 +171,7 @@ public class GamePlayController {
 				        		if (student.getHealthStudent() <= 0) {
 				        			scoreMatch.addScore();
 				        	        gameModel.setScoreMacth(scoreMatch.getScore());
+				        	        gameModel.setEnergy(gameModel.getEnergy() + student.getEnergy());
 				        			removeStudentView(student);
 				        			
 						        	studentIterator.remove(); // Rimuovi lo studente morto dalla lista
