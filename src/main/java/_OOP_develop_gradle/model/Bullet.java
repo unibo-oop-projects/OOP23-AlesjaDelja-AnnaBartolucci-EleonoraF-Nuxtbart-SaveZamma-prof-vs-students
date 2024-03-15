@@ -89,10 +89,10 @@ public final class Bullet {
         int newBulletY = currentPosition.getY() + bulletSpeed;
 
         // Check that the bullet does not go beyond the boundaries of the game field
-        if (newBulletX >= 0 && newBulletX < 8 && newBulletY >= 0 && newBulletY < 8) {
+        //if (newBulletX >= 0 && newBulletX < 8 && newBulletY >= 0 && newBulletY < 8) {
             // Update the position of the bullet
             currentPosition = new Elements<>(newBulletX, newBulletY);
-        }
+        //}
     }
 
     
