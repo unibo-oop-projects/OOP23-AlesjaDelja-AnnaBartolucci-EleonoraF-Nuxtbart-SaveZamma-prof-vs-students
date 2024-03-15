@@ -8,7 +8,7 @@ public class Student {
 	private int damage;
 	private int energy;
 	//  TODO da sistemare
-	private int DEFAULT_HEALTH = 25;
+	private int DEFAULT_HEALTH = 100;
 	private int DEFAULT_DAMAGE = 25;
 	private int DEFAULT_ENERGY = 10;
 	private Elements<Integer, Integer> positionStudent;
