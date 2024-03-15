@@ -21,7 +21,7 @@ public class MainMenuController {
 	
 	public void newGame(ActionEvent e) throws IOException {
 		StageChangeController stageChanger = new StageChangeController();
-		stageChanger.changeScene(e, "../GameView.fxml");
+		stageChanger.changeScene(e, "/GameView.fxml");
 		//CONTROLLARE SE SERVE ANCORA MAIN MENUVIEW.FXML E MAIN MENU CONTROLLER DELL'ANNA
 	}
 	
@@ -31,7 +31,7 @@ public class MainMenuController {
 	 */
 	public void helpGame(ActionEvent e) throws IOException {
 		StageChangeController stageChanger = new StageChangeController();
-        stageChanger.changeScene(e, "../view/HelpGameView.fxml");
+        stageChanger.changeScene(e, "/HelpGameView.fxml");
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class MainMenuController {
 	 */
 	public void leaderboard(ActionEvent e) throws IOException {
 		StageChangeController stageChanger = new StageChangeController();
-        stageChanger.changeScene(e, "../view/LeaderBoard.fxml");
+        stageChanger.changeScene(e, "/LeaderBoard.fxml");
 	}
 	/**
 	 * Closes the game when clicked

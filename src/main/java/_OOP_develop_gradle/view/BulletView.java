@@ -10,7 +10,7 @@ public class BulletView  extends ElementView{
 	
 	@Override
     protected String getImagePath() {
-        return "_OOP_develop_gradle/img/pea.png"; 
+		return "/img/pea.png"; 
     }
 
 }

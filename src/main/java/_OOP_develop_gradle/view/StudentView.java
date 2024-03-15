@@ -11,8 +11,8 @@ import javafx.scene.layout.GridPane;
 public class StudentView extends ElementView {
 	
 	//Variabe used to memorize relative path of the images of Students and when it attacks
-	private String PATH_STUDENT = "../img/student.png";
-	private String PATH_ATTACK = "../img/attack.png";
+	private String PATH_STUDENT = "/img/student.png";
+	private String PATH_ATTACK = "/img/attack.png";
 	//Costructs
     public StudentView(GridPane gridPane) {
         super(gridPane);

@@ -1,9 +1,10 @@
-package _OOP_develop_gradle;
+package _OOP_develop_gradle.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import _OOP_develop_gradle.view.GamePlayView;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,7 +78,7 @@ public class MenuController {
         // per il riferimento al MainMenu e il MainMenuController
         FXMLLoader mainMenuLoader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
         mainMenuLoader.load();
-        MainMenuController mainMenuController = mainMenuLoader.getController();
+        MainMenuController2 mainMenuController = mainMenuLoader.getController();
         
         AnchorPane mainMenu = mainMenuController.getMainMenu();
 
@@ -86,7 +87,7 @@ public class MenuController {
         AnchorPane game = gameLoader.load();
         GamePlayView gamePlayView = gameLoader.getController();
         GamePlayController gamePlayController = new GamePlayController();
-        gamePlayController.initData(gamePlayView, mainMenu);
+        gamePlayController.initData(gamePlayView);
 
        
         // setto la scena da gioco

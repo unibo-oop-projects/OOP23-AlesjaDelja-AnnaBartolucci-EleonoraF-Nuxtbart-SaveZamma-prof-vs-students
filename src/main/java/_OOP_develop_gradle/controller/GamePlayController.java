@@ -1,10 +1,27 @@
-package _OOP_develop_gradle;
+package _OOP_develop_gradle.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
+import _OOP_develop_gradle.model.Bullet;
+import _OOP_develop_gradle.model.Elements;
+import _OOP_develop_gradle.model.GamePlayModel;
+import _OOP_develop_gradle.model.NormalProfessor;
+import _OOP_develop_gradle.model.Professor;
+import _OOP_develop_gradle.model.Rector;
+import _OOP_develop_gradle.model.Score;
+import _OOP_develop_gradle.model.Student;
+import _OOP_develop_gradle.model.Tutor;
+import _OOP_develop_gradle.view.BulletView;
+import _OOP_develop_gradle.view.ElementView;
+import _OOP_develop_gradle.view.GamePlayView;
+import _OOP_develop_gradle.view.NormalProfView;
+import _OOP_develop_gradle.view.RectorView;
+import _OOP_develop_gradle.view.StudentView;
+import _OOP_develop_gradle.view.TutorView;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
