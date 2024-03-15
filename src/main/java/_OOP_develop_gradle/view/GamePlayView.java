@@ -2,6 +2,8 @@ package _OOP_develop_gradle.view;
 
 import java.util.List;
 
+import java.util.Iterator;
+
 import _OOP_develop_gradle.controller.GamePlayController;
 import _OOP_develop_gradle.controller.MenuController;
 import _OOP_develop_gradle.model.Bullet;
@@ -225,9 +227,21 @@ public class GamePlayView {
 	}
 	
 	public void updateProfessorPositions(List<List<? extends Professor>> profsList) {
-		profsInGrid = profsList;
+		 // Rimuovi le liste obsolete da profsInGrid
+	    List<List<? extends Professor>> professorsToRemove = new ArrayList<>();
+
 	    for (List<? extends Professor> professors : profsInGrid) {
-	        for (Professor prof : professors) {
+	        if (!profsList.contains(professors)) {
+	            professorsToRemove.add(professors);
+	        }
+	    }
+
+	    profsInGrid.removeAll(professorsToRemove);
+	    
+	    for (List<? extends Professor> professors : profsInGrid) {
+	        Iterator<? extends Professor> iterator = professors.iterator();
+	        while (iterator.hasNext()) {
+	            Professor prof = iterator.next();
 	            // Prendi le coordinate del professore e metti la foto corrispondente sulla griglia
 	            if (prof instanceof Tutor) {
 	                Tutor tutor = (Tutor) prof;
@@ -273,7 +287,7 @@ public class GamePlayView {
     @FXML
     private void handleMouseClick(MouseEvent event) {
     	
-        Integer columnIndex = GridPane.getRowIndex((Region) event.getSource());
+        Integer columnIndex = GridPane.getColumnIndex((Region) event.getSource());
         Integer rowIndex = GridPane.getRowIndex((Region) event.getSource());
 
         System.out.println("Clicked at column " + columnIndex + " and row " + rowIndex);
