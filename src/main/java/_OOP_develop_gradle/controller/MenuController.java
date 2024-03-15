@@ -58,7 +58,7 @@ public class MenuController {
         // Chiudi tutte le finestre aperte
         closeAllWindows();
         
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MainMenuView.fxml"));
         Parent mainMenu = (Parent) fxmlLoader.load();
         Stage mainMenuStage = new Stage();
         mainMenuStage.setScene(new Scene(mainMenu));
@@ -67,6 +67,7 @@ public class MenuController {
         
     }
 
+    // TODO impazzisce, da rincontrollare
     @FXML
     void replayGame(MouseEvent event) throws IOException {
     	
@@ -76,14 +77,14 @@ public class MenuController {
         closeAllWindows();
         
         // per il riferimento al MainMenu e il MainMenuController
-        FXMLLoader mainMenuLoader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
+       /* FXMLLoader mainMenuLoader = new FXMLLoader(getClass().getResource("/MainMenuView.fxml"));
         mainMenuLoader.load();
-        MainMenuController2 mainMenuController = mainMenuLoader.getController();
+        MainMenuController mainMenuController = mainMenuLoader.getController();*/
         
-        AnchorPane mainMenu = mainMenuController.getMainMenu();
+        //AnchorPane mainMenu = mainMenuController.getMainMenu();
 
         // carico la scena del campo da gioco 
-        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
+        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/GameView.fxml"));
         AnchorPane game = gameLoader.load();
         GamePlayView gamePlayView = gameLoader.getController();
         GamePlayController gamePlayController = new GamePlayController();
