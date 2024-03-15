@@ -11,22 +11,22 @@
    <children>
       <ImageView fitHeight="296.0" fitWidth="386.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/GameMenu.png" />
+            <Image url="@img/GameMenu.png" />
          </image>
       </ImageView>
       <ImageView fx:id="gameMenuButton" fitHeight="92.0" fitWidth="175.0" layoutX="195.0" layoutY="36.0" onMouseClicked="#returnMainManu" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/gameMenuButton.png" />
+            <Image url="@img/gameMenuButton.png" />
          </image>
       </ImageView>
       <ImageView fx:id="exitGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="12.0" layoutY="34.0" onMouseClicked="#exitGame" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/exitButton.jpg" />
+            <Image url="@img/exitButton.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="replayGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="14.0" layoutY="127.0" onMouseClicked="#replayGame" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/replayButton.jpg" />
+            <Image url="@img/replayButton.jpg" />
          </image>
       </ImageView>
       <Button fx:id="resumeButton" text="Riprendi" onAction="#resumeGame" />
