@@ -1,9 +1,11 @@
 package _OOP_develop_gradle.model;
 
 
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-/*public class RectorTest {
+public class RectorTest {
 
     private Rector rector= new Rector(0, 0);
 
@@ -43,4 +45,4 @@ package _OOP_develop_gradle.model;
         //assertEquals(initialCol + rector.getBulletSpeed(), rector.getRectorBullet().getPosition().getX());
         //assertEquals(initialRow + rector.getBulletSpeed(), rector.getRectorBullet().getPosition().getY());
     }
-}*/
+}
