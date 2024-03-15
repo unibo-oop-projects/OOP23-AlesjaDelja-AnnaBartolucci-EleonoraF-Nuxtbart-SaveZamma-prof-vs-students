@@ -7,10 +7,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class MainMenuController {
-	
+	private boolean soundOn = true;
+    public Button soundButton;
 	Stage stage;
 	
 	/**
@@ -40,8 +42,13 @@ public class MainMenuController {
 	 * @param e Listens to when the player click on this buttons
 	 */
 	public void sounds(ActionEvent e) {
-		//TO-DO Cambiare il coso dell'Anna per il suono e metterlo tutto da parte in modo che sia più comprensibile
-		System.out.println("Sounds");
+		if (soundOn) {
+            soundOn = false;
+            soundButton.setText("Sound Off");
+        } else {
+            soundOn = true;
+            soundButton.setText("Sound On");
+        }
 	}
 	/**
 	 * Changes from the main menu to the leaderboard menu.
