@@ -103,11 +103,10 @@ public final class Bullet {
             newBulletY -= bulletSpeed;
         }
 
-        // Verifica che il proiettile non esca dai limiti del campo di gioco
-        
             // Aggiorna la posizione del proiettile
             currentPosition = new Elements<>(newBulletX, newBulletY);
     }
+
     
      //POSSO ELIMINARLO?
     public String getPathImgBullet() {
