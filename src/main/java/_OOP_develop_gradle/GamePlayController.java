@@ -5,16 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-
-import _OOP_develop_gradle.model.Professor;
-import _OOP_develop_gradle.model.Score;
-import _OOP_develop_gradle.model.Student;
-import _OOP_develop_gradle.view.BulletView;
-import _OOP_develop_gradle.view.ElementView;
-import _OOP_develop_gradle.view.NormalProfView;
-import _OOP_develop_gradle.view.RectorView;
-import _OOP_develop_gradle.view.StudentView;
-import _OOP_develop_gradle.view.TutorView;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,6 +24,7 @@ public class GamePlayController {
 	public static GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
 	public Score scoreMatch;
+	public boolean firstProfPicked;
 	public List<Bullet> bulletNormalList = new ArrayList<>(); // lista dei bullet normali in gioco
 	public List<Bullet> bulletDiagonalList = new ArrayList<>(); // lista dei bullet diagonali in gioco
 	
@@ -51,11 +42,12 @@ public class GamePlayController {
         allProfessors.add(rectorInGame);
     }
 	
-	public void initData(GamePlayView gamePlayView, AnchorPane mainMenu) {
+	public void initData(GamePlayView gamePlayView) {
     	NUM_STUD_ONDATA = 1;
     	scoreMatch = new Score();
     	scoreMatch.resetScore();
     	gameStatus = true;
+    	
         gameModel = new GamePlayModel();
         gameModel.setTimeTot(TEMPO_TOT_INIT);
         gameModel.setEnergy(ENERGY_INIT);
@@ -69,7 +61,7 @@ public class GamePlayController {
         addAllLists(tutorInGame, normalPInGame, rectorInGame);
         
         this.gamePlayView = gamePlayView; // Assegna il riferimento dell'oggetto passato al metodo alla variabile gamePlayView
-        
+        gamePlayView.setFirstProfPicked(false);
         try {
 			initGamePlay();
 		} catch (IOException e) {
@@ -77,7 +69,7 @@ public class GamePlayController {
 		}
         
         if (!studInGame.isEmpty()) {
-        	gamePlayView.initialize();// avvio il tempo
+        	gamePlayView.initializeView();// avvio il tempo
             startGame(gamePlayView);
             
         }
@@ -240,7 +232,7 @@ public class GamePlayController {
 			        	  		}
 		
 						        // Controlla se sono in vita ancora tutti i professori
-						        if (allProfessors.isEmpty()) {
+						        if (allProfessors.isEmpty() && gamePlayView.isFirstProfPicked()) {
 						            // Utente ha perso, aggiorna lo stato del gioco
 						            gameStatus = false;
 						            try {
@@ -268,7 +260,7 @@ public class GamePlayController {
 						e.printStackTrace();
 					}
 				    
-				    sleep(2000);
+				    sleep(200000);
 				
     	
 			}).start();
@@ -276,7 +268,9 @@ public class GamePlayController {
 	}
     	
     
-    /**
+    
+
+	/**
      * Executes an action within a synchronized section, ensuring safe access to the 
      * shared lists {@code studInGame}, {@code profInGame}, {@code bulletNormalList}, 
      * and {@code bulletDiagonalList}.
@@ -299,7 +293,7 @@ public class GamePlayController {
     	Platform.runLater(() -> {
             try {
 		    	//carico il file fxml con la scritta hai perso
-		    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LostGameView.fxml"));
+		    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/LostGameView.fxml"));
 		        Parent lostGame = (Parent) fxmlLoader.load();
 		        Stage stage = new Stage();
 		        stage.setScene(new Scene(lostGame));
@@ -316,7 +310,7 @@ public class GamePlayController {
     	Platform.runLater(() -> {
             try {
 		    	//carico il file fxml con la scritta hai vinto
-		    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WinGameView.fxml"));
+		    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/WinGameView.fxml"));
 		        Parent lostGame = (Parent) fxmlLoader.load();
 		        Stage stage = new Stage();
 		        stage.setScene(new Scene(lostGame));

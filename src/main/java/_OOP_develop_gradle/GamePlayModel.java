@@ -3,8 +3,6 @@ package _OOP_develop_gradle;
 import java.util.List;
 import java.util.ArrayList;
 
-import _OOP_develop_gradle.model.Professor;
-import _OOP_develop_gradle.model.Student;
 /**
  * Class representing the model for the gameplay.
  */

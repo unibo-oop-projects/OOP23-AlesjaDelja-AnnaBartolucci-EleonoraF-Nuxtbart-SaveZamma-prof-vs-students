@@ -2,15 +2,7 @@ package _OOP_develop_gradle;
 
 import java.util.List;
 
-import _OOP_develop_gradle.model.Professor;
-import _OOP_develop_gradle.model.Score;
-import _OOP_develop_gradle.model.Student;
-import _OOP_develop_gradle.view.BulletView;
-import _OOP_develop_gradle.view.ElementView;
-import _OOP_develop_gradle.view.NormalProfView;
-import _OOP_develop_gradle.view.RectorView;
-import _OOP_develop_gradle.view.StudentView;
-import _OOP_develop_gradle.view.TutorView;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,7 +60,7 @@ public class GamePlayView {
     private List<Student> studentInGrid = new ArrayList<>(); // Lista di studenti presenti
     private List<Bullet>  bulletInGrid = new ArrayList<>();
     List<List<? extends Professor>> profsInGrid = new ArrayList<>();
-    
+    public boolean firstProfPicked;
     private List<StudentView> studentViewList = new ArrayList<>();
     private List<TutorView> tutorViewList = new ArrayList<>();
     private List<NormalProfView> normalProfessorViewList = new ArrayList<>();
@@ -117,8 +109,26 @@ public class GamePlayView {
 	public void setController(GamePlayController gameController) {
         this.gameController = gameController;
     }
+	public boolean isFirstProfPicked() {
+		return firstProfPicked;
+	}
+
+	public void setFirstProfPicked(boolean firstProfPicked) {
+		this.firstProfPicked = firstProfPicked;
+	}
     @FXML
     public void initialize() {
+    	// Inizializza la GameView
+        try {
+        	gameController = new GamePlayController();
+            gameController.initData(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Gestisci l'eccezione in modo appropriato, ad esempio mostrando un messaggio di errore all'utente
+        }
+    }
+    
+    public void initializeView() {
         // Inizializza la griglia di gioco, impostando le immagini iniziali, ecc.
     	//lawn_grid.setVisible(true);
     	//ProfChoose.getProfTypes(gamePlayRoot);
@@ -261,6 +271,7 @@ public class GamePlayView {
         
 	    if(profChoosen != -1) {
 	    	if(columnIndex!=null && rowIndex!=null && !isProfInCell(columnIndex, rowIndex)) {
+	    		setFirstProfPicked(true);
 	    		switch(profChoosen) {
 	    			case 1:
 	    				Tutor tutornew = new Tutor(columnIndex, rowIndex);
@@ -335,7 +346,7 @@ public class GamePlayView {
     void GameMenu(MouseEvent event) throws IOException {
     	timerStop = true;// stoppo il timer quando apro il menù
     	GamePlayController.getInstance().setGameStatus(false);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MenuView.fxml"));
         Parent gameMenu = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(gameMenu));

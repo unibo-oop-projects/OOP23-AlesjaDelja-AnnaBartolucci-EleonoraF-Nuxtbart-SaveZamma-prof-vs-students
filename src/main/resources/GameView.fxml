@@ -11,16 +11,16 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="GamePlayRoot" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GamePlayView">
+<AnchorPane fx:id="GamePlayRoot" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="_OOP_develop_gradle2.GamePlayView">
    <children>
       <ImageView fx:id="lawnImage" fitHeight="600.0" fitWidth="1024.0" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../img/lawnGame.png" />
+            <Image url="@/img/lawnGame.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="58.0" fitWidth="77.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/sun.png" />
+            <Image url="@/img/sun.png" />
          </image>
       </ImageView>
       <Label fx:id="matchScoreLabel" layoutX="58.0" layoutY="3.0" prefHeight="73.0" prefWidth="104.0" text="50" textFill="WHITE">
@@ -35,7 +35,7 @@
       </Label> 
       <ImageView fx:id="GameMenuLoaderButton" fitHeight="91.0" fitWidth="150.0" layoutX="2.0" layoutY="505.0" onMouseClicked="#GameMenu" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/gameMenuButton.png" />
+            <Image url="@/img/gameMenuButton.png" />
          </image>
       </ImageView>
       <Label fx:id="timeLabel" layoutX="490.0" layoutY="2.5" prefHeight="73.0" prefWidth="104.0" text="01:15" textFill="WHITE">
@@ -45,17 +45,17 @@
       </Label> 
       <ImageView onMouseClicked="#handleTutorCardClick" fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="75.0"><!-- onMouseClicked="#sunalmanac" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" --> <!-- ALMANAC -->
          <image>
-            <Image url="@../img/cardSunflower.png" />
+            <Image url="@/img/cardSunflower.png" />
          </image>
       </ImageView >
       <ImageView onMouseClicked="#handleNormalCardClick" fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="156.0">
          <image>
-            <Image url="@../img/cardWallnut.png" />
+            <Image url="@/img/cardWallnut.png" />
          </image>
       </ImageView>
       <ImageView onMouseClicked="#handleRectorCardClick" fitHeight="60.0" fitWidth="73.0" layoutX="18.0" layoutY="237.0">
          <image>
-            <Image url="@../img/cardJalapeno.png" />
+            <Image url="@/img/cardJalapeno.png" />
          </image>
       </ImageView>
       <GridPane fx:id="lawn_grid" layoutX="322.0" layoutY="83.0" prefHeight="489.0" prefWidth="694.0">
