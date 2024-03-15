@@ -1,5 +1,7 @@
 package _OOP_develop_gradle.view;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class BulletView  extends ElementView{
@@ -17,8 +19,8 @@ public class BulletView  extends ElementView{
     private Image getResizedImage() {
         Image image = new Image(getImagePath());
         // Definisci la nuova larghezza e altezza desiderata per l'immagine
-        double newWidth = 20; // Nuova larghezza desiderata
-        double newHeight = 20; // Nuova altezza desiderata
+        double newWidth = 5; // Nuova larghezza desiderata
+        double newHeight = 5; // Nuova altezza desiderata
         // Crea un'ImageView per l'immagine e imposta le nuove dimensioni
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(newWidth);
