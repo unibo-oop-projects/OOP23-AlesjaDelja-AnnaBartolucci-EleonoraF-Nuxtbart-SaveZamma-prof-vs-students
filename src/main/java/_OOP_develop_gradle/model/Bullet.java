@@ -85,28 +85,28 @@ public final class Bullet {
      * @param professor The professor from which the bullet is fired.
      */
     public void shootDiagonal() {
-    	// Calcola la nuova posizione del proiettile in diagonale
+        // Calcola la nuova posizione del proiettile in diagonale
         Random random = new Random();
         int direction = random.nextInt(2); // Genera un numero casuale: 0 o 1
 
-        int newBulletX;
-        int newBulletY;
+        int newBulletX = currentPosition.getX(); // Inizializziamo con la posizione corrente
+        int newBulletY = currentPosition.getY(); // Inizializziamo con la posizione corrente
 
+        // Verifica la direzione e aggiorna le coordinate di conseguenza
         if (direction == 0) {
             // Sparare sulla diagonale a destra
-            newBulletX = currentPosition.getX() + bulletSpeed;
-            newBulletY = currentPosition.getY() + bulletSpeed;
+            newBulletX += bulletSpeed;
+            newBulletY += bulletSpeed;
         } else {
             // Sparare sulla diagonale a sinistra
-            newBulletX = currentPosition.getX() + bulletSpeed;
-            newBulletY = currentPosition.getY() - bulletSpeed;
+            newBulletX += bulletSpeed;
+            newBulletY -= bulletSpeed;
         }
 
         // Verifica che il proiettile non esca dai limiti del campo di gioco
-        if (newBulletX >= 0 && newBulletX < 8 && newBulletY >= 0 && newBulletY < 8) {
+        
             // Aggiorna la posizione del proiettile
             currentPosition = new Elements<>(newBulletX, newBulletY);
-        }
     }
     
      //POSSO ELIMINARLO?
