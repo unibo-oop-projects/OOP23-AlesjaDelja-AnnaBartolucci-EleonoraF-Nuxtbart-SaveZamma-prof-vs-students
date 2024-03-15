@@ -83,10 +83,7 @@ public final class Bullet {
      * @param professor The professor from which the bullet is fired.
      * @param studentView The student's view where the bullet will be displayed.
      */
-    public void shootDiagonal(Professor professor, StudentView studentView) {
-        // Get the current position of the professor
-        Elements<Integer, Integer> professorPosition = professor.getPositionProf();
-
+    public void shootDiagonal(Professor professor) {
         // Calculate the new position of the bullet diagonally
         int newBulletX = currentPosition.getX() + bulletSpeed;
         int newBulletY = currentPosition.getY() + bulletSpeed;
