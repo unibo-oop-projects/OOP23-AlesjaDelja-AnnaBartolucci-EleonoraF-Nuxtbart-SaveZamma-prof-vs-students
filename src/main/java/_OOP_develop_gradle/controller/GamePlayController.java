@@ -159,7 +159,9 @@ public class GamePlayController {
 	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                });
 					
-				    Iterator<Student> studentIterator = gameModel.getStudentList().iterator();
+	                List<Student> studentToRemove = new ArrayList<>();
+	                List<Student> studentCopy = new ArrayList<>(studInGame);
+				    Iterator<Student> studentIterator = studentCopy.iterator();//gameModel.getStudentList().iterator();
 				    while (studentIterator.hasNext()) {
 				        Student student = studentIterator.next();
 				        
@@ -172,10 +174,11 @@ public class GamePlayController {
 				        	        gameModel.setScoreMacth(scoreMatch.getScore());
 				        	        gameModel.setEnergy(gameModel.getEnergy() + student.getEnergy());
 				        			removeStudentView(student);
-				        			Platform.runLater(() -> {
+				        			/*Platform.runLater(() -> {
 				        			    studentIterator.remove(); // Rimuovi lo studente morto dalla lista
-				        			});
+				        			});*/
 						        	//studentIterator.remove(); // Rimuovi lo studente morto dalla lista
+				        			studentToRemove.add(student);
 				        		}
 				        		
 				        	}
@@ -218,10 +221,12 @@ public class GamePlayController {
 				            }
 				        } else {
 				        	removeStudentView(student);
-				        	studentIterator.remove(); // Rimuovi lo studente morto dalla lista
+				        	//studentIterator.remove(); // Rimuovi lo studente morto dalla lista
+				        	studentToRemove.add(student);
 				        }
 				        
 				    }
+				    studInGame.removeAll(studentToRemove);
 				    
 				    advanceBullets();
 				    
@@ -283,7 +288,7 @@ public class GamePlayController {
 				   for (List<? extends Professor> professorList : allProfessors) {
 					   professorList.removeAll(professorsToRemove);
        	  			}
-				}
+				// era qua la parentesi while(status)
 				    // Sincronizza l'accesso alle liste condivise
 	                synchronizeLists(() -> {
 	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
@@ -298,8 +303,8 @@ public class GamePlayController {
 						e.printStackTrace();
 					}
 				    
-				    sleep(200000);
-				
+				    sleep(2000);
+				}
     	
 			}).start();
 	   }
