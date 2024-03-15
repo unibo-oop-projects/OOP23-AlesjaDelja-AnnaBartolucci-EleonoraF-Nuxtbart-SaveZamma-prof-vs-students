@@ -27,6 +27,10 @@ public class Rector extends Professor{
 	public Rector(int col, int row) {
 		super(RECTOR_HIT_DAMAGE, RECTOR_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), RECTOR_IMG_PATH, RECTOR_BUY_COST, rectorName);
 		this.currentPosition = new Elements<Integer, Integer>(col, row);
+		int bulletCol = currentPosition.getX() + bulletSpeed;
+	    int bulletRow = currentPosition.getY() + bulletSpeed;
+	    rectorBullet = new Bullet(bulletSpeed, RECTOR_HIT_DAMAGE, new Elements<>(bulletCol, bulletRow), rectorBulletName, pathImgR);
+	    
 	}
 	
 	/**
