@@ -49,16 +49,16 @@ public class MainMenuController {
 		if (soundOn) {
             soundOn = false;
             soundButton.setText("Sound Off");
-            Media sound = new Media(getClass().getResource("/music/background.wav").toString());
+            Media sound = new Media(getClass().getResource("/music/background.wav").toString()); // DA CAMBIARE LA PATH
 	        mediaPlayer = new MediaPlayer(sound);
 	        mediaPlayer.setAutoPlay(true);
 	        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 	        mediaPlayer.setStartTime(Duration.seconds(0));
-	        mediaPlayer.setStopTime(Duration.seconds(50));
 	        mediaPlayer.play();
         } else {
             soundOn = true;
             soundButton.setText("Sound On");
+            mediaPlayer.stop();
         }
 	}
 	/**
