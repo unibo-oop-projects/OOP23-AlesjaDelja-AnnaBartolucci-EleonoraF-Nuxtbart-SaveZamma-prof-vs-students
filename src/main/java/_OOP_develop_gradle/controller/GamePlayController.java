@@ -384,9 +384,9 @@ public class GamePlayController {
     	    Iterator<Bullet> bulletDiagonalIterator = bulletDiagonalList.iterator();
     	    while (bulletDiagonalIterator.hasNext()) {
     	        Bullet bullet = bulletDiagonalIterator.next();
-    	        bullet.move(); 
+    	        bullet.shootDiagonal(); 
 
-    	        if (bullet.getPosition().getX() > 8) {
+    	        if (bullet.getPosition().getX() > 8 || bullet.getPosition().getY()>4 || bullet.getPosition().getY()<0) {
     	            bulletDiagonalIterator.remove(); 
     	            removeBulletView(bullet); 
     	        }
