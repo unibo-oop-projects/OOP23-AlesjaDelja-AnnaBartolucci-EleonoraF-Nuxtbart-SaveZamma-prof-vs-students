@@ -26,8 +26,8 @@ public class Student {
 	
 	private void generateRandomPosition() {
         Random random = new Random();
-        int randomY = random.nextInt(7);
-        this.positionStudent = new Elements<>(0, randomY);
+        int randomY = random.nextInt(5);
+        this.positionStudent = new Elements<>(8, randomY);
     }
 
 	//Now we make the method that gets and sets the health and damage
