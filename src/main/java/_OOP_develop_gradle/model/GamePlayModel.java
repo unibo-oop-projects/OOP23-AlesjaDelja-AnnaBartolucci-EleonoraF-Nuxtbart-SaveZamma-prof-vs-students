@@ -11,12 +11,12 @@ import java.util.ArrayList;
 public class GamePlayModel {
 
 		private int scoreMacth;
-	    private int energy; // Punteggio partita
-	    private int timeTot; // Tempo di gioco
-	    private List<Student> studentList; // Lista di studenti presenti
-	    private List<Tutor> tutorList; // Lista di tutor presenti
-	    private List<NormalProfessor> normalProfList; // Lista di normal p presenti
-	    private List<Rector> rectorList; // Lista di rector presenti
+	    private int energy; // cost
+	    private int timeTot;
+	    private List<Student> studentList;
+	    private List<Tutor> tutorList;
+	    private List<NormalProfessor> normalProfList;
+	    private List<Rector> rectorList;
 	    private List<Bullet> bulletListNormal;
 	    private List<Bullet> bulletListDiagonal;
 	    
@@ -32,16 +32,24 @@ public class GamePlayModel {
 	        this.bulletListDiagonal = new ArrayList<>();
 	    }
 
+	    /**
+	     * Takes the match score.
+	     * @return The match score.
+	     */
 	    public int getScoreMacth() {
 			return scoreMacth;
 		}
 
+	    /**
+	     * Takes the match score.
+	     * @return The match score.
+	     */
 		public void setScoreMacth(int scoreMacth) {
 			this.scoreMacth = scoreMacth;
 		}
 
 		/**
-	     * Retrieves the list of normalProf bullets.
+	     * Takes the list of normalProf bullets.
 	     * @return The list of normalProf bullets.
 	     */
 		public List<Bullet> getBulletListNormal() {
@@ -57,7 +65,7 @@ public class GamePlayModel {
 		}
 
 		/**
-	     * Retrieves the list of diagonal bullets.
+	     * Takes the list of diagonal bullets.
 	     * @return The list of diagonal bullets.
 	     */
 		public List<Bullet> getBulletListDiagonal() {
@@ -73,7 +81,7 @@ public class GamePlayModel {
 		}
 
 		/**
-	     * Retrieves the energy.
+	     * Takes the energy.
 	     * @return The energy.
 	     */
 		public int getEnergy() {
@@ -89,7 +97,7 @@ public class GamePlayModel {
 		}
 
 		 /**
-	     * Retrieves the total game time.
+	     * Takes the total game time.
 	     * @return The total game time.
 	     */
 		public int getTimeTot() {
@@ -105,7 +113,7 @@ public class GamePlayModel {
 	    }
 	    
 	    /**
-	     * Retrieves the list of students.
+	     * Takes the list of students.
 	     * @return The list of students.
 	     */
 	    public List<Student> getStudentList() {
@@ -117,15 +125,13 @@ public class GamePlayModel {
 	     * @param waveSize The size of the wave.
 	     */
 	    public void generateWave(int waveSize) {
-	        // Creare una nuova ondata di studenti
 	        for (int i = 0; i < waveSize; i++) {
 	            generateNewStudent();
 	        }
-	    	
 	    }
 
 	    /**
-	     * Retrieves the list of tutors.
+	     * Takes the list of tutors.
 	     * @return The list of tutors.
 	     */
 	   public List<Tutor> getTutorList() {
@@ -141,7 +147,7 @@ public class GamePlayModel {
 		}
 
 		/**
-		 * Retrieves the list of normal professors.
+		 * Takes the list of normal professors.
 		 * @return The list of normal professors.
 		 */
 		public List<NormalProfessor> getNormalProfList() {
@@ -157,7 +163,7 @@ public class GamePlayModel {
 		}
 
 		/**
-		 * Retrieves the list of rectors.
+		 * Takes the list of rectors.
 		 * @return The list of rectors.
 		 */
 		public List<Rector> getRectorList() {
@@ -183,13 +189,14 @@ public class GamePlayModel {
 		/**
 		 * Generates a new tutor and adds it to the list.
 		 * @param position The position of the new tutor.
-		 * @return The newly generated tutor.
+		 * @return The new tutor generated.
 		 */
 		public Tutor generateNewTutor(Elements<Integer, Integer> position) {
 			Tutor newTutor = new Tutor(position.getX(), position.getY());
     		tutorList.add(newTutor);
     		return newTutor;
 	    }
+		
 		/**
 		 * Generates a new normal professor and adds it to the list.
 		 * @param damage The damage of the new normal professor.
@@ -198,23 +205,25 @@ public class GamePlayModel {
 		 * @param pathImg The image path of the new normal professor.
 		 * @param costProfessor The cost of the new normal professor.
 		 * @param idProf The ID of the new normal professor.
-		 * @return The newly generated normal professor.
+		 * @return The new normal professor generated.
 		 */
 		public NormalProfessor generateNewNormalP(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor, int idProf) {
 			NormalProfessor newnormalProf = new NormalProfessor(position.getX(), position.getY());
 			normalProfList.add(newnormalProf);
     		return newnormalProf;
 	    }
+		
 		/**
 		 * Generates a new rector and adds it to the list.
 		 * @param position The position of the new rector.
-		 * @return The newly generated rector.
+		 * @return The new rector generated.
 		 */
 		public Rector generateNewRector(Elements<Integer, Integer> position ) {
 			Rector newRector = new Rector(position.getX(), position.getY());
     		rectorList.add(newRector);
     		return newRector;
 	    }
+		
 		/**
 		 * Generates a new student and adds it to the list.
 		 */
@@ -222,6 +231,7 @@ public class GamePlayModel {
 	    	Student student = new Student();
 	    	this.studentList.add(student);
 	    }
+	    
 	    /**
 	     * Increases the match score by a specified amount.
 	     * @param amount The amount to increase the match score by.
@@ -229,6 +239,7 @@ public class GamePlayModel {
 	    public void increaseEnergy(int amount) {
 	    	energy += amount;
 	    }
+	    
 	    /**
 	     * Decreases the match score by a specified amount.
 	     * @param amount The amount to decrease the match score by.
@@ -241,6 +252,7 @@ public class GamePlayModel {
 	        } 
 	        return false;
 	    }
+	    
 	    /**
 	     * Increases the total game time by a specified amount.
 	     * @param amount The amount to increase the total game time by.
@@ -248,6 +260,7 @@ public class GamePlayModel {
 	    public void increaseTimeTot(double amount) {
 	    	timeTot += amount;
 	    }
+	    
 	    /**
 	     * Decreases the total game time by a specified amount.
 	     * @param amount The amount to decrease the total game time by.
