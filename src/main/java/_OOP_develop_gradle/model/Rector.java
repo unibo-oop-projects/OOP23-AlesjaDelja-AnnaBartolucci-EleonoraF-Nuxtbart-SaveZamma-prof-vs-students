@@ -4,13 +4,13 @@ public class Rector extends Professor{
 
 	private Elements<Integer, Integer> currentPosition;
 	
-	public static final int RECTOR_HIT_DAMAGE = 25; //DANNO CHE INFLIGGO ALLO STUDENTE
+	public static final int RECTOR_HIT_DAMAGE = 50; //DANNO CHE INFLIGGO ALLO STUDENTE
 	public static final int RECTOR_BUY_COST = 10;
 	public static final int RECTOR_HEALTHPOINTS = 100;
 	public static final String RECTOR_IMG_PATH = "img/professor.png";
 	public static final String rectorBulletName = "rectorBullet";
 	public Bullet rectorBullet;
-	private int bulletSpeed=3;
+	private int bulletSpeed=1;
 	
 	public String pathImgR;
 	public static final int rectorName = 3;
@@ -75,12 +75,4 @@ public class Rector extends Professor{
 	public static String getRectorbulletname() {
 		return rectorBulletName;
 	}
-	
-	/**
-     * Shoots a bullet diagonally from the Rector's current position.
-     *
-     * @param col The total number of columns in the game grid.
-     * @param row The total number of rows in the game grid.
-     */
-	
 }
