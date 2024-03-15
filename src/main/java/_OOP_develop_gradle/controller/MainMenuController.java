@@ -7,12 +7,16 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class MainMenuController {
 	private boolean soundOn = true;
     public Button soundButton;
+    public static MediaPlayer mediaPlayer;
 	Stage stage;
 	
 	/**
@@ -45,6 +49,13 @@ public class MainMenuController {
 		if (soundOn) {
             soundOn = false;
             soundButton.setText("Sound Off");
+            Media sound = new Media(getClass().getResource("/music/background.wav").toString());
+	        mediaPlayer = new MediaPlayer(sound);
+	        mediaPlayer.setAutoPlay(true);
+	        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+	        mediaPlayer.setStartTime(Duration.seconds(0));
+	        mediaPlayer.setStopTime(Duration.seconds(50));
+	        mediaPlayer.play();
         } else {
             soundOn = true;
             soundButton.setText("Sound On");
