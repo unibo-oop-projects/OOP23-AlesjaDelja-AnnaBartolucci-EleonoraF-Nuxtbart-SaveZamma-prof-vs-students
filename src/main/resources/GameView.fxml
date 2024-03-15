@@ -15,7 +15,7 @@
    <children>
       <ImageView fx:id="lawnImage" fitHeight="600.0" fitWidth="1024.0" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@/img/lawnGame.png" />
+            <Image url="@/img/gamefield.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="58.0" fitWidth="77.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
