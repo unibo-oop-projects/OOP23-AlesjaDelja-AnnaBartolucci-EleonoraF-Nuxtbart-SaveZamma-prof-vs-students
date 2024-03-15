@@ -23,16 +23,17 @@
             <Image url="@/img/sun.png" />
          </image>
       </ImageView>
+      <Label fx:id="energyLabel" layoutX="208.0" layoutY="3.0" prefHeight="73.0" prefWidth="104.0" text="20" textFill="WHITE">
+         <font>
+            <Font name="Dyuthi" size="35.0" />
+         </font>
+      </Label>
       <Label fx:id="matchScoreLabel" layoutX="58.0" layoutY="3.0" prefHeight="73.0" prefWidth="104.0" text="0" textFill="WHITE">
          <font>
             <Font name="Dyuthi" size="35.0" />
          </font>
       </Label> 
-      <Label fx:id="energyLabel" layoutX="108.0" layoutY="3.0" prefHeight="73.0" prefWidth="104.0" text="20" textFill="WHITE">
-         <font>
-            <Font name="Dyuthi" size="35.0" />
-         </font>
-      </Label> 
+       
       <ImageView fx:id="GameMenuLoaderButton" fitHeight="91.0" fitWidth="150.0" layoutX="2.0" layoutY="505.0" onMouseClicked="#GameMenu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/img/gameMenuButton.png" />
