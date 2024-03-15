@@ -160,6 +160,7 @@ public class GamePlayView {
                     	if (timeTot > 0) {
                     		updateTempoLabel();
                     		updateEnergyLabel();
+                    		updateMatchScoreLabel();
                             lastTimeUpdate = now;
                     	}else {
                         	timer.stop();
@@ -196,9 +197,15 @@ public class GamePlayView {
 		energyLabel.setText(String.format("%d", gamePlayModel.getEnergy()));
 	}
     
-	public void updateMatchScoreLabel(Score score) {
-		score.updateScore(matchScoreLabel);
+	public void updateMatchScoreLabel() {
+		matchScoreLabel.setText(String.format("%d", gamePlayModel.getScoreMacth()));
 		
+	}
+	public int getMatchScore() {
+		return matchScore;
+	}
+	public void setMatchScore(int matchScore) {
+		this.matchScore = matchScore;
 	}
 	public void updatePositions(List<Student> studentList, List<List<? extends Professor>> profList, List<Bullet> bulletListNormal, List<Bullet> bulletList){
 		Platform.runLater(() -> {
