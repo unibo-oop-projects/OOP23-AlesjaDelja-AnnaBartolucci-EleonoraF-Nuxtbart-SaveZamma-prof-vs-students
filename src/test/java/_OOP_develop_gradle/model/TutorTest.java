@@ -24,7 +24,7 @@ public class TutorTest {
         assertEquals(Tutor.tutorName, tutor.getTutorname());
         assertNotNull(tutor.getTutorBullet());
         assertEquals(1, tutor.getBulletSpeed());
-        assertEquals(Tutor.tutorBulletName, tutor.getTutorbulletname());
+        assertEquals(Tutor.tutorBulletName, Tutor.getTutorbulletname());
     }
 
     @Test
