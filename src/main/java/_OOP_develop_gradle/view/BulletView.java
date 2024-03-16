@@ -22,26 +22,14 @@ public class BulletView  extends ElementView{
 	
 	@Override
 	public void displayElement(Elements<Integer, Integer> positionElement) {
-		double newWidth = 20; // Nuova larghezza desiderata
-        double newHeight = 20; // Nuova altezza desiderata
-        imageView.setFitWidth(newWidth);
-        imageView.setFitHeight(newHeight);
-		super.displayElement(positionElement);
+		 Image image = new Image(getClass().getResourceAsStream(getImagePath()));
+
+	        imageView = new ImageView(image);
+	        // Impostare le dimensioni che siano addatte a quello che serve
+	        imageView.setFitWidth(20); 
+	        imageView.setFitHeight(20); 
+	        
+	     // Sets the position of student
+	        gridPane.add(imageView, positionElement.getX(),positionElement.getY());
 	}
-
-	// Metodo per ottenere un'immagine ridimensionata
-    private Image getResizedImage() {
-        Image image = new Image(getImagePath());
-        // Definisci la nuova larghezza e altezza desiderata per l'immagine
-
-        double newWidth = 5; // Nuova larghezza desiderata
-        double newHeight = 5; // Nuova altezza desiderata
-        // Crea un'ImageView per l'immagine e imposta le nuove dimensioni
-        ImageView imageView = new ImageView(image);
-        //imageView.setFitWidth(newWidth);
-        //imageView.setFitHeight(newHeight);
-        // Restituisci l'immagine ridimensionata
-        return imageView.snapshot(null, null);
-    }
-
 }

@@ -1,7 +1,5 @@
 package _OOP_develop_gradle.model;
 
-
-//tutor cerbottana
 public class Tutor extends Professor{
 	
 	public static final int TUTOR_HIT_DAMAGE = 25; //DANNO CHE INFLIGGO ALLO STUDENTE
