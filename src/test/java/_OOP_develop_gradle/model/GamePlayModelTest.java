@@ -92,8 +92,8 @@ class GamePlayModelTest {
 	 
 	 @Test
 	    public void testBulletLists() {
-	        Bullet bullet1 = new Bullet(1, 10, new Elements<>(1, 3), "bullet1", "/img/pea.png");
-	        Bullet bullet2 = new Bullet(2, 10, new Elements<>(2, 4), "bullet2", "/img/pea.png");
+	        Bullet bullet1 = new Bullet(1, 10, new Elements<>(1, 3));
+	        Bullet bullet2 = new Bullet(2, 10, new Elements<>(2, 4));
 	        
 	        gameModel.getBulletListNormal().add(bullet1);
 	        gameModel.getBulletListDiagonal().add(bullet2);

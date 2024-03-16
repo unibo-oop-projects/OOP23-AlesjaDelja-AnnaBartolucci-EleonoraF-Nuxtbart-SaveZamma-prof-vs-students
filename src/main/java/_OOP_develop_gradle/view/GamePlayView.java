@@ -306,7 +306,7 @@ public class GamePlayView {
 	    				Tutor tutornew = new Tutor(columnIndex, rowIndex);
 	    				Bullet tutorBullet = tutornew.tutorBullet;
 	    				
-	    				if(tutornew.getCostProfessor() <= gamePlayModel.getEnergy()) {
+	    				if(tutornew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
 	    					gamePlayModel.getTutorList().add(tutornew);
 	    					tutorInGrid.add(tutornew);
 	    					gamePlayModel.getBulletListNormal().add(tutorBullet);
@@ -317,14 +317,14 @@ public class GamePlayView {
 	    					
 	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
 	    	    			
-	    	    			gamePlayModel.decreaseEnergy(tutornew.getCostProfessor());
+	    	    			gamePlayModel.decreaseEnergy(tutornew.getEnergyProfessor());
 	    	    		}
 	    				break;
 	    			case 2:
 	    				NormalProfessor normalProfNew = new NormalProfessor(columnIndex, rowIndex);
 	    				Bullet nProfBullet = normalProfNew.normalProfBullet;
 	    				
-	    				if(normalProfNew.getCostProfessor() <= gamePlayModel.getEnergy()) {
+	    				if(normalProfNew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
 	    					gamePlayModel.getNormalProfList().add(normalProfNew);
 	    					normalProfInGrid.add(normalProfNew);
 	    					gamePlayModel.getBulletListNormal().add(nProfBullet); 
@@ -336,14 +336,14 @@ public class GamePlayView {
 	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
 	    	    			
 	    	    			
-	    	    			gamePlayModel.decreaseEnergy(normalProfNew.getCostProfessor());
+	    	    			gamePlayModel.decreaseEnergy(normalProfNew.getEnergyProfessor());
 	    	    		}
 	    				break;
 	    			case 3:
 	    				Rector rectornew = new Rector(columnIndex, rowIndex);
 	    				Bullet rectorBullet = rectornew.rectorBullet;
 	    				
-	    				if(rectornew.getCostProfessor() <= gamePlayModel.getEnergy()) {
+	    				if(rectornew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
 	    					gamePlayModel.getRectorList().add(rectornew);
 	    					rectorInGrid.add(rectornew);
 	    					gamePlayModel.getBulletListDiagonal().add(rectorBullet);
@@ -355,7 +355,7 @@ public class GamePlayView {
 	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
 	    	    			
 	    	    			// diminuisco la moneta tot 
-	    	    			gamePlayModel.decreaseEnergy(rectornew.getCostProfessor());
+	    	    			gamePlayModel.decreaseEnergy(rectornew.getEnergyProfessor());
 	    	    		}
 	    				break;
 	    			default:
