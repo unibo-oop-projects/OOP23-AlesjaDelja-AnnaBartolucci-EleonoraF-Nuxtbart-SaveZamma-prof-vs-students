@@ -10,9 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-//import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -23,30 +21,18 @@ public class MenuController {
 
 	@FXML
     private AnchorPane GameMainMenuRoot;
-	@FXML
-    private ImageView gameMenuButton;
-
     @FXML
-    private ImageView exitGameButton;
-    
-    @FXML
-    private ImageView replayGameButton;
-    
+    private Button replayGameButton;
     @FXML
     public void initData() {
     	GamePlayController.getInstance().setGameStatus(false); // Per mettere in pausa quando apro il menu
     }
     
     @FXML
-    void exitGame(MouseEvent event) throws IOException {
-    	System.exit(0);
-    }
-    
-    @FXML
-    void returnMainManu(ActionEvent event) throws IOException {
+    void back(ActionEvent event) throws IOException {
         //GamePlayController.gameStatus = false;
-        Stage currentStage = (Stage) gameMenuButton.getScene().getWindow();
-        currentStage.close();
+        //tage currentStage = (Stage) gameMenuButton.getScene().getWindow();
+        //currentStage.close();
         // Chiudi tutte le finestre aperte
         closeAllWindows();
         StageChangeController stageChanger = new StageChangeController();
@@ -56,7 +42,7 @@ public class MenuController {
 
     // TODO impazzisce, da rincontrollare
     @FXML
-    void replayGame(MouseEvent event) throws IOException {
+    void replay(ActionEvent event) throws IOException {
     	
     	// chiudo tutte le finestre e la finestra del menù piccolina
         Stage menuScene = (Stage) replayGameButton.getScene().getWindow();
@@ -86,20 +72,6 @@ public class MenuController {
 
     }
 
-    /*@FXML NON FATTA
-    void resumeGame(ActionEvent event) {
-        // Riprendi il gioco
-    	GamePlayController gameController = GamePlayController.getInstance();
-        gameController.setGameStatus(true);
-        //GamePlayController.gameStatus = true; // Imposta lo stato del gioco su attivo
-
-        //chiudo la finestra del menù
-        Stage currentStage = (Stage) gameMenuButton.getScene().getWindow();
-        currentStage.close();
-        
-        gameController.startGame(gameController.getGamePlayView());
-    }*/
-    
     private void closeAllWindows() {
         // Chiudi tutte le finestre aperte, tranne quella del menu principale
         ObservableList<Window> windows = Window.getWindows();

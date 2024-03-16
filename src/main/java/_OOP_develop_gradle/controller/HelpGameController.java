@@ -1,15 +1,13 @@
 package _OOP_develop_gradle.controller;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 
-public class HelpGameController {
+public class HelpGameController implements GameControllerInterface {
 
-	
-	public void back(ActionEvent e) throws IOException {
-		StageChangeController stageChanger = new StageChangeController();
+    @Override
+    public void back(ActionEvent e) throws IOException {
+        StageChangeController stageChanger = new StageChangeController();
         stageChanger.mainMenu(e);
-	}
-	
+    }
 }

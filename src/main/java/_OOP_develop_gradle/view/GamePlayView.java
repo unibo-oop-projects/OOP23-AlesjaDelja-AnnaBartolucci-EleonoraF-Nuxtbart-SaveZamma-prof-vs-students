@@ -128,33 +128,24 @@ public class GamePlayView {
 	}
     @FXML
     public void initialize() {
-    	// Inizializza la GameView
+    	
         try {
         	gameController = new GamePlayController();
             gameController.initData(this);
         } catch (Exception e) {
             e.printStackTrace();
-            // Gestisci l'eccezione in modo appropriato, ad esempio mostrando un messaggio di errore all'utente
         }
     }
     
     public void initializeView() {
-        // Inizializza la griglia di gioco, impostando le immagini iniziali, ecc.
-    	//lawn_grid.setVisible(true);
-    	//ProfChoose.getProfTypes(gamePlayRoot);
-    	/*gamePlayModel = new GamePlayModel();
-    	profInGrid = gamePlayModel.getProfList();
-    	studentInGrid = gamePlayModel.getStudentList();
     	
-    	gameController = new GamePlayController();
-    	gameController.initData(this);*/
     	profChoosen=-1;
     	gamePlayModel = GamePlayController.getGameModel();
 		timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
             	if (!timerStop) {
-                    if (now - lastTimeUpdate >= ONE_SECOND) { // check se è passato un secondo
+                    if (now - lastTimeUpdate >= ONE_SECOND) {
                     	timeTot = gamePlayModel.getTimeTot();
                     	if (timeTot > 0) {
                     		updateTempoLabel();
@@ -222,8 +213,7 @@ public class GamePlayView {
 	}
 	
 	private void updateStudentPositions(List<Student> studentList) {
-		// per ogni studente in studentInGrid
-    	//	prendo le coordinate e metto sulla griglia la foto corrispondente
+		
 		studentInGrid =studentList;
     	for(Student stud : studentInGrid) {
     		StudentView studView = new StudentView(lawn_grid);

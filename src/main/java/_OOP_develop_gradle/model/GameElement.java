@@ -3,23 +3,23 @@ package _OOP_develop_gradle.model;
 public interface GameElement {
 	/**
 	 *  Gets the position of an element.
-	 * @return
+	 * @return position
 	 */
     Elements<Integer, Integer> getPosition();
+    /**
+     * Sets the position of an element.
+     * @param position
+     */
+    void setPosition(Elements<Integer, Integer> position);
     
-    /**
-     * Checks if a element is alive.
-     * @return
-     */
-    boolean isAlive();
-    /**
-     * Gets the name of an element.
-     * @return
-     */
-    String getName();
     /**
      * Gets the damage of the element.
      * @return
      */
     int getDamage();
+    /**
+     * Sets the damage of the element.
+     * @param damage
+     */
+    void setDamage(int damage);
 }
