@@ -1,38 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.Button?>
 
-<AnchorPane fx:id="GameMainMenuRoot" prefHeight="278.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="_OOP_develop_gradle.controller.MenuController">
+<AnchorPane fx:id="GameMainMenuRoot" prefHeight="278.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="_OOP_develop_gradle.controller.MenuController">
    <children>
-      <ImageView fitHeight="296.0" fitWidth="386.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@img/GameMenu.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="gameMenuButton" fitHeight="92.0" fitWidth="175.0" layoutX="195.0" layoutY="36.0" onMouseClicked="#returnMainManu" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="gameMenuButton" fitHeight="141.0" fitWidth="237.0" layoutX="86.0" layoutY="46.0" onMouseClicked="#returnMainManu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/gameMenuButton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="exitGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="12.0" layoutY="34.0" onMouseClicked="#exitGame" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="exitGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="6.0" layoutY="187.0" onMouseClicked="#exitGame" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/exitButton.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="replayGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="14.0" layoutY="127.0" onMouseClicked="#replayGame" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="replayGameButton" fitHeight="92.0" fitWidth="175.0" layoutX="203.0" layoutY="187.0" onMouseClicked="#replayGame" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/replayButton.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="resumeButton" text="Riprendi" onAction="#resumeGame" />
-      <Label fx:id="GameMenuMessage" layoutX="34.0" layoutY="208.0" prefHeight="51.0" prefWidth="246.0" textFill="#f5881a">
-         <font>
-            <Font name="Comic Sans MS" size="25.0" />
-         </font></Label>
    </children>
 </AnchorPane>
