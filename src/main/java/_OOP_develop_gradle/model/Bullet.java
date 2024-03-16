@@ -9,8 +9,6 @@ public final class Bullet {
     private Elements<Integer, Integer> currentPosition;
     private final int bulletSpeed;
     private final int bulletDamage;
-    private final String bulletName;
-	private String pathImgB;
 
     /**
      * Constructor for BulletEntity.
@@ -21,12 +19,10 @@ public final class Bullet {
      * @param name   the name of the bullet
      * @param pathImg   the name of the bullet
      */
-    public Bullet(int speed, int damage, Elements<Integer, Integer> pos, String name, String pathImgB) {
+    public Bullet(int speed, int damage, Elements<Integer, Integer> pos) {
         this.bulletSpeed = speed;
         this.bulletDamage = damage;
         this.currentPosition = pos;
-        this.bulletName = name;
-        this.pathImgB = pathImgB;
     }
 
     /**
@@ -35,19 +31,6 @@ public final class Bullet {
 	 */
     public Elements<Integer, Integer> getPosition() {
         return currentPosition;
-    }
-
-    //é da togliere???
-    public boolean isAlive() {
-        return true;
-    }
-
-    /**
-	 * Gets the name of the Bullet
-	 * @return the current name of the Bullet
-	 */
-    public String getBulletName() {
-        return this.bulletName;
     }
 
     /**
@@ -103,11 +86,5 @@ public final class Bullet {
             // Aggiorna la posizione del proiettile
             currentPosition = new Elements<>(newBulletX, newBulletY);
     }
-
-    
-     //POSSO ELIMINARLO?
-    public String getPathImgBullet() {
-		return pathImgB;
-	}
     
 }

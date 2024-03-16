@@ -8,71 +8,57 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProfessorTest {
 
 	Elements<Integer, Integer> position= new Elements<>(0, 0);
-    Professor professor = new Professor(50, 100, position, "imagePath", 10, 1);
+    Professor professor = new Professor(50, 100, new Elements<>(0, 0), 10);
     
 
     @Test
-    public void testGetPathImgProf() {
-        assertEquals("imagePath", professor.getPathImgProf());
-    }
-
-    @Test
-    public void testSetPathImgProf() {
-        professor.setPathImgProf("newImagePath");
-        assertEquals("newImagePath", professor.getPathImgProf());
-    }
-
-    @Test
-    public void testGetHealthPointsProf() {
-        assertEquals(100, professor.getHealthPointsProf());
-    }
-
-    @Test
-    public void testSetHealthPointsProf() {
-        professor.setHealthPointsProf(150);
-        assertEquals(150, professor.getHealthPointsProf());
-    }
-
-    @Test
-    public void testGetCostProfessor() {
-        assertEquals(10, professor.getCostProfessor());
-    }
-
-    @Test
-    public void testSetCostProfessor() {
-        professor.setCostProfessor(20);
-        assertEquals(20, professor.getCostProfessor());
-    }
-
-    @Test
-    public void testGetDamageProf() {
+    public void testConstructor() {
+        // Verifica che il costruttore inizializzi correttamente il Professor
+        assertNotNull(professor);
         assertEquals(50, professor.getDamageProf());
-    }
-
-    @Test
-    public void testSetDamageProf() {
-        professor.setDamageProf(60);
-        assertEquals(60, professor.getDamageProf());
-    }
-
-    @Test
-    public void testGetPositionProf() {
-        assertEquals(position, professor.getPositionProf());
-    }
-
-    @Test
-    public void testIsAliveProf() {
-        assertTrue(professor.isAliveProf());
+        assertEquals(100, professor.getHealthPointsProf());
+        assertEquals(new Elements<>(0, 0), professor.getPositionProf());
+        assertEquals(10, professor.getEnergyProfessor());
+        assertFalse(professor.isAttacked());
     }
 
     @Test
     public void testReceiveDamageProf() {
-        professor.receiveDamageProf(20);
+        // Verifica che il metodo receiveDamageProf sottragga correttamente i danni dai punti vita del professor
+        assertEquals(100, professor.getHealthPointsProf());
+        professor.receiveDamageProf(25);
+        assertEquals(75, professor.getHealthPointsProf());
+    }
+
+    @Test
+    public void testSetAttacked() {
+        // Verifica che il metodo setAttacked imposti correttamente lo stato del professor
+        assertFalse(professor.isAttacked());
+        professor.setAttacked(true);
+        assertTrue(professor.isAttacked());
+    }
+
+    @Test
+    public void testSetHealthPointsProf() {
+        // Verifica che il metodo setHealthPointsProf imposti correttamente i punti vita del professor
+        assertEquals(100, professor.getHealthPointsProf());
+        professor.setHealthPointsProf(80);
         assertEquals(80, professor.getHealthPointsProf());
     }
 
     @Test
-    public void testGetIDProf() {
-        assertEquals(1, professor.getIDProf());
+    public void testSetEnergyProfessor() {
+        // Verifica che il metodo setEnergyProfessor imposti correttamente l'energia del professor
+        assertEquals(10, professor.getEnergyProfessor());
+        professor.setEnergyProfessor(15);
+        assertEquals(15, professor.getEnergyProfessor());
+    }
+
+    @Test
+    public void testSetDamageProf() {
+        // Verifica che il metodo setDamageProf imposti correttamente i danni del professor
+        assertEquals(50, professor.getDamageProf());
+        professor.setDamageProf(60);
+        assertEquals(60, professor.getDamageProf());
     }
 }
