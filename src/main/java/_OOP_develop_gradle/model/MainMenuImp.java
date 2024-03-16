@@ -9,13 +9,15 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class MainMenuImp extends Application {
+public class MainMenuImp extends Application implements MainMenu{
+	private static final String MAIN_MENU_PATH = "/MainMenuView.fxml";
+	private static final String EXIT_TITLE = "Exit";
+	private static final String EXIT_HEADER = "You are going to exit the game!";
+	private static final String EXIT_CONTENT = "Are you sure?";
 		@Override
 		public void start(Stage primaryStage) {
 			try {
-				System.out.println(getClass().getResource("/MainMenuView.fxml"));
-			    //Parent root = FXMLLoader.load(ClassLoader.getSystemResource("MainMenuView.fxml"));
-				Parent root = FXMLLoader.load(getClass().getResource("/MainMenuView.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource(MAIN_MENU_PATH));
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
 				primaryStage.show();
@@ -31,12 +33,11 @@ public class MainMenuImp extends Application {
 		}
 		
 		public void exitGame(Stage stage) {
-			
 			//Insert an alert that makes sure that the user is sure about exiting the game
 			Alert exitAlert = new Alert(AlertType.CONFIRMATION);
-			exitAlert.setTitle("Exit");
-			exitAlert.setHeaderText("You are going to exit the game!");
-			exitAlert.setContentText("Are you sure?");
+			exitAlert.setTitle(EXIT_TITLE);
+			exitAlert.setHeaderText(EXIT_HEADER);
+			exitAlert.setContentText(EXIT_CONTENT);
 			if(exitAlert.showAndWait().get() == ButtonType.OK) {
 				stage.close();
 			}
