@@ -119,6 +119,173 @@ public class GamePlayController {
 		    System.out.println("settato nuvo gruppo di studenti");
 		}
     }
+   public void moveStudents() {
+	   
+	   List<Student> studentToRemove = new ArrayList<>();
+       List<Student> studentCopy = new ArrayList<>(studInGame);
+	    Iterator<Student> studentIterator = studentCopy.iterator();//gameModel.getStudentList().iterator();
+	    while (studentIterator.hasNext()) {
+	        Student student = studentIterator.next();
+	        
+	        // Check dello studente se è vivo 
+	        if (student.getHealthStudent() > 0) { 
+	        	
+	        	//if (collisionBulletAndStudent(student, bulletNormalList) || collisionBulletAndStudent(student, bulletDiagonalList)) {
+	        		if (student.getHealthStudent() <= 0) {
+	        			/*scoreMatch.addScore();
+	        	        gameModel.setScoreMacth(scoreMatch.getScore());
+	        	        gameModel.setEnergy(gameModel.getEnergy() + student.getEnergy());
+	        			removeStudentView(student);*/
+	        			
+	        			studentToRemove.add(student);
+	        		}
+	        		
+	        	//}
+	        	
+	        	if (collisionProfAndStudent(student, allProfessors)) {
+	        		// TODO aggiungere sync ??
+	        		synchronizeLists(() -> {
+	        			gamePlayView.getStudentViewList().get(studInGame.indexOf(student)).attackStudents();
+                   });
+	        		
+	        	}else {
+	        		// Avanzamento in riga (diminuzione colonna)
+		            if (student.getPositionStudent().getX() > 0) {
+		            	student.setPositionStudent(new Elements<Integer, Integer> (student.getPositionStudent().getX() - 1,student.getPositionStudent().getY()));
+		            }
+	        	}
+	            
+	            // Controllo se è arrivato nella cella finale
+	            if (student.getPositionStudent().getX() == 0) {
+	            	 // se nessun prof è presente in quella posizione ha perso
+	            	 // sennò si colpice il prof 
+	            	if (collisionProfAndStudent(student, allProfessors)) {
+	            		// TODO aggiungere sync ??
+	            		synchronizeLists(() -> {
+	            			gamePlayView.getStudentViewList().get(studInGame.indexOf(student)).attackStudents();
+	            			gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
+	                    });
+		        		
+	            		//break;
+	            	}
+	                // Utente ha perso, aggiorna lo stato del gioco
+	                gameStatus = false;
+	                gamePlayView.setTimerStop(true);
+	                try {
+						userGame("Sconfitta");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+	                break;
+	            }
+	        } else {
+	        	removeStudentView(student);
+	        	studentToRemove.add(student);
+	        }
+	        
+	   }
+	   studInGame.removeAll(studentToRemove);
+   }
+   
+   public void handleProfessors() {
+	   
+	   List<Professor> professorsToRemove = new ArrayList<>();
+	   List<List<? extends Professor>> allProfessorsCopy = new ArrayList<>(allProfessors);
+	   if(!allProfessorsCopy.isEmpty()) {
+		    for (List<? extends Professor> professorList : allProfessorsCopy) {
+				   Iterator<? extends Professor> profIterator = professorList.iterator();
+				   while (profIterator.hasNext() && !professorList.isEmpty()) {
+				        Professor prof = profIterator.next();
+	
+			        	// il prof che viene colpito lo faccio già nel ciclo degli studenti
+	        	  		if(prof.getHealthPointsProf() <= 0){
+			                gameModel.setEnergy(gameModel.getEnergy() - prof.getEnergyProfessor());
+	        	  			//TODO controllare
+			                prof.setAttacked(false);
+			                System.out.println("Il prof dovrebbe muorire ora e scomparire!");
+			                removeProfessorView(prof);
+			                
+			                professorsToRemove.add(prof);
+	        	  			
+	        	  		}else {
+	        	  			// se è in vita ed è tempo di sparare: creo nuovo bullet e sparo
+	        	  			// TODO decidere ogni quanto far sparare --> per ora ogni 4 sec
+	        	  			if(gameModel.getTimeTot() % 4 == 0 && !prof.isAttacked()) {
+	        	  				if(prof instanceof Tutor ) {
+	        	  					Tutor curr = (Tutor) prof;
+	        	  					bulletNormalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf()));
+	        	  					gameModel.setBulletListNormal(bulletNormalList);
+	        	  				}else if(prof instanceof NormalProfessor) {
+	        	  					NormalProfessor normalProfessor = (NormalProfessor) prof;
+	        	  		            bulletNormalList.add(new Bullet(normalProfessor.getBulletSpeed(), prof.getDamageProf(), prof.getPositionProf()));
+	        	  		        
+	        	  				}else{
+	        	  					Rector curr = (Rector) prof;
+	        	  					bulletDiagonalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf()));
+	        	  					gameModel.setBulletListDiagonal(bulletDiagonalList);
+	        	  				}
+	        	  			}
+	        	  			
+	        	  		}
+	        	  		
+				        // Controlla se sono in vita ancora tutti i professori
+				        /*if (allProfessors.isEmpty() && gamePlayView.isFirstProfPicked()) {
+				            // Utente ha perso, aggiorna lo stato del gioco
+				            gameStatus = false;
+				            try {
+				                userLost();
+				            } catch (IOException e) {
+				                e.printStackTrace();
+				            }
+				            break;
+				        }*/
+			   }
+		   }
+	   }
+	   for (List<? extends Professor> professorList : allProfessors) {
+		   //professorList.removeAll(professorsToRemove);
+		   professorList.removeIf(professorsToRemove::contains);
+ 			}
+   }
+   
+   private void advanceBullets() {
+   	// Faccio avanzare i bullet
+	 List<Bullet> bulletToRemove = new ArrayList<>();
+     List<Bullet> bulletNormalCopy = new ArrayList<>(bulletNormalList);
+   	 Iterator<Bullet> bulletNormalIterator = bulletNormalCopy.iterator();
+   	    while (bulletNormalIterator.hasNext() && !bulletNormalCopy.isEmpty()) {
+   	        Bullet bullet = bulletNormalIterator.next();
+   	        
+   	        if(collisionBulletAndStudents(studInGame, bullet)) {
+   	        	removeBulletView(bullet);
+   	        	//bulletNormalIterator.remove();
+   	        	bulletToRemove.add(bullet);
+   	        }else {
+   	        	bullet.move();
+   	        }
+   	        
+   	        if (bullet.getPosition().getX() > 8) {
+   	            //bulletNormalIterator.remove(); 
+   	        	bulletToRemove.add(bullet);
+   	            removeBulletView(bullet);
+   	        }
+   	    }
+
+   	 bulletNormalList.removeIf(bulletToRemove::contains);
+   	 
+   	    // Faccio avanzare i bullet diagonali
+   	    Iterator<Bullet> bulletDiagonalIterator = bulletDiagonalList.iterator();
+   	    while (bulletDiagonalIterator.hasNext()) {
+   	        Bullet bullet = bulletDiagonalIterator.next();
+   	        // TODO da fare la collision con students
+   	        bullet.shootDiagonal(); 
+
+   	        if (bullet.getPosition().getX() > 8 || bullet.getPosition().getY()>4 || bullet.getPosition().getY()<0) {
+   	            bulletDiagonalIterator.remove(); 
+   	            removeBulletView(bullet); 
+   	        }
+   	    }
+   }
    
    /**
     * 
@@ -160,139 +327,15 @@ public class GamePlayController {
 	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                });
 					
-	                List<Student> studentToRemove = new ArrayList<>();
-	                List<Student> studentCopy = new ArrayList<>(studInGame);
-				    Iterator<Student> studentIterator = studentCopy.iterator();//gameModel.getStudentList().iterator();
-				    while (studentIterator.hasNext()) {
-				        Student student = studentIterator.next();
-				        
-				        // Check dello studente se è vivo 
-				        if (student.getHealthStudent() > 0) { 
-				        	
-				        	if (collisionBulletAndStudent(student, bulletNormalList) || collisionBulletAndStudent(student, bulletDiagonalList)) {
-				        		if (student.getHealthStudent() <= 0) {
-				        			scoreMatch.addScore();
-				        	        gameModel.setScoreMacth(scoreMatch.getScore());
-				        	        gameModel.setEnergy(gameModel.getEnergy() + student.getEnergy());
-				        			removeStudentView(student);
-				        			/*Platform.runLater(() -> {
-				        			    studentIterator.remove(); // Rimuovi lo studente morto dalla lista
-				        			});*/
-						        	//studentIterator.remove(); // Rimuovi lo studente morto dalla lista
-				        			studentToRemove.add(student);
-				        		}
-				        		
-				        	}
-				        	
-				        	if (collisionProfAndStudent(student, allProfessors)) {
-				        		// TODO aggiungere sync ??
-				        		synchronizeLists(() -> {
-				        			gamePlayView.getStudentViewList().get(studInGame.indexOf(student)).attackStudents();
-			                    });
-				        		
-				        	}else {
-				        		// Avanzamento in riga (diminuzione colonna)
-					            if (student.getPositionStudent().getX() > 0) {
-					            	student.setPositionStudent(new Elements<Integer, Integer> (student.getPositionStudent().getX() - 1,student.getPositionStudent().getY()));
-					            }
-				        	}
-				            
-				            
-				            // Controllo se è arrivato nella cella finale
-				            if (student.getPositionStudent().getX() == 0) {
-				            	 // se nessun prof è presente in quella posizione ha perso
-				            	 // sennò si colpice il prof 
-				            	if (collisionProfAndStudent(student, allProfessors)) {
-				            		// TODO aggiungere sync ??
-				            		synchronizeLists(() -> {
-				            			gamePlayView.getStudentViewList().get(studInGame.indexOf(student)).attackStudents();
-				                    });
-					        		
-				            		//break;
-				            	}
-				                // Utente ha perso, aggiorna lo stato del gioco
-				                gameStatus = false;
-				                gamePlayView.setTimerStop(true);
-				                try {
-									userGame("Sconfitta");
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-				                break;
-				            }
-				        } else {
-				        	removeStudentView(student);
-				        	//studentIterator.remove(); // Rimuovi lo studente morto dalla lista
-				        	studentToRemove.add(student);
-				        }
-				        
-				   }
-				   studInGame.removeAll(studentToRemove);
+	                moveStudents();
+	                
+				    //advanceBullets();
 				    
-				   advanceBullets();
+				    addAllLists(gameModel.getTutorList(), gameModel.getNormalProfList(), gameModel.getRectorList());
 				    
-				   addAllLists(gameModel.getTutorList(), gameModel.getNormalProfList(), gameModel.getRectorList());
-				   // Logica per professori
-				   List<Professor> professorsToRemove = new ArrayList<>();
-				   List<List<? extends Professor>> allProfessorsCopy = new ArrayList<>(allProfessors);
-				   for (List<? extends Professor> professorList : allProfessorsCopy) {
-						   Iterator<? extends Professor> profIterator = professorList.iterator();
-						   while (profIterator.hasNext() && !professorList.isEmpty()) {
-						        Professor prof = profIterator.next();
-			
-					        	// il prof che viene colpito lo faccio già nel ciclo degli studenti
-			        	  		if(prof.getHealthPointsProf() <= 0){
-					                gameModel.setEnergy(gameModel.getEnergy() - prof.getEnergyProfessor());
-			        	  			//TODO controllare
-					                prof.setAttacked(false);
-					                System.out.println("Il prof dovrebbe muorire ora e scomparire!");
-					                removeProfessorView(prof);
-					                
-					                professorsToRemove.add(prof);
-			        	  			//profIterator.remove();
-			        	  			
-			        	  		}else {
-			        	  			// se è in vita ed è tempo di sparare: creo nuovo bullet e sparo
-			        	  			// TODO decidere ogni quanto far sparare --> per ora ogni 4 sec
-			        	  			if(gameModel.getTimeTot() % 2 == 0 && !prof.isAttacked()) {
-			        	  				if(prof instanceof Tutor ) {
-			        	  					Tutor curr = (Tutor) prof;
-			        	  					bulletNormalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf()));
-			        	  					gameModel.setBulletListNormal(bulletNormalList);
-			        	  				}else if(prof instanceof NormalProfessor) {
-			        	  					NormalProfessor normalProfessor = (NormalProfessor) prof;
-			        	  		            bulletNormalList.add(new Bullet(normalProfessor.getBulletSpeed(), prof.getDamageProf(), prof.getPositionProf()));
-			        	  		        
-			        	  				}else{
-			        	  					Rector curr = (Rector) prof;
-			        	  					bulletDiagonalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf()));
-			        	  					gameModel.setBulletListDiagonal(bulletDiagonalList);
-			        	  				}
-			        	  			}
-			        	  			
-			        	  		}
-			        	  		
-						        // Controlla se sono in vita ancora tutti i professori
-						        /*if (allProfessors.isEmpty() && gamePlayView.isFirstProfPicked()) {
-						            // Utente ha perso, aggiorna lo stato del gioco
-						            gameStatus = false;
-						            try {
-						                userLost();
-						            } catch (IOException e) {
-						                e.printStackTrace();
-						            }
-						            break;
-						        }*/
-						        
-					   }
-		                
-						    
-				   }
-				   for (List<? extends Professor> professorList : allProfessors) {
-					   //professorList.removeAll(professorsToRemove);
-					   professorList.removeIf(professorsToRemove::contains);
-       	  			}
-				   	// era qua la parentesi while(status)
+				    // handle professors 
+				    //handleProfessors();
+				    
 				    // Sincronizza l'accesso alle liste condivise
 	                synchronizeLists(() -> {
 	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
@@ -311,10 +354,26 @@ public class GamePlayController {
 				}
     	
 			}).start();
+		    
+		    // Avvio del thread per il movimento dei bullet
+	        new Thread(() -> {
+	            while (gameStatus) {
+	            	synchronizeLists(() -> {
+	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
+	                });
+	            	
+	            	advanceBullets();
+	            	handleProfessors();
+	                sleep(1000);
+	                
+	                synchronizeLists(() -> {
+	                	advanceBullets();
+	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
+	                });
+	            }
+	        }).start();
 	   }
 	}
-    	
-    
     
 
 	/**
@@ -335,18 +394,18 @@ public class GamePlayController {
             }
         }
     }
+    
     public void userGame(String Status) throws IOException{
     	Platform.runLater(() -> {
             try {
-		    	//carico il file fxml con la scritta hai perso
+		    	
 		    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/StatusGameView.fxml"));
 		        Parent lostGame = (Parent) fxmlLoader.load();
 		        Stage stage = new Stage();
 		        stage.setScene(new Scene(lostGame));
-		     // Ottieni la label dal FXML
+		     
 	            Label label = (Label) lostGame.lookup("#gameLabel");
 
-	            // Modifica il testo della label a seconda dello status
 	            if (Status.equals("Vittoria")) {
 	                label.setText("Hai vinto!");
 	            } else if (Status.equals("Sconfitta")) {
@@ -358,41 +417,7 @@ public class GamePlayController {
             }
         });
     }
-   /* public void userLost() throws IOException{
-    	Platform.runLater(() -> {
-            try {
-		    	//carico il file fxml con la scritta hai perso
-		    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/LostGameView.fxml"));
-		        Parent lostGame = (Parent) fxmlLoader.load();
-		        Stage stage = new Stage();
-		        stage.setScene(new Scene(lostGame));
-		        MenuController controller = fxmlLoader.<MenuController>getController(); //controller uguale a quello del menu perchè ho gli stessi pulsanti
-		        controller.initData();
-		        stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-    
-    public void userWin() throws IOException{
-    	Platform.runLater(() -> {
-            try {
-		    	//carico il file fxml con la scritta hai vinto
-		    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/WinGameView.fxml"));
-		        Parent lostGame = (Parent) fxmlLoader.load();
-		        Stage stage = new Stage();
-		        stage.setScene(new Scene(lostGame));
-		        MenuController controller = fxmlLoader.<MenuController>getController(); //controller uguale a quello del menu perchè ho gli stessi pulsanti
-		        controller.initData();
-		        stage.show();
-		        
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }*/
-    
+  
 	// ritardo per la visibilità del gioco    
 	private void sleep(int num) {
 		if(gameModel.getTimeTot()>0) {//controllo che il timer non sia a zero sennò mi faceva aspettare lo stesso
@@ -403,54 +428,33 @@ public class GamePlayController {
 		    }
 		}
 	}
-    private void advanceBullets() {
-    	// Faccio avanzare i bullet
-    	 Iterator<Bullet> bulletNormalIterator = bulletNormalList.iterator();
-    	    while (bulletNormalIterator.hasNext()) {
-    	        Bullet bullet = bulletNormalIterator.next();
-    	        bullet.move(); 
-    	        
-    	        if (bullet.getPosition().getX() > 8) {
-    	            bulletNormalIterator.remove(); 
-    	            removeBulletView(bullet);
-    	        }
-    	    }
-
-    	    // Faccio avanzare i bullet diagonali
-    	    Iterator<Bullet> bulletDiagonalIterator = bulletDiagonalList.iterator();
-    	    while (bulletDiagonalIterator.hasNext()) {
-    	        Bullet bullet = bulletDiagonalIterator.next();
-    	        bullet.shootDiagonal(); 
-
-    	        if (bullet.getPosition().getX() > 8 || bullet.getPosition().getY()>4 || bullet.getPosition().getY()<0) {
-    	            bulletDiagonalIterator.remove(); 
-    	            removeBulletView(bullet); 
-    	        }
-    	    }
-    }
     
- // Rimozione del metodo removeBulletView() all'interno di collisionBulletAndStudent()
-    public boolean collisionBulletAndStudent(Student currentStud, List<Bullet> bulletList) {
-    	List<Bullet> bulletsToRemove = new ArrayList<>();
-        boolean collisionDetected = false;
+	public boolean collisionBulletAndStudents(List<Student> studentList, Bullet bullet) {
+		List<Student> studentToRemove = new ArrayList<>();
+		boolean collisionDetected = false;
 
-        for (Bullet bullet : bulletList) {
-            if (bullet.getPosition().equals(currentStud.getPositionStudent())) {
-                currentStud.takeDamageStudents(bullet.getBulletDamage());
-                System.out.println("destroy bullet");
-                bulletsToRemove.add(bullet); // Aggiungiamo il bullet da rimuovere alla lista
-                collisionDetected = true;
-            }
+	    for (Student currentStud : studentList) {
+	        if (bullet.getPosition().equals(currentStud.getPositionStudent())) {
+	            currentStud.takeDamageStudents(bullet.getBulletDamage());
+	            System.out.println("destroy bullet");
+	            collisionDetected = true;
+	            
+	            if (currentStud.getHealthStudent() <= 0) {
+	            	scoreMatch.addScore();
+	    	        gameModel.setScoreMacth(scoreMatch.getScore());
+	    	        gameModel.setEnergy(gameModel.getEnergy() + currentStud.getEnergy());
+	    			studentToRemove.add(currentStud);
+	            }
+	        }
+	    }
+	    
+	    for (Student student : studentToRemove) {
+	    	removeStudentView(student);
+            studentList.remove(student);
         }
-
-        for (Bullet bullet : bulletsToRemove) {
-            removeBulletView(bullet);
-            bulletList.remove(bullet);
-        }
-
-        return collisionDetected;
-    }
-	
+	    return collisionDetected;
+	}
+    
 	public void removeBulletView(Bullet bullet) {
 		BulletView bulletViewToRemove = null;
 		
@@ -467,7 +471,7 @@ public class GamePlayController {
 			gamePlayView.getBulletViewList().remove(bulletViewToRemove);
 	        List<ElementView> elementsToRemove = new ArrayList<>();
 	        elementsToRemove.add(bulletViewToRemove); 
-	        //TODO aggiungere sync prima della remove ?
+	        
 	        synchronizeLists(() -> {
             	gamePlayView.removePosition(elementsToRemove);
             });
@@ -485,19 +489,16 @@ public class GamePlayController {
 	        if (result.isPresent()) {
 	            Professor professor = result.get();
 	            professor.receiveDamageProf(currentStud.getDamageStudent());
-	            //professor.setHealthPointsProf(professor.getHealthPointsProf()-currentStud.getDamageStudent());
 	            if (professor.getHealthPointsProf() > 0) {
-	                // Il professore è vivo, quindi lo studente attacca il professore anziché avanzare
 	            	System.out.println("prof attacked");
 	            	professor.setAttacked(true);
-	                return true; // Lo studente è bloccato nella posizione del professore
+	                return true; 
 	            } else {
-	                // Il professore è morto, quindi lo studente può avanzare
 	                return false;
 	            }
 	        }
 	    }
-	    return false; // Nessuna collisione tra professore e studente
+	    return false;
 	}
 	
 	public void removeStudentView(Student student) {
@@ -514,7 +515,7 @@ public class GamePlayController {
 	                    List<ElementView> elementsToRemove = new ArrayList<>();
 	                    elementsToRemove.add(studentViewToRemove);
 	                    synchronizeLists(() -> {
-	                        gamePlayView.removePosition(elementsToRemove); // Rimuovi lo studente morto dalla visualizzazione
+	                        gamePlayView.removePosition(elementsToRemove);
 	                    });
 	                }
 	                break;
@@ -525,38 +526,6 @@ public class GamePlayController {
 	
 	
 	public void removeProfessorView(Professor prof) {
-		
-	    /*List<ElementView> elementsToRemove = new ArrayList<>();
-
-	    if (prof instanceof Tutor && tutorInGame.indexOf(prof) != -1) {
-	        TutorView tutorViewToRemove = gamePlayView.getTutorViewList().get(tutorInGame.indexOf(prof));
-	        tutorInGame.remove(prof);
-	        gamePlayView.getTutorViewList().remove(tutorViewToRemove);
-	        
-	        elementsToRemove.add(tutorViewToRemove);
-			
-	    } else if (prof instanceof NormalProfessor && normalPInGame.indexOf(prof) != -1) {
-	        NormalProfView normalPViewToRemove = gamePlayView.getNormalProfessorViewList().get(normalPInGame.indexOf(prof));
-	        normalPInGame.remove(prof);
-	        gamePlayView.getNormalProfessorViewList().remove(normalPViewToRemove);
-	        
-	        elementsToRemove.add(normalPViewToRemove);
-			
-	    } else if (prof instanceof Rector && rectorInGame.indexOf(prof) != -1) {
-	        RectorView rectorPViewToRemove = gamePlayView.getRectorViewList().get(rectorInGame.indexOf(prof));
-	        rectorInGame.remove(prof);
-	        gamePlayView.getRectorViewList().remove(rectorPViewToRemove);
-	        
-	        elementsToRemove.add(rectorPViewToRemove);
-			
-	    }
-
-	    //TODO aggiungere sync prima della remove ?
-	    synchronizeLists(() -> {
-	    	gamePlayView.removePosition(elementsToRemove);
-        });
-	    */
-		
 		    List<ElementView> elementsToRemove = new ArrayList<>();
 
 		    Iterator<? extends Professor> iterator;
@@ -654,3 +623,25 @@ public class GamePlayController {
 	}
 	
 }
+// Rimozione del metodo removeBulletView() all'interno di collisionBulletAndStudent()
+/*    public boolean collisionBulletAndStudent(Student currentStud, List<Bullet> bulletList) {
+   	List<Bullet> bulletsToRemove = new ArrayList<>();
+       boolean collisionDetected = false;
+
+       for (Bullet bullet : bulletList) {
+           if (bullet.getPosition().equals(currentStud.getPositionStudent())) {
+               currentStud.takeDamageStudents(bullet.getBulletDamage());
+               System.out.println("destroy bullet");
+               bulletsToRemove.add(bullet);
+               collisionDetected = true;
+           }
+       }
+
+       for (Bullet bullet : bulletsToRemove) {
+           removeBulletView(bullet);
+           bulletList.remove(bullet);
+       }
+
+       return collisionDetected;
+   }
+*/	
