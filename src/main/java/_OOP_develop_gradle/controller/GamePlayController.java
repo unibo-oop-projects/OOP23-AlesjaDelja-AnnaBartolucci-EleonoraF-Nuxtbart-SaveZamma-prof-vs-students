@@ -241,7 +241,7 @@ public class GamePlayController {
 			
 					        	// il prof che viene colpito lo faccio già nel ciclo degli studenti
 			        	  		if(prof.getHealthPointsProf() <= 0){
-					                gameModel.setEnergy(gameModel.getEnergy() - prof.getCostProfessor());
+					                gameModel.setEnergy(gameModel.getEnergy() - prof.getEnergyProfessor());
 			        	  			//TODO controllare
 					                prof.setAttacked(false);
 					                System.out.println("Il prof dovrebbe muorire ora e scomparire!");
@@ -256,15 +256,15 @@ public class GamePlayController {
 			        	  			if(gameModel.getTimeTot() % 2 == 0 && !prof.isAttacked()) {
 			        	  				if(prof instanceof Tutor ) {
 			        	  					Tutor curr = (Tutor) prof;
-			        	  					bulletNormalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf(), Tutor.getTutorbulletname(), curr.getTutorBullet().getPathImgBullet()));
+			        	  					bulletNormalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf()));
 			        	  					gameModel.setBulletListNormal(bulletNormalList);
 			        	  				}else if(prof instanceof NormalProfessor) {
 			        	  					NormalProfessor normalProfessor = (NormalProfessor) prof;
-			        	  		            bulletNormalList.add(new Bullet(normalProfessor.getBulletSpeed(), prof.getDamageProf(), prof.getPositionProf(), normalProfessor.getNormalprofbulletname(), normalProfessor.getNormalProfBullet().getPathImgBullet()));
+			        	  		            bulletNormalList.add(new Bullet(normalProfessor.getBulletSpeed(), prof.getDamageProf(), prof.getPositionProf()));
 			        	  		        
 			        	  				}else{
 			        	  					Rector curr = (Rector) prof;
-			        	  					bulletDiagonalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf(), curr.getRectorbulletname(), curr.getRectorBullet().getPathImgBullet()));
+			        	  					bulletDiagonalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf()));
 			        	  					gameModel.setBulletListDiagonal(bulletDiagonalList);
 			        	  				}
 			        	  			}
@@ -404,7 +404,6 @@ public class GamePlayController {
     	            removeBulletView(bullet); 
     	        }
     	    }
-    	
     }
     
  // Rimozione del metodo removeBulletView() all'interno di collisionBulletAndStudent()
@@ -462,7 +461,8 @@ public class GamePlayController {
 	                .findFirst();
 	        if (result.isPresent()) {
 	            Professor professor = result.get();
-	            professor.setHealthPointsProf(professor.getHealthPointsProf()-currentStud.getDamageStudent());
+	            professor.receiveDamageProf(currentStud.getDamageStudent());
+	            //professor.setHealthPointsProf(professor.getHealthPointsProf()-currentStud.getDamageStudent());
 	            if (professor.getHealthPointsProf() > 0) {
 	                // Il professore è vivo, quindi lo studente attacca il professore anziché avanzare
 	            	System.out.println("prof attacked");
