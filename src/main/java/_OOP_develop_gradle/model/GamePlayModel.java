@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Class representing the model for the gameplay.
  */
-public class GamePlayModel {
+public class GamePlayModel implements GamePlayModelInterface {
 
 		private int scoreMacth;
 	    private int energy; // cost
