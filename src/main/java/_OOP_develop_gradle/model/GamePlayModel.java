@@ -36,6 +36,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Takes the match score.
 	     * @return The match score.
 	     */
+	    @Override
 	    public int getScoreMacth() {
 			return scoreMacth;
 		}
@@ -44,6 +45,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Takes the match score.
 	     * @return The match score.
 	     */
+	    @Override
 		public void setScoreMacth(int scoreMacth) {
 			this.scoreMacth = scoreMacth;
 		}
@@ -52,6 +54,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Takes the list of normalProf bullets.
 	     * @return The list of normalProf bullets.
 	     */
+	    @Override
 		public List<Bullet> getBulletListNormal() {
 			return bulletListNormal;
 		}
@@ -60,6 +63,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Sets the list of normalProf bullets.
 	     * @param bulletListNormal The list of normalProf bullets.
 	     */
+	    @Override
 		public void setBulletListNormal(List<Bullet> bulletListNormal) {
 			this.bulletListNormal = bulletListNormal;
 		}
@@ -68,6 +72,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Takes the list of diagonal bullets.
 	     * @return The list of diagonal bullets.
 	     */
+	    @Override
 		public List<Bullet> getBulletListDiagonal() {
 			return bulletListDiagonal;
 		}
@@ -76,6 +81,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Sets the list of diagonal bullets.
 	     * @param bulletListDiagonal The list of diagonal bullets.
 	     */
+	    @Override
 		public void setBulletListDiagonal(List<Bullet> bulletListDiagonal) {
 			this.bulletListDiagonal = bulletListDiagonal;
 		}
@@ -84,6 +90,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Takes the energy.
 	     * @return The energy.
 	     */
+	    @Override
 		public int getEnergy() {
 			return energy;
 		}
@@ -92,6 +99,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Sets the energy.
 	     * @param energy The energy.
 	     */
+	    @Override
 		public void setEnergy(int matchScore) {
 			this.energy = matchScore;
 		}
@@ -100,6 +108,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Takes the total game time.
 	     * @return The total game time.
 	     */
+	    @Override
 		public int getTimeTot() {
 	        return timeTot;
 	    }
@@ -108,6 +117,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Sets the total game time.
 	     * @param time The total game time.
 	     */
+	    @Override
 	    public void setTimeTot(int time) {
 	    	timeTot=time;
 	    }
@@ -116,6 +126,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Takes the list of students.
 	     * @return The list of students.
 	     */
+	    @Override
 	    public List<Student> getStudentList() {
 	        return this.studentList;
 	    }
@@ -124,6 +135,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Generates a wave of students.
 	     * @param waveSize The size of the wave.
 	     */
+	    @Override
 	    public void generateWave(int waveSize) {
 	        for (int i = 0; i < waveSize; i++) {
 	            generateNewStudent();
@@ -134,6 +146,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Takes the list of tutors.
 	     * @return The list of tutors.
 	     */
+	    @Override
 	   public List<Tutor> getTutorList() {
 			return tutorList;
 		}
@@ -142,6 +155,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	    * Sets the list of tutors.
 	    * @param tutorList The list of tutors.
 	    */
+	    @Override
 		public void setTutorList(List<Tutor> tutorList) {
 			this.tutorList = tutorList;
 		}
@@ -150,6 +164,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 		 * Takes the list of normal professors.
 		 * @return The list of normal professors.
 		 */
+	    @Override
 		public List<NormalProfessor> getNormalProfList() {
 			return normalProfList;
 		}
@@ -158,6 +173,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 		 * Sets the list of normal professors.
 		 * @param normalProfList The list of normal professors.
 		 */
+	    @Override
 		public void setNormalProfList(List<NormalProfessor> normalProfList) {
 			this.normalProfList = normalProfList;
 		}
@@ -166,6 +182,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 		 * Takes the list of rectors.
 		 * @return The list of rectors.
 		 */
+	    @Override
 		public List<Rector> getRectorList() {
 			return rectorList;
 		}
@@ -174,6 +191,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 		 * Sets the list of rectors.
 		 * @param rectorList The list of rectors.
 		 */
+	    @Override
 		public void setRectorList(List<Rector> rectorList) {
 			this.rectorList = rectorList;
 		}
@@ -182,6 +200,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 		 * Sets the list of students.
 		 * @param studentList The list of students.
 		 */
+	    @Override
 		public void setStudentList(List<Student> studentList) {
 			this.studentList = studentList;
 		}
@@ -191,6 +210,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 		 * @param position The position of the new tutor.
 		 * @return The new tutor generated.
 		 */
+	    @Override
 		public Tutor generateNewTutor(Elements<Integer, Integer> position) {
 			Tutor newTutor = new Tutor(position.getX(), position.getY());
     		tutorList.add(newTutor);
@@ -207,6 +227,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 		 * @param idProf The ID of the new normal professor.
 		 * @return The new normal professor generated.
 		 */
+	    @Override
 		public NormalProfessor generateNewNormalP(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor, int idProf) {
 			NormalProfessor newnormalProf = new NormalProfessor(position.getX(), position.getY());
 			normalProfList.add(newnormalProf);
@@ -218,6 +239,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 		 * @param position The position of the new rector.
 		 * @return The new rector generated.
 		 */
+	    @Override
 		public Rector generateNewRector(Elements<Integer, Integer> position ) {
 			Rector newRector = new Rector(position.getX(), position.getY());
     		rectorList.add(newRector);
@@ -227,6 +249,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 		/**
 		 * Generates a new student and adds it to the list.
 		 */
+	    @Override
 	    public void generateNewStudent() {
 	    	Student student = new Student();
 	    	this.studentList.add(student);
@@ -236,6 +259,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Increases the match score by a specified amount.
 	     * @param amount The amount to increase the match score by.
 	     */
+	    @Override
 	    public void increaseEnergy(int amount) {
 	    	energy += amount;
 	    }
@@ -245,6 +269,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * @param amount The amount to decrease the match score by.
 	     * @return True if the match score was successfully decreased, false otherwise.
 	     */
+	    @Override
 	    public boolean decreaseEnergy(int amount) {
 	        if (energy >= amount) {
 	        	energy -= amount;
@@ -257,6 +282,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * Increases the total game time by a specified amount.
 	     * @param amount The amount to increase the total game time by.
 	     */
+	    @Override
 	    public void increaseTimeTot(double amount) {
 	    	timeTot += amount;
 	    }
@@ -266,6 +292,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     * @param amount The amount to decrease the total game time by.
 	     * @return True if the total game time was successfully decreased, false otherwise.
 	     */
+	    @Override
 	    public boolean decreaseTimeTot(double amount) {
 	        if (timeTot >= amount) {
 	        	timeTot -= amount;
