@@ -53,7 +53,6 @@ public class GamePlayController {
 	public void addAllLists(List<Tutor> tutorInGame, List<NormalProfessor> normalPInGame, List<Rector> rectorInGame) {
 		allProfessors.clear();
 	    allProfessors.add(tutorInGame);
-    	allProfessors.add(tutorInGame);
         allProfessors.add(normalPInGame);
         allProfessors.add(rectorInGame);
     }
@@ -98,7 +97,8 @@ public class GamePlayController {
     	if(gameStatus) {
     		sleep(100);
 			// genero la prima ondata di studenti
-			NUM_STUD_ONDATA+=1;
+			//TODO NUM_STUD_ONDATA+=1;
+    		
 		    gameModel.generateWave(NUM_STUD_ONDATA);
 		    studInGame = gameModel.getStudentList();
 		    tutorInGame = gameModel.getTutorList();
@@ -225,18 +225,18 @@ public class GamePlayController {
 				        	studentToRemove.add(student);
 				        }
 				        
-				    }
-				    studInGame.removeAll(studentToRemove);
+				   }
+				   studInGame.removeAll(studentToRemove);
 				    
-				    advanceBullets();
+				   advanceBullets();
 				    
-				    addAllLists(gameModel.getTutorList(), gameModel.getNormalProfList(), gameModel.getRectorList());
+				   addAllLists(gameModel.getTutorList(), gameModel.getNormalProfList(), gameModel.getRectorList());
 				   // Logica per professori
 				   List<Professor> professorsToRemove = new ArrayList<>();
 				   List<List<? extends Professor>> allProfessorsCopy = new ArrayList<>(allProfessors);
 				   for (List<? extends Professor> professorList : allProfessorsCopy) {
-		                Iterator<? extends Professor> profIterator = professorList.iterator();
-						    while (profIterator.hasNext()) {
+						   Iterator<? extends Professor> profIterator = professorList.iterator();
+						   while (profIterator.hasNext() && !professorList.isEmpty()) {
 						        Professor prof = profIterator.next();
 			
 					        	// il prof che viene colpito lo faccio già nel ciclo degli studenti
@@ -253,7 +253,7 @@ public class GamePlayController {
 			        	  		}else {
 			        	  			// se è in vita ed è tempo di sparare: creo nuovo bullet e sparo
 			        	  			// TODO decidere ogni quanto far sparare --> per ora ogni 4 sec
-			        	  			if(gameModel.getTimeTot() % 4 == 0 && !prof.isAttacked()) {
+			        	  			if(gameModel.getTimeTot() % 2 == 0 && !prof.isAttacked()) {
 			        	  				if(prof instanceof Tutor ) {
 			        	  					Tutor curr = (Tutor) prof;
 			        	  					bulletNormalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf(), Tutor.getTutorbulletname(), curr.getTutorBullet().getPathImgBullet()));
@@ -283,12 +283,15 @@ public class GamePlayController {
 						            break;
 						        }*/
 						        
-						    }
+					   }
+		                
+						    
 				   }
 				   for (List<? extends Professor> professorList : allProfessors) {
-					   professorList.removeAll(professorsToRemove);
+					   //professorList.removeAll(professorsToRemove);
+					   professorList.removeIf(professorsToRemove::contains);
        	  			}
-				// era qua la parentesi while(status)
+				   	// era qua la parentesi while(status)
 				    // Sincronizza l'accesso alle liste condivise
 	                synchronizeLists(() -> {
 	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
