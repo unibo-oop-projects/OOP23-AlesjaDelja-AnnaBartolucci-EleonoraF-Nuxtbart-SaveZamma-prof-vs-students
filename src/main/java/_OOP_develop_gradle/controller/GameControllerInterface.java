@@ -3,7 +3,7 @@ package _OOP_develop_gradle.controller;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 
-public interface HelpGameControllerInterface {
+public interface GameControllerInterface {
 
     /**
      * Goes back to the main menu.
