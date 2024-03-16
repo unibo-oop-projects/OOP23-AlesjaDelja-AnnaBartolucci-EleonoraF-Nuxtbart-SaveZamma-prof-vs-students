@@ -26,6 +26,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class GamePlayController {
@@ -136,13 +137,13 @@ public class GamePlayController {
 				    	gameStatus = false;
 				    	if(allProfessors.isEmpty()) {
 				    		try {
-								userLost();
+				    			userGame("Sconfitta");
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
 				    	}else {
 				    		try {
-								userWin();
+								userGame("Vittoria");
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
@@ -213,7 +214,7 @@ public class GamePlayController {
 				                gameStatus = false;
 				                gamePlayView.setTimerStop(true);
 				                try {
-									userLost();
+									userGame("Sconfitta");
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
@@ -334,8 +335,30 @@ public class GamePlayController {
             }
         }
     }
-    
-    public void userLost() throws IOException{
+    public void userGame(String Status) throws IOException{
+    	Platform.runLater(() -> {
+            try {
+		    	//carico il file fxml con la scritta hai perso
+		    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/StatusGameView.fxml"));
+		        Parent lostGame = (Parent) fxmlLoader.load();
+		        Stage stage = new Stage();
+		        stage.setScene(new Scene(lostGame));
+		     // Ottieni la label dal FXML
+	            Label label = (Label) lostGame.lookup("#gameLabel");
+
+	            // Modifica il testo della label a seconda dello status
+	            if (Status.equals("Vittoria")) {
+	                label.setText("Hai vinto!");
+	            } else if (Status.equals("Sconfitta")) {
+	                label.setText("Hai perso!");
+	            }
+		        stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+   /* public void userLost() throws IOException{
     	Platform.runLater(() -> {
             try {
 		    	//carico il file fxml con la scritta hai perso
@@ -368,7 +391,7 @@ public class GamePlayController {
                 e.printStackTrace();
             }
         });
-    }
+    }*/
     
 	// ritardo per la visibilità del gioco    
 	private void sleep(int num) {
