@@ -9,9 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+//import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -19,17 +18,11 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class MenuController {
-	@FXML
-	private Button resumeButton;
+	//@FXML
+	//private Button resumeButton;
 
 	@FXML
     private AnchorPane GameMainMenuRoot;
-	
-	@FXML
-    private AnchorPane LostGame;
-	@FXML
-    private AnchorPane WonGame;
-	
 	@FXML
     private ImageView gameMenuButton;
 
@@ -50,20 +43,14 @@ public class MenuController {
     }
     
     @FXML
-    void returnMainManu(MouseEvent event) throws IOException {
+    void returnMainManu(ActionEvent event) throws IOException {
         //GamePlayController.gameStatus = false;
         Stage currentStage = (Stage) gameMenuButton.getScene().getWindow();
         currentStage.close();
-
         // Chiudi tutte le finestre aperte
         closeAllWindows();
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MainMenuView.fxml"));
-        Parent mainMenu = (Parent) fxmlLoader.load();
-        Stage mainMenuStage = new Stage();
-        mainMenuStage.setScene(new Scene(mainMenu));
-
-        mainMenuStage.show();
+        StageChangeController stageChanger = new StageChangeController();
+        stageChanger.mainMenu(event);
         
     }
 
@@ -99,7 +86,7 @@ public class MenuController {
 
     }
 
-    @FXML
+    /*@FXML NON FATTA
     void resumeGame(ActionEvent event) {
         // Riprendi il gioco
     	GamePlayController gameController = GamePlayController.getInstance();
@@ -111,7 +98,7 @@ public class MenuController {
         currentStage.close();
         
         gameController.startGame(gameController.getGamePlayView());
-    }
+    }*/
     
     private void closeAllWindows() {
         // Chiudi tutte le finestre aperte, tranne quella del menu principale

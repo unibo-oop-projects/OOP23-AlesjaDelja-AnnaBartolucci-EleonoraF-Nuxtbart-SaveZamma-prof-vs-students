@@ -34,6 +34,6 @@ public class StageChangeController {
 	 */
 	
 	public void mainMenu(ActionEvent e ) throws IOException {
-		changeScene(e , "../view/MainMenuView.fxml");
+		changeScene(e , "/MainMenuView.fxml");
 	}
 }
