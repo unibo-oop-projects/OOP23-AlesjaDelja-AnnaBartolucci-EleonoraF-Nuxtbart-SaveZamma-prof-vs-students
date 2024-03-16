@@ -56,7 +56,7 @@ public class Tutor extends Professor{
 	 * Gets the BulletName of a Tutor
 	 * @return the BulletName of the Tutor
 	 */
-	public String getTutorbulletname() {
+	public static String getTutorbulletname() {
 		return tutorBulletName;
 	}
 	
