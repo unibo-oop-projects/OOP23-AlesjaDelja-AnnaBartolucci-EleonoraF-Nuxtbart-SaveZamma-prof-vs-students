@@ -54,6 +54,7 @@ public class MainMenuController {
 	            mediaPlayer.setAutoPlay(true);
 	            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 	            mediaPlayer.setStartTime(Duration.seconds(0));
+		        mediaPlayer.setStopTime(Duration.seconds(50));
 	            mediaPlayer.play();
 	        } else {
 	            soundOn = true;
