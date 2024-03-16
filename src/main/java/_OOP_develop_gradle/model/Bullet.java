@@ -6,7 +6,8 @@ import java.util.Random;
 
 public final class Bullet {
 
-    private Elements<Integer, Integer> currentPosition;
+    private static final int SPEED_MULTIPLIER = 4;
+	private Elements<Integer, Integer> currentPosition;
     private final int bulletSpeed;
     private final int bulletDamage;
 
@@ -54,7 +55,7 @@ public final class Bullet {
 	 * @return the position after shooting
 	 */
     public void move() {
-        this.currentPosition = new Elements<>(currentPosition.getX() + bulletSpeed, currentPosition.getY());
+    	this.currentPosition = new Elements<>(currentPosition.getX() + (bulletSpeed * SPEED_MULTIPLIER), currentPosition.getY());
     }
     
     /**
