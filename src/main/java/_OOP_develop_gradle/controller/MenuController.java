@@ -34,7 +34,7 @@ public class MenuController {
         //tage currentStage = (Stage) gameMenuButton.getScene().getWindow();
         //currentStage.close();
         // Chiudi tutte le finestre aperte
-        //closeAllWindows();
+        closeAllWindows();
         StageChangeController stageChanger = new StageChangeController();
         stageChanger.mainMenu(event);
         
