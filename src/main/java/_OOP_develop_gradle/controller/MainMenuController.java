@@ -1,7 +1,6 @@
 package _OOP_develop_gradle.controller;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -13,85 +12,62 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class MainMenuController {
-	private boolean soundOn = true;
+public class MainMenuController implements MainMenuControllerInterface {
+    private boolean soundOn = true;
     public Button soundButton;
     public static MediaPlayer mediaPlayer;
-	Stage stage;
-	
-	/**
-	 * Starts a default game
-	 * @param e Listens to when the player click on this buttons
-	 * @throws IOException 
-	 */
-	
-	public void newGame(ActionEvent e) throws IOException {
-		StageChangeController stageChanger = new StageChangeController();
-		stageChanger.changeScene(e, "/GameView.fxml");
-		//CONTROLLARE SE SERVE ANCORA MAIN MENUVIEW.FXML E MAIN MENU CONTROLLER DELL'ANNA
-	}
-	
-	/**
-	 * Changes to the view help the playes on how it's played the game
-	 * @param e Listens to when the player click on this buttons
-	 */
-	public void helpGame(ActionEvent e) throws IOException {
-		StageChangeController stageChanger = new StageChangeController();
-        stageChanger.changeScene(e, "/HelpGameView.fxml");
-	}
-	
-	/**
-	 * When The player click on it it changes the sound from on to off and from off to on.
-	 * In default this is set to ON
-	 * @param e Listens to when the player click on this buttons
-	 */
-	 public void sounds(ActionEvent e) {
-	        if (soundOn) {
-	            soundOn = false;
-	            soundButton.setText("Sound Off");
-	            Media sound = new Media(getClass().getResource("/music/background.wav").toString()); 
-	            mediaPlayer = new MediaPlayer(sound);
-	            mediaPlayer.setAutoPlay(true);
-	            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-	            mediaPlayer.setStartTime(Duration.seconds(0));
-		        mediaPlayer.setStopTime(Duration.seconds(50));
-	            mediaPlayer.play();
-	        } else {
-	            soundOn = true;
-	            soundButton.setText("Sound On");
-	            if (mediaPlayer != null) {
-	                mediaPlayer.stop();
-	            }
-	        }
-	    }
-	
-	/**
-	 * Changes from the main menu to the leaderboard menu.
-	 * @param e
-	 * @throws IOException
-	 */
-	public void leaderboard(ActionEvent e) throws IOException {
-		StageChangeController stageChanger = new StageChangeController();
-        stageChanger.changeScene(e, "/LeaderBoard.fxml");
-	}
-	/**
-	 * Closes the game when clicked
-	 * @param e Listens to when the player click on this buttons
-	 */
-	public void exitGame(ActionEvent e) {
-		//Insert an alert that makes sure that the user is sure about exiting the game
-		Alert exitAlert = new Alert(AlertType.CONFIRMATION);
-		exitAlert.setTitle("Exit");
-		exitAlert.setHeaderText("You are going to exit the game!");
-		exitAlert.setContentText("Are you sure?");
-				
-		if(exitAlert.showAndWait().get() == ButtonType.OK) {
-			stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-			stage.close();
-		}		
-				
-	}
-	
+    private static final String GAME_PATH = "/GameView.fxml";
+    private static final String GAME_HELP_PATH = "/HelpGameView.fxml";
+    private static final String SOUND_PATH = "/music/background.wav";
+    private static final String SOUND_ON = "Sound On";
+    private static final String SOUND_OFF = "Sound Off";
+	private static final String EXIT_TITLE = "Exit";
+	private static final String EXIT_HEADER = "You are going to exit the game!";
+	private static final String EXIT_CONTENT = "Are you sure?";
+    Stage stage;
+
+    @Override
+    public void newGame(ActionEvent e) throws IOException {
+        StageChangeController stageChanger = new StageChangeController();
+        stageChanger.changeScene(e, GAME_PATH);
+    }
+
+    @Override
+    public void helpGame(ActionEvent e) throws IOException {
+        StageChangeController stageChanger = new StageChangeController();
+        stageChanger.changeScene(e, GAME_HELP_PATH);
+    }
+
+    @Override
+    public void sounds(ActionEvent e) {
+        if (soundOn) {
+            soundOn = false;
+            soundButton.setText(SOUND_OFF);
+            Media sound = new Media(getClass().getResource(SOUND_PATH).toString()); 
+            mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.setAutoPlay(true);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.setStartTime(Duration.seconds(0));
+            mediaPlayer.setStopTime(Duration.seconds(50));
+            mediaPlayer.play();
+        } else {
+            soundOn = true;
+            soundButton.setText(SOUND_ON);
+            if (mediaPlayer != null) {
+                mediaPlayer.stop();
+            }
+        }
+    }
+    @Override
+    public void exitGame(ActionEvent e) {
+        Alert exitAlert = new Alert(AlertType.CONFIRMATION);
+        exitAlert.setTitle(EXIT_TITLE);
+        exitAlert.setHeaderText(EXIT_HEADER);
+        exitAlert.setContentText(EXIT_CONTENT);
+                
+        if(exitAlert.showAndWait().get() == ButtonType.OK) {
+            stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+            stage.close();
+        }        
+    }
 }
-
-
