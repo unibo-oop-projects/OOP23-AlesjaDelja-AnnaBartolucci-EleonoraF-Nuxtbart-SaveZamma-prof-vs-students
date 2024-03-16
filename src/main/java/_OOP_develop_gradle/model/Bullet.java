@@ -6,7 +6,7 @@ import java.util.Random;
 
 public final class Bullet {
 
-    private static final int SPEED_MULTIPLIER = 4;
+    private static final int SPEED_MULTIPLIER = 2;
 	private Elements<Integer, Integer> currentPosition;
     private final int bulletSpeed;
     private final int bulletDamage;
