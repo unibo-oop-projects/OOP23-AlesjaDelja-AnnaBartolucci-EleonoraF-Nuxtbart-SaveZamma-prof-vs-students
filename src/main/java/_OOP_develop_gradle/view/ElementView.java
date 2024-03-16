@@ -36,6 +36,10 @@ public class ElementView {
 	 */
 	public void removeElement() {
 		gridPane.getChildren().remove(imageView);
+		//Image image = imageView.getImage();
+	    imageView.setImage(null); // Libera il riferimento all'immagine per consentire la pulizia della memoria
+	    imageView = null; // Libera il riferimento all'imageView
+	    
 	}
 	
 	/**
