@@ -2,47 +2,34 @@ package _OOP_develop_gradle.model;
 
 import javafx.scene.control.Label;
 
-public class Score {
-	
-	private static final int DEFAULT_RESET = 0;
-	private static final int DEFAULT_SCORE = 100;
-	private int score;
+public class Score implements ScoreInterface {
+    
+    private static final int DEFAULT_RESET = 0;
+    private static final int DEFAULT_SCORE = 100;
+    private int score;
+    
+    @Override
+    public int getScore() {
+        return score;
+    }
+    
+    @Override
+    public void setScore(int score) {
+        this.score = score;
+    }
 
-	/**
-	 * Getter of score
-	 * @return the current score
-	 */
-	public int getScore() {
-		return score;
-	}
+    @Override
+    public void addScore() {
+        this.score += DEFAULT_SCORE;
+    }
 
-	/**
-	 * Sets the score
-	 * @param score Sets the new score
-	 */
-	public void setScore(int score) {
-		this.score = score;
-	}
+    @Override
+    public void updateScore(Label scoreLabel) {
+        scoreLabel.setText("Score: " + score);
+    }
 
-	/**
-	 * Adds the score to the current one.
-	 */
-	
-	public void addScore() { 
-		this.score = score +  DEFAULT_SCORE;
-	}
-	
-	/**
-	 * Updates the score
-	 * @param scoreLabel The label that needs to be updated
-	 */
-	public void updateScore(Label scoreLabel) {
-		scoreLabel.setText("Score: " + score);
-	}
-	/**
-	 * Resets the score to a dafault number
-	 */
-	public void resetScore() {
-		this.score = DEFAULT_RESET;
-	}
+    @Override
+    public void resetScore() {
+        this.score = DEFAULT_RESET;
+    }
 }

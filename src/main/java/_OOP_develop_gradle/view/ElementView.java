@@ -5,32 +5,27 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class ElementView {
-	protected GridPane gridPane;
-	protected ImageView imageView;// DA METTERE L'ID PRESENTE IN QUELLO DELL'ANNA
-	
-	//Costructor
-	public ElementView(GridPane gridPane) {
+public class ElementView implements ElementViewInterface {
+    protected GridPane gridPane;
+    protected ImageView imageView;
+
+    // Costruttore
+    public ElementView(GridPane gridPane) {
         this.gridPane = gridPane;
     }
-	
-	 /**
-	 * Sets the image of the element when it will appear to the player
-	 * @param positionStudent 
-	 */
-	
-	public void displayElement(Elements<Integer, Integer> positionElement) {
+    @Override
+    public void displayElement(Elements<Integer, Integer> positionElement) {
         Image image = new Image(getClass().getResourceAsStream(getImagePath()));
 
         imageView = new ImageView(image);
-        // Impostare le dimensioni che siano addatte a quello che serve
+        // Impostare le dimensioni che siano adatte a quello che serve
         imageView.setFitWidth(100); 
         imageView.setFitHeight(50); 
-        
-     // Sets the position of student
-        gridPane.add(imageView, positionElement.getX(),positionElement.getY());
+
+        // Imposta la posizione dell'elemento
+        gridPane.add(imageView, positionElement.getX(), positionElement.getY());
     }
-	
+
 	/**
 	 * Removes the image that is not needed for a student that is dead
 	 */
@@ -47,6 +42,7 @@ public class ElementView {
 	 * @return
 	 */
 	protected String getImagePath() {
+
         return "";
-	}
+    }
 }

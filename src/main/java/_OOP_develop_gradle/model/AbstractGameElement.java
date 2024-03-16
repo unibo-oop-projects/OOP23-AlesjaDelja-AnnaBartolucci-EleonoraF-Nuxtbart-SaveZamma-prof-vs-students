@@ -1,14 +1,10 @@
 package _OOP_develop_gradle.model;
 
 public abstract class AbstractGameElement implements GameElement {
-    // Implementazione parziale dei metodi comuni a tutti gli elementi del gioco
-
     protected Elements<Integer, Integer> position;
-    protected String name;
     protected int damage;
 
-    public AbstractGameElement(String name, int damage, Elements<Integer, Integer> position) {
-        this.name = name;
+    public AbstractGameElement(int damage, Elements<Integer, Integer> position) {
         this.damage = damage;
         this.position = position;
     }
@@ -17,12 +13,15 @@ public abstract class AbstractGameElement implements GameElement {
         return position;
     }
 
-    public String getName() {
-        return name;
+    public void setPosition(Elements<Integer, Integer> position) {
+        this.position = position;
     }
 
     public int getDamage() {
         return damage;
     }
 
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
 }
