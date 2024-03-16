@@ -45,22 +45,25 @@ public class MainMenuController {
 	 * In default this is set to ON
 	 * @param e Listens to when the player click on this buttons
 	 */
-	public void sounds(ActionEvent e) {
-		if (soundOn) {
-            soundOn = false;
-            soundButton.setText("Sound Off");
-            Media sound = new Media(getClass().getResource("/music/background.wav").toString()); // DA CAMBIARE LA PATH
-	        mediaPlayer = new MediaPlayer(sound);
-	        mediaPlayer.setAutoPlay(true);
-	        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-	        mediaPlayer.setStartTime(Duration.seconds(0));
-	        mediaPlayer.play();
-        } else {
-            soundOn = true;
-            soundButton.setText("Sound On");
-            mediaPlayer.stop();
-        }
-	}
+	 public void sounds(ActionEvent e) {
+	        if (soundOn) {
+	            soundOn = false;
+	            soundButton.setText("Sound Off");
+	            Media sound = new Media(getClass().getResource("/music/background.wav").toString()); 
+	            mediaPlayer = new MediaPlayer(sound);
+	            mediaPlayer.setAutoPlay(true);
+	            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+	            mediaPlayer.setStartTime(Duration.seconds(0));
+	            mediaPlayer.play();
+	        } else {
+	            soundOn = true;
+	            soundButton.setText("Sound On");
+	            if (mediaPlayer != null) {
+	                mediaPlayer.stop();
+	            }
+	        }
+	    }
+	
 	/**
 	 * Changes from the main menu to the leaderboard menu.
 	 * @param e
