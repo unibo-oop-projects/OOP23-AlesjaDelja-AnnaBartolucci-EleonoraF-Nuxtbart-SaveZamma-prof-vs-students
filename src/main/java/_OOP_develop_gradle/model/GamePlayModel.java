@@ -228,6 +228,7 @@ public class GamePlayModel implements GamePlayModelInterface {
 		 * @return The new normal professor generated.
 		 */
 	    @Override
+	    
 		public NormalProfessor generateNewNormalP(int damage, double healthPoints, Elements<Integer, Integer> position, String pathImg, int costProfessor, int idProf) {
 			NormalProfessor newnormalProf = new NormalProfessor(position.getX(), position.getY());
 			normalProfList.add(newnormalProf);
