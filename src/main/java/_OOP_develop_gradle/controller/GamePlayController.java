@@ -33,10 +33,10 @@ public class GamePlayController {
 	
 	private static GamePlayController instance;
 	public boolean gameStatus;
-	
+	public static String STATUS_VITTORIA="Vittoria";
+	public static String STATUS_SCONFITTA="Sconfitta";
 	public static int TIME_TO_SHOOT = 4;
 	public static int ENERGY_INIT = 40;
-	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!! TODO
 	public static int TEMPO_TOT_INIT = 60;
 	public static int NUM_STUD_ONDATA;
 	public static GamePlayModel gameModel;
@@ -45,7 +45,6 @@ public class GamePlayController {
 	public boolean firstProfPicked;
 	public List<Bullet> bulletNormalList = new ArrayList<>();
 	public List<Bullet> bulletDiagonalList = new ArrayList<>();
-	
 	public List<Tutor> tutorInGame = new ArrayList<>(); 
 	public List<NormalProfessor> normalPInGame = new ArrayList<>(); 
 	public List<Rector> rectorInGame = new ArrayList<>(); 
@@ -58,7 +57,6 @@ public class GamePlayController {
         allProfessors.add(normalPInGame);
         allProfessors.add(rectorInGame);
     }
-	
 	/**
 	 * Initializes the game data with the specified {@code GamePlayView}.
 	 * Initializes various game elements such as score, game status, and lists of bullets and professors.
@@ -106,7 +104,6 @@ public class GamePlayController {
 	 * @throws IOException If an I/O error occurs while initializing the game.
 	 */
 	public void initGamePlay() throws IOException {
-    	
     	if(gameStatus) {
             synchronizeLists(() -> {
             	gameModel.generateWave(NUM_STUD_ONDATA);
@@ -130,14 +127,7 @@ public class GamePlayController {
 	        
 	        if (student.getHealthStudent() > 0) { 
 	        	
-	        	if (collisionProfAndStudent(student, allProfessors)) {
-	        		// TODO aggiungere sync ??
-	        		/*synchronizeLists(() -> {
-	        			gamePlayView.getStudentViewList().get(studInGame.indexOf(student)).attackStudents();
-                   });*/
-	        		
-	        	}else {
-	        		// Avanzamento in riga (diminuzione colonna)
+	        	if (!collisionProfAndStudent(student, allProfessors)) {
 		            if (student.getPosition().getX() > 0) {
 		            	student.setPosition(new Elements<Integer, Integer> (student.getPosition().getX() - 1,student.getPosition().getY()));
 		            }
@@ -146,16 +136,14 @@ public class GamePlayController {
 	            if (student.getPosition().getX() == 0) {
 	            	if (collisionProfAndStudent(student, allProfessors)) {
 	            		synchronizeLists(() -> {
-	            			//gamePlayView.getStudentViewList().get(studInGame.indexOf(student)).attackStudents();
 	            			gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                    });
 		        		
 	            	}else {
-	            		// Utente ha perso, aggiorna lo stato del gioco
 		                gameStatus = false;
 		                gamePlayView.setTimerStop(true);
 		                try {
-							userGame("Sconfitta");
+							userGame(STATUS_SCONFITTA);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -231,14 +219,12 @@ public class GamePlayController {
    	        
    	        if(collisionBulletAndStudents(studInGame, bullet)) {
    	        	bulletToRemoveN.add(bullet);
-   	        	//bulletNormalIterator.remove();
    	        }else {
    	        	bullet.move();
    	        }
    	        
    	        if (bullet.getPosition().getX() > 8) {
    	        	bulletToRemoveN.add(bullet);
-   	        	//bulletNormalIterator.remove();
    	        }
    	    }
 
@@ -253,20 +239,17 @@ public class GamePlayController {
 	        
 	        if(collisionBulletAndStudents(studInGame, bullet)) {
 	    		bulletToRemoveD.add(bullet);
-	    		//bulletDiagonalIterator.remove();
 		    }else {
 	    		bullet.shootDiagonal();
 		    }
 	        
 	        if (bullet.getPosition().getX() > 8 || bullet.getPosition().getY()>4 || bullet.getPosition().getY()<0) {
 	        	bulletToRemoveD.add(bullet);
-	            //bulletDiagonalIterator.remove();
 	        }
 	    }
 	    bulletToRemoveD.forEach(bullet -> { removeBulletView(bullet);});
 	    bulletDiagonalList.removeIf(bulletToRemoveD::contains);
 }
-   
    /**
     * Starts the game by initializing various game threads and loops to manage gameplay mechanics such as
     * advancing time, updating positions, handling collisions, and checking game status for victory or defeat.
@@ -284,13 +267,13 @@ public class GamePlayController {
 					    	
 					    	if(allProfessors.stream().allMatch(list -> list.isEmpty())) {
 					    		try {
-					    			userGame("Sconfitta");
+					    			userGame(STATUS_SCONFITTA);
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
 					    	}else {
 					    		try {
-									userGame("Vittoria");
+									userGame(STATUS_VITTORIA);
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
@@ -326,7 +309,6 @@ public class GamePlayController {
 		    	}
 		    }).start();
 		    
-		    
 	        new Thread(() -> {
 	            while (gameStatus) {
 	            	synchronizeLists(() -> {
@@ -341,8 +323,6 @@ public class GamePlayController {
 	        }).start();
 	   }
 	}
-    
-
 	/**
      * Executes an action within a synchronized section, ensuring safe access to the 
      * shared lists {@code studInGame}, {@code profInGame}, {@code bulletNormalList}, 
@@ -378,9 +358,9 @@ public class GamePlayController {
 		     
 	            Label label = (Label) lostGame.lookup("#gameLabel");
 
-	            if (Status.equals("Vittoria")) {
+	            if (Status.equals(STATUS_VITTORIA)) {
 	                label.setText("Hai vinto!");
-	            } else if (Status.equals("Sconfitta")) {
+	            } else if (Status.equals(STATUS_SCONFITTA)) {
 	                label.setText("Hai perso!");
 	            }
 		        stage.show();
@@ -544,7 +524,6 @@ public class GamePlayController {
 	        }
 	    }
 	}
-	
 		/**
 		 * Removes the graphical representation of a professor from the game view and updates the game state accordingly.
 		 *
@@ -574,7 +553,7 @@ public class GamePlayController {
 
 		    // Rimuovi la vista associata al professore
 		    if (prof instanceof Tutor) {
-		        TutorView tutorViewToRemove = gamePlayView.getTutorViewList().stream()
+				TutorView tutorViewToRemove = gamePlayView.getTutorViewList().stream()
 		                .filter(view -> view.equals(prof))
 		                .findFirst()
 		                .orElse(null);
