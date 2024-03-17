@@ -53,9 +53,8 @@ public class MainMenuController implements MainMenuControllerInterface {
             mediaPlayer.play();
 		} /*
 			 * else { soundOn = true; soundButton.setText(SOUND_ON); if (mediaPlayer !=
-			 * null) { mediaPlayer.stop(); }
+			 * null) { mediaPlayer.stop(); } }
 			 */
-        }
     }
     
     public void resetSoundState() {
@@ -79,6 +78,6 @@ public class MainMenuController implements MainMenuControllerInterface {
             stage.close();
             System.exit(0);
         }    
-        resetSoundState();
+        
     }
 }
