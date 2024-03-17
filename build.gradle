@@ -17,7 +17,6 @@ plugins {
 
 javafx {
 	modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
-    modules = ['javafx.controls', 'javafx.fxml'] // Elenca tutti i moduli necessari
 }
 
 repositories {
