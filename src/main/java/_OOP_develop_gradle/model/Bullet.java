@@ -2,7 +2,7 @@ package _OOP_develop_gradle.model;
 
 import java.util.Random;
 
-public final class Bullet {
+public final class Bullet extends AbstractGameElement{
 
 	private Elements<Integer, Integer> currentPosition;
     private final int bulletSpeed;
@@ -17,10 +17,11 @@ public final class Bullet {
      * @param name   the name of the bullet
      * @param pathImg   the name of the bullet
      */
-    public Bullet(int speed, int damage, Elements<Integer, Integer> pos) {
+    public Bullet(int speed, int damage, Elements<Integer, Integer> currentPosition) {
+    	super(damage, currentPosition);
         this.bulletSpeed = speed;
         this.bulletDamage = damage;
-        this.currentPosition = pos;
+        this.currentPosition = currentPosition;
     }
 
     /**
