@@ -19,7 +19,7 @@ public class Student extends AbstractGameElement {
         generateRandomPosition();
     }
 
-    private void generateRandomPosition() {
+    void generateRandomPosition() {
         Random random = new Random();
         int randomY = random.nextInt(DEFAULT_ROW);
         this.position = new Elements<>(DEFAULT_COL, randomY);
