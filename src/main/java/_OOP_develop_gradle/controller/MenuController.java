@@ -90,6 +90,11 @@ public class MenuController implements GameControllerInterface {
             }
         }
     }
+
+	@Override
+	public void initialize() {
+		
+	}
     
     
 }
