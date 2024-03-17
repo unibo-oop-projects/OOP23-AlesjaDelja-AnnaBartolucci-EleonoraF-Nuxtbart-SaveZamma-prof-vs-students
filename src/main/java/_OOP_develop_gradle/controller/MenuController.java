@@ -89,8 +89,9 @@ public class MenuController implements GameControllerInterface {
                 }
             }
         }
+        MainMenuController.getInstance().resetSoundState();
     }
-
+    
 	@Override
 	public void initialize() {
 		
