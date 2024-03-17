@@ -78,6 +78,7 @@ public class MainMenuController implements MainMenuControllerInterface {
             stage.close();
             System.exit(0);
         }    
+        resetSoundState();
         
     }
 }
