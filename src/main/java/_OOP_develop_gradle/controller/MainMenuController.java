@@ -40,6 +40,7 @@ public class MainMenuController implements MainMenuControllerInterface {
 
     @Override
     public void sounds(ActionEvent e) {
+    	System.out.println(getClass().getResource(SOUND_PATH).toString());
         if (soundOn) {
             soundOn = false;
             soundButton.setText(SOUND_OFF);
@@ -68,6 +69,7 @@ public class MainMenuController implements MainMenuControllerInterface {
         if(exitAlert.showAndWait().get() == ButtonType.OK) {
             stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
             stage.close();
+            System.exit(0);
         }        
     }
 }
