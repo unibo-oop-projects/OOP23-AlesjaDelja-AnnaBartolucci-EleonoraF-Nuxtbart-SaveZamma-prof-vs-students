@@ -23,12 +23,12 @@
             <Image url="@/img/sun.png" />
          </image>
       </ImageView>
-      <Label fx:id="energyLabel" layoutX="208.0" layoutY="3.0" prefHeight="73.0" prefWidth="104.0" text="20" textFill="WHITE">
+      <Label fx:id="energyLabel" layoutX="58.0" layoutY="3.0" prefHeight="73.0" prefWidth="104.0" text="20" textFill="WHITE">
          <font>
             <Font name="Dyuthi" size="35.0" />
          </font>
       </Label>
-      <Label fx:id="matchScoreLabel" layoutX="58.0" layoutY="3.0" prefHeight="73.0" prefWidth="104.0" text="0" textFill="WHITE">
+      <Label fx:id="matchScoreLabel" layoutX="208.0" layoutY="3.0" prefHeight="73.0" text="0" textFill="WHITE">
          <font>
             <Font name="Dyuthi" size="35.0" />
          </font>
