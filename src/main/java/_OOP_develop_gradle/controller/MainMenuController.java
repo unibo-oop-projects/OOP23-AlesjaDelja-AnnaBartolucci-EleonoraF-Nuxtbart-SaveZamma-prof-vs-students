@@ -67,20 +67,26 @@ public class MainMenuController implements MainMenuControllerInterface {
         Preferences prefs = Preferences.userNodeForPackage(MainMenuController.class);
         prefs.putBoolean("soundOn", soundOn);
     }
-@Override
+    @Override
     public void exitGame(ActionEvent e) {
         Alert exitAlert = new Alert(AlertType.CONFIRMATION);
         exitAlert.setTitle(EXIT_TITLE);
         exitAlert.setHeaderText(EXIT_HEADER);
         exitAlert.setContentText(EXIT_CONTENT);
-
+                
         if(exitAlert.showAndWait().get() == ButtonType.OK) {
             stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
             stage.close();
             System.exit(0);
+        }    
+        // Se la musica sta suonando, imposta il pulsante su "Sound Off"
+        if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+            soundButton.setText(SOUND_OFF);
+        } else {
+            resetSoundState();
         }
-        resetSoundState();
     }
+
 
     public void resetSoundState() {
         soundOn = true;
