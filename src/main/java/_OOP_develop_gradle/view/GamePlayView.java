@@ -218,7 +218,7 @@ public class GamePlayView {
     	for(Student stud : studentInGrid) {
     		StudentView studView = new StudentView(lawn_grid);
     		studentViewList.add(studView);
-    		studView.displayElement(stud.getPositionStudent());
+    		studView.displayElement(stud.getPosition());
     	}
 	}
 	
