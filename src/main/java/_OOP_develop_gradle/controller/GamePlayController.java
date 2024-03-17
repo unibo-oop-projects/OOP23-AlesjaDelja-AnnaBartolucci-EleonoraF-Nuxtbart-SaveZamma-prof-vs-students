@@ -34,9 +34,9 @@ public class GamePlayController {
 	private static GamePlayController instance;
 	public boolean gameStatus;
 	
-	public static int ENERGY_INIT = 20;
+	public static int ENERGY_INIT = 10;
 	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!!
-	public static int TEMPO_TOT_INIT = 120; // sarebbe da mettere 120 che sono 2 minuti, per ora 10 sec per fare le prove
+	public static int TEMPO_TOT_INIT = 90; // sarebbe da mettere 120 che sono 2 minuti, per ora 10 sec per fare le prove 90sec->1,5min
 	public static int NUM_STUD_ONDATA;
 	public static GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
@@ -96,8 +96,8 @@ public class GamePlayController {
 	public void initGamePlay() throws IOException {
     	
     	if(gameStatus) {
-    		sleep(100);
-			// genero la prima ondata di studenti
+    		//sleep(4000);//TODO capire quanto far aspettare
+			
 			//TODO NUM_STUD_ONDATA+=1;
     		
 		    gameModel.generateWave(NUM_STUD_ONDATA);
@@ -123,7 +123,7 @@ public class GamePlayController {
 	   
 	   List<Student> studentToRemove = new ArrayList<>();
        List<Student> studentCopy = new ArrayList<>(studInGame);
-	    Iterator<Student> studentIterator = studentCopy.iterator();//gameModel.getStudentList().iterator();
+	    Iterator<Student> studentIterator = studentCopy.iterator();
 	    while (studentIterator.hasNext()) {
 	        Student student = studentIterator.next();
 	        
@@ -293,37 +293,65 @@ public class GamePlayController {
     */
     public void startGame(GamePlayView gamePlayView){
     	if(gameStatus) {
-			
+    		new Thread(() -> {
+    			while (gameStatus) {
+					
+					synchronizeLists(() -> {
+						if (gameModel.getTimeTot()==0) {
+					    	gameStatus = false;
+					    	
+					    	if(tutorInGame.isEmpty() && normalPInGame.isEmpty() && rectorInGame.isEmpty()) {
+					    		try {
+					    			userGame("Sconfitta");
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+					    	}else {
+					    		try {
+									userGame("Vittoria");
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+					    	}
+						}
+			    	 });
+			    	
+					}
+				    
+				}).start();
+    		
 			// Avvio del thread per l'aggiornamento dell'interfaccia utente
 		    new Thread(() -> {
 				while (gameStatus) {
 				    // Logica per studenti
-					
 					// controllo se è scaduto il tempo tot
-					if (gameModel.getTimeTot()==0) {
-				    	gameStatus = false;
-				    	if(allProfessors.isEmpty()) {
-				    		try {
-				    			userGame("Sconfitta");
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-				    	}else {
-				    		try {
-								userGame("Vittoria");
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-				    	}
-		                
+					/*if (gameModel.getTimeTot()==0) {
+						synchronizeLists(() -> {
+					    	gameStatus = false;
+					    	
+					    	if(allProfessors.isEmpty()) {
+					    		try {
+					    			userGame("Sconfitta");
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+					    	}else {
+					    		try {
+									userGame("Vittoria");
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+					    	}
+				    	 });
+				    	
 		                break;
-				    }
+				    }*/
 					
-					sleep(2000);
+					sleep(6000);
 			        
 					// Sincronizza l'accesso alle liste condivise
 	                synchronizeLists(() -> {
-	                	advanceBullets(); // così dovrebbero andare più veloci
+	                	//advanceBullets(); // così dovrebbero andare più veloci
 	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                });
 					
@@ -337,23 +365,27 @@ public class GamePlayController {
 				    //handleProfessors();
 				    
 				    // Sincronizza l'accesso alle liste condivise
-	                synchronizeLists(() -> {
+	                /*synchronizeLists(() -> {
 	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
-	                });
+	                });*/
 				    
 				    // Introdotto un ritardo per la visibilità del gioco
-			        sleep(2000);
+			        //sleep(4000);
 			        
-				    try {
+				}
+    	
+			}).start();
+		    
+		    new Thread(() -> {
+		    	while (gameStatus) {
+			    	try {
+				    	sleep(10000);
 						initGamePlay();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-				    
-				    sleep(2000);
-				}
-    	
-			}).start();
+		    	}
+		    }).start();
 		    
 		    // Avvio del thread per il movimento dei bullet
 	        new Thread(() -> {
