@@ -3,13 +3,13 @@ package _OOP_develop_gradle.model;
 
 public class Professor extends AbstractGameElement{
     
-    private int energyProfessor;
-    private boolean isAttacked;
-    private int damage;
-    private final Elements<Integer, Integer> position;
-    private int healthPoints;
-    public String pathImgP;
-    public int id;
+	private int energyProfessor; // The energy level of the professor.
+    private boolean isAttacked; // Indicates whether the professor is currently under attack.
+    private int damage; // The damage inflicted by the professor.
+    private final Elements<Integer, Integer> position; // The position of the professor on the game grid.
+    private int healthPoints; // The health points of the professor.
+    public String pathImgP; // The file path for the image representing the professor.
+    public int id; // The unique identifier for the professor.
     
     /**
      * Constructor for creating a Professor object.
@@ -30,11 +30,19 @@ public class Professor extends AbstractGameElement{
 		  this.isAttacked = false;
 		 
     }
-
+    /**
+     * Returns a boolean value indicating whether the object has been attacked.
+     *
+     * @return {@code true} if the object has been attacked, {@code false} otherwise.
+     */
     public boolean isAttacked() {
 		return isAttacked;
 	}
-
+    /**
+     * Sets the boolean value indicating whether the object has been attacked.
+     *
+     * @param isAttacked {@code true} if the object has been attacked, {@code false} otherwise.
+     */
 	public void setAttacked(boolean isAttacked) {
 		this.isAttacked = isAttacked;
 	}
