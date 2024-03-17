@@ -257,15 +257,12 @@ public class GamePlayController {
    	        Bullet bullet = bulletNormalIterator.next();
    	        
    	        if(collisionBulletAndStudents(studInGame, bullet)) {
-   	        	removeBulletView(bullet);
-   	        	//bulletNormalIterator.remove();
    	        	bulletToRemove.add(bullet);
    	        }else {
    	        	bullet.move();
    	        }
    	        
    	        if (bullet.getPosition().getX() > 8) {
-   	            //bulletNormalIterator.remove(); 
    	        	bulletToRemove.add(bullet);
    	            removeBulletView(bullet);
    	        }
