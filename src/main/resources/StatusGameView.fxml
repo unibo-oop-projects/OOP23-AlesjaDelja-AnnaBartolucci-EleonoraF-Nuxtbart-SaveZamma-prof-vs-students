@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="WonGame" prefHeight="278.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="_OOP_develop_gradle.controller.GameStatusController">
+<AnchorPane fx:id="WonGame" prefHeight="278.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="_OOP_develop_gradle.controller.MenuController">
    <children>
    	<Label fx:id="gameLabel" layoutX="91.0" layoutY="92.0" prefHeight="73.0" prefWidth="204.0" textFill="BLACK">
          <font>

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import _OOP_develop_gradle.view.GamePlayView;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,10 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class MenuController {
-	//@FXML
-	//private Button resumeButton;
-
+public class MenuController implements GameControllerInterface {
+	
 	@FXML
     private AnchorPane GameMainMenuRoot;
     @FXML
@@ -27,49 +24,47 @@ public class MenuController {
     @FXML
     private Button returnToMainButton;
     
+    /**
+     * This method is called when the FXML file is loaded and ready for use.
+     * It sets the game status to false, indicating that the game is over now.
+     */
     @FXML
     public void initData() {
-    	GamePlayController.getInstance().setGameStatus(false); // Per mettere in pausa quando apro il menu
+    	GamePlayController.getInstance().setGameStatus(false);
     }
     
-    @FXML
-    void back(ActionEvent event) throws IOException {
-    	//GamePlayController.getInstance().setGameStatus(false); // Per mettere in pausa quando apro il menu
-        //tage currentStage = (Stage) gameMenuButton.getScene().getWindow();
-        //currentStage.close();
-        // Chiudi tutte le finestre aperte
+    /**
+     * Handles the action event triggered by clicking the "Return to main menu" button.
+     * Closes all windows except the main menu and brings back to the main menu.
+     * 
+     * @param event The action event triggered by clicking the "Return to main menu" button.
+     * @throws IOException If an I/O exception occurs while going back to the main menu.
+     */
+    @Override
+	public void back(ActionEvent event) throws IOException {
         closeAllWindows();
         StageChangeController stageChanger = new StageChangeController();
         stageChanger.mainMenu(event);
         
     }
     
-
-    // TODO impazzisce, da rincontrollare
+    /**
+     * Handles the action event triggered by clicking the "Replay" button.
+     * Closes the current window, closes all other windows, and opens a new game window.
+     * 
+     * @param event The action event triggered by clicking the "Replay" button.
+     * @throws IOException If an I/O exception occurs while loading the game window.
+     */
     @FXML
     void replay(ActionEvent event) throws IOException {
     	
-    	// chiudo tutte le finestre e la finestra del menù piccolina
         Stage menuScene = (Stage) replayGameButton.getScene().getWindow();
         menuScene.close();
         closeAllWindows();
-        
-        // per il riferimento al MainMenu e il MainMenuController
-       /* FXMLLoader mainMenuLoader = new FXMLLoader(getClass().getResource("/MainMenuView.fxml"));
-        mainMenuLoader.load();
-        MainMenuController mainMenuController = mainMenuLoader.getController();*/
-        
-        //AnchorPane mainMenu = mainMenuController.getMainMenu();
-
-        // carico la scena del campo da gioco 
+       
         FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/GameView.fxml"));
         AnchorPane game = gameLoader.load();
-        //GamePlayView gamePlayView = gameLoader.getController();
-        //GamePlayController gamePlayController = new GamePlayController();
-       // gamePlayController.initData(gamePlayView);
-
-       
-        // setto la scena da gioco
+        
         Scene gameScene = new Scene(game);
         Stage newGameStage = new Stage();
         newGameStage.setScene(gameScene);
@@ -77,18 +72,19 @@ public class MenuController {
 
     }
 
+    /**
+     * Closes all windows except the main menu window.
+     */
     private void closeAllWindows() {
-        // Chiudi tutte le finestre aperte, tranne quella del menu principale
         ObservableList<Window> windows = Window.getWindows();
-        // Crea una nuova lista basata sulla lista originale
+        
         List<Window> windowsCopy = new ArrayList<>(windows);
 
-        // Rimuovi le finestre dalla nuova lista
         for (Window window : windowsCopy) {
             if (window instanceof Stage) {
                 Stage stage = (Stage) window;
 
-                if (!"MainMenu".equals(stage.getTitle())) {  //"MainMenu" è l'ID dentro l'AnchorPane el MainMenuView.fxml
+                if (!"MainMenu".equals(stage.getTitle())) {
                     stage.close();
                 }
             }
