@@ -13,12 +13,9 @@ import _OOP_develop_gradle.model.Professor;
 import _OOP_develop_gradle.model.Rector;
 import _OOP_develop_gradle.model.Student;
 import _OOP_develop_gradle.model.Tutor;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javafx.animation.AnimationTimer;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,9 +31,6 @@ import javafx.stage.Stage;
 
 
 public class GamePlayView {
-	// per gestire la griglia di gioco, popolarla con le immagini degli studenti, professori, ecc.,
-	// e di rispondere agli eventi di clic sulla griglia --> per rispettare meglio il pattern MVC
-	
 	@FXML
     private AnchorPane GamePlayRoot;
     
@@ -63,11 +57,10 @@ public class GamePlayView {
 
     public GamePlayController gameController;
     public GamePlayModel gamePlayModel;
-    
-    private List<Tutor> tutorInGrid = new ArrayList<>(); // Lista di tutor presenti
-    private List<NormalProfessor> normalProfInGrid = new ArrayList<>(); // Lista di normal p presenti
-    private List<Rector> rectorInGrid = new ArrayList<>(); // Lista di rector presenti
-    private List<Student> studentInGrid = new ArrayList<>(); // Lista di studenti presenti
+    private List<Tutor> tutorInGrid = new ArrayList<>();
+    private List<NormalProfessor> normalProfInGrid = new ArrayList<>();
+    private List<Rector> rectorInGrid = new ArrayList<>();
+    private List<Student> studentInGrid = new ArrayList<>();
     private List<Bullet>  bulletInGrid = new ArrayList<>();
     List<List<? extends Professor>> profsInGrid = new ArrayList<>();
     public boolean firstProfPicked;
@@ -76,10 +69,8 @@ public class GamePlayView {
     private List<NormalProfView> normalProfessorViewList = new ArrayList<>();
     private List<RectorView> rectorViewList = new ArrayList<>();
     private List<BulletView>  bulletViewList = new ArrayList<>();
-    
-    
     public AnimationTimer  timer;
-    public int timeTot ;// Partiamo da 2 minuti, quindi 120 secondi
+    public int timeTot;
     public int matchScore ;
     public long lastTimeUpdate = 0;
     public long ONE_SECOND = 1_000_000_000;
@@ -195,7 +186,6 @@ public class GamePlayView {
 	 */
     @FXML
     public void initialize() {
-    	
         try {
         	gameController = new GamePlayController();
             gameController.initData(this);
@@ -300,7 +290,6 @@ public class GamePlayView {
 	 */
 	public void updatePositions(List<Student> studentList, List<List<? extends Professor>> profList, List<Bullet> bulletListNormal, List<Bullet> bulletList){
 		Platform.runLater(() -> {
-			
 			removeImageViews();
 	        updateStudentPositions(studentList);
 	        updateProfessorPositions(profList);
@@ -322,13 +311,9 @@ public class GamePlayView {
 	private void updateStudentPositions(List<Student> studentList) {
 		studentInGrid =studentList;
 	    List<Student> studentInGridCopy = new ArrayList<>(studentInGrid);
-
-	    // Utilizzo un iteratore per iterare sulla copia della lista
 	    Iterator<Student> iterator = studentInGridCopy.iterator();
 	    while (iterator.hasNext()) {
 	        Student student = iterator.next();
-
-	        // Creo e aggiungo la vista dello studente alla lista studentViewList
 	        StudentView studView = new StudentView(lawn_grid);
 	        studentViewList.add(studView);
 	        studView.displayElement(student.getPosition());
@@ -341,17 +326,13 @@ public class GamePlayView {
 	 * @param profsList The list of professors.
 	 */
 	public void updateProfessorPositions(List<List<? extends Professor>> profsList) {
-		 // Rimuovi le liste obsolete da profsInGrid
 	    List<List<? extends Professor>> professorsToRemove = new ArrayList<>();
-
 	    for (List<? extends Professor> professors : profsInGrid) {
 	        if (!profsList.contains(professors)) {
 	            professorsToRemove.add(professors);
 	        }
 	    }
-
 	    profsInGrid.removeAll(professorsToRemove);
-	    
 	    for (List<? extends Professor> professors : profsInGrid) {
 	        Iterator<? extends Professor> iterator = professors.iterator();
 	        while (iterator.hasNext() && !professors.isEmpty()) {
@@ -383,8 +364,6 @@ public class GamePlayView {
 	 */
 	public void updateBulletPositions(List<Bullet> bulletList) {
 	    bulletInGrid = bulletList;
-	    
-	    // Creo una copia della lista bulletInGrid
 	    List<Bullet> bulletInGridCopy = new ArrayList<>(bulletInGrid);
 
 	    // Utilizzo un iteratore per iterare sulla copia della lista
