@@ -1,3 +1,4 @@
+package _OOP_develop_gradle.model;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
