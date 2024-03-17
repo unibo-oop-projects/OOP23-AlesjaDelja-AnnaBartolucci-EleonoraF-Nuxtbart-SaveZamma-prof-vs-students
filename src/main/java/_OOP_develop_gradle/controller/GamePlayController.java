@@ -150,13 +150,13 @@ public class GamePlayController {
 	        		
 	        	}else {
 	        		// Avanzamento in riga (diminuzione colonna)
-		            if (student.getPositionStudent().getX() > 0) {
-		            	student.setPositionStudent(new Elements<Integer, Integer> (student.getPositionStudent().getX() - 1,student.getPositionStudent().getY()));
+		            if (student.getPosition().getX() > 0) {
+		            	student.setPosition(new Elements<Integer, Integer> (student.getPosition().getX() - 1,student.getPosition().getY()));
 		            }
 	        	}
 	            
 	            // Controllo se è arrivato nella cella finale
-	            if (student.getPositionStudent().getX() == 0) {
+	            if (student.getPosition().getX() == 0) {
 	            	 // se nessun prof è presente in quella posizione ha perso
 	            	 // sennò si colpice il prof 
 	            	if (collisionProfAndStudent(student, allProfessors)) {
@@ -434,7 +434,7 @@ public class GamePlayController {
 		boolean collisionDetected = false;
 
 	    for (Student currentStud : studentList) {
-	        if (bullet.getPosition().equals(currentStud.getPositionStudent())) {
+	        if (bullet.getPosition().equals(currentStud.getPosition())) {
 	            currentStud.takeDamageStudents(bullet.getBulletDamage());
 	            System.out.println("destroy bullet");
 	            collisionDetected = true;
@@ -484,11 +484,11 @@ public class GamePlayController {
 	public boolean collisionProfAndStudent(Student currentStud, List<List<? extends Professor>> profList) {
 		for (List<? extends Professor> professors : profList) {
 	        Optional<? extends Professor> result = professors.stream()
-	                .filter(prof -> prof.getPositionProf().equals(currentStud.getPositionStudent()))
+	                .filter(prof -> prof.getPositionProf().equals(currentStud.getPosition()))
 	                .findFirst();
 	        if (result.isPresent()) {
 	            Professor professor = result.get();
-	            professor.receiveDamageProf(currentStud.getDamageStudent());
+	            professor.receiveDamageProf(currentStud.getDamage());
 	            if (professor.getHealthPointsProf() > 0) {
 	            	System.out.println("prof attacked");
 	            	professor.setAttacked(true);
