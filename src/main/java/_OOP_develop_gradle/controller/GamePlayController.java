@@ -188,8 +188,8 @@ public class GamePlayController {
 	    	  					gameModel.setBulletListNormal(bulletNormalList);
 	    	  				}else if(prof instanceof NormalProfessor) {
 	    	  					NormalProfessor normalProfessor = (NormalProfessor) prof;
-	    	  		            bulletNormalList.add(new Bullet(normalProfessor.getBulletSpeed(), prof.getDamageProf(), prof.getPositionProf()));
-	    	  		        
+	    	  		            bulletNormalList.add(new Bullet(normalProfessor.getBulletSpeed(), normalProfessor.getDamageProf(), normalProfessor.getPositionProf()));
+	    	  		            gameModel.setBulletListNormal(bulletNormalList);
 	    	  				}else{
 	    	  					Rector curr = (Rector) prof;
 	    	  					bulletDiagonalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf()));

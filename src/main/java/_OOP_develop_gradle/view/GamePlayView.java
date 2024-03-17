@@ -214,12 +214,15 @@ public class GamePlayView {
 	
 	private void updateStudentPositions(List<Student> studentList) {
 		
-		studentInGrid =studentList;
-    	for(Student stud : studentInGrid) {
-    		StudentView studView = new StudentView(lawn_grid);
+		studentInGrid =studentList;;
+    	
+    	Iterator<Student> iterator = studentInGrid.iterator();
+        while (iterator.hasNext() && !studentInGrid.isEmpty()) {
+            Student student = iterator.next();
+            StudentView studView = new StudentView(lawn_grid);
     		studentViewList.add(studView);
-    		studView.displayElement(stud.getPosition());
-    	}
+    		studView.displayElement(student.getPosition());
+        }
 	}
 	
 	public void updateProfessorPositions(List<List<? extends Professor>> profsList) {
@@ -236,7 +239,7 @@ public class GamePlayView {
 	    
 	    for (List<? extends Professor> professors : profsInGrid) {
 	        Iterator<? extends Professor> iterator = professors.iterator();
-	        while (iterator.hasNext()) {
+	        while (iterator.hasNext() && !professors.isEmpty()) {
 	            Professor prof = iterator.next();
 	            // Prendi le coordinate del professore e metti la foto corrispondente sulla griglia
 	            if (prof instanceof Tutor) {
@@ -261,11 +264,16 @@ public class GamePlayView {
 	
 	public void updateBulletPositions(List<Bullet> bulletList){
 	    	bulletInGrid = bulletList;
-	    	for(Bullet bullet : bulletInGrid) {
-	    		BulletView bulletView = new BulletView(lawn_grid);
-	    		bulletViewList.add(bulletView);
-	    		bulletView.displayElement(bullet.getPosition());
-	    	}
+	    	
+	    	Iterator<Bullet> iterator = bulletInGrid.iterator();
+	        while (iterator.hasNext() && !bulletInGrid.isEmpty()) {
+	            Bullet bullet = iterator.next();
+	            
+	            // Aggiungi la vista del proiettile
+	            BulletView bulletView = new BulletView(lawn_grid);
+	            bulletViewList.add(bulletView);
+	            bulletView.displayElement(bullet.getPosition());
+	        }
     }
 
 	public void removePosition(List<? extends ElementView> elementsToRemove) {
