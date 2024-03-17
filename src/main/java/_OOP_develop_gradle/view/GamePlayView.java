@@ -378,7 +378,6 @@ public class GamePlayView {
 	    }
 	}
 
-
 	/**
 	 * Removes the specified elements from the view.
 	 *
@@ -402,7 +401,6 @@ public class GamePlayView {
     	
         Integer columnIndex = GridPane.getColumnIndex((Region) event.getSource());
         Integer rowIndex = GridPane.getRowIndex((Region) event.getSource());
-
         System.out.println("Clicked at column " + columnIndex + " and row " + rowIndex);
         
 	    if(profChoosen != -1) {
@@ -417,13 +415,7 @@ public class GamePlayView {
 	    					gamePlayModel.getTutorList().add(tutornew);
 	    					tutorInGrid.add(tutornew);
 	    					gamePlayModel.getBulletListNormal().add(tutorBullet);
-	    					
-	    					profsInGrid.add(gamePlayModel.getTutorList());
-	    					profsInGrid.add(gamePlayModel.getNormalProfList());
-	    					profsInGrid.add(gamePlayModel.getRectorList());
-	    					
-	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
-	    	    			
+	    					addProfsInListAndUpdate();
 	    	    			gamePlayModel.decreaseEnergy(tutornew.getEnergyProfessor());
 	    	    		}
 	    				break;
@@ -435,13 +427,7 @@ public class GamePlayView {
 	    					gamePlayModel.getNormalProfList().add(normalProfNew);
 	    					normalProfInGrid.add(normalProfNew);
 	    					gamePlayModel.getBulletListNormal().add(nProfBullet); 
-	    					
-	    					profsInGrid.add(gamePlayModel.getTutorList());
-	    					profsInGrid.add(gamePlayModel.getNormalProfList());
-	    					profsInGrid.add(gamePlayModel.getRectorList());
-	    					
-	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
-	    	    			
+	    					addProfsInListAndUpdate();
 	    	    			
 	    	    			gamePlayModel.decreaseEnergy(normalProfNew.getEnergyProfessor());
 	    	    		}
@@ -454,13 +440,7 @@ public class GamePlayView {
 	    					gamePlayModel.getRectorList().add(rectornew);
 	    					rectorInGrid.add(rectornew);
 	    					gamePlayModel.getBulletListDiagonal().add(rectorBullet);
-	    					
-	    					profsInGrid.add(gamePlayModel.getTutorList());
-	    					profsInGrid.add(gamePlayModel.getNormalProfList());
-	    					profsInGrid.add(gamePlayModel.getRectorList());
-	    					
-	    	    			updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
-	    	    			
+	    					addProfsInListAndUpdate();
 	    	    			// diminuisco la moneta tot 
 	    	    			gamePlayModel.decreaseEnergy(rectornew.getEnergyProfessor());
 	    	    		}
@@ -472,7 +452,17 @@ public class GamePlayView {
 	    	}
 	    }
     }
-    
+    /**
+     *  Add all types of professors to the General list of professors in grid and update the positions on the view.
+     */
+    public void addProfsInListAndUpdate() {
+    	profsInGrid.add(gamePlayModel.getTutorList());
+		profsInGrid.add(gamePlayModel.getNormalProfList());
+		profsInGrid.add(gamePlayModel.getRectorList());
+		
+		updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
+		
+    }
     /**
      * Function that opens the Game Menu 
      * @param event
