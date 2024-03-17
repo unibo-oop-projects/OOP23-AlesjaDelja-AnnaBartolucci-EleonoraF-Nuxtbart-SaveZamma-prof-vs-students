@@ -545,8 +545,12 @@ public class GamePlayController {
 	    }
 	}
 	
-	
-public void removeProfessorView(Professor prof) {
+		/**
+		 * Removes the graphical representation of a professor from the game view and updates the game state accordingly.
+		 *
+		 * @param prof The professor whose graphical representation needs to be removed.
+		 */
+		public void removeProfessorView(Professor prof) {
 		    List<ElementView> elementsToRemove = new ArrayList<>();
 
 		    Iterator<? extends Professor> iterator;
@@ -609,42 +613,78 @@ public void removeProfessorView(Professor prof) {
 		    });
 	}
 	
-	// per restiruire l'istanta corrente del GamePlayController
+	/**
+	 * Retrieves the current instance of the GamePlayController, ensuring that only one instance is created.
+	 *
+	 * @return The current instance of the GamePlayController.
+	 */
 	public static GamePlayController getInstance() {
         if (instance == null) {
             instance = new GamePlayController();
         }
         return instance;
     }
-	
+	/**
+	 * Retrieves the score of the current match.
+	 *
+	 * @return The score of the current match.
+	 */
     public Score getScoreMatch() {
 		return scoreMatch;
 	}
-
+    /**
+     * Sets the score of the current match.
+     *
+     * @param scoreMatch The score of the current match to be set.
+     */
 	public void setScoreMatch(Score scoreMatch) {
 		this.scoreMatch = scoreMatch;
 	}
-
+	/**
+	 * Checks the status of the game.
+	 *
+	 * @return True if the game is currently active, false otherwise.
+	 */
 	public boolean isGameStatus() {
 		return gameStatus;
 	}
-	
+	/**
+	 * Sets the status of the game.
+	 *
+	 * @param status The status of the game to be set.
+	 */
 	public void setGameStatus(boolean status) {
         gameStatus = status;
     }
-	
+	/**
+	 * Retrieves the GamePlayView associated with this controller.
+	 *
+	 * @return The GamePlayView associated with this controller.
+	 */
 	public GamePlayView getGamePlayView() {
         return gamePlayView;
     }
-
+	/**
+	 * Retrieves the GamePlayModel associated with this controller.
+	 *
+	 * @return The GamePlayModel associated with this controller.
+	 */
 	public static GamePlayModel getGameModel() {
 		return gameModel;
 	}
-
+	/**
+	 * Retrieves the list of students currently in the game.
+	 *
+	 * @return The list of students currently in the game.
+	 */
 	public List<Student> getStudInGame() {
 		return studInGame;
 	}
-
+	/**
+	 * Sets the list of students currently in the game.
+	 *
+	 * @param studInGame The list of students currently in the game to be set.
+	 */
 	public void setStudInGame(List<Student> studInGame) {
 		this.studInGame = studInGame;
 	}
