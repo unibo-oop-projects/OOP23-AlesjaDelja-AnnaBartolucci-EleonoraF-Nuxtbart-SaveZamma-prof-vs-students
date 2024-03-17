@@ -43,6 +43,12 @@ public class MenuController implements GameControllerInterface {
     @Override
 	public void back(ActionEvent event) throws IOException {
         closeAllWindows();
+     // Chiudi la finestra corrente
+        Stage menuScene = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        menuScene.close();
+
+        // Interrompi la riproduzione della musica
+        MainMenuController.resetSoundState();
         StageChangeController stageChanger = new StageChangeController();
         stageChanger.mainMenu(event);
         
@@ -89,7 +95,6 @@ public class MenuController implements GameControllerInterface {
                 }
             }
         }
-        MainMenuController.getInstance().resetSoundState();
     }
     
 	@Override
