@@ -1,8 +1,7 @@
 package _OOP_develop_gradle.model;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AbstractGameElementTest {
     private AbstractGameElement gameElement = new ConcreteGameElement(10, new Elements<>(0, 0));
