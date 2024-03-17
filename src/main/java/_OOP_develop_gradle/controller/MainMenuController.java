@@ -13,8 +13,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainMenuController implements MainMenuControllerInterface {
-    private boolean soundOn = true;
-    public Button soundButton;
+    private static boolean soundOn = true;
+    public static Button soundButton;
     public static MediaPlayer mediaPlayer;
     private static final String GAME_PATH = "/GameView.fxml";
     private static final String GAME_HELP_PATH = "/HelpGameView.fxml";
@@ -61,8 +61,18 @@ public class MainMenuController implements MainMenuControllerInterface {
     }
     
     public static void resetSoundState() {
-        soundOn = true;
-        soundButton.setText(SOUND_ON);
+        try {
+			soundOn = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        try {
+			soundButton.setText(SOUND_ON);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
