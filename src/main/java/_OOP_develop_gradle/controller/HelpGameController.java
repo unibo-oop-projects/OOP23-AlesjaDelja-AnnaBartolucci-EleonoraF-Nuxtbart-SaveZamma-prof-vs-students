@@ -19,7 +19,7 @@ public class HelpGameController implements GameControllerInterface {
 	@Override
     public void initialize() throws IOException {
         // Impostazione del testo di aiuto nella label
-		 String helpText = new String(Files.readAllBytes(Paths.get("../../../../../README.md")));
+		 String helpText = new String(Files.readAllBytes(Paths.get("Help.txt")));
         helpLabel.setText(helpText);
 
         // Impostazione delle proprietà per rendere la label scorrevole
