@@ -131,7 +131,7 @@ public class GamePlayController {
 	            if (student.getPosition().getX() == 0) {
 	            	if (collisionProfAndStudent(student, allProfessors)) {
 	            		synchronizeLists(() -> {
-	            			gamePlayView.getStudentViewList().get(studInGame.indexOf(student)).attackStudents();
+	            			//gamePlayView.getStudentViewList().get(studInGame.indexOf(student)).attackStudents();
 	            			gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                    });
 		        		
