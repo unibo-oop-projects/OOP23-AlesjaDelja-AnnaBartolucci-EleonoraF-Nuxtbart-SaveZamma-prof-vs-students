@@ -6,7 +6,7 @@ public class Student extends AbstractGameElement {
     private int health;
     private int energy;
     private static int DEFAULT_DAMAGE =  25;
-    private static int DEFAULT_HEALTH =  50;
+    private static int DEFAULT_HEALTH =  100;
     private static int DEFAULT_ENERGY = 10;
     private static int DEFAULT_ROW = 5;
     private static int DEFAULT_COL = 8;
