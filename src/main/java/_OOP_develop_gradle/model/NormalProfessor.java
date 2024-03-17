@@ -4,7 +4,7 @@ public class NormalProfessor extends Professor{
 
 	public static final int NORMALPROF_HIT_DAMAGE = 50; //DANNO CHE INFLIGGO ALLO STUDENTE
 	public static final int NORMALPROF_BUY_ENERGY = 20;
-	public static final int NORMALPROF_HEALTHPOINTS = 150;
+	public static final int NORMALPROF_HEALTHPOINTS = 100;
 	public static final int NormalProfName = 2;
 	public Bullet normalProfBullet;
 	public int bulletSpeed=1;

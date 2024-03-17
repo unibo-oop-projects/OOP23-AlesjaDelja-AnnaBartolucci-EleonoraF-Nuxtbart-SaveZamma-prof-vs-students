@@ -78,24 +78,24 @@ public class MainMenuController implements MainMenuControllerInterface {
             stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
             stage.close();
             System.exit(0);
-        }else {
-        	resetSoundState();
+        }    
+        // Se la musica sta suonando, imposta il pulsante su "Sound Off"
+        if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+            soundButton.setText(SOUND_OFF);
+        } else {
+            resetSoundState();
         }
     }
 
+
     public void resetSoundState() {
-    	 if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-    	        soundOn = false;
-    	        soundButton.setText(SOUND_OFF);
-    	    } else {
-    	        soundOn = true;
-    	        soundButton.setText(SOUND_ON);
-    	    }
-    	    if (mediaPlayer != null) {
-    	        mediaPlayer.stop();
-    	    }
-    	    // Salva lo stato del suono nelle preferenze dell'applicazione
-    	    Preferences prefs = Preferences.userNodeForPackage(MainMenuController.class);
-    	    prefs.putBoolean("soundOn", soundOn);
+        soundOn = true;
+        soundButton.setText(SOUND_OFF);
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+        }
+        // Salva lo stato del suono nelle preferenze dell'applicazione
+        Preferences prefs = Preferences.userNodeForPackage(MainMenuController.class);
+        prefs.putBoolean("soundOn", soundOn);
     }
 }
