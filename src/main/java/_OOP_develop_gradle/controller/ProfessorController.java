@@ -24,7 +24,7 @@ import _OOP_develop_gradle.view.RectorView;
 import _OOP_develop_gradle.view.StudentView;
 import _OOP_develop_gradle.view.TutorView;
 //INCOMPLETA
-public class ProfessorController {
+/*public class ProfessorController {
 
 	private GamePlayModel gameModel;
     private GamePlayView gamePlayView;
@@ -80,3 +80,4 @@ public class ProfessorController {
         // Implementa la logica per rimuovere la vista del professore
     }
 }
+*/
