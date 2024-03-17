@@ -59,6 +59,7 @@ public class MainMenuController implements MainMenuControllerInterface {
             }
         }
     }
+    
     @Override
     public void exitGame(ActionEvent e) {
         Alert exitAlert = new Alert(AlertType.CONFIRMATION);
