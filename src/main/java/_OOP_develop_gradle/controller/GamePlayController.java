@@ -34,21 +34,22 @@ public class GamePlayController {
 	private static GamePlayController instance;
 	public boolean gameStatus;
 	
+	public static int TIME_TO_SHOOT = 4;
 	public static int ENERGY_INIT = 40;
-	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!!
-	public static int TEMPO_TOT_INIT = 60; // sarebbe da mettere 120 che sono 2 minuti, per ora 10 sec per fare le prove 90sec->1,5min
+	public static int TEMPO_TRA_ONDATE = 2; // tempo tra ondate da definire meglio!!!! TODO
+	public static int TEMPO_TOT_INIT = 60;
 	public static int NUM_STUD_ONDATA;
 	public static GamePlayModel gameModel;
 	public GamePlayView gamePlayView;
 	public Score scoreMatch;
 	public boolean firstProfPicked;
-	public List<Bullet> bulletNormalList = new ArrayList<>(); // lista dei bullet normali in gioco
-	public List<Bullet> bulletDiagonalList = new ArrayList<>(); // lista dei bullet diagonali in gioco
+	public List<Bullet> bulletNormalList = new ArrayList<>();
+	public List<Bullet> bulletDiagonalList = new ArrayList<>();
 	
 	public List<Tutor> tutorInGame = new ArrayList<>(); 
 	public List<NormalProfessor> normalPInGame = new ArrayList<>(); 
 	public List<Rector> rectorInGame = new ArrayList<>(); 
-	public List<Student> studInGame = new ArrayList<>(); // lista degli studenti in partita
+	public List<Student> studInGame = new ArrayList<>();
 	private List<List<? extends Professor>> allProfessors = new ArrayList<>();
 	
 	public void addAllLists(List<Tutor> tutorInGame, List<NormalProfessor> normalPInGame, List<Rector> rectorInGame) {
@@ -77,7 +78,7 @@ public class GamePlayController {
         
         addAllLists(tutorInGame, normalPInGame, rectorInGame);
         
-        this.gamePlayView = gamePlayView; // Assegna il riferimento dell'oggetto passato al metodo alla variabile gamePlayView
+        this.gamePlayView = gamePlayView;
         gamePlayView.setFirstProfPicked(false);
         try {
 			initGamePlay();
@@ -86,7 +87,7 @@ public class GamePlayController {
 		}
         
         if (!studInGame.isEmpty()) {
-        	gamePlayView.initializeView();// avvio il tempo
+        	gamePlayView.initializeView();
             startGame(gamePlayView);
             
         }
@@ -96,7 +97,6 @@ public class GamePlayController {
 	public void initGamePlay() throws IOException {
     	
     	if(gameStatus) {
-		    // Sincronizza l'accesso alle liste condivise
             synchronizeLists(() -> {
             	gameModel.generateWave(NUM_STUD_ONDATA);
                 gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
@@ -113,7 +113,6 @@ public class GamePlayController {
 	    while (studentIterator.hasNext()) {
 	        Student student = studentIterator.next();
 	        
-	        // Check dello studente se è vivo 
 	        if (student.getHealthStudent() > 0) { 
 	        	
 	        	if (collisionProfAndStudent(student, allProfessors)) {
@@ -129,16 +128,13 @@ public class GamePlayController {
 		            }
 	        	}
 	            
-	            // Controllo se è arrivato nella cella finale
 	            if (student.getPosition().getX() == 0) {
 	            	if (collisionProfAndStudent(student, allProfessors)) {
-	            		// TODO aggiungere sync ??
 	            		synchronizeLists(() -> {
 	            			gamePlayView.getStudentViewList().get(studInGame.indexOf(student)).attackStudents();
 	            			gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                    });
 		        		
-	            		//break;
 	            	}else {
 	            		// Utente ha perso, aggiorna lo stato del gioco
 		                gameStatus = false;
@@ -170,18 +166,15 @@ public class GamePlayController {
 			   while (profIterator.hasNext() && !professorList.isEmpty()) {
 			        Professor prof = profIterator.next();
 	
-		        	// il prof che viene colpito lo faccio già nel ciclo degli studenti
 	    	  		if(prof.getHealthPointsProf() <= 0){
-		                gameModel.setEnergy(gameModel.getEnergy() - prof.getEnergyProfessor());
-	    	  			//TODO controllare
+	    	  			gameModel.setEnergy(Math.max(0, gameModel.getEnergy() - prof.getEnergyProfessor()));
 		                prof.setAttacked(false);
-		                System.out.println("Il prof dovrebbe muorire ora e scomparire!");
+		                System.out.println("Il prof scompare, non ha più vite");
 		                professorsToRemove.add(prof);
 		                profIterator.remove();
 		                
 	    	  		}else if(!collisionProfAndStudents(studInGame, prof)){
-	    	  			// TODO decidere ogni quanto far sparare --> per ora ogni 4 sec
-	    	  			if(gameModel.getTimeTot() % 4 == 0 && !prof.isAttacked()) {
+	    	  			if(gameModel.getTimeTot() % TIME_TO_SHOOT == 0 && !prof.isAttacked()) {
 	    	  				if(prof instanceof Tutor ) {
 	    	  					Tutor curr = (Tutor) prof;
 	    	  					bulletNormalList.add(new Bullet(curr.getBulletSpeed(), curr.getDamageProf(), curr.getPositionProf()));
@@ -261,12 +254,12 @@ public class GamePlayController {
     	if(gameStatus) {
     		new Thread(() -> {
     			while (gameStatus) {
-					
+    				
 					synchronizeLists(() -> {
-						if (gameModel.getTimeTot()==0) {
+						if (gameModel.getTimeTot()==0 || (gameModel.getEnergy() == 0 && allProfessors.stream().allMatch(list -> list.isEmpty())) ) {
 					    	gameStatus = false;
 					    	
-					    	if(allProfessors.get(0).isEmpty() && allProfessors.get(1).isEmpty() && allProfessors.get(2).isEmpty()) {
+					    	if(allProfessors.stream().allMatch(list -> list.isEmpty())) {
 					    		try {
 					    			userGame("Sconfitta");
 								} catch (IOException e) {
@@ -290,7 +283,6 @@ public class GamePlayController {
 				while (gameStatus) {
 					sleep(6000);
 			        
-					// Sincronizza l'accesso alle liste condivise
 	                synchronizeLists(() -> {
 	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                    moveStudents();
@@ -321,8 +313,6 @@ public class GamePlayController {
 		            	gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                });
 	            	
-	            	//advanceBullets();
-	            	//handleProfessors();
 	                sleep(1000);
 	            }
 	        }).start();
@@ -374,7 +364,7 @@ public class GamePlayController {
   
 	// ritardo per la visibilità del gioco    
 	private void sleep(int num) {
-		if(gameModel.getTimeTot()>0) {//controllo che il timer non sia a zero sennò mi faceva aspettare lo stesso
+		if(gameModel.getTimeTot()>0) {
 			try {
 		        Thread.sleep(num);
 		    } catch (InterruptedException e) {
@@ -462,7 +452,6 @@ public class GamePlayController {
 	                .findFirst();
 	        if (result.isPresent()) {
 	            Professor professor = result.get();
-	            //professor.receiveDamageProf(currentStud.getDamage());
 	            if (professor.getHealthPointsProf() > 0) {
 	            	System.out.println("prof attacked STUDENT");
 	            	professor.setAttacked(true);
@@ -489,8 +478,6 @@ public class GamePlayController {
 	                    List<ElementView> elementsToRemove = new ArrayList<>();
 	                    elementsToRemove.add(studentViewToRemove);
 	                    synchronizeLists(() -> {
-	                    	//gamePlayView.getStudentViewList().remove(studentViewToRemove);
-	                    	//studInGame.remove(currentStudent);
 	                        gamePlayView.removePosition(elementsToRemove);
 	                    });
 	                }
@@ -512,14 +499,14 @@ public void removeProfessorView(Professor prof) {
 		    } else if (prof instanceof Rector) {
 		        iterator = rectorInGame.iterator();
 		    } else {
-		        return; // Tipo di professore non gestito
+		        return;
 		    }
 
 		    while (iterator.hasNext()) {
 		        Professor currentProf = iterator.next();
 		        if (currentProf.equals(prof)) {
 		            iterator.remove();
-		            break; // Esci dal ciclo una volta trovato il professore da rimuovere
+		            break;
 		        }
 		    }
 
@@ -605,25 +592,3 @@ public void removeProfessorView(Professor prof) {
 	}
 	
 }
-// Rimozione del metodo removeBulletView() all'interno di collisionBulletAndStudent()
-/*    public boolean collisionBulletAndStudent(Student currentStud, List<Bullet> bulletList) {
-   	List<Bullet> bulletsToRemove = new ArrayList<>();
-       boolean collisionDetected = false;
-
-       for (Bullet bullet : bulletList) {
-           if (bullet.getPosition().equals(currentStud.getPositionStudent())) {
-               currentStud.takeDamageStudents(bullet.getBulletDamage());
-               System.out.println("destroy bullet");
-               bulletsToRemove.add(bullet);
-               collisionDetected = true;
-           }
-       }
-
-       for (Bullet bullet : bulletsToRemove) {
-           removeBulletView(bullet);
-           bulletList.remove(bullet);
-       }
-
-       return collisionDetected;
-   }
-*/	
