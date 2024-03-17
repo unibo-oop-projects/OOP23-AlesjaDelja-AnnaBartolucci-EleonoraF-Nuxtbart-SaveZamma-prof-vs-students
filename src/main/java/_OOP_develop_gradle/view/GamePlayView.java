@@ -188,7 +188,7 @@ public class GamePlayView {
 	}
     
 	public void updateMatchScoreLabel() {
-		matchScoreLabel.setText(String.format("%d", gamePlayModel.getScoreMacth()));
+		matchScoreLabel.setText(String.format("Score: %d", gamePlayModel.getScoreMacth()));
 		
 	}
 	public int getMatchScore() {
