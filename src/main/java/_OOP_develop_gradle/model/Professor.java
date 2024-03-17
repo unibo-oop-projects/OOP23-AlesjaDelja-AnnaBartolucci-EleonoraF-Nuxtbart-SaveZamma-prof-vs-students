@@ -22,8 +22,7 @@ public class Professor extends AbstractGameElement{
      * @param id The unique identifier of the professor.
      */
     public Professor(int damage, int healthPoints, Elements<Integer, Integer> position, int energyProfessor) {
-        super(damage, healthPoints, position, energyProfessor);
-		
+          super(damage, position);
 		  this.damage = damage; 
 		  this.healthPoints = healthPoints; 
 		  this.position =position; 
