@@ -51,14 +51,20 @@ public class MainMenuController implements MainMenuControllerInterface {
             mediaPlayer.setStartTime(Duration.seconds(0));
             mediaPlayer.setStopTime(Duration.seconds(50));
             mediaPlayer.play();
-        } else {
-            soundOn = true;
-            soundButton.setText(SOUND_ON);
-            if (mediaPlayer != null) {
-                mediaPlayer.stop();
-            }
+		} /*
+			 * else { soundOn = true; soundButton.setText(SOUND_ON); if (mediaPlayer !=
+			 * null) { mediaPlayer.stop(); } }
+			 */
+    }
+    
+    public void resetSoundState() {
+        soundOn = true;
+        soundButton.setText(SOUND_ON);
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
         }
     }
+
     
     @Override
     public void exitGame(ActionEvent e) {
@@ -71,6 +77,7 @@ public class MainMenuController implements MainMenuControllerInterface {
             stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
             stage.close();
             System.exit(0);
-        }        
+        }    
+        
     }
 }
