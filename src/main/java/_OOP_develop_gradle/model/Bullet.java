@@ -2,11 +2,8 @@ package _OOP_develop_gradle.model;
 
 import java.util.Random;
 
-
-
 public final class Bullet {
 
-    //private static final int SPEED_MULTIPLIER = 2;
 	private Elements<Integer, Integer> currentPosition;
     private final int bulletSpeed;
     private final int bulletDamage;

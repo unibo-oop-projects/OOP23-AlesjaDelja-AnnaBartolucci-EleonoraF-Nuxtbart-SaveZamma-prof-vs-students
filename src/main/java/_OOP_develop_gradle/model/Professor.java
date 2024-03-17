@@ -1,7 +1,7 @@
 package _OOP_develop_gradle.model;
 
 
-public class Professor {
+public class Professor extends AbstractGameElement{
     
     private int costProfessor;
     private boolean isAttacked;
@@ -101,4 +101,5 @@ public class Professor {
     public void receiveDamageProf(int damageReceived) {
         healthPoints -= damageReceived;
     }
+
 }

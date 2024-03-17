@@ -5,7 +5,7 @@ public class Rector extends Professor{
 	private Elements<Integer, Integer> currentPosition;
 	
 	public static final int RECTOR_HIT_DAMAGE = 50; //DANNO CHE INFLIGGO ALLO STUDENTE
-	public static final int RECTOR_BUY_ENERGY = 10;
+	public static final int RECTOR_BUY_ENERGY = 30;
 	public static final int RECTOR_HEALTHPOINTS = 100;
 	public Bullet rectorBullet;
 	private int bulletSpeed=1;
