@@ -86,46 +86,113 @@ public class GamePlayView {
     public boolean timerStop = false;
     public int profChoosen;
     
+    /**
+     * Retrieves the list of StudentView objects associated with this view.
+     *
+     * @return The list of StudentView objects.
+     */
     public List<StudentView> getStudentViewList() {
 		return studentViewList;
 	}
+    /**
+     * Sets the list of StudentView objects associated with this view.
+     *
+     * @param studentViewList The list of StudentView objects to be set.
+     */
 	public void setStudentViewList(List<StudentView> studentViewList) {
 		this.studentViewList = studentViewList;
 	}
+	/**
+	 * Retrieves the list of TutorView objects associated with this view.
+	 *
+	 * @return The list of TutorView objects.
+	 */
 	public List<TutorView> getTutorViewList() {
 		return tutorViewList;
 	}
+	/**
+	 * Sets the list of TutorView objects associated with this view.
+	 *
+	 * @param tutorViewList The list of TutorView objects to be set.
+	 */
 	public void setTutorViewList(List<TutorView> tutorViewList) {
 		this.tutorViewList = tutorViewList;
 	}
+	/**
+	 * Retrieves the list of NormalProfView objects associated with this view.
+	 *
+	 * @return The list of NormalProfView objects.
+	 */
 	public List<NormalProfView> getNormalProfessorViewList() {
 		return normalProfessorViewList;
 	}
+	/**
+	 * Sets the list of NormalProfView objects associated with this view.
+	 *
+	 * @param normalProfessorViewList The list of NormalProfView objects to be set.
+	 */
 	public void setNormalProfessorViewList(List<NormalProfView> normalProfessorViewList) {
 		this.normalProfessorViewList = normalProfessorViewList;
 	}
+	/**
+	 * Retrieves the list of RectorView objects associated with this view.
+	 *
+	 * @return The list of RectorView objects.
+	 */
 	public List<RectorView> getRectorViewList() {
 		return rectorViewList;
 	}
+	/**
+	 * Sets the list of RectorView objects associated with this view.
+	 *
+	 * @param rectorViewList The list of RectorView objects to be set.
+	 */
 	public void setRectorViewList(List<RectorView> rectorViewList) {
 		this.rectorViewList = rectorViewList;
 	}
+	/**
+	 * Retrieves the list of BulletView objects associated with this view.
+	 *
+	 * @return The list of BulletView objects.
+	 */
 	public List<BulletView> getBulletViewList() {
 		return bulletViewList;
 	}
+	/**
+	 * Sets the list of BulletView objects associated with this view.
+	 *
+	 * @param bulletViewList The list of BulletView objects to be set.
+	 */
 	public void setBulletViewList(List<BulletView> bulletViewList) {
 		this.bulletViewList = bulletViewList;
 	}
+	/**
+	 * Sets the controller associated with this view.
+	 *
+	 * @param gameController The GamePlayController to be set.
+	 */
 	public void setController(GamePlayController gameController) {
         this.gameController = gameController;
     }
+	/**
+	 * Checks if a professor card has been picked for placement on the game grid.
+	 *
+	 * @return True if a professor card has been picked, false otherwise.
+	 */
 	public boolean isFirstProfPicked() {
 		return firstProfPicked;
 	}
-
+	/**
+	 * Sets the flag indicating whether a professor card has been picked for placement on the game grid.
+	 *
+	 * @param firstProfPicked The flag to be set.
+	 */
 	public void setFirstProfPicked(boolean firstProfPicked) {
 		this.firstProfPicked = firstProfPicked;
 	}
+	/**
+	 * Initializes the view by setting up the game controller and starting the timer for updating game elements.
+	 */
     @FXML
     public void initialize() {
     	
@@ -136,7 +203,9 @@ public class GamePlayView {
             e.printStackTrace();
         }
     }
-    
+    /**
+     * Initializes the view components.
+     */
     public void initializeView() {
     	
     	profChoosen=-1;
@@ -163,15 +232,25 @@ public class GamePlayView {
         };
         timer.start();
     }
-    
+    /**
+     * Checks if the timer is stopped.
+     *
+     * @return True if the timer is stopped, false otherwise.
+     */
     public boolean isTimerStop() {
 		return timerStop;
 	}
-    
+    /**
+     * Sets the flag indicating whether the timer is stopped.
+     *
+     * @param timerStop The flag to be set.
+     */
 	public void setTimerStop(boolean timerStop) {
 		this.timerStop = timerStop;
 	}
-	
+	/**
+	 * Updates the displayed time on the game view.
+	 */
 	private void updateTempoLabel() {
     	// funzione che mi aggiorna il tempo che scorre
     	timeTot--;
@@ -182,21 +261,43 @@ public class GamePlayView {
         gamePlayModel.setTimeTot(timeTot);
         
 	}
-	
+	/**
+	 * Updates the displayed energy on the game view.
+	 */
 	public void updateEnergyLabel() {
 		energyLabel.setText(String.format("%d", gamePlayModel.getEnergy()));
 	}
-    
+	/**
+	 * Updates the displayed match score on the game view.
+	 */
 	public void updateMatchScoreLabel() {
 		matchScoreLabel.setText(String.format("Score: %d", gamePlayModel.getScoreMacth()));
 		
 	}
+	/**
+	 * Retrieves the match score.
+	 *
+	 * @return The match score.
+	 */
 	public int getMatchScore() {
 		return matchScore;
 	}
+	/**
+	 * Sets the match score.
+	 *
+	 * @param matchScore The match score to be set.
+	 */
 	public void setMatchScore(int matchScore) {
 		this.matchScore = matchScore;
 	}
+	/**
+	 * Updates the positions of game elements on the view.
+	 *
+	 * @param studentList       The list of students.
+	 * @param profList          The list of professors.
+	 * @param bulletListNormal  The list of normal bullets.
+	 * @param bulletList        The list of diagonal bullets.
+	 */
 	public void updatePositions(List<Student> studentList, List<List<? extends Professor>> profList, List<Bullet> bulletListNormal, List<Bullet> bulletList){
 		Platform.runLater(() -> {
 			
@@ -207,11 +308,17 @@ public class GamePlayView {
 	        updateBulletPositions(bulletListNormal);
 	    });
     }
-	
+	/**
+	 * Removes the image views of game elements from the view.
+	 */
 	private void removeImageViews() {
 	    lawn_grid.getChildren().removeIf(node -> node instanceof ImageView);
 	}
-	
+	/**
+	 * Updates the positions of students on the view.
+	 *
+	 * @param studentList The list of students.
+	 */
 	private void updateStudentPositions(List<Student> studentList) {
 		studentInGrid =studentList;
 	    List<Student> studentInGridCopy = new ArrayList<>(studentInGrid);
@@ -228,7 +335,11 @@ public class GamePlayView {
 	    }
 	}
 
-	
+	/**
+	 * Updates the positions of professors on the view.
+	 *
+	 * @param profsList The list of professors.
+	 */
 	public void updateProfessorPositions(List<List<? extends Professor>> profsList) {
 		 // Rimuovi le liste obsolete da profsInGrid
 	    List<List<? extends Professor>> professorsToRemove = new ArrayList<>();
@@ -265,7 +376,11 @@ public class GamePlayView {
 	        }
 	    }
 	}
-	
+	/**
+	 * Updates the positions of bullets on the view.
+	 *
+	 * @param bulletList The list of bullets.
+	 */
 	public void updateBulletPositions(List<Bullet> bulletList) {
 	    bulletInGrid = bulletList;
 	    
@@ -285,7 +400,11 @@ public class GamePlayView {
 	}
 
 
-
+	/**
+	 * Removes the specified elements from the view.
+	 *
+	 * @param elementsToRemove The list of elements to be removed.
+	 */
 	public void removePosition(List<? extends ElementView> elementsToRemove) {
 	    Platform.runLater(() -> {
 	        for (ElementView elem : elementsToRemove) {
@@ -295,9 +414,10 @@ public class GamePlayView {
 	}
 	
 	/**
-     * Function that handle the choice of a professor type and put it on the lawn grid
-     * @param event
-     */
+	 * Handles the mouse click event for selecting a professor card.
+	 *
+	 * @param event The mouse click event.
+	 */
     @FXML
     private void handleMouseClick(MouseEvent event) {
     	
@@ -393,28 +513,34 @@ public class GamePlayView {
         
         stage.show();
     }
-
+    /**
+     * Handles the selection of the tutor card.
+     */
     @FXML
     public void handleTutorCardClick(){
     	profChoosen=1;
     }
-    
+    /**
+     * Handles the selection of the normal professor card.
+     */
     @FXML
     public void handleNormalCardClick(){
     	profChoosen=2;
     }
-    
+    /**
+     * Handles the selection of the rector card.
+     */
     @FXML
     public void handleRectorCardClick(){
     	profChoosen=3;
     }
     /**
-     * Check if the professor is in the cell with columnIndex and rowIndex
-     * @param columnIndex
-     * @param rowIndex
-     * @return TRUE if prof is in the cell otherwise FALSE
+     * Checks if a professor is present in the specified cell.
+     *
+     * @param columnIndex The column index of the cell.
+     * @param rowIndex    The row index of the cell.
+     * @return True if a professor is present in the cell, false otherwise.
      */
-    // TODO da controllare e da mettere per tutte le tipologie di professori e se non c'è già uno studente
 	private boolean isProfInCell(int columnIndex, int rowIndex) {
 		return rectorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex);
 	}
