@@ -213,14 +213,21 @@ public class GamePlayView {
 	}
 	
 	private void updateStudentPositions(List<Student> studentList) {
-		
 		studentInGrid =studentList;
-    	for(Student stud : studentInGrid) {
-    		StudentView studView = new StudentView(lawn_grid);
-    		studentViewList.add(studView);
-    		studView.displayElement(stud.getPosition());
-    	}
+	    List<Student> studentInGridCopy = new ArrayList<>(studentInGrid);
+
+	    // Utilizzo un iteratore per iterare sulla copia della lista
+	    Iterator<Student> iterator = studentInGridCopy.iterator();
+	    while (iterator.hasNext()) {
+	        Student student = iterator.next();
+
+	        // Creo e aggiungo la vista dello studente alla lista studentViewList
+	        StudentView studView = new StudentView(lawn_grid);
+	        studentViewList.add(studView);
+	        studView.displayElement(student.getPosition());
+	    }
 	}
+
 	
 	public void updateProfessorPositions(List<List<? extends Professor>> profsList) {
 		 // Rimuovi le liste obsolete da profsInGrid
@@ -236,7 +243,7 @@ public class GamePlayView {
 	    
 	    for (List<? extends Professor> professors : profsInGrid) {
 	        Iterator<? extends Professor> iterator = professors.iterator();
-	        while (iterator.hasNext()) {
+	        while (iterator.hasNext() && !professors.isEmpty()) {
 	            Professor prof = iterator.next();
 	            // Prendi le coordinate del professore e metti la foto corrispondente sulla griglia
 	            if (prof instanceof Tutor) {
@@ -259,14 +266,25 @@ public class GamePlayView {
 	    }
 	}
 	
-	public void updateBulletPositions(List<Bullet> bulletList){
-	    	bulletInGrid = bulletList;
-	    	for(Bullet bullet : bulletInGrid) {
-	    		BulletView bulletView = new BulletView(lawn_grid);
-	    		bulletViewList.add(bulletView);
-	    		bulletView.displayElement(bullet.getPosition());
-	    	}
-    }
+	public void updateBulletPositions(List<Bullet> bulletList) {
+	    bulletInGrid = bulletList;
+	    
+	    // Creo una copia della lista bulletInGrid
+	    List<Bullet> bulletInGridCopy = new ArrayList<>(bulletInGrid);
+
+	    // Utilizzo un iteratore per iterare sulla copia della lista
+	    Iterator<Bullet> iterator = bulletInGridCopy.iterator();
+	    while (iterator.hasNext() && !bulletInGridCopy.isEmpty()) {
+	        Bullet bullet = iterator.next();
+
+	        // Creo e aggiungo la vista del proiettile alla lista bulletViewList
+	        BulletView bulletView = new BulletView(lawn_grid);
+	        bulletViewList.add(bulletView);
+	        bulletView.displayElement(bullet.getPosition());
+	    }
+	}
+
+
 
 	public void removePosition(List<? extends ElementView> elementsToRemove) {
 	    Platform.runLater(() -> {
@@ -363,6 +381,7 @@ public class GamePlayView {
      */
     @FXML
     void GameMenu(MouseEvent event) throws IOException {
+    	gameController.setGameStatus(false);
     	timerStop = true;// stoppo il timer quando apro il menù
     	GamePlayController.getInstance().setGameStatus(false);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MenuView.fxml"));
