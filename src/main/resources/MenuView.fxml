@@ -6,6 +6,6 @@
 <AnchorPane fx:id="GameMainMenuRoot" prefHeight="278.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="_OOP_develop_gradle.controller.MenuController">
    <children>
       <Button fx:id="replayGameButton" layoutX="106.0" layoutY="139.0" mnemonicParsing="false" onAction="#replay" prefHeight="42.0" prefWidth="175.0" text="Replay" textAlignment="CENTER" wrapText="true" />
-      <Button layoutX="106.0" layoutY="73.0" mnemonicParsing="false" onAction="#back" prefHeight="42.0" prefWidth="175.0" text="Return to Main Menu" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="returnToMainButton" layoutX="106.0" layoutY="73.0" mnemonicParsing="false" onAction="#back" prefHeight="42.0" prefWidth="175.0" text="Return to Main Menu" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

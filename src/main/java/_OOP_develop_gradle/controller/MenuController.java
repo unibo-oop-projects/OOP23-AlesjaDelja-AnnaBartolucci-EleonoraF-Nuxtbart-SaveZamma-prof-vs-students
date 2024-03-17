@@ -23,6 +23,10 @@ public class MenuController {
     private AnchorPane GameMainMenuRoot;
     @FXML
     private Button replayGameButton;
+    
+    @FXML
+    private Button returnToMainButton;
+    
     @FXML
     public void initData() {
     	GamePlayController.getInstance().setGameStatus(false); // Per mettere in pausa quando apro il menu
@@ -30,7 +34,7 @@ public class MenuController {
     
     @FXML
     void back(ActionEvent event) throws IOException {
-        //GamePlayController.gameStatus = false;
+    	//GamePlayController.getInstance().setGameStatus(false); // Per mettere in pausa quando apro il menu
         //tage currentStage = (Stage) gameMenuButton.getScene().getWindow();
         //currentStage.close();
         // Chiudi tutte le finestre aperte
@@ -39,6 +43,7 @@ public class MenuController {
         stageChanger.mainMenu(event);
         
     }
+    
 
     // TODO impazzisce, da rincontrollare
     @FXML
@@ -59,9 +64,9 @@ public class MenuController {
         // carico la scena del campo da gioco 
         FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/GameView.fxml"));
         AnchorPane game = gameLoader.load();
-        GamePlayView gamePlayView = gameLoader.getController();
-        GamePlayController gamePlayController = new GamePlayController();
-        gamePlayController.initData(gamePlayView);
+        //GamePlayView gamePlayView = gameLoader.getController();
+        //GamePlayController gamePlayController = new GamePlayController();
+       // gamePlayController.initData(gamePlayView);
 
        
         // setto la scena da gioco

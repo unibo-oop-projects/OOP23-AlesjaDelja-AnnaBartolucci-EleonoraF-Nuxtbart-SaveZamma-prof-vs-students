@@ -40,6 +40,7 @@ public class MainMenuImp extends Application implements MainMenu{
 			exitAlert.setContentText(EXIT_CONTENT);
 			if(exitAlert.showAndWait().get() == ButtonType.OK) {
 				stage.close();
+				System.exit(0);
 			}
 		}
 	}
