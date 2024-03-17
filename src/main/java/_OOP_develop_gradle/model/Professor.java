@@ -3,7 +3,7 @@ package _OOP_develop_gradle.model;
 
 public class Professor extends AbstractGameElement{
     
-    private int costProfessor;
+    private int energyProfessor;
     private boolean isAttacked;
     private int damage;
     private final Elements<Integer, Integer> position;
@@ -21,12 +21,15 @@ public class Professor extends AbstractGameElement{
      * @param costProfessor The cost to buy the professor.
      * @param id The unique identifier of the professor.
      */
-    public Professor(int damage, int healthPoints, Elements<Integer, Integer> position, int costProfessor) {
-        this.damage = damage;
-        this.healthPoints = healthPoints;
-        this.position = position;
-        this.costProfessor = costProfessor;
-        this.isAttacked = false;
+    public Professor(int damage, int healthPoints, Elements<Integer, Integer> position, int energyProfessor) {
+        super(damage, healthPoints, position, energyProfessor);
+		
+		  this.damage = damage; 
+		  this.healthPoints = healthPoints; 
+		  this.position =position; 
+		  this.energyProfessor = energyProfessor; 
+		  this.isAttacked = false;
+		 
     }
 
     public boolean isAttacked() {
@@ -57,17 +60,18 @@ public class Professor extends AbstractGameElement{
      * Gets the costProfessor of a professor
      * @return the costProfessor of the professor
      */
-    public int getEnergyProfessor() {
-        return costProfessor;
-    }
+	
+	  public int getEnergyProfessor() { return energyProfessor; }
+	 
     
     /**
      * Sets the costProfessor of a professor
      * @param the costProfessor value of the professor
      */
-    public void setEnergyProfessor(int costProfessor) {
-        this.costProfessor = costProfessor;
-    }
+	
+	  public void setEnergyProfessor(int energyProfessor) { this.energyProfessor =
+	  energyProfessor; }
+	 
     
     /**
      * Gets the damage of a professor

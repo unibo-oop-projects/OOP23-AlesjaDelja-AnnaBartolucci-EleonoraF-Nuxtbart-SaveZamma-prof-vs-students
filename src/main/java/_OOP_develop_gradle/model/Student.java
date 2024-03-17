@@ -10,9 +10,10 @@ public class Student extends AbstractGameElement {
     private static int DEFAULT_ENERGY = 10;
     private static int DEFAULT_ROW = 5;
     private static int DEFAULT_COL = 8;
-
+//MODIFICATO COSTRUTTORE
     public Student() {
-    	super(DEFAULT_DAMAGE,null);
+    	super(DEFAULT_DAMAGE, DEFAULT_HEALTH, null, DEFAULT_ENERGY);
+    	//guardare se settare i campi
         this.health = DEFAULT_HEALTH;
         this.energy = DEFAULT_ENERGY;
         generateRandomPosition();
