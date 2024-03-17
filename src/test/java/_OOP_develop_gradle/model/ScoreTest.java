@@ -3,11 +3,6 @@ package _OOP_develop_gradle.model;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-/*import static org.junit.Assert.assertEquals;
-import org.junit.Before;
-import javafx.scene.control.Label;
-import org.junit.Test;*/
-
 public class ScoreTest {
 
     private Score score = new Score();;
