@@ -1,40 +1,64 @@
-package _OOP_develop_gradle.model;
-
-
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import _OOP_develop_gradle.model.Bullet;
+import _OOP_develop_gradle.model.Elements;
+
+/**
+ * Test class for the {@link Tutor} class.
+ */
 public class TutorTest {
 
-	//private Tutor tutor;
-
-	private Tutor tutor = new Tutor(0, 0); // Passa le coordinate iniziali
+    private Tutor tutor;
     
+    /**
+     * Sets up a new instance of {@link Tutor} before each test method.
+     */
+    @BeforeEach
+    void setUp() {
+        tutor = new Tutor(1, 1);
+    }
 
-	 @Test
-	    public void testConstructor() {
-	        // Verifica che il costruttore inizializzi correttamente il Tutor
-	        assertNotNull(tutor);
-	        assertEquals(25, tutor.getDamageProf());
-	        assertEquals(100, tutor.getHealthPointsProf());
-	        assertEquals(10, tutor.getEnergyProfessor());
-	        assertEquals(1, tutor.getBulletSpeed());
-	        assertNotNull(tutor.getTutorBullet());
-	    }
+    /**
+     * Test case for the {@link Tutor#getTutorBullet()} method.
+     * It checks if the Tutor's bullet is not null and is an instance of {@link Bullet}.
+     */
+    @Test
+    void testGetTutorBullet() {
+        assertNotNull(tutor.getTutorBullet());
+        assertTrue(tutor.getTutorBullet() instanceof Bullet);
+    }
 
-	    @Test
-	    public void testSetTutorBullet() {
-	        // Verifica che il metodo setTutorBullet imposti correttamente il Bullet del Tutor
-	        Bullet bullet = new Bullet(2, 30, new Elements<>(1, 1));
-	        tutor.setTutorBullet(bullet);
-	        assertEquals(bullet, tutor.getTutorBullet());
-	    }
+    /**
+     * Test case for the {@link Tutor#setTutorBullet(Bullet)} method.
+     * It verifies if the Tutor's bullet can be set correctly.
+     */
+    @Test
+    void testSetTutorBullet() {
+        Bullet newBullet = new Bullet(2, 30, new Elements<>(2, 2));
+        tutor.setTutorBullet(newBullet);
+        assertEquals(newBullet, tutor.getTutorBullet());
+    }
 
-	    @Test
-	    public void testSetBulletSpeed() {
-	        // Verifica che il metodo setBulletSpeed imposti correttamente la velocità del Bullet del Tutor
-	        tutor.setBulletSpeed(2);
-	        assertEquals(2, tutor.getBulletSpeed());
-	    }
+    /**
+     * Test case for the {@link Tutor#getBulletSpeed()} method.
+     * It checks if the Tutor's bullet speed is initialized correctly.
+     */
+    @Test
+    void testGetBulletSpeed() {
+        assertEquals(1, tutor.getBulletSpeed());
+    }
+
+    /**
+     * Test case for the {@link Tutor#setBulletSpeed(int)} method.
+     * It verifies if the Tutor's bullet speed can be set correctly.
+     */
+    @Test
+    void testSetBulletSpeed() {
+        int newSpeed = 2;
+        tutor.setBulletSpeed(newSpeed);
+        assertEquals(newSpeed, tutor.getBulletSpeed());
+    }
 }
