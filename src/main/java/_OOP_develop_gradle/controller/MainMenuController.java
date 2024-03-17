@@ -60,7 +60,7 @@ public class MainMenuController implements MainMenuControllerInterface {
 			 */
     }
     
-    public void resetSoundState() {
+    public static void resetSoundState() {
         soundOn = true;
         soundButton.setText(SOUND_ON);
         if (mediaPlayer != null) {
