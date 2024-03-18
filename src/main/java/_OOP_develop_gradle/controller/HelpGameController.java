@@ -5,15 +5,11 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 
-public class HelpGameController implements GameControllerInterface {
-
-    @FXML
-    private ScrollPane scrollPane; // Dichiarazione dello ScrollPane
+public class HelpGameController implements GameControllerInterface { 
 
     @FXML
-    private Label helpLabel; // Dichiarazione della Label per il testo di aiuto
+    private Label helpLabel; 
     
     private String TEST_LABEL ="Prof vs. Students is a strategy and defense game where the player must protect their house from waves of students using a variety of profs with special abilities.\r\n"
     		+ "Players can plant various types of profs each with unique defensive functions such as shooting direct and diagonal projectiles . \r\n"
@@ -30,15 +26,9 @@ public class HelpGameController implements GameControllerInterface {
     		+ "    Tutor-> Health 50 - Damage 25 - Energy 10 - Shoots direct projeciles\r\n"
     		+ "    Normal-> Health 100 - Damage 50 - Energy 20 - Shoots direct projeciles\r\n"
     		+ "    Rector-> Health 150 - Damage 50 - Energy 30 - Shoots diagonal projectiles";
-	@Override
+	
     public void initialize() throws IOException {
-        // Impostazione del testo di aiuto nella label
-		 //String helpText = new String(Files.readAllBytes(Paths.get("Help.txt")));
-        helpLabel.setText(TEST_LABEL);
-
-        // Impostazione delle proprietà per rendere la label scorrevole
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
+		helpLabel.setText(TEST_LABEL);
     }
     @Override
     public void back(ActionEvent e) throws IOException {

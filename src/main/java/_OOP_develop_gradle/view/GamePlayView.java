@@ -477,9 +477,6 @@ public class GamePlayView {
         Parent gameMenu = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(gameMenu));
-        MenuController controller = fxmlLoader.<MenuController>getController();
-        controller.initData();
-        
         stage.show();
     }
     /**

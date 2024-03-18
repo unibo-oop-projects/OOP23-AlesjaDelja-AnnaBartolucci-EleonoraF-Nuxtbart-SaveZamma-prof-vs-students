@@ -2,22 +2,21 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="_OOP_develop_gradle.controller.HelpGameController">
    <children>
-      <Label layoutX="163.0" layoutY="14.0" prefHeight="122.0" prefWidth="275.0" text="Prof vs Students: How To Play?" textAlignment="CENTER" textFill="#0add4a" wrapText="true">
+      <Label layoutX="35.0" layoutY="-25.0" prefHeight="122.0" prefWidth="530.0" text="Prof vs Students: How To Play?" textAlignment="CENTER" textFill="#0add4a" wrapText="true">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="459.0" layoutY="361.0" mnemonicParsing="false" onAction="#back" text="Back to Main Menu" />
-      <ScrollPane fx:id="scrollPane" layoutX="31.0" layoutY="124.0" prefHeight="224.0" prefWidth="556.0">
-        <content>
-                  <Label fx:id="helpLabel" prefHeight="215.0" prefWidth="545.0" />
-        </content>
-      </ScrollPane>
+      <Button layoutX="467.0" layoutY="361.0" mnemonicParsing="false" onAction="#back" text="Back to Main Menu" />
+            <Label fx:id="helpLabel" layoutX="16.0" layoutY="51.0" prefHeight="305.0" prefWidth="569.0" text="Prof vs. Students is a strategy and defense game where the player must protect their house from waves of students using a variety of profs with special abilities.\r\n&quot;    + &quot;Players can plant various types of profs each with unique defensive functions such as shooting direct and diagonal projectiles . \r\n&quot;    + &quot;During gameplay, players must strategically plan the placement of prof and manage resources (energy) to plant new defenses. \r\n&quot;    + &quot;The player MUST choose the first time a prof and then where to plant it(where there isn't anything), if he doesn't choose a different prof then he will plant the last choosen prof.\r\n&quot;    + &quot;Students will come from different directions.\r\n&quot;    + &quot;The ultimate goal is to survive for as a minute, protecting your house and preventing the students from reaching the final goal.\r\n&quot;    + &quot;\r\n&quot;    + &quot;LEGENDS:\r\n&quot;    + &quot;Student-&gt; Health 100 - Damage 25\r\n&quot;    + &quot;When a students dies it will decrease the energy by 10\r\n&quot;    + &quot;Prof:\r\n&quot;    + &quot;  The enegy statistic is the enegy needed to summon that prof.\r\n&quot;    + &quot;    Tutor-&gt; Health 50 - Damage 25 - Energy 10 - Shoots direct projeciles\r\n&quot;    + &quot;    Normal-&gt; Health 100 - Damage 50 - Energy 20 - Shoots direct projeciles\r\n&quot;    + &quot;    Rector-&gt; Health 150 - Damage 50 - Energy 30 - Shoots diagonal projectiles" wrapText="true">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
