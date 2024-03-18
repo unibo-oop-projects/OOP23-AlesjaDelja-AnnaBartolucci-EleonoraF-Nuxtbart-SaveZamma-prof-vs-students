@@ -1,6 +1,5 @@
 package _OOP_develop_gradle.model;
 
-import javafx.scene.control.Label;
 
 public class Score implements ScoreInterface {
     
@@ -13,20 +12,12 @@ public class Score implements ScoreInterface {
         return score;
     }
     
-    @Override
-    public void setScore(int score) {
-        this.score = score;
-    }
 
     @Override
     public void addScore() {
         this.score += DEFAULT_SCORE;
     }
 
-    @Override
-    public void updateScore(Label scoreLabel) {
-        scoreLabel.setText("Score: " + score);
-    }
 
     @Override
     public void resetScore() {
