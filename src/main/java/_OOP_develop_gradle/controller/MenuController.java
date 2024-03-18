@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.Node;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,8 +20,19 @@ public class MenuController implements GameControllerInterface {
     private AnchorPane GameMainMenuRoot;
     @FXML
     private Button replayGameButton;
+    
     @FXML
     private Button returnToMainButton;
+    
+    /**
+     * This method is called when the FXML file is loaded and ready for use.
+     * It sets the game status to false, indicating that the game is over now.
+     */
+    @FXML
+    public void initData() {
+    	GamePlayController.getInstance().setGameStatus(false);
+    }
+    
     /**
      * Handles the action event triggered by clicking the "Return to main menu" button.
      * Closes all windows except the main menu and brings back to the main menu.
@@ -33,14 +43,6 @@ public class MenuController implements GameControllerInterface {
     @Override
 	public void back(ActionEvent event) throws IOException {
         closeAllWindows();
-     // Chiudi la finestra corrente
-		/*
-		 * Stage menuScene = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		 * menuScene.close();
-		 * 
-		 * // Interrompi la riproduzione della musica
-		 * MainMenuController.resetSoundState();
-		 */
         StageChangeController stageChanger = new StageChangeController();
         stageChanger.mainMenu(event);
         
@@ -88,5 +90,6 @@ public class MenuController implements GameControllerInterface {
             }
         }
     }
+    
     
 }
