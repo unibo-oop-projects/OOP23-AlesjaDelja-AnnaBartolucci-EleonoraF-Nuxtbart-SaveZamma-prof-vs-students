@@ -8,16 +8,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="_OOP_develop_gradle.controller.HelpGameController">
    <children>
-      <Label layoutX="163.0" layoutY="14.0" prefHeight="122.0" prefWidth="275.0" text="Prof vs Students: How To Play?" textAlignment="CENTER" textFill="#0add4a" wrapText="true">
+      <Label layoutX="35.0" layoutY="-25.0" prefHeight="122.0" prefWidth="530.0" text="Prof vs Students: How To Play?" textAlignment="CENTER" textFill="#0add4a" wrapText="true">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="459.0" layoutY="361.0" mnemonicParsing="false" onAction="#back" text="Back to Main Menu" />
-      <ScrollPane fx:id="scrollPane" layoutX="31.0" layoutY="124.0" prefHeight="224.0" prefWidth="556.0">
-        <content>
-                  <Label fx:id="helpLabel" prefHeight="215.0" prefWidth="545.0" />
-        </content>
+      <Button layoutX="467.0" layoutY="361.0" mnemonicParsing="false" onAction="#back" text="Back to Main Menu" />
+      <ScrollPane fx:id="scrollPane" layoutX="23.0" layoutY="65.0" prefHeight="285.0" prefWidth="546.0">
+         <content>
+                  <Label fx:id="helpLabel" prefHeight="299.0" prefWidth="569.0" wrapText="true" />
+         </content>
       </ScrollPane>
    </children>
 </AnchorPane>
