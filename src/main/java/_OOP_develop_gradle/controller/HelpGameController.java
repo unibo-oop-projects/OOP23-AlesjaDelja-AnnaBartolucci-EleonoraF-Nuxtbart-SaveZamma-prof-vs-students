@@ -5,12 +5,8 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 
-public class HelpGameController implements GameControllerInterface {
-
-    @FXML
-    private ScrollPane scrollPane; 
+public class HelpGameController implements GameControllerInterface { 
 
     @FXML
     private Label helpLabel; 
@@ -33,8 +29,6 @@ public class HelpGameController implements GameControllerInterface {
 	
     public void initialize() throws IOException {
 		helpLabel.setText(TEST_LABEL);
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
     }
     @Override
     public void back(ActionEvent e) throws IOException {
