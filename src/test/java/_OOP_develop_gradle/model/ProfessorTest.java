@@ -1,9 +1,10 @@
+package _OOP_develop_gradle.model;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import _OOP_develop_gradle.model.Elements;
 
 /**
  * Test class for the {@link Professor} class.
