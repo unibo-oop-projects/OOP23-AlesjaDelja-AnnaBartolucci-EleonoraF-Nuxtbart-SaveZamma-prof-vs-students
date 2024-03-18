@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.prefs.Preferences;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -15,9 +16,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainMenuController implements MainMenuControllerInterface {
-	
+	@FXML 
+	public Button soundButton;
     private boolean soundOn;
-    public Button soundButton;
+   // public Button soundButton;
     public static MediaPlayer mediaPlayer;
     private static final String GAME_PATH = "/GameView.fxml";
     private static final String GAME_HELP_PATH = "/HelpGameView.fxml";
