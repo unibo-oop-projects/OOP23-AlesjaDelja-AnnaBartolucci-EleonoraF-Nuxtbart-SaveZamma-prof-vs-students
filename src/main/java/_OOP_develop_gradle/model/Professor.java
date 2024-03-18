@@ -68,7 +68,9 @@ public class Professor extends AbstractGameElement{
      * @return the costProfessor of the professor
      */
 	
-	  public int getEnergyProfessor() { return energyProfessor; }
+	  public int getEnergyProfessor() { 
+		  return energyProfessor; 
+	  }
 	 
     
     /**
@@ -76,8 +78,9 @@ public class Professor extends AbstractGameElement{
      * @param the costProfessor value of the professor
      */
 	
-	  public void setEnergyProfessor(int energyProfessor) { this.energyProfessor =
-	  energyProfessor; }
+	  public void setEnergyProfessor(int energyProfessor) { 
+		  this.energyProfessor =energyProfessor; 
+	  }
 	 
     
     /**

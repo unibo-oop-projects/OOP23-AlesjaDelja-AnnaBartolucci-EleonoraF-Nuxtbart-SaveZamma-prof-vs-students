@@ -2,7 +2,7 @@ package _OOP_develop_gradle.model;
 
 public class Tutor extends Professor{
 	
-	public static final int TUTOR_HIT_DAMAGE = 25; //DANNO CHE INFLIGGO ALLO STUDENTE
+	public static final int TUTOR_HIT_DAMAGE = 25; 
 	public static final int TUTOR_BUY_ENERGY = 10;
 	public static final int TUTOR_HEALTHPOINTS = 50;
 	public Bullet tutorBullet;
