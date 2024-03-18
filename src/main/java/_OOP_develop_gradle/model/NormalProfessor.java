@@ -2,7 +2,7 @@ package _OOP_develop_gradle.model;
 
 public class NormalProfessor extends Professor{
 
-	public static final int NORMALPROF_HIT_DAMAGE = 50; //DANNO CHE INFLIGGO ALLO STUDENTE
+	public static final int NORMALPROF_HIT_DAMAGE = 50;
 	public static final int NORMALPROF_BUY_ENERGY = 20;
 	public static final int NORMALPROF_HEALTHPOINTS = 100;
 	public static final int NormalProfName = 2;
