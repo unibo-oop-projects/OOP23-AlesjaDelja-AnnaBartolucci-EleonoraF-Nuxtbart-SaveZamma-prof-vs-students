@@ -30,7 +30,7 @@ public class HelpGameController implements GameControllerInterface {
     		+ "    Tutor-> Health 50 - Damage 25 - Energy 10 - Shoots direct projeciles\r\n"
     		+ "    Normal-> Health 100 - Damage 50 - Energy 20 - Shoots direct projeciles\r\n"
     		+ "    Rector-> Health 150 - Damage 50 - Energy 30 - Shoots diagonal projectiles";
-	@Override
+	
     public void initialize() throws IOException {
 		helpLabel.setText(TEST_LABEL);
         scrollPane.setFitToWidth(true);

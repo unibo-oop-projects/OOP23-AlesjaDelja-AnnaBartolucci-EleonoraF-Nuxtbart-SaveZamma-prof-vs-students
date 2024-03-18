@@ -12,5 +12,4 @@ public interface GameControllerInterface {
      */
     void back(ActionEvent e) throws IOException;
 
-	void initialize() throws IOException;
 }
