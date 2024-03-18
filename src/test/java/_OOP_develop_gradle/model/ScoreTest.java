@@ -11,11 +11,6 @@ public class ScoreTest {
         assertEquals(0, score.getScore());
     }
 
-    @Test
-    public void testSetScore() {
-        score.setScore(50);
-        assertEquals(50, score.getScore());
-    }
 
     @Test
     public void testAddScore() {
@@ -25,7 +20,7 @@ public class ScoreTest {
 
     @Test
     public void testResetScore() {
-        score.setScore(50);
+        score.addScore();
         score.resetScore();
         assertEquals(0, score.getScore());
     }
