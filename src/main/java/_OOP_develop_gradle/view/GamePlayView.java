@@ -30,7 +30,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 
-public class GamePlayView {
+public class GamePlayView implements GamePlayViewInterface{
 	@FXML
     private AnchorPane GamePlayRoot;
     
@@ -77,107 +77,54 @@ public class GamePlayView {
     public boolean timerStop = false;
     public int profChoosen;
     
-    /**
-     * Retrieves the list of StudentView objects associated with this view.
-     *
-     * @return The list of StudentView objects.
-     */
     public List<StudentView> getStudentViewList() {
 		return studentViewList;
 	}
-    /**
-     * Sets the list of StudentView objects associated with this view.
-     *
-     * @param studentViewList The list of StudentView objects to be set.
-     */
+    
 	public void setStudentViewList(List<StudentView> studentViewList) {
 		this.studentViewList = studentViewList;
 	}
-	/**
-	 * Retrieves the list of TutorView objects associated with this view.
-	 *
-	 * @return The list of TutorView objects.
-	 */
+	
 	public List<TutorView> getTutorViewList() {
 		return tutorViewList;
 	}
-	/**
-	 * Sets the list of TutorView objects associated with this view.
-	 *
-	 * @param tutorViewList The list of TutorView objects to be set.
-	 */
+	
 	public void setTutorViewList(List<TutorView> tutorViewList) {
 		this.tutorViewList = tutorViewList;
 	}
-	/**
-	 * Retrieves the list of NormalProfView objects associated with this view.
-	 *
-	 * @return The list of NormalProfView objects.
-	 */
+	
 	public List<NormalProfView> getNormalProfessorViewList() {
 		return normalProfessorViewList;
 	}
-	/**
-	 * Sets the list of NormalProfView objects associated with this view.
-	 *
-	 * @param normalProfessorViewList The list of NormalProfView objects to be set.
-	 */
+	
 	public void setNormalProfessorViewList(List<NormalProfView> normalProfessorViewList) {
 		this.normalProfessorViewList = normalProfessorViewList;
 	}
-	/**
-	 * Retrieves the list of RectorView objects associated with this view.
-	 *
-	 * @return The list of RectorView objects.
-	 */
+	
 	public List<RectorView> getRectorViewList() {
 		return rectorViewList;
 	}
-	/**
-	 * Sets the list of RectorView objects associated with this view.
-	 *
-	 * @param rectorViewList The list of RectorView objects to be set.
-	 */
+	
 	public void setRectorViewList(List<RectorView> rectorViewList) {
 		this.rectorViewList = rectorViewList;
 	}
-	/**
-	 * Retrieves the list of BulletView objects associated with this view.
-	 *
-	 * @return The list of BulletView objects.
-	 */
+	
 	public List<BulletView> getBulletViewList() {
 		return bulletViewList;
 	}
-	/**
-	 * Sets the list of BulletView objects associated with this view.
-	 *
-	 * @param bulletViewList The list of BulletView objects to be set.
-	 */
+	
 	public void setBulletViewList(List<BulletView> bulletViewList) {
 		this.bulletViewList = bulletViewList;
 	}
-	/**
-	 * Sets the controller associated with this view.
-	 *
-	 * @param gameController The GamePlayController to be set.
-	 */
+	
 	public void setController(GamePlayController gameController) {
         this.gameController = gameController;
     }
-	/**
-	 * Checks if a professor card has been picked for placement on the game grid.
-	 *
-	 * @return True if a professor card has been picked, false otherwise.
-	 */
+	
 	public boolean isFirstProfPicked() {
 		return firstProfPicked;
 	}
-	/**
-	 * Sets the flag indicating whether a professor card has been picked for placement on the game grid.
-	 *
-	 * @param firstProfPicked The flag to be set.
-	 */
+	
 	public void setFirstProfPicked(boolean firstProfPicked) {
 		this.firstProfPicked = firstProfPicked;
 	}
@@ -193,9 +140,7 @@ public class GamePlayView {
             e.printStackTrace();
         }
     }
-    /**
-     * Initializes the view components.
-     */
+    
     public void initializeView() {
     	
     	profChoosen=-1;
@@ -222,19 +167,11 @@ public class GamePlayView {
         };
         timer.start();
     }
-    /**
-     * Checks if the timer is stopped.
-     *
-     * @return True if the timer is stopped, false otherwise.
-     */
+    
     public boolean isTimerStop() {
 		return timerStop;
 	}
-    /**
-     * Sets the flag indicating whether the timer is stopped.
-     *
-     * @param timerStop The flag to be set.
-     */
+    
 	public void setTimerStop(boolean timerStop) {
 		this.timerStop = timerStop;
 	}
@@ -264,30 +201,15 @@ public class GamePlayView {
 		matchScoreLabel.setText(String.format("Score: %d", gamePlayModel.getScoreMacth()));
 		
 	}
-	/**
-	 * Retrieves the match score.
-	 *
-	 * @return The match score.
-	 */
+	
 	public int getMatchScore() {
 		return matchScore;
 	}
-	/**
-	 * Sets the match score.
-	 *
-	 * @param matchScore The match score to be set.
-	 */
+	
 	public void setMatchScore(int matchScore) {
 		this.matchScore = matchScore;
 	}
-	/**
-	 * Updates the positions of game elements on the view.
-	 *
-	 * @param studentList       The list of students.
-	 * @param profList          The list of professors.
-	 * @param bulletListNormal  The list of normal bullets.
-	 * @param bulletList        The list of diagonal bullets.
-	 */
+	
 	public void updatePositions(List<Student> studentList, List<List<? extends Professor>> profList, List<Bullet> bulletListNormal, List<Bullet> bulletList){
 		Platform.runLater(() -> {
 			removeImageViews();
@@ -325,7 +247,7 @@ public class GamePlayView {
 	 *
 	 * @param profsList The list of professors.
 	 */
-	public void updateProfessorPositions(List<List<? extends Professor>> profsList) {
+	private void updateProfessorPositions(List<List<? extends Professor>> profsList) {
 	    List<List<? extends Professor>> professorsToRemove = new ArrayList<>();
 	    for (List<? extends Professor> professors : profsInGrid) {
 	        if (!profsList.contains(professors)) {
@@ -362,7 +284,7 @@ public class GamePlayView {
 	 *
 	 * @param bulletList The list of bullets.
 	 */
-	public void updateBulletPositions(List<Bullet> bulletList) {
+	private void updateBulletPositions(List<Bullet> bulletList) {
 	    bulletInGrid = bulletList;
 	    List<Bullet> bulletInGridCopy = new ArrayList<>(bulletInGrid);
 
@@ -378,11 +300,6 @@ public class GamePlayView {
 	    }
 	}
 
-	/**
-	 * Removes the specified elements from the view.
-	 *
-	 * @param elementsToRemove The list of elements to be removed.
-	 */
 	public void removePosition(List<? extends ElementView> elementsToRemove) {
 	    Platform.runLater(() -> {
 	        for (ElementView elem : elementsToRemove) {
@@ -455,7 +372,7 @@ public class GamePlayView {
     /**
      *  Add all types of professors to the General list of professors in grid and update the positions on the view.
      */
-    public void addProfsInListAndUpdate() {
+    private void addProfsInListAndUpdate() {
     	profsInGrid.add(gamePlayModel.getTutorList());
 		profsInGrid.add(gamePlayModel.getNormalProfList());
 		profsInGrid.add(gamePlayModel.getRectorList());

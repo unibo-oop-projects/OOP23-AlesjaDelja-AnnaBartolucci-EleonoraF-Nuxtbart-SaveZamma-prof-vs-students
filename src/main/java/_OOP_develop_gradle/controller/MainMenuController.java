@@ -31,11 +31,11 @@ public class MainMenuController implements MainMenuControllerInterface {
     private static final String EXIT_CONTENT = "Are you sure?";
     private Stage stage;
 
-    private MainMenuController() {
+   /* private MainMenuController() {
         // Carica lo stato del suono dalle preferenze dell'applicazione
         Preferences prefs = Preferences.userNodeForPackage(MainMenuController.class);
         soundOn = prefs.getBoolean("soundOn", true);
-    }
+    }*/
 
     private static MainMenuController instance;
 
