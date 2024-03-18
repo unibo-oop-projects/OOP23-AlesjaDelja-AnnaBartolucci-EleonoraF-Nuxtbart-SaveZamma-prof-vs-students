@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainMenuController implements MainMenuControllerInterface {
+	
     private boolean soundOn;
     public Button soundButton;
     public static MediaPlayer mediaPlayer;
@@ -28,18 +29,28 @@ public class MainMenuController implements MainMenuControllerInterface {
     private static final String EXIT_CONTENT = "Are you sure?";
     private Stage stage;
 
-    public MainMenuController() {
+    private MainMenuController() {
         // Carica lo stato del suono dalle preferenze dell'applicazione
         Preferences prefs = Preferences.userNodeForPackage(MainMenuController.class);
         soundOn = prefs.getBoolean("soundOn", true);
     }
 
+    private static MainMenuController instance;
+
+    public static MainMenuController getInstance() {
+        if (instance == null) {
+            instance = new MainMenuController();
+        }
+        return instance;
+    }
+    
     @Override
     public void newGame(ActionEvent e) throws IOException {
         StageChangeController stageChanger = new StageChangeController();
         stageChanger.changeScene(e, GAME_PATH);
     }
-@Override
+    
+    @Override
     public void helpGame(ActionEvent e) throws IOException {
         StageChangeController stageChanger = new StageChangeController();
         stageChanger.changeScene(e, GAME_HELP_PATH);
@@ -50,25 +61,17 @@ public class MainMenuController implements MainMenuControllerInterface {
         if (soundOn) {
             soundOn = false;
             soundButton.setText(SOUND_OFF);
-            Media sound = new Media(getClass().getResource(SOUND_PATH).toString()); 
-            mediaPlayer = new MediaPlayer(sound);
-            mediaPlayer.setAutoPlay(true);
-            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            mediaPlayer.setStartTime(Duration.seconds(0));
-            mediaPlayer.setStopTime(Duration.seconds(50));
-            mediaPlayer.play();
+            playSound();
         } else {
             soundOn = true;
             soundButton.setText(SOUND_ON);
-            if (mediaPlayer != null) {
-                mediaPlayer.stop();
-            }
+            stopSound();
         }
         // Salva lo stato del suono nelle preferenze dell'applicazione
-        Preferences prefs = Preferences.userNodeForPackage(MainMenuController.class);
-        prefs.putBoolean("soundOn", soundOn);
+        saveSoundState();
     }
-@Override
+    
+    @Override
     public void exitGame(ActionEvent e) {
         Alert exitAlert = new Alert(AlertType.CONFIRMATION);
         exitAlert.setTitle(EXIT_TITLE);
@@ -80,16 +83,25 @@ public class MainMenuController implements MainMenuControllerInterface {
             stage.close();
             System.exit(0);
         }
-        resetSoundState();
     }
 
-    public void resetSoundState() {
-        soundOn = true;
-        soundButton.setText(SOUND_OFF);
+    private void playSound() {
+        Media sound = new Media(getClass().getResource(SOUND_PATH).toString());
+        mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.setStartTime(Duration.seconds(0));
+        mediaPlayer.setStopTime(Duration.seconds(50));
+        mediaPlayer.play();
+    }
+
+    private void stopSound() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
-        // Salva lo stato del suono nelle preferenze dell'applicazione
+    }
+
+    private void saveSoundState() {
         Preferences prefs = Preferences.userNodeForPackage(MainMenuController.class);
         prefs.putBoolean("soundOn", soundOn);
     }
