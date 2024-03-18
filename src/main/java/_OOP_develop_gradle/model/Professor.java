@@ -17,9 +17,7 @@ public class Professor extends AbstractGameElement{
      * @param damage The damage inflicted by the professor.
      * @param healthPoints The health points of the professor.
      * @param position The position of the professor on the game grid.
-     * @param pathImgP The path to the image representing the professor.
-     * @param costProfessor The cost to buy the professor.
-     * @param id The unique identifier of the professor.
+     * @param energyProfessor The cost to buy the professor.
      */
     public Professor(int damage, int healthPoints, Elements<Integer, Integer> position, int energyProfessor) {
           super(damage, position);
