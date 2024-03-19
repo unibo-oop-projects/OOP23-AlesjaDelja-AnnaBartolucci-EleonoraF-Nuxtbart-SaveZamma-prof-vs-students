@@ -29,7 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class GamePlayController {
+public class GamePlayController implements GamePlayControllerInterface{
 	
 	private static GamePlayController instance;
 	public boolean gameStatus;
@@ -57,13 +57,7 @@ public class GamePlayController {
         allProfessors.add(normalPInGame);
         allProfessors.add(rectorInGame);
     }
-	/**
-	 * Initializes the game data with the specified {@code GamePlayView}.
-	 * Initializes various game elements such as score, game status, and lists of bullets and professors.
-	 * Also sets up the game view and starts the game if there are students present.
-	 *
-	 * @param gamePlayView The GamePlayView instance to initialize the game with.
-	 */
+	
 	public void initData(GamePlayView gamePlayView) {
     	NUM_STUD_ONDATA = 1;
     	scoreMatch = new Score();
@@ -97,12 +91,7 @@ public class GamePlayController {
             
         }
     }
-	/**
-	 * Initializes the gameplay by generating a new wave of students.
-	 * Updates the game view with the new positions of the students and professors.
-	 *
-	 * @throws IOException If an I/O error occurs while initializing the game.
-	 */
+	
 	public void initGamePlay() throws IOException {
     	if(gameStatus) {
             synchronizeLists(() -> {
@@ -113,10 +102,7 @@ public class GamePlayController {
 		    System.out.println("settato nuvo gruppo di studenti");
 		}
     }
-	/**
-	 * Moves the students in the game by advancing their positions and handling collisions with professors.
-	 * Updates the game status if necessary and removes defeated students from the game.
-	 */
+	
    public void moveStudents() {
 	   
 	   List<Student> studentToRemove = new ArrayList<>();
@@ -158,10 +144,7 @@ public class GamePlayController {
 	   }
 	   studInGame.removeAll(studentToRemove);
    }
-   /**
-    * Handles the behavior of professors in the game, such as shooting bullets and removing defeated professors.
-    * Also updates the game energy based on the status of professors.
-    */
+   
    public void handleProfessors() {
 	   
 	   List<Professor> professorsToRemove = new ArrayList<>();
@@ -206,11 +189,8 @@ public class GamePlayController {
 		   professorList.removeIf(professorsToRemove::contains);
  		}
    }
-   /**
-    * Advances the bullets in the game by moving them and handling collisions with students.
-    * Removes bullets that have reached their maximum range or have hit a student.
-    */
-   private void advanceBullets() {
+   
+   public void advanceBullets() {
 	 List<Bullet> bulletToRemoveN = new ArrayList<>();
      List<Bullet> bulletNormalCopy = new ArrayList<>(bulletNormalList);
    	 Iterator<Bullet> bulletNormalIterator = bulletNormalCopy.iterator();
@@ -250,12 +230,7 @@ public class GamePlayController {
 	    bulletToRemoveD.forEach(bullet -> { removeBulletView(bullet);});
 	    bulletDiagonalList.removeIf(bulletToRemoveD::contains);
 }
-   /**
-    * Starts the game by initializing various game threads and loops to manage gameplay mechanics such as
-    * advancing time, updating positions, handling collisions, and checking game status for victory or defeat.
-    *
-    * @param gamePlayView The GamePlayView instance used to interact with the game view.
-    */
+  
     public void startGame(GamePlayView gamePlayView){
     	if(gameStatus) {
     		new Thread(() -> {
@@ -341,12 +316,7 @@ public class GamePlayController {
             }
         }
     }
-    /**
-     * Displays the game status (victory or defeat) to the user in a separate window using JavaFX.
-     *
-     * @param status The status of the game, either "Vittoria" for victory or "Sconfitta" for defeat.
-     * @throws IOException If an I/O error occurs while loading the game status view.
-     */
+    
     public void userGame(String Status) throws IOException{
     	Platform.runLater(() -> {
             try {
@@ -384,13 +354,7 @@ public class GamePlayController {
 		    }
 		}
 	}
-	/**
-	 * Checks for collisions between bullets and students, updating game state accordingly.
-	 *
-	 * @param studentList The list of students in the game.
-	 * @param bullet The bullet to check for collisions with students.
-	 * @return True if a collision between the bullet and a student is detected, false otherwise.
-	 */
+	
 	public boolean collisionBulletAndStudents(List<Student> studentList, Bullet bullet) {
 		List<Student> studentToRemove = new ArrayList<>();
 		boolean collisionDetected = false;
@@ -416,11 +380,7 @@ public class GamePlayController {
         }
 	    return collisionDetected;
 	}
-	/**
-	 * Removes the graphical representation of a bullet from the game view.
-	 *
-	 * @param bullet The bullet to remove from the game view.
-	 */
+	
 	public void removeBulletView(Bullet bullet) {
 		BulletView bulletViewToRemove = null;
 		
@@ -446,13 +406,7 @@ public class GamePlayController {
         
 		}
 	}
-	/**
-	 * Checks for collisions between professors and students, updating game state accordingly.
-	 *
-	 * @param students The list of students in the game.
-	 * @param prof The professor to check for collisions with students.
-	 * @return True if a collision between the professor and a student is detected, false otherwise.
-	 */ 
+	
 	public boolean collisionProfAndStudents(List<Student> students, Professor prof) {
 		
 	    for (Student currentStud : students) {
@@ -472,13 +426,7 @@ public class GamePlayController {
 	    
 	    return false;
 	}
-	/**
-	 * Checks for collisions between a professor and a specific student.
-	 *
-	 * @param currentStud The student to check for collisions with professors.
-	 * @param profList The list of professor lists to check for collisions with the student.
-	 * @return True if a collision between the professor and the student is detected, false otherwise.
-	 */
+	
 	public boolean collisionProfAndStudent(Student currentStud, List<List<? extends Professor>> profList) {
 		for (List<? extends Professor> professors : profList) {
 	        Optional<? extends Professor> result = professors.stream()
@@ -497,11 +445,7 @@ public class GamePlayController {
 	    }
 	    return false;
 	}
-	/**
-	 * Removes the graphical representation of a student from the game view.
-	 *
-	 * @param student The student to remove from the game view.
-	 */
+	
 	public void removeStudentView(Student student) {
 	    synchronized (studInGame) {
 	        Iterator<Student> iterator = studInGame.iterator();
@@ -524,11 +468,7 @@ public class GamePlayController {
 	        }
 	    }
 	}
-		/**
-		 * Removes the graphical representation of a professor from the game view and updates the game state accordingly.
-		 *
-		 * @param prof The professor whose graphical representation needs to be removed.
-		 */
+		
 		public void removeProfessorView(Professor prof) {
 		    List<ElementView> elementsToRemove = new ArrayList<>();
 
@@ -603,43 +543,23 @@ public class GamePlayController {
         }
         return instance;
     }
-	/**
-	 * Retrieves the score of the current match.
-	 *
-	 * @return The score of the current match.
-	 */
+	
     public Score getScoreMatch() {
 		return scoreMatch;
 	}
-    /**
-     * Sets the score of the current match.
-     *
-     * @param scoreMatch The score of the current match to be set.
-     */
+    
 	public void setScoreMatch(Score scoreMatch) {
 		this.scoreMatch = scoreMatch;
 	}
-	/**
-	 * Checks the status of the game.
-	 *
-	 * @return True if the game is currently active, false otherwise.
-	 */
+	
 	public boolean isGameStatus() {
 		return gameStatus;
 	}
-	/**
-	 * Sets the status of the game.
-	 *
-	 * @param status The status of the game to be set.
-	 */
+	
 	public void setGameStatus(boolean status) {
         gameStatus = status;
     }
-	/**
-	 * Retrieves the GamePlayView associated with this controller.
-	 *
-	 * @return The GamePlayView associated with this controller.
-	 */
+	
 	public GamePlayView getGamePlayView() {
         return gamePlayView;
     }
@@ -651,19 +571,11 @@ public class GamePlayController {
 	public static GamePlayModel getGameModel() {
 		return gameModel;
 	}
-	/**
-	 * Retrieves the list of students currently in the game.
-	 *
-	 * @return The list of students currently in the game.
-	 */
+	
 	public List<Student> getStudInGame() {
 		return studInGame;
 	}
-	/**
-	 * Sets the list of students currently in the game.
-	 *
-	 * @param studInGame The list of students currently in the game to be set.
-	 */
+	
 	public void setStudInGame(List<Student> studInGame) {
 		this.studInGame = studInGame;
 	}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.prefs.Preferences;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -15,8 +16,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainMenuController implements MainMenuControllerInterface {
+
+	private Button soundButton;
     private boolean soundOn;
-    public Button soundButton;
+   // public Button soundButton;
     public static MediaPlayer mediaPlayer;
     private static final String GAME_PATH = "/GameView.fxml";
     private static final String GAME_HELP_PATH = "/HelpGameView.fxml";
@@ -28,11 +31,7 @@ public class MainMenuController implements MainMenuControllerInterface {
     private static final String EXIT_CONTENT = "Are you sure?";
     private Stage stage;
 
-    public MainMenuController() {
-        // Carica lo stato del suono dalle preferenze dell'applicazione
-        Preferences prefs = Preferences.userNodeForPackage(MainMenuController.class);
-        soundOn = prefs.getBoolean("soundOn", true);
-    }
+ 
 
     @Override
     public void newGame(ActionEvent e) throws IOException {
