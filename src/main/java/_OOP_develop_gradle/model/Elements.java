@@ -45,7 +45,6 @@ public class Elements<X, Y> implements ElementsInterface<X, Y>{
 	     * @return A hash code value for this elements.
 	     */
 	    @Override
-	    @Override
 	    public int hashCode() {
 	        return Objects.hash(this.x, this.y);
 	    }

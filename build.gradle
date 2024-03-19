@@ -71,7 +71,9 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
-
+tasks.withType(JavaExec) {
+   	maxHeapSize = '8g'
+}
 application {
     mainClass = '_OOP_develop_gradle.model.Main'
 }
