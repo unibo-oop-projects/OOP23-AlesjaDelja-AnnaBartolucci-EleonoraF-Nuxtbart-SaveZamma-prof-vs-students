@@ -3,7 +3,7 @@ package _OOP_develop_gradle.model;
 
 import java.util.Objects;
 
-public class Elements<X, Y> {
+public class Elements<X, Y> implements ElementsInterface<X, Y>{
 	 private final X x;
 	    private final Y y;
 
@@ -24,6 +24,7 @@ public class Elements<X, Y> {
 	     * 
 	     * @return The first element of the element.
 	     */
+	    @Override
 	    public X getX() {
 	        return this.x;
 	    }
@@ -33,6 +34,7 @@ public class Elements<X, Y> {
 	     * 
 	     * @return second element of elements.
 	     */
+	    @Override
 	    public Y getY() {
 	        return this.y;
 	    }
@@ -42,6 +44,7 @@ public class Elements<X, Y> {
 	     * 
 	     * @return A hash code value for this elements.
 	     */
+	    @Override
 	    @Override
 	    public int hashCode() {
 	        return Objects.hash(this.x, this.y);
