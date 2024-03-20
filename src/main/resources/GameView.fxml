@@ -80,6 +80,7 @@
         </rowConstraints>
          <children>
             <Region  GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Region onMouseClicked="#handleMouseClick" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Region onMouseClicked="#handleMouseClick" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Region onMouseClicked="#handleMouseClick" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <Region onMouseClicked="#handleMouseClick" GridPane.columnIndex="0" GridPane.rowIndex="3" />

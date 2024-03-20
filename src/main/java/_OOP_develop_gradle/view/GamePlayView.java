@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Iterator;
 
 import _OOP_develop_gradle.controller.GamePlayController;
-import _OOP_develop_gradle.controller.MenuController;
 import _OOP_develop_gradle.model.Bullet;
 import _OOP_develop_gradle.model.GamePlayModel;
 import _OOP_develop_gradle.model.NormalProfessor;
@@ -64,11 +63,6 @@ public class GamePlayView implements GamePlayViewInterface{
     private List<Bullet>  bulletInGrid = new ArrayList<>();
     List<List<? extends Professor>> profsInGrid = new ArrayList<>();
     public boolean firstProfPicked;
-    private List<StudentView> studentViewList = new ArrayList<>();
-    private List<TutorView> tutorViewList = new ArrayList<>();
-    private List<NormalProfView> normalProfessorViewList = new ArrayList<>();
-    private List<RectorView> rectorViewList = new ArrayList<>();
-    private List<BulletView>  bulletViewList = new ArrayList<>();
     public AnimationTimer  timer;
     public int timeTot;
     public int matchScore ;
@@ -77,46 +71,6 @@ public class GamePlayView implements GamePlayViewInterface{
     public boolean timerStop = false;
     public int profChoosen;
     
-    public List<StudentView> getStudentViewList() {
-		return studentViewList;
-	}
-    
-	public void setStudentViewList(List<StudentView> studentViewList) {
-		this.studentViewList = studentViewList;
-	}
-	
-	public List<TutorView> getTutorViewList() {
-		return tutorViewList;
-	}
-	
-	public void setTutorViewList(List<TutorView> tutorViewList) {
-		this.tutorViewList = tutorViewList;
-	}
-	
-	public List<NormalProfView> getNormalProfessorViewList() {
-		return normalProfessorViewList;
-	}
-	
-	public void setNormalProfessorViewList(List<NormalProfView> normalProfessorViewList) {
-		this.normalProfessorViewList = normalProfessorViewList;
-	}
-	
-	public List<RectorView> getRectorViewList() {
-		return rectorViewList;
-	}
-	
-	public void setRectorViewList(List<RectorView> rectorViewList) {
-		this.rectorViewList = rectorViewList;
-	}
-	
-	public List<BulletView> getBulletViewList() {
-		return bulletViewList;
-	}
-	
-	public void setBulletViewList(List<BulletView> bulletViewList) {
-		this.bulletViewList = bulletViewList;
-	}
-	
 	public void setController(GamePlayController gameController) {
         this.gameController = gameController;
     }
@@ -237,7 +191,6 @@ public class GamePlayView implements GamePlayViewInterface{
 	    while (iterator.hasNext()) {
 	        Student student = iterator.next();
 	        StudentView studView = new StudentView(lawn_grid);
-	        //studentViewList.add(studView);
 	        studView.displayElement(student.getPosition());
 	    }
 	}
@@ -259,21 +212,18 @@ public class GamePlayView implements GamePlayViewInterface{
 	        Iterator<? extends Professor> iterator = professors.iterator();
 	        while (iterator.hasNext() && !professors.isEmpty()) {
 	            Professor prof = iterator.next();
-	            // Prendi le coordinate del professore e metti la foto corrispondente sulla griglia
+	            
 	            if (prof instanceof Tutor) {
 	                Tutor tutor = (Tutor) prof;
 	                TutorView tutorView = new TutorView(lawn_grid);
-	                //tutorViewList.add(tutorView);
 	                tutorView.displayElement(tutor.getPositionProf());
 	            } else if (prof instanceof NormalProfessor) {
 	                NormalProfessor normalProfessor = (NormalProfessor) prof;
 	                NormalProfView normalProfessorView = new NormalProfView(lawn_grid);
-	                //normalProfessorViewList.add(normalProfessorView);
 	                normalProfessorView.displayElement(normalProfessor.getPositionProf());
 	            } else if (prof instanceof Rector) {
 	                Rector rector = (Rector) prof;
 	                RectorView rectorView = new RectorView(lawn_grid);
-	                //rectorViewList.add(rectorView);
 	                rectorView.displayElement(rector.getPositionProf());
 	            }
 	        }
@@ -288,14 +238,11 @@ public class GamePlayView implements GamePlayViewInterface{
 	    bulletInGrid = bulletList;
 	    List<Bullet> bulletInGridCopy = new ArrayList<>(bulletInGrid);
 
-	    // Utilizzo un iteratore per iterare sulla copia della lista
 	    Iterator<Bullet> iterator = bulletInGridCopy.iterator();
 	    while (iterator.hasNext() && !bulletInGridCopy.isEmpty()) {
 	        Bullet bullet = iterator.next();
 
-	        // Creo e aggiungo la vista del proiettile alla lista bulletViewList
 	        BulletView bulletView = new BulletView(lawn_grid);
-	        bulletViewList.add(bulletView);
 	        bulletView.displayElement(bullet.getPosition());
 	    }
 	}
@@ -321,7 +268,7 @@ public class GamePlayView implements GamePlayViewInterface{
         System.out.println("Clicked at column " + columnIndex + " and row " + rowIndex);
         
 	    if(profChoosen != -1) {
-	    	if(columnIndex!=null && rowIndex!=null && !isProfInCell(columnIndex, rowIndex)) {
+	    	if(columnIndex!=null && rowIndex!=null && !isProfInCell(columnIndex, rowIndex) && !isStudentInCell(columnIndex, rowIndex)) {
 	    		setFirstProfPicked(true);
 	    		switch(profChoosen) {
 	    			case 1:
@@ -358,7 +305,7 @@ public class GamePlayView implements GamePlayViewInterface{
 	    					rectorInGrid.add(rectornew);
 	    					gamePlayModel.getBulletListDiagonal().add(rectorBullet);
 	    					addProfsInListAndUpdate();
-	    	    			// diminuisco la moneta tot 
+
 	    	    			gamePlayModel.decreaseEnergy(rectornew.getEnergyProfessor());
 	    	    		}
 	    				break;
@@ -388,7 +335,7 @@ public class GamePlayView implements GamePlayViewInterface{
     @FXML
     void GameMenu(MouseEvent event) throws IOException {
     	gameController.setGameStatus(false);
-    	timerStop = true;// stoppo il timer quando apro il menù
+    	timerStop = true;
     	GamePlayController.getInstance().setGameStatus(false);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MenuView.fxml"));
         Parent gameMenu = (Parent) fxmlLoader.load();
@@ -425,8 +372,20 @@ public class GamePlayView implements GamePlayViewInterface{
      * @return True if a professor is present in the cell, false otherwise.
      */
 	private boolean isProfInCell(int columnIndex, int rowIndex) {
-		return rectorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex);
+		return (rectorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex) &&
+				tutorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex) &&
+				normalProfInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex)
+				);
 	}
 
-    
+	/**
+     * Checks if a student is present in the specified cell.
+     *
+     * @param columnIndex The column index of the cell.
+     * @param rowIndex    The row index of the cell.
+     * @return True if a student is present in the cell, false otherwise.
+     */
+	private boolean isStudentInCell(int columnIndex, int rowIndex) {
+		return studentInGrid.stream().anyMatch(s -> s.getPosition().getX() == columnIndex && s.getPosition().getY() == rowIndex);
+	}
 }

@@ -10,66 +10,6 @@ import _OOP_develop_gradle.model.Student;
 public interface GamePlayViewInterface {
 
 	/**
-     * Retrieves the list of StudentView objects associated with this view.
-     *
-     * @return The list of StudentView objects.
-     */
-    public List<StudentView> getStudentViewList();
-    /**
-     * Sets the list of StudentView objects associated with this view.
-     *
-     * @param studentViewList The list of StudentView objects to be set.
-     */
-	public void setStudentViewList(List<StudentView> studentViewList);
-	/**
-	 * Retrieves the list of TutorView objects associated with this view.
-	 *
-	 * @return The list of TutorView objects.
-	 */
-	public List<TutorView> getTutorViewList();
-	/**
-	 * Sets the list of TutorView objects associated with this view.
-	 *
-	 * @param tutorViewList The list of TutorView objects to be set.
-	 */
-	public void setTutorViewList(List<TutorView> tutorViewList);
-	/**
-	 * Retrieves the list of NormalProfView objects associated with this view.
-	 *
-	 * @return The list of NormalProfView objects.
-	 */
-	public List<NormalProfView> getNormalProfessorViewList();
-	/**
-	 * Sets the list of NormalProfView objects associated with this view.
-	 *
-	 * @param normalProfessorViewList The list of NormalProfView objects to be set.
-	 */
-	public void setNormalProfessorViewList(List<NormalProfView> normalProfessorViewList);
-	/**
-	 * Retrieves the list of RectorView objects associated with this view.
-	 *
-	 * @return The list of RectorView objects.
-	 */
-	public List<RectorView> getRectorViewList();
-	/**
-	 * Sets the list of RectorView objects associated with this view.
-	 *
-	 * @param rectorViewList The list of RectorView objects to be set.
-	 */
-	public void setRectorViewList(List<RectorView> rectorViewList);
-	/**
-	 * Retrieves the list of BulletView objects associated with this view.
-	 *
-	 * @return The list of BulletView objects.
-	 */
-	public List<BulletView> getBulletViewList();
-	/**
-	 * Sets the list of BulletView objects associated with this view.
-	 *
-	 * @param bulletViewList The list of BulletView objects to be set.
-	 */
-	public void setBulletViewList(List<BulletView> bulletViewList);
-	/**
 	 * Sets the controller associated with this view.
 	 *
 	 * @param gameController The GamePlayController to be set.

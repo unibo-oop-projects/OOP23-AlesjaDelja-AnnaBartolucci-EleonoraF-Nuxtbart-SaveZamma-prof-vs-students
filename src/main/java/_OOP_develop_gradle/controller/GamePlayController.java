@@ -15,13 +15,7 @@ import _OOP_develop_gradle.model.Rector;
 import _OOP_develop_gradle.model.Score;
 import _OOP_develop_gradle.model.Student;
 import _OOP_develop_gradle.model.Tutor;
-import _OOP_develop_gradle.view.BulletView;
-import _OOP_develop_gradle.view.ElementView;
 import _OOP_develop_gradle.view.GamePlayView;
-import _OOP_develop_gradle.view.NormalProfView;
-import _OOP_develop_gradle.view.RectorView;
-import _OOP_develop_gradle.view.StudentView;
-import _OOP_develop_gradle.view.TutorView;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -98,8 +92,6 @@ public class GamePlayController implements GamePlayControllerInterface{
             	gameModel.generateWave(NUM_STUD_ONDATA);
                 gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
             });
-            
-		    System.out.println("settato nuvo gruppo di studenti");
 		}
     }
 	
@@ -158,7 +150,6 @@ public class GamePlayController implements GamePlayControllerInterface{
 	    	  		if(prof.getHealthPointsProf() <= 0){
 	    	  			gameModel.setEnergy(Math.max(0, gameModel.getEnergy() - prof.getEnergyProfessor()));
 		                prof.setAttacked(false);
-		                System.out.println("Il prof scompare, non ha più vite");
 		                professorsToRemove.add(prof);
 		                profIterator.remove();
 		                
@@ -207,8 +198,6 @@ public class GamePlayController implements GamePlayControllerInterface{
    	        	bulletToRemoveN.add(bullet);
    	        }
    	    }
-
-		bulletToRemoveN.forEach(bullet -> { removeBulletView(bullet);});
 		bulletNormalList.removeIf(bulletToRemoveN::contains);
    	
    	List<Bullet> bulletToRemoveD = new ArrayList<>();
@@ -227,7 +216,6 @@ public class GamePlayController implements GamePlayControllerInterface{
 	        	bulletToRemoveD.add(bullet);
 	        }
 	    }
-	    bulletToRemoveD.forEach(bullet -> { removeBulletView(bullet);});
 	    bulletDiagonalList.removeIf(bulletToRemoveD::contains);
 }
   
@@ -362,7 +350,6 @@ public class GamePlayController implements GamePlayControllerInterface{
 	    for (Student currentStud : studentList) {
 	        if (bullet.getPosition().equals(currentStud.getPosition())) {
 	            currentStud.takeDamageStudents(bullet.getBulletDamage());
-	            System.out.println("destroy bullet");
 	            collisionDetected = true;
 	            
 	            if (currentStud.getHealthStudent() <= 0) {
@@ -375,36 +362,9 @@ public class GamePlayController implements GamePlayControllerInterface{
 	    }
 	    
 	    for (Student student : studentToRemove) {
-	    	//removeStudentView(student);
             studentList.remove(student);
         }
 	    return collisionDetected;
-	}
-	
-	public void removeBulletView(Bullet bullet) {
-		BulletView bulletViewToRemove = null;
-		
-		if (bulletNormalList.indexOf(bullet) != -1) {
-			bulletViewToRemove = gamePlayView.getBulletViewList().get(bulletNormalList.indexOf(bullet));
-			bulletNormalList.remove(bullet); 
-			
-		}else if(bulletDiagonalList.indexOf(bullet) != -1) {
-			bulletViewToRemove = gamePlayView.getBulletViewList().get(bulletDiagonalList.indexOf(bullet));
-			bulletDiagonalList.remove(bullet); 
-		}
-		
-		if (bulletViewToRemove != null) {
-			gamePlayView.getBulletViewList().remove(bulletViewToRemove);
-	        List<ElementView> elementsToRemove = new ArrayList<>();
-	        elementsToRemove.add(bulletViewToRemove); 
-	        
-	        synchronizeLists(() -> {
-            	gamePlayView.removePosition(elementsToRemove);
-            });
-	        
-	        System.out.println("destroied bullet");
-        
-		}
 	}
 	
 	public boolean collisionProfAndStudents(List<Student> students, Professor prof) {
@@ -412,10 +372,8 @@ public class GamePlayController implements GamePlayControllerInterface{
 	    for (Student currentStud : students) {
 	        if (currentStud.getPosition().equals(prof.getPosition())) {
 	        	prof.receiveDamageProf(currentStud.getDamage());
-	            System.out.println("prof attacked PROFESSOR");
 	            
 	            if (prof.getHealthPointsProf() > 0) {
-	            	System.out.println("prof has other lives");
 	            	prof.setAttacked(true);
 	                return true; 
 	            } else {
@@ -435,7 +393,6 @@ public class GamePlayController implements GamePlayControllerInterface{
 	        if (result.isPresent()) {
 	            Professor professor = result.get();
 	            if (professor.getHealthPointsProf() > 0) {
-	            	System.out.println("prof attacked STUDENT");
 	            	professor.setAttacked(true);
 	                return true; 
 	            } else {
@@ -445,95 +402,18 @@ public class GamePlayController implements GamePlayControllerInterface{
 	    }
 	    return false;
 	}
-	
-	public void removeStudentView(Student student) {
-	    synchronized (studInGame) {
-	        Iterator<Student> iterator = studInGame.iterator();
-	        while (iterator.hasNext()) {
-	            Student currentStudent = iterator.next();
-	            if (currentStudent.equals(student)) {
-	                iterator.remove();
-	                if(studInGame.indexOf(student) != -1) {
-	                	StudentView studentViewToRemove = gamePlayView.getStudentViewList().get(studInGame.indexOf(student));
-		                if (studentViewToRemove != null) {
-		                	System.out.println("entra que per fare la remove");
-		                    //StudentView studentViewToRemove = gamePlayView.getStudentViewList().get(studentIndex);
-		                    gamePlayView.getStudentViewList().remove(studentViewToRemove);
-		                    List<ElementView> elementsToRemove = new ArrayList<>();
-		                    elementsToRemove.add(studentViewToRemove);
-		                    synchronizeLists(() -> {
-		                        gamePlayView.removePosition(elementsToRemove);
-		                    });
-		                }
-	                }
-	                //qui
-	                break;
-	            }
-	        }
-	    }
-	}
 		
-		public void removeProfessorView(Professor prof) {
-		    List<ElementView> elementsToRemove = new ArrayList<>();
+	public void removeProfessorView(Professor prof) {
 
-		    Iterator<? extends Professor> iterator;
 		    if (prof instanceof Tutor) {
-		        iterator = tutorInGame.iterator();
+		    	tutorInGame.remove(prof);
 		    } else if (prof instanceof NormalProfessor) {
-		        iterator = normalPInGame.iterator();
+		    	normalPInGame.remove(prof);
 		    } else if (prof instanceof Rector) {
-		        iterator = rectorInGame.iterator();
+		    	rectorInGame.remove(prof);
 		    } else {
 		        return;
 		    }
-
-		    while (iterator.hasNext()) {
-		        Professor currentProf = iterator.next();
-		        if (currentProf.equals(prof)) {
-		            iterator.remove();
-		            break;
-		        }
-		    }
-
-		    // Rimuovi la vista associata al professore
-		    /*if (prof instanceof Tutor) {
-				TutorView tutorViewToRemove = gamePlayView.getTutorViewList().stream()
-		                .filter(view -> view.equals(prof))
-		                .findFirst()
-		                .orElse(null);
-		        if (tutorViewToRemove != null) {
-		        	synchronizeLists(() -> {
-		            gamePlayView.getTutorViewList().remove(tutorViewToRemove);
-		        	});
-		            elementsToRemove.add(tutorViewToRemove);
-		        }
-		    } else if (prof instanceof NormalProfessor) {
-		        NormalProfView normalPViewToRemove = gamePlayView.getNormalProfessorViewList().stream()
-		                .filter(view -> view.equals(prof))
-		                .findFirst()
-		                .orElse(null);
-		        if (normalPViewToRemove != null) {
-		        	synchronizeLists(() -> {
-		            gamePlayView.getNormalProfessorViewList().remove(normalPViewToRemove);
-		        	});
-		            elementsToRemove.add(normalPViewToRemove);
-		        }
-		    } else if (prof instanceof Rector) {
-		        RectorView rectorPViewToRemove = gamePlayView.getRectorViewList().stream()
-		                .filter(view -> view.equals(prof))
-		                .findFirst()
-		                .orElse(null);
-		        if (rectorPViewToRemove != null) {
-		        	synchronizeLists(() -> {
-		            gamePlayView.getRectorViewList().remove(rectorPViewToRemove);
-		        	});
-		            elementsToRemove.add(rectorPViewToRemove);
-		        }
-		    }
-
-		    synchronizeLists(() -> {
-		        gamePlayView.removePosition(elementsToRemove);
-		    });*/
 	}
 	
 	/**

@@ -86,13 +86,7 @@ public interface GamePlayControllerInterface {
 	 *
 	 * @param bullet The bullet to remove from the game view.
 	 */
-	public void removeBulletView(Bullet bullet);
-	/**
-	 * Removes the graphical representation of a student from the game view.
-	 *
-	 * @param student The student to remove from the game view.
-	 */
-	public void removeStudentView(Student student);
+	//public void removeBulletView(Bullet bullet);
 	/**
 	 * Removes the graphical representation of a professor from the game view and updates the game state accordingly.
 	 *
