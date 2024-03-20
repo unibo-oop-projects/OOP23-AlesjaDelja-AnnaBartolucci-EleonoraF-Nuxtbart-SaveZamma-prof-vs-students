@@ -18,8 +18,6 @@ public class BulletView  extends ElementView{
 		return "/img/pea.png"; 
     }
 	
-	
-	
 	@Override
 	public void displayElement(Elements<Integer, Integer> positionElement) {
 		 Image image = new Image(getClass().getResourceAsStream(getImagePath()));
