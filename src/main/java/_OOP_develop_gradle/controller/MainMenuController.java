@@ -6,20 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class MainMenuController implements MainMenuControllerInterface {
-    private boolean soundOn = true;
-    public Button soundButton;
-    public static MediaPlayer mediaPlayer;
     private static final String GAME_PATH = "/GameView.fxml";
     private static final String GAME_HELP_PATH = "/HelpGameView.fxml";
-    private static final String SOUND_PATH = "/music/background.wav";
-    private static final String SOUND_ON_OFF = "Sound On/Off";
 	private static final String EXIT_TITLE = "Exit";
 	private static final String EXIT_HEADER = "You are going to exit the game!";
 	private static final String EXIT_CONTENT = "Are you sure?";
@@ -37,30 +28,6 @@ public class MainMenuController implements MainMenuControllerInterface {
         stageChanger.changeScene(e, GAME_HELP_PATH);
     }
 
-    @Override
-    public void sounds(ActionEvent e) {
-    	System.out.println(getClass().getResource(SOUND_PATH).toString());
-        if (soundOn) {
-            soundOn = false;
-            soundButton.setText(SOUND_ON_OFF);
-            Media sound = new Media(getClass().getResource(SOUND_PATH).toString()); 
-            mediaPlayer = new MediaPlayer(sound);
-            mediaPlayer.setAutoPlay(true);
-            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            mediaPlayer.setStartTime(Duration.seconds(0));
-            mediaPlayer.setStopTime(Duration.seconds(50));
-            mediaPlayer.play();
-		}
-    }
-    
-    public void resetSoundState() {
-        soundOn = true;
-        soundButton.setText(SOUND_ON_OFF);
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-        }
-    }
-
     
     @Override
     public void exitGame(ActionEvent e) {
@@ -73,7 +40,7 @@ public class MainMenuController implements MainMenuControllerInterface {
             stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
             stage.close();
             System.exit(0);
-        }    
+        }
         
     }
 }

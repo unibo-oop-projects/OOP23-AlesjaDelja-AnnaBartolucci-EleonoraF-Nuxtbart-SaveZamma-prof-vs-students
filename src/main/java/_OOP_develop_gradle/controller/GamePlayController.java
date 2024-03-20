@@ -36,7 +36,7 @@ public class GamePlayController implements GamePlayControllerInterface{
 	public static String STATUS_VITTORIA="Vittoria";
 	public static String STATUS_SCONFITTA="Sconfitta";
 	public static int TIME_TO_SHOOT = 4;
-	public static int ENERGY_INIT = 40;
+	public static int ENERGY_INIT = 20;
 	public static int TEMPO_TOT_INIT = 60;
 	public static int NUM_STUD_ONDATA;
 	public static GamePlayModel gameModel;

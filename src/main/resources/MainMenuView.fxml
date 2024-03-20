@@ -14,7 +14,6 @@
       </Label>
       <Button layoutX="222.0" layoutY="169.0" mnemonicParsing="false" onAction="#newGame" prefHeight="31.0" prefWidth="157.0" text="New Game" />
       <Button layoutX="222.0" layoutY="210.0" mnemonicParsing="false" onAction="#helpGame" prefHeight="31.0" prefWidth="157.0" text="How To Play?" />
-      <Button fx:id="soundButton" layoutX="222.0" layoutY="253.0" mnemonicParsing="false" onAction="#sounds" prefHeight="31.0" prefWidth="157.0" text="Sounds On" />
-      <Button layoutX="222.0" layoutY="296.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="31.0" prefWidth="157.0" text="Exit Game" />
+      <Button layoutX="222.0" layoutY="253.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="31.0" prefWidth="157.0" text="Exit Game" />
    </children>
 </AnchorPane>

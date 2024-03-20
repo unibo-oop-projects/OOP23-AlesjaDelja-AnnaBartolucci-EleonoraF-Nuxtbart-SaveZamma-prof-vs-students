@@ -20,13 +20,6 @@ public interface MainMenuControllerInterface {
     void helpGame(ActionEvent e) throws IOException;
 
     /**
-     * When the player clicks on it, it changes the sound from on to off and from off to on.
-     * In default this is set to ON.
-     * @param e Listens to when the player clicks on this button
-     */
-    void sounds(ActionEvent e);
-
-    /**
      * Closes the game when clicked.
      * @param e Listens to when the player clicks on this button
      */
