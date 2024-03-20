@@ -16,3 +16,10 @@ Prof:
     Tutor-> Health 100 - Damage 25 - Energy 10 - Shoots direct projeciles  
     Normal-> Health 150 - Damage 50 - Energy 20 - Shoots direct projeciles  
     Rector-> Health 100 - Damage 50 - Energy 30 - Shoots diagonal projeciles  
+  
+  
+    
+  
+Anna Bartolucci  
+Alesja Delja  
+Eleonora Falconi  
