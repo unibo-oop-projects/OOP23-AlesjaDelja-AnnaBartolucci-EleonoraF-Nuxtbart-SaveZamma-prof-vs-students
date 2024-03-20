@@ -237,7 +237,7 @@ public class GamePlayView implements GamePlayViewInterface{
 	    while (iterator.hasNext()) {
 	        Student student = iterator.next();
 	        StudentView studView = new StudentView(lawn_grid);
-	        studentViewList.add(studView);
+	        //studentViewList.add(studView);
 	        studView.displayElement(student.getPosition());
 	    }
 	}
@@ -263,17 +263,17 @@ public class GamePlayView implements GamePlayViewInterface{
 	            if (prof instanceof Tutor) {
 	                Tutor tutor = (Tutor) prof;
 	                TutorView tutorView = new TutorView(lawn_grid);
-	                tutorViewList.add(tutorView);
+	                //tutorViewList.add(tutorView);
 	                tutorView.displayElement(tutor.getPositionProf());
 	            } else if (prof instanceof NormalProfessor) {
 	                NormalProfessor normalProfessor = (NormalProfessor) prof;
 	                NormalProfView normalProfessorView = new NormalProfView(lawn_grid);
-	                normalProfessorViewList.add(normalProfessorView);
+	                //normalProfessorViewList.add(normalProfessorView);
 	                normalProfessorView.displayElement(normalProfessor.getPositionProf());
 	            } else if (prof instanceof Rector) {
 	                Rector rector = (Rector) prof;
 	                RectorView rectorView = new RectorView(lawn_grid);
-	                rectorViewList.add(rectorView);
+	                //rectorViewList.add(rectorView);
 	                rectorView.displayElement(rector.getPositionProf());
 	            }
 	        }

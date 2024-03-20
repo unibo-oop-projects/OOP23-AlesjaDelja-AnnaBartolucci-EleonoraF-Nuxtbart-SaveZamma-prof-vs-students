@@ -375,7 +375,7 @@ public class GamePlayController implements GamePlayControllerInterface{
 	    }
 	    
 	    for (Student student : studentToRemove) {
-	    	removeStudentView(student);
+	    	//removeStudentView(student);
             studentList.remove(student);
         }
 	    return collisionDetected;
@@ -453,16 +453,20 @@ public class GamePlayController implements GamePlayControllerInterface{
 	            Student currentStudent = iterator.next();
 	            if (currentStudent.equals(student)) {
 	                iterator.remove();
-	                int studentIndex = gamePlayView.getStudentViewList().indexOf(student);
-	                if (studentIndex != -1) {
-	                    StudentView studentViewToRemove = gamePlayView.getStudentViewList().get(studentIndex);
-	                    gamePlayView.getStudentViewList().remove(studentViewToRemove);
-	                    List<ElementView> elementsToRemove = new ArrayList<>();
-	                    elementsToRemove.add(studentViewToRemove);
-	                    synchronizeLists(() -> {
-	                        gamePlayView.removePosition(elementsToRemove);
-	                    });
+	                if(studInGame.indexOf(student) != -1) {
+	                	StudentView studentViewToRemove = gamePlayView.getStudentViewList().get(studInGame.indexOf(student));
+		                if (studentViewToRemove != null) {
+		                	System.out.println("entra que per fare la remove");
+		                    //StudentView studentViewToRemove = gamePlayView.getStudentViewList().get(studentIndex);
+		                    gamePlayView.getStudentViewList().remove(studentViewToRemove);
+		                    List<ElementView> elementsToRemove = new ArrayList<>();
+		                    elementsToRemove.add(studentViewToRemove);
+		                    synchronizeLists(() -> {
+		                        gamePlayView.removePosition(elementsToRemove);
+		                    });
+		                }
 	                }
+	                //qui
 	                break;
 	            }
 	        }
@@ -492,7 +496,7 @@ public class GamePlayController implements GamePlayControllerInterface{
 		    }
 
 		    // Rimuovi la vista associata al professore
-		    if (prof instanceof Tutor) {
+		    /*if (prof instanceof Tutor) {
 				TutorView tutorViewToRemove = gamePlayView.getTutorViewList().stream()
 		                .filter(view -> view.equals(prof))
 		                .findFirst()
@@ -529,7 +533,7 @@ public class GamePlayController implements GamePlayControllerInterface{
 
 		    synchronizeLists(() -> {
 		        gamePlayView.removePosition(elementsToRemove);
-		    });
+		    });*/
 	}
 	
 	/**
