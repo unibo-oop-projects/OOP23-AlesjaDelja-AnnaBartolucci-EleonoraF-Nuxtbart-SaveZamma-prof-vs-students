@@ -208,8 +208,9 @@ public class GamePlayController implements GamePlayControllerInterface {
     		new Thread(() -> {
     			while (gameStatus) {
 					synchronizeLists(() -> {
-						if (gameModel.getTimeTot() == 0 || 
-								(gameModel.getEnergy() == 0 && allProfessors.stream().allMatch(list -> list.isEmpty()))) {
+						if (gameModel.getTimeTot() == 0
+								|| (gameModel.getEnergy() == 0 
+								&& allProfessors.stream().allMatch(list -> list.isEmpty()))) {
 					    	gameStatus = false;
 					    	if (allProfessors.stream().allMatch(list -> list.isEmpty())) {
 					    		try {
