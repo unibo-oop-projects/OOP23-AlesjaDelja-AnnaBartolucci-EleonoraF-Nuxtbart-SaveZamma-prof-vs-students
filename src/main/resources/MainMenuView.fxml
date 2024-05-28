@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="MainMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="_OOP_develop_gradle.controller.MainMenuController">
+<AnchorPane fx:id="MainMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oopdevelopgradle.controller.MainMenuController">
    <children>
       <Label layoutX="156.0" layoutY="8.0" prefHeight="140.0" prefWidth="289.0" text="Prof vs Students: Main Menu" textAlignment="CENTER" textFill="#15e144" wrapText="true">
          <font>
