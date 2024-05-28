@@ -27,7 +27,7 @@ public class ElementView implements ElementViewInterface {
     }
 
 	/**
-	 * Removes the image that is not needed for a student that is dead
+	 * Removes the image that is not needed for a student that is dead.
 	 */
     @Override
 	public void removeElement() {
@@ -35,12 +35,11 @@ public class ElementView implements ElementViewInterface {
 		//Image image = imageView.getImage();
 	    imageView.setImage(null); // Libera il riferimento all'immagine per consentire la pulizia della memoria
 	    imageView = null; // Libera il riferimento all'imageView
-	    
 	}
 	
 	/**
-	 * Needed to get the path of the image needed
-	 * @return
+	 * Needed to get the path of the image needed.
+	 * @return string path of the image
 	 */
 	protected String getImagePath() {
 

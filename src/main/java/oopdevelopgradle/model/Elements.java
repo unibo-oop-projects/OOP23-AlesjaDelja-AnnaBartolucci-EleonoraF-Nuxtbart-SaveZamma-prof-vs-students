@@ -3,10 +3,9 @@ package oopdevelopgradle.model;
 
 import java.util.Objects;
 
-public class Elements<X, Y> implements ElementsInterface<X, Y>{
+public class Elements<X, Y> implements ElementsInterface<X, Y> {
 	 private final X x;
-	    private final Y y;
-
+	 private final Y y;
 	    /**
 	     * Constructs a pair of elements.
 	     * 
@@ -16,9 +15,7 @@ public class Elements<X, Y> implements ElementsInterface<X, Y>{
 	    public Elements(final X x, final Y y) {
 	        this.x = x;
 	        this.y = y;
-			
 	    }
-
 	    /**
 	     * Returns the first element of the element.
 	     * 
@@ -28,7 +25,6 @@ public class Elements<X, Y> implements ElementsInterface<X, Y>{
 	    public X getX() {
 	        return this.x;
 	    }
-
 	    /**
 	     * Returns the second element of the Element Object.
 	     * 
@@ -38,7 +34,6 @@ public class Elements<X, Y> implements ElementsInterface<X, Y>{
 	    public Y getY() {
 	        return this.y;
 	    }
-
 	    /**
 	     * Computes a hash code for this elements.
 	     * 
@@ -48,7 +43,6 @@ public class Elements<X, Y> implements ElementsInterface<X, Y>{
 	    public int hashCode() {
 	        return Objects.hash(this.x, this.y);
 	    }
-	    
 	    /**
 	     * Checks if the specified object is equal to this object.
 	     * Two objects are considered equal if:
@@ -63,27 +57,33 @@ public class Elements<X, Y> implements ElementsInterface<X, Y>{
 	     */
 	    @SuppressWarnings("rawtypes")
 		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
+		public boolean equals(final Object obj) {
+			if (this == obj) {
 				return true;
-			if (obj == null)
+			}
+			if (obj == null) {
 				return false;
-			if (getClass() != obj.getClass())
+			}
+			if (getClass() != obj.getClass()) {
 				return false;
+			}
 			Elements other = (Elements) obj;
 			if (x == null) {
-				if (other.x != null)
+				if (other.x != null) {
 					return false;
-			} else if (!x.equals(other.x))
+				}
+			} else if (!x.equals(other.x)) {
 				return false;
+			}
 			if (y == null) {
-				if (other.y != null)
+				if (other.y != null) {
 					return false;
-			} else if (!y.equals(other.y))
+					}
+			} else if (!y.equals(other.y)) {
 				return false;
+			}
 			return true;
 		}
-
 	    /**
 	     * Returns a string representation of the element.
 	     * 
@@ -93,5 +93,4 @@ public class Elements<X, Y> implements ElementsInterface<X, Y>{
 	    public String toString() {
 	        return "Pair [X = " + this.x + ", Y = " + this.y + "]";
 	    }
-
 }

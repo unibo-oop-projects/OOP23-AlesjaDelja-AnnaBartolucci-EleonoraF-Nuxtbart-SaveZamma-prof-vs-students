@@ -6,8 +6,7 @@ import javafx.scene.layout.GridPane;
  * A view class for displaying an image of a normal professor.
  */
 
-public class NormalProfView extends ElementView{
-
+public class NormalProfView extends ElementView {
 	/**
      * Constructor for NormalProfView.
      * @param gridPane The GridPane where the normal professor view will be added.

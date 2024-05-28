@@ -1,13 +1,12 @@
 package oopdevelopgradle.model;
 
-public class Tutor extends Professor{
+public class Tutor extends Professor {
 	
 	public static final int TUTOR_HIT_DAMAGE = 25; 
 	public static final int TUTOR_BUY_ENERGY = 10;
 	public static final int TUTOR_HEALTHPOINTS = 50;
 	public Bullet tutorBullet;
-	private int bulletSpeed=1;
-
+	private int bulletSpeed = 1;
 	public static final int TUTOR_NAME = 1;
 	
 	public Tutor(final int col, final int row) {
@@ -16,32 +15,32 @@ public class Tutor extends Professor{
 	}
 
 	/**
-	 * Gets the Bullet of a Tutor
-	 * @return the Bullet of the Tutor
+	 * Gets the Bullet of a Tutor.
+	 * @return tutorBullet the Bullet of the Tutor
 	 */
 	public Bullet getTutorBullet() {
 		return tutorBullet;
 	}
 
 	/**
-	 * Sets the Bullet of a Tutor
-	 * @param Bullet Value of the Tutor
+	 * Sets the Bullet of a Tutor.
+	 * @param tutorBullet Value of the Tutor
 	 */
 	public void setTutorBullet(final Bullet tutorBullet) {
 		this.tutorBullet = tutorBullet;
 	}
 
 	/**
-	 * Gets the BulletSpeed of a Tutor
-	 * @return the BulletSpeed of the Tutor
+	 * Gets the BulletSpeed of a Tutor.
+	 * @return the bulletSpeed of the Tutor
 	 */
 	public int getBulletSpeed() {
 		return bulletSpeed;
 	}
 
 	/**
-	 * Sets the BulletSpeed of a Tutor
-	 * @param BulletSpeed Value of the Tutor
+	 * Sets the BulletSpeed of a Tutor.
+	 * @param bulletSpeed Value of the Tutor
 	 */
 	public void setBulletSpeed(final int bulletSpeed) {
 		this.bulletSpeed = bulletSpeed;

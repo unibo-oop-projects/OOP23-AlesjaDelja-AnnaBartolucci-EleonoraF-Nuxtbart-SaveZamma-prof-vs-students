@@ -19,7 +19,6 @@ public class GamePlayModel implements GamePlayModelInterface {
 	    private List<Rector> rectorList;
 	    private List<Bullet> bulletListNormal;
 	    private List<Bullet> bulletListDiagonal;
-	    
 	    public GamePlayModel() {
 	    	this.scoreMacth = 0;
 	        this.energy = 0;
@@ -40,10 +39,8 @@ public class GamePlayModel implements GamePlayModelInterface {
 	    public int getScoreMacth() {
 			return scoreMacth;
 		}
-
 	    /**
 	     * Takes the match score.
-	     * @return The match score.
 	     */
 	    @Override
 		public void setScoreMacth(final int scoreMacth) {
@@ -94,10 +91,9 @@ public class GamePlayModel implements GamePlayModelInterface {
 		public int getEnergy() {
 			return energy;
 		}
-
 		 /**
 	     * Sets the energy.
-	     * @param energy The energy.
+	     * @param matchScore
 	     */
 	    @Override
 		public void setEnergy(final int matchScore) {
@@ -119,9 +115,8 @@ public class GamePlayModel implements GamePlayModelInterface {
 	     */
 	    @Override
 	    public void setTimeTot(final int time) {
-	    	timeTot=time;
+	    	timeTot = time;
 	    }
-	    
 	    /**
 	     * Takes the list of students.
 	     * @return The list of students.
@@ -216,7 +211,6 @@ public class GamePlayModel implements GamePlayModelInterface {
     		tutorList.add(newTutor);
     		return newTutor;
 	    }
-		
 		/**
 		 * Generates a new normal professor and adds it to the list.
 		 * @param damage The damage of the new normal professor.
@@ -228,25 +222,24 @@ public class GamePlayModel implements GamePlayModelInterface {
 		 * @return The new normal professor generated.
 		 */
 	    @Override
-	    
-		public NormalProfessor generateNewNormalP(final int damage, final double healthPoints, final Elements<Integer, Integer> position, final String pathImg, final int costProfessor, final int idProf) {
+		public NormalProfessor generateNewNormalP(final int damage, final double healthPoints, 
+				final Elements<Integer, Integer> position, final String pathImg, 
+				final int costProfessor, final int idProf) {
 			final NormalProfessor newnormalProf = new NormalProfessor(position.getX(), position.getY());
 			normalProfList.add(newnormalProf);
     		return newnormalProf;
 	    }
-		
 		/**
 		 * Generates a new rector and adds it to the list.
 		 * @param position The position of the new rector.
 		 * @return The new rector generated.
 		 */
 	    @Override
-		public Rector generateNewRector(final Elements<Integer, Integer> position ) {
+		public Rector generateNewRector(final Elements<Integer, Integer> position) {
 			final Rector newRector = new Rector(position.getX(), position.getY());
     		rectorList.add(newRector);
     		return newRector;
 	    }
-		
 		/**
 		 * Generates a new student and adds it to the list.
 		 */
@@ -255,7 +248,6 @@ public class GamePlayModel implements GamePlayModelInterface {
 	    	final Student student = new Student();
 	    	this.studentList.add(student);
 	    }
-	    
 	    /**
 	     * Increases the match score by a specified amount.
 	     * @param amount The amount to increase the match score by.
@@ -264,7 +256,6 @@ public class GamePlayModel implements GamePlayModelInterface {
 	    public void increaseEnergy(final int amount) {
 	    	energy += amount;
 	    }
-	    
 	    /**
 	     * Decreases the match score by a specified amount.
 	     * @param amount The amount to decrease the match score by.
@@ -278,7 +269,6 @@ public class GamePlayModel implements GamePlayModelInterface {
 	        } 
 	        return false;
 	    }
-	    
 	    /**
 	     * Increases the total game time by a specified amount.
 	     * @param amount The amount to increase the total game time by.
@@ -287,7 +277,6 @@ public class GamePlayModel implements GamePlayModelInterface {
 	    public void increaseTimeTot(final double amount) {
 	    	timeTot += amount;
 	    }
-	    
 	    /**
 	     * Decreases the total game time by a specified amount.
 	     * @param amount The amount to decrease the total game time by.

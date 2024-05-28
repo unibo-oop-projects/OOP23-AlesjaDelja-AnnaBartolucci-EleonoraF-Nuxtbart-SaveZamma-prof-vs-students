@@ -8,7 +8,6 @@ import oopdevelopgradle.model.Student;
 import oopdevelopgradle.controller.GamePlayController;
 
 public interface GamePlayViewInterface {
-
 	/**
 	 * Sets the controller associated with this view.
 	 *
@@ -63,7 +62,8 @@ public interface GamePlayViewInterface {
 	 * @param bulletListNormal  The list of normal bullets.
 	 * @param bulletList        The list of diagonal bullets.
 	 */
-	void updatePositions(List<Student> studentList, List<List<? extends Professor>> profList, List<Bullet> bulletListNormal, List<Bullet> bulletList);
+	void updatePositions(List<Student> studentList, List<List<? extends Professor>> profList, 
+			List<Bullet> bulletListNormal, List<Bullet> bulletList);
 	/**
 	 * Removes the specified elements from the view.
 	 *

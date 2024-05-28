@@ -1,19 +1,14 @@
 package oopdevelopgradle.model;
 
-public class Rector extends Professor{
-
+public class Rector extends Professor {
 	private final Elements<Integer, Integer> currentPosition;
-	
 	public static final int RECTOR_HIT_DAMAGE = 50; 
 	public static final int RECTOR_BUY_ENERGY = 30;
 	public static final int RECTOR_HEALTHPOINTS = 150;
 	public Bullet rectorBullet;
-	private int bulletSpeed=1;
-	
-	public String pathImgR;
+	private int bulletSpeed = 1;
+	private String pathImgR;
 	public static final int RECTOR_NAME = 3;
-	
-	
 	/**
      * Constructor for creating a Rector object.
      *
@@ -26,9 +21,7 @@ public class Rector extends Professor{
 		final int bulletCol = currentPosition.getX() + bulletSpeed;
 	    final int bulletRow = currentPosition.getY() + bulletSpeed;
 	    rectorBullet = new Bullet(bulletSpeed, RECTOR_HIT_DAMAGE, new Elements<>(bulletCol, bulletRow));
-	    
 	}
-	
 	/**
      * Gets the bullet used by the Rector.
      *
@@ -37,7 +30,6 @@ public class Rector extends Professor{
 	public Bullet getRectorBullet() {
 		return rectorBullet;
 	}
-	
 	/**
      * Sets the bullet used by the Rector.
      *
@@ -46,7 +38,6 @@ public class Rector extends Professor{
 	public void setRectorBullet(final Bullet rectorBullet) {
 		this.rectorBullet = rectorBullet;
 	}
-	
 	/**
      * Gets the speed of the bullet used by the Rector.
      *
@@ -55,7 +46,6 @@ public class Rector extends Professor{
 	public int getBulletSpeed() {
 		return bulletSpeed;
 	}
-	
 	/**
      * Sets the speed of the bullet used by the Rector.
      *

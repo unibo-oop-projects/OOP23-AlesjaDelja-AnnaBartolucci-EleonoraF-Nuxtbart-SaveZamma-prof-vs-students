@@ -14,33 +14,27 @@ public class MainMenuController implements MainMenuControllerInterface {
 	private static final String EXIT_TITLE = "Exit";
 	private static final String EXIT_HEADER = "You are going to exit the game!";
 	private static final String EXIT_CONTENT = "Are you sure?";
-    Stage stage;
-
+    private Stage stage;
     @Override
-    public void newGame(ActionEvent e) throws IOException {
+    public void newGame(final ActionEvent e) throws IOException {
         StageChangeController stageChanger = new StageChangeController();
         stageChanger.changeScene(e, GAME_PATH);
     }
-
     @Override
-    public void helpGame(ActionEvent e) throws IOException {
+    public void helpGame(final ActionEvent e) throws IOException {
         StageChangeController stageChanger = new StageChangeController();
         stageChanger.changeScene(e, GAME_HELP_PATH);
     }
-
-    
     @Override
-    public void exitGame(ActionEvent e) {
+    public void exitGame(final ActionEvent e) {
         Alert exitAlert = new Alert(AlertType.CONFIRMATION);
         exitAlert.setTitle(EXIT_TITLE);
         exitAlert.setHeaderText(EXIT_HEADER);
         exitAlert.setContentText(EXIT_CONTENT);
-                
-        if(exitAlert.showAndWait().get() == ButtonType.OK) {
-            stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        if (exitAlert.showAndWait().get() == ButtonType.OK) {
+            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             stage.close();
             System.exit(0);
         }
-        
     }
 }

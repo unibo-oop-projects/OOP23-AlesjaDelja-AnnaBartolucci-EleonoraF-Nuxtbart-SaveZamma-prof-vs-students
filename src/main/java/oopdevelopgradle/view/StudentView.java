@@ -3,9 +3,8 @@ package oopdevelopgradle.view;
 import javafx.scene.layout.GridPane;
 
 public class StudentView extends ElementView {
-	
 	//Variabe used to memorize relative path of the images of Students and when it attacks
-	private final String PATH_STUDENT = "/img/studenteNewNobg.png";
+	private final String pathStudent = "/img/studenteNewNobg.png";
 	//Costructs
     public StudentView(final GridPane gridPane) {
         super(gridPane);
@@ -13,8 +12,6 @@ public class StudentView extends ElementView {
 
     @Override
     protected String getImagePath() {
-        return PATH_STUDENT;
+        return pathStudent;
     }
-    
-
 }

@@ -30,47 +30,40 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 
-public class GamePlayView implements GamePlayViewInterface{
+public class GamePlayView implements GamePlayViewInterface {
 	@FXML
     private AnchorPane gamePlayRoot;
-    
     @FXML
     private ImageView lawnImage;
-    
     @FXML
     private ImageView sunCountImage;
-    
     @FXML
     private Label matchScoreLabel;
-    
     @FXML
     private Label energyLabel;
-    
     @FXML
     private ImageView gameMenuButton;
-    
     @FXML
     private GridPane lawnGrid;
-    
     @FXML
     private Label timeLabel;
-
-    public GamePlayController gameController;
-    public GamePlayModel gamePlayModel;
+    private GamePlayController gameController;
+    private GamePlayModel gamePlayModel;
     private final List<Tutor> tutorInGrid = new ArrayList<>();
     private final List<NormalProfessor> normalProfInGrid = new ArrayList<>();
     private final List<Rector> rectorInGrid = new ArrayList<>();
     private List<Student> studentInGrid = new ArrayList<>();
     private List<Bullet>  bulletInGrid = new ArrayList<>();
-    List<List<? extends Professor>> profsInGrid = new ArrayList<>();
-    public boolean firstProfPicked;
-    public AnimationTimer  timer;
-    public int timeTot;
-    public int matchScore ;
-    public long lastTimeUpdate = 0;
-    public long oneSecond = 1_000_000_000;
-    public boolean timerStop = false;
-    public int profChoosen;
+    private List<List<? extends Professor>> profsInGrid = new ArrayList<>();
+    private boolean firstProfPicked;
+    private AnimationTimer  timer;
+    private int timeTot;
+    private int matchScore;
+    private long lastTimeUpdate = 0;
+    private static final long ONE_SECOND = 1_000_000_000;
+    private static final int ONE_MINUTE = 60;
+    private boolean timerStop = false;
+    private int profChoosen;
     @Override
 	public void setController(final GamePlayController gameController) {
         this.gameController = gameController;
@@ -97,25 +90,24 @@ public class GamePlayView implements GamePlayViewInterface{
     }
     @Override
     public void initializeView() {
-    	
-    	profChoosen=-1;
+    	profChoosen = -1;
     	gamePlayModel = GamePlayController.getGameModel();
 		timer = new AnimationTimer() {
             @Override
             public void handle(final long now) {
             	if (!timerStop) {
-                    if (now - lastTimeUpdate >= oneSecond) {
+                    if (now - lastTimeUpdate >= ONE_SECOND) {
                     	timeTot = gamePlayModel.getTimeTot();
                     	if (timeTot > 0) {
                     		updateTempoLabel();
                     		updateEnergyLabel();
                     		updateMatchScoreLabel();
                             lastTimeUpdate = now;
-                    	}else {
+                    	} else {
                         	timer.stop();
                     	}
                     }
-            	}else{
+            	} else {
             		timer.stop();
             	}
            }
@@ -136,12 +128,10 @@ public class GamePlayView implements GamePlayViewInterface{
 	private void updateTempoLabel() {
     	// funzione che mi aggiorna il tempo che scorre
     	timeTot--;
-        final int min = timeTot / 60;
-        final int sec = timeTot % 60;
-        
+        final int min = timeTot / ONE_MINUTE;
+        final int sec = timeTot % ONE_MINUTE;
         timeLabel.setText(String.format("%02d:%02d", min, sec));
         gamePlayModel.setTimeTot(timeTot);
-        
 	}
 	/**
 	 * Updates the displayed energy on the game view.
@@ -154,7 +144,6 @@ public class GamePlayView implements GamePlayViewInterface{
 	 */
 	public void updateMatchScoreLabel() {
 		matchScoreLabel.setText(String.format("Score: %d", gamePlayModel.getScoreMacth()));
-		
 	}
 	@Override
 	public int getMatchScore() {
@@ -165,7 +154,8 @@ public class GamePlayView implements GamePlayViewInterface{
 		this.matchScore = matchScore;
 	}
 	@Override
-	public void updatePositions(final List<Student> studentList, final List<List<? extends Professor>> profList, final List<Bullet> bulletListNormal, final List<Bullet> bulletList){
+	public void updatePositions(final List<Student> studentList, final List<List<? extends Professor>> profList, 
+			final List<Bullet> bulletListNormal, final List<Bullet> bulletList) {
 		Platform.runLater(() -> {
 			removeImageViews();
 	        updateStudentPositions(studentList);
@@ -186,7 +176,7 @@ public class GamePlayView implements GamePlayViewInterface{
 	 * @param studentList The list of students.
 	 */
 	private void updateStudentPositions(final List<Student> studentList) {
-		studentInGrid =studentList;
+		studentInGrid = studentList;
 	    final List<Student> studentInGridCopy = new ArrayList<>(studentInGrid);
 	    final Iterator<Student> iterator = studentInGridCopy.iterator();
 	    while (iterator.hasNext()) {
@@ -213,7 +203,6 @@ public class GamePlayView implements GamePlayViewInterface{
 	        final Iterator<? extends Professor> iterator = professors.iterator();
 	        while (iterator.hasNext() && !professors.isEmpty()) {
 	            final Professor prof = iterator.next();
-	            
 	            if (prof instanceof Tutor) {
 	                final Tutor tutor = (Tutor) prof;
 	                final TutorView tutorView = new TutorView(lawnGrid);
@@ -263,20 +252,18 @@ public class GamePlayView implements GamePlayViewInterface{
 	 */
     @FXML
     private void handleMouseClick(final MouseEvent event) {
-    	
         final Integer columnIndex = GridPane.getColumnIndex((Region) event.getSource());
         final Integer rowIndex = GridPane.getRowIndex((Region) event.getSource());
         System.out.println("Clicked at column " + columnIndex + " and row " + rowIndex);
-        
-	    if(profChoosen != -1) {
-	    	if(columnIndex!=null && rowIndex!=null && !isProfInCell(columnIndex, rowIndex) && !isStudentInCell(columnIndex, rowIndex)) {
+	    if (profChoosen != -1) {
+	    	if (columnIndex != null && rowIndex != null && !isProfInCell(columnIndex, rowIndex) 
+	    			&& !isStudentInCell(columnIndex, rowIndex)) {
 	    		setFirstProfPicked(true);
-	    		switch(profChoosen) {
+	    		switch (profChoosen) {
 	    			case 1:
 	    				final Tutor tutornew = new Tutor(columnIndex, rowIndex);
 	    				final Bullet tutorBullet = tutornew.tutorBullet;
-	    				
-	    				if(tutornew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
+	    				if (tutornew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
 	    					gamePlayModel.getTutorList().add(tutornew);
 	    					tutorInGrid.add(tutornew);
 	    					gamePlayModel.getBulletListNormal().add(tutorBullet);
@@ -287,21 +274,18 @@ public class GamePlayView implements GamePlayViewInterface{
 	    			case 2:
 	    				final NormalProfessor normalProfNew = new NormalProfessor(columnIndex, rowIndex);
 	    				final Bullet nProfBullet = normalProfNew.normalProfBullet;
-	    				
-	    				if(normalProfNew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
+	    				if (normalProfNew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
 	    					gamePlayModel.getNormalProfList().add(normalProfNew);
 	    					normalProfInGrid.add(normalProfNew);
 	    					gamePlayModel.getBulletListNormal().add(nProfBullet); 
 	    					addProfsInListAndUpdate();
-	    	    			
 	    	    			gamePlayModel.decreaseEnergy(normalProfNew.getEnergyProfessor());
 	    	    		}
 	    				break;
 	    			case 3:
 	    				final Rector rectornew = new Rector(columnIndex, rowIndex);
 	    				final Bullet rectorBullet = rectornew.rectorBullet;
-	    				
-	    				if(rectornew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
+	    				if (rectornew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
 	    					gamePlayModel.getRectorList().add(rectornew);
 	    					rectorInGrid.add(rectornew);
 	    					gamePlayModel.getBulletListDiagonal().add(rectorBullet);
@@ -324,12 +308,11 @@ public class GamePlayView implements GamePlayViewInterface{
     	profsInGrid.add(gamePlayModel.getTutorList());
 		profsInGrid.add(gamePlayModel.getNormalProfList());
 		profsInGrid.add(gamePlayModel.getRectorList());
-		
-		updatePositions(gamePlayModel.getStudentList(), profsInGrid,gamePlayModel.getBulletListNormal(), gamePlayModel.getBulletListDiagonal());
-		
+		updatePositions(gamePlayModel.getStudentList(), profsInGrid, gamePlayModel.getBulletListNormal(), 
+				gamePlayModel.getBulletListDiagonal());
     }
     /**
-     * Function that opens the Game Menu 
+     * Function that opens the Game Menu.
      * @param event
      * @throws IOException
      */
@@ -348,22 +331,22 @@ public class GamePlayView implements GamePlayViewInterface{
      * Handles the selection of the tutor card.
      */
     @FXML
-    public void handleTutorCardClick(){
-    	profChoosen=1;
+    public void handleTutorCardClick() {
+    	profChoosen = 1;
     }
     /**
      * Handles the selection of the normal professor card.
      */
     @FXML
-    public void handleNormalCardClick(){
-    	profChoosen=2;
+    public void handleNormalCardClick() {
+    	profChoosen = 2;
     }
     /**
      * Handles the selection of the rector card.
      */
     @FXML
-    public void handleRectorCardClick(){
-    	profChoosen=3;
+    public void handleRectorCardClick() {
+    	profChoosen = 3;
     }
     /**
      * Checks if a professor is present in the specified cell.
@@ -373,9 +356,12 @@ public class GamePlayView implements GamePlayViewInterface{
      * @return True if a professor is present in the cell, false otherwise.
      */
 	private boolean isProfInCell(final int columnIndex, final int rowIndex) {
-		return (rectorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex) &&
-				tutorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex) &&
-				normalProfInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex && p.getPositionProf().getY() == rowIndex)
+		return (rectorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex 
+				&& p.getPositionProf().getY() == rowIndex)
+				&& tutorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex 
+				&& p.getPositionProf().getY() == rowIndex)
+				&& normalProfInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex 
+				&& p.getPositionProf().getY() == rowIndex)
 				);
 	}
 
@@ -387,6 +373,7 @@ public class GamePlayView implements GamePlayViewInterface{
      * @return True if a student is present in the cell, false otherwise.
      */
 	private boolean isStudentInCell(final int columnIndex, final int rowIndex) {
-		return studentInGrid.stream().anyMatch(s -> s.getPosition().getX() == columnIndex && s.getPosition().getY() == rowIndex);
+		return studentInGrid.stream().anyMatch(s -> s.getPosition().getX() == columnIndex 
+				&& s.getPosition().getY() == rowIndex);
 	}
 }

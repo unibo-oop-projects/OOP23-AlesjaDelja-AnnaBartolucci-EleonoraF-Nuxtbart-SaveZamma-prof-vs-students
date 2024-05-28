@@ -1,13 +1,12 @@
 package oopdevelopgradle.model;
 
-public class NormalProfessor extends Professor{
-
+public class NormalProfessor extends Professor {
 	public static final int NORMALPROF_HIT_DAMAGE = 50; 
 	public static final int NORMALPROF_BUY_ENERGY = 20;
 	public static final int NORMALPROF_HEALTHPOINTS = 100;
 	public static final int NORMAL_PROF_NAME = 2;
 	public Bullet normalProfBullet;
-	public int bulletSpeed=1;
+	private int bulletSpeed = 1;
 	
 	/**
 	 * Constructor for creating a NormalProfessor object.
@@ -16,7 +15,8 @@ public class NormalProfessor extends Professor{
 	 * @param row The row position of the NormalProfessor.
 	 */
 	public NormalProfessor(final int col, final int row) {
-		super(NORMALPROF_HIT_DAMAGE, NORMALPROF_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), NORMALPROF_BUY_ENERGY);
+		super(NORMALPROF_HIT_DAMAGE, NORMALPROF_HEALTHPOINTS, 
+				new Elements<Integer, Integer>(col, row), NORMALPROF_BUY_ENERGY);
 		normalProfBullet = new Bullet(bulletSpeed, NORMALPROF_HIT_DAMAGE, new Elements<Integer, Integer>(col, row));
 	}
 

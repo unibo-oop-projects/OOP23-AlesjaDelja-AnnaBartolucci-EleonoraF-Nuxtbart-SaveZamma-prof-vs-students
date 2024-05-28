@@ -11,10 +11,9 @@ public interface GameElement {
      * @param position
      */
     void setPosition(Elements<Integer, Integer> position);
-    
     /**
      * Gets the damage of the element.
-     * @return
+     * @return damage the damage suffered
      */
     int getDamage();
     /**

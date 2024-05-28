@@ -5,8 +5,7 @@ import javafx.scene.layout.GridPane;
 /**
  * A view class for displaying a tutor's image.
  */
-public class TutorView extends ElementView{
-	
+public class TutorView extends ElementView {
 	/**
      * Constructor for TutorView.
      * @param gridPane The GridPane where the tutor view will be added.
@@ -23,5 +22,4 @@ public class TutorView extends ElementView{
     protected String getImagePath() {
         return "/img/tutorNobg.png"; 
     }
-        
 }

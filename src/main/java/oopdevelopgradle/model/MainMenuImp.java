@@ -9,7 +9,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class MainMenuImp extends Application implements MainMenu{
+public class MainMenuImp extends Application implements MainMenu {
 	private static final String MAIN_MENU_PATH = "/MainMenuView.fxml";
 	private static final String EXIT_TITLE = "Exit";
 	private static final String EXIT_HEADER = "You are going to exit the game!";
@@ -26,8 +26,7 @@ public class MainMenuImp extends Application implements MainMenu{
 					event.consume();
 					exitGame(primaryStage);
 					});
-				
-			} catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -38,7 +37,7 @@ public class MainMenuImp extends Application implements MainMenu{
 			exitAlert.setTitle(EXIT_TITLE);
 			exitAlert.setHeaderText(EXIT_HEADER);
 			exitAlert.setContentText(EXIT_CONTENT);
-			if(exitAlert.showAndWait().get().equals(ButtonType.OK)) {
+			if (exitAlert.showAndWait().get().equals(ButtonType.OK)) {
 				stage.close();
 				System.exit(0);
 			}

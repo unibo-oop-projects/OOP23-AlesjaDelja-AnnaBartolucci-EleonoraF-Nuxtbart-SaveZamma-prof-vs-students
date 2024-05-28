@@ -4,8 +4,7 @@ import javafx.scene.layout.GridPane;
 /**
  * A view class for displaying a rector's image.
  */
-public class RectorView extends ElementView{
-
+public class RectorView extends ElementView {
 	/**
      * Constructor for RectorView.
      * @param gridPane The GridPane where the rector view will be added.
@@ -22,5 +21,4 @@ public class RectorView extends ElementView{
     protected String getImagePath() {
 		return "/img/rectorNobg.png";
     }
-
 }

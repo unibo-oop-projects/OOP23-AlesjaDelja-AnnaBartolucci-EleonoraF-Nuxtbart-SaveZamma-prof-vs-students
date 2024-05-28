@@ -7,8 +7,7 @@ import javafx.scene.image.ImageView;
 import oopdevelopgradle.model.Elements;
 import javafx.scene.layout.GridPane;
 
-public class BulletView  extends ElementView{
-
+public class BulletView  extends ElementView {
 	public BulletView(final GridPane gridPane) {
 		super(gridPane);
 	}
@@ -25,9 +24,8 @@ public class BulletView  extends ElementView{
 	        imageView = new ImageView(image);
 	        // Impostare le dimensioni che siano addatte a quello che serve
 	        imageView.setFitWidth(20); 
-	        imageView.setFitHeight(20); 
-	        
+	        imageView.setFitHeight(20);
 	     // Sets the position of student
-	        gridPane.add(imageView, positionElement.getX(),positionElement.getY());
+	        gridPane.add(imageView, positionElement.getX(), positionElement.getY());
 	}
 }
