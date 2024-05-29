@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
+
 import oopdevelopgradle.model.Bullet;
 import oopdevelopgradle.model.Elements;
 import oopdevelopgradle.model.GamePlayModel;
@@ -46,6 +48,7 @@ public class GamePlayController implements GamePlayControllerInterface {
 	private List<Rector> rectorInGame = new ArrayList<>(); 
 	private List<Student> studInGame = new ArrayList<>();
 	private final List<List<? extends Professor>> allProfessors = new ArrayList<>();
+	private final Logger log = Logger.getLogger(GamePlayController.class.getName());
 	/**
 	 * Function that create a list of lists of all types of professors in the game.
 	 * @param tutorInGame list of tutors in game
@@ -81,8 +84,7 @@ public class GamePlayController implements GamePlayControllerInterface {
         try {
 			initGamePlay();
 		} catch (IOException e) {
-			//e.printStackTrace();
-			System.out.println(e);
+			log.fine(e.toString());
 		}
         if (!studInGame.isEmpty()) {
         	gamePlayView.initializeView();
@@ -122,7 +124,7 @@ public class GamePlayController implements GamePlayControllerInterface {
 		                try {
 							userGame(STATUS_SCONFITTA);
 						} catch (IOException e) {
-							System.out.println(e); //e.printStackTrace();
+							log.fine(e.toString());
 						}
 		                break;
 	            	}
@@ -215,20 +217,20 @@ public class GamePlayController implements GamePlayControllerInterface {
     			while (gameStatus) {
 					synchronizeLists(() -> {
 						if (gameModel.getTimeTot() == 0
-								|| (gameModel.getEnergy() == 0 
-								&& allProfessors.stream().allMatch(list -> list.isEmpty()))) {
+								|| gameModel.getEnergy() == 0 
+								&& allProfessors.stream().allMatch(list -> list.isEmpty())) {
 					    	gameStatus = false;
 					    	if (allProfessors.stream().allMatch(list -> list.isEmpty())) {
 					    		try {
 					    			userGame(STATUS_SCONFITTA);
 								} catch (IOException e) {
-									System.out.println(e); //e.printStackTrace();
+									log.fine(e.toString());
 								}
 					    	} else {
 					    		try {
 									userGame(STATUS_VITTORIA);
 								} catch (IOException e) {
-									e.printStackTrace();
+									log.fine(e.toString());
 								}
 					    	}
 						}
@@ -251,7 +253,7 @@ public class GamePlayController implements GamePlayControllerInterface {
 				    	sleep(SLEEP_1);
 						initGamePlay();
 					} catch (IOException e) {
-						e.printStackTrace();
+						log.fine(e.toString());
 					}
 		    	}
 		    }).start();
@@ -295,14 +297,14 @@ public class GamePlayController implements GamePlayControllerInterface {
 		        final Stage stage = new Stage();
 		        stage.setScene(new Scene(lostGame));
 	            final Label label = (Label) lostGame.lookup("#gameLabel");
-	            if (status.equals(STATUS_VITTORIA)) {
+	            if (STATUS_VITTORIA.equals(status)) {
 	                label.setText("Hai vinto!");
-	            } else if (status.equals(STATUS_SCONFITTA)) {
+	            } else if (STATUS_SCONFITTA.equals(status)) {
 	                label.setText("Hai perso!");
 	            }
 		        stage.show();
             } catch (IOException e) {
-            	System.out.println(e); //e.printStackTrace();
+            	log.fine(e.toString());
             }
         });
     }
@@ -317,7 +319,7 @@ public class GamePlayController implements GamePlayControllerInterface {
 			try {
 		        Thread.sleep(num);
 		    } catch (InterruptedException e) {
-		        e.printStackTrace();
+		    	log.fine(e.toString());
 		    }
 		}
 	}

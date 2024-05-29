@@ -1,6 +1,7 @@
 package oopdevelopgradle.view;
 
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.Iterator;
 import oopdevelopgradle.model.Bullet;
 import oopdevelopgradle.model.GamePlayModel;
@@ -53,17 +54,17 @@ public class GamePlayView implements GamePlayViewInterface {
     private final List<NormalProfessor> normalProfInGrid = new ArrayList<>();
     private final List<Rector> rectorInGrid = new ArrayList<>();
     private List<Student> studentInGrid = new ArrayList<>();
-    private List<Bullet>  bulletInGrid = new ArrayList<>();
-    private List<List<? extends Professor>> profsInGrid = new ArrayList<>();
+    private final List<List<? extends Professor>> profsInGrid = new ArrayList<>();
     private boolean firstProfPicked;
     private AnimationTimer  timer;
     private int timeTot;
     private int matchScore;
-    private long lastTimeUpdate = 0;
+    private long lastTimeUpdate;
     private static final long ONE_SECOND = 1_000_000_000;
     private static final int ONE_MINUTE = 60;
-    private boolean timerStop = false;
+    private boolean timerStop;
     private int profChoosen;
+    private final Logger log = Logger.getLogger(GamePlayController.class.getName());
     @Override
 	public void setController(final GamePlayController gameController) {
         this.gameController = gameController;
@@ -84,8 +85,8 @@ public class GamePlayView implements GamePlayViewInterface {
         try {
         	gameController = new GamePlayController();
             gameController.initData(this);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IllegalStateException e) {
+        	log.fine(e.toString());
         }
     }
     @Override
@@ -225,7 +226,7 @@ public class GamePlayView implements GamePlayViewInterface {
 	 * @param bulletList The list of bullets.
 	 */
 	private void updateBulletPositions(final List<Bullet> bulletList) {
-	    bulletInGrid = bulletList;
+		final List<Bullet>  bulletInGrid = bulletList;
 	    final List<Bullet> bulletInGridCopy = new ArrayList<>(bulletInGrid);
 
 	    final Iterator<Bullet> iterator = bulletInGridCopy.iterator();
@@ -251,10 +252,10 @@ public class GamePlayView implements GamePlayViewInterface {
 	 * @param event The mouse click event.
 	 */
     @FXML
-    private void handleMouseClick(final MouseEvent event) {
+    void handleMouseClick(final MouseEvent event) {
         final Integer columnIndex = GridPane.getColumnIndex((Region) event.getSource());
         final Integer rowIndex = GridPane.getRowIndex((Region) event.getSource());
-        System.out.println("Clicked at column " + columnIndex + " and row " + rowIndex);
+        log.fine("Clicked at column " + columnIndex + " and row " + rowIndex);
 	    	if (profChoosen != -1 && columnIndex != null && rowIndex != null 
 	    			&& !isProfInCell(columnIndex, rowIndex) 
 	    			&& !isStudentInCell(columnIndex, rowIndex)) {
@@ -295,7 +296,7 @@ public class GamePlayView implements GamePlayViewInterface {
 	    	    		}
 	    				break;
 	    			default:
-	    		        System.out.println("Il numero non è né 1, né 2, né 3");
+	    				log.fine("Il numero non è né 1, né 2, né 3");
 	    		        break;
 	    		 }
 	    }

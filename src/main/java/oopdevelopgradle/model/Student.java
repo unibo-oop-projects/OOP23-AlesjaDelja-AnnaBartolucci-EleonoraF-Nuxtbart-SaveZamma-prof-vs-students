@@ -19,7 +19,9 @@ public class Student extends AbstractGameElement {
     	super(DEFAULT_DAMAGE, null);
         this.health = DEFAULT_HEALTH;
         this.energy = DEFAULT_ENERGY;
-        generateRandomPosition();
+        final Random random = new Random();
+        final int randomY = random.nextInt(DEFAULT_ROW);
+        this.position = new Elements<>(DEFAULT_COL, randomY);
     }
     /**
      * Generates a random position for the student within the game grid.
