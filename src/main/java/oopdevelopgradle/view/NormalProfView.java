@@ -7,20 +7,22 @@ import javafx.scene.layout.GridPane;
  */
 
 public class NormalProfView extends ElementView {
-	/**
+    /**
      * Constructor for NormalProfView.
+     * 
      * @param gridPane The GridPane where the normal professor view will be added.
      */
-	public NormalProfView(final GridPane gridPane) {
-		super(gridPane);
-	}
+    public NormalProfView(final GridPane gridPane) {
+        super(gridPane);
+    }
 
-	/**
+    /**
      * Retrieves the path to the image file representing the normal professor.
+     * 
      * @return The path to the image file.
      */
-	@Override
+    @Override
     protected String getImagePath() {
-		return "/img/professoressa2Nobg.png";
+        return "/img/professoressa2Nobg.png";
     }
 }

@@ -7,7 +7,7 @@ package oopdevelopgradle.model;
  * @param <Y> The type of the second element.
  */
 public interface ElementsInterface<X, Y> {
-	/**
+    /**
      * Returns the first element of the pair.
      * 
      * @return The first element of the pair.

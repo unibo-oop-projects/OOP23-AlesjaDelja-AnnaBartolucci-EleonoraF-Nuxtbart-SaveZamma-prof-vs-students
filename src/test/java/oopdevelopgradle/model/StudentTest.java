@@ -1,5 +1,6 @@
 package oopdevelopgradle.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,7 @@ class StudentTest {
     private static final int HEALTH1 = 80;
     private static final int ENERGY1 = 20;
     private static final int DEMAGE = 25;
+    private static final int MAX_WI = 5;
 
     @Test
     void testDefaultHealth() {
@@ -33,7 +35,7 @@ class StudentTest {
         assertEquals(DEMAGE, student.getDamage());
         assertEquals(DEFAULT_HEALTH, student.getHealthStudent());
         assertEquals(DEFAULT_ENERGY, student.getEnergy());
-        //final Elements<Integer, Integer> position = student.getPosition();
-        //assertTrue(position.getX() >= 0 && position.getX() < 5); //???
+        final Elements<Integer, Integer> position = student.getPosition();
+        assertTrue(position.getX() >= 0 && position.getX() < MAX_WI); //???
     }
 }

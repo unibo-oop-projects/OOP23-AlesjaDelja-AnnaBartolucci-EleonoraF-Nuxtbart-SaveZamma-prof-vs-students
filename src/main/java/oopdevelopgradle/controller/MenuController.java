@@ -13,33 +13,40 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+
 /**
- * This class implements the GameControllerInterface. It handles the changing scene from
- * the game play to returning back to the main menu' or replay another match.
+ * This class implements the GameControllerInterface. It handles the changing
+ * scene from the game play to returning back to the main menu' or replay
+ * another match.
  */
 public class MenuController implements GameControllerInterface {
-	@FXML
+    @FXML
     private AnchorPane gameMainMenuRoot;
     @FXML
     private Button replayGameButton;
     @FXML
     private Button returnToMainButton;
+
     /**
-     * Handles the action event triggered by clicking the "Return to main menu" button.
-     * Closes all windows except the main menu and brings back to the main menu.
+     * Handles the action event triggered by clicking the "Return to main menu"
+     * button. Closes all windows except the main menu and brings back to the main
+     * menu.
      * 
-     * @param event The action event triggered by clicking the "Return to main menu" button.
-     * @throws IOException If an I/O exception occurs while going back to the main menu.
+     * @param event The action event triggered by clicking the "Return to main menu"
+     *              button.
+     * @throws IOException If an I/O exception occurs while going back to the main
+     *                     menu.
      */
     @Override
-	public void back(final ActionEvent event) throws IOException {
+    public void back(final ActionEvent event) throws IOException {
         closeAllWindows();
         final StageChangeController stageChanger = new StageChangeController();
         stageChanger.mainMenu(event);
     }
+
     /**
-     * Handles the action event triggered by clicking the "Replay" button.
-     * Closes the current window, closes all other windows, and opens a new game window.
+     * Handles the action event triggered by clicking the "Replay" button. Closes
+     * the current window, closes all other windows, and opens a new game window.
      * 
      * @param event The action event triggered by clicking the "Replay" button.
      * @throws IOException If an I/O exception occurs while loading the game window.
@@ -57,6 +64,7 @@ public class MenuController implements GameControllerInterface {
         newGameStage.show();
 
     }
+
     /**
      * Closes all windows except the main menu window.
      */
