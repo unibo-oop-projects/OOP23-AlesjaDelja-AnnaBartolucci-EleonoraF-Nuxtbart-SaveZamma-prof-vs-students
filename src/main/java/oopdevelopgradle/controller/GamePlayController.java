@@ -27,7 +27,7 @@ import javafx.stage.Stage;
  * The class GamePlayController controls the game logic, manages the game state, 
  * and communicates between the model and view components of the game.
  */
-public class GamePlayController implements GamePlayControllerInterface {
+public final class GamePlayController implements GamePlayControllerInterface {
 	private boolean gameStatus;
 	/**
 	 * Game status when the player wins.

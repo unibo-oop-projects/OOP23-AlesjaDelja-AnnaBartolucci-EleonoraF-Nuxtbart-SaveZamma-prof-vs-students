@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * in the application. Implements StageChangeControllerInterface
  * and provides the methods to change scene and to reach the main menù.
  */
-public class StageChangeController implements StageChangeControllerInterface {
+public final class StageChangeController implements StageChangeControllerInterface {
 	@Override
 	public void changeScene(final ActionEvent e, final String nameScene) throws IOException {
 		final Stage stage;

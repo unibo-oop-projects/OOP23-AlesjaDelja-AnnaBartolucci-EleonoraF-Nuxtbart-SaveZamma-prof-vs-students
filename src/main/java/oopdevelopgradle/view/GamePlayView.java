@@ -31,7 +31,7 @@ import javafx.stage.Stage;
  * This class implements the methods of its interface in order to manage
  * the view of the game play.
  */
-public class GamePlayView implements GamePlayViewInterface {
+public final class GamePlayView implements GamePlayViewInterface {
 	@FXML
     private AnchorPane gamePlayRoot;
     @FXML

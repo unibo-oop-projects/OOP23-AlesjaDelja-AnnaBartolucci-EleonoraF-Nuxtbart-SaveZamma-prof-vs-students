@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * with the main menu' of the application. This class implements the methods to start a new game,
  * to exit the application and to read the rules of the game.
  */
-public class MainMenuController implements MainMenuControllerInterface {
+public final class MainMenuController implements MainMenuControllerInterface {
     private static final String GAME_PATH = "/GameView.fxml";
     private static final String GAME_HELP_PATH = "/HelpGameView.fxml";
     private static final String EXIT_TITLE = "Exit";

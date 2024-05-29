@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
  * This class implements the GameControllerInterface. HelpGameController implements
  * the functions in order to display the game's rules.
  */
-public class HelpGameController implements GameControllerInterface { 
+public final class HelpGameController implements GameControllerInterface { 
     @FXML
     private Label helpLabel;
     private final String testLabel = "Prof vs. Students is a strategy and defense game where the player "
