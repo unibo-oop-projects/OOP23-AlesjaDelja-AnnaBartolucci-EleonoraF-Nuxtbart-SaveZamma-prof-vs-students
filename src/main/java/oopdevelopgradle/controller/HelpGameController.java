@@ -5,13 +5,14 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
+/**
+ * This class implements the GameControllerInterface. HelpGameController implements
+ * the functions in order to display the game's rules.
+ */
 public class HelpGameController implements GameControllerInterface { 
-
     @FXML
-    private Label helpLabel; 
-    
-    private String testLabel = "Prof vs. Students is a strategy and defense game where the player "
+    private Label helpLabel;
+    private final String testLabel = "Prof vs. Students is a strategy and defense game where the player "
     		+ "must protect their house from waves of students using a variety of profs with special abilities.\r\n"
     		+ "Players can plant various types of profs each with unique defensive functions such as shooting direct "
     		+ "and diagonal projectiles . \r\n"
@@ -32,13 +33,16 @@ public class HelpGameController implements GameControllerInterface {
     		+ "    Tutor-> Health 50 - Damage 25 - Energy 10 - Shoots direct projeciles\r\n"
     		+ "    Normal-> Health 100 - Damage 50 - Energy 20 - Shoots direct projeciles\r\n"
     		+ "    Rector-> Health 150 - Damage 50 - Energy 30 - Shoots diagonal projectiles";
-	
+	/**
+	 * Function that displays the rules of the game.
+	 * @throws IOException
+	 */
     public void initialize() throws IOException {
 		helpLabel.setText(testLabel);
     }
     @Override
     public void back(final ActionEvent e) throws IOException {
-        StageChangeController stageChanger = new StageChangeController();
+        final StageChangeController stageChanger = new StageChangeController();
         stageChanger.mainMenu(e);
     }
 }

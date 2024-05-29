@@ -6,7 +6,11 @@ import oopdevelopgradle.model.Bullet;
 import oopdevelopgradle.model.Professor;
 import oopdevelopgradle.model.Student;
 import oopdevelopgradle.controller.GamePlayController;
-
+/**
+ * The Interface GamePlayViewInterface represents the view in the game.
+ * It provides methods to update the positions of game elements, to interact with 
+ * the game controller and also manages the state of the view.
+ */
 public interface GamePlayViewInterface {
 	/**
 	 * Sets the controller associated with this view.

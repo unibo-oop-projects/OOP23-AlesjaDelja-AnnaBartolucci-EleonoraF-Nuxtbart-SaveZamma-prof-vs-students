@@ -1,7 +1,10 @@
 package oopdevelopgradle.view;
 
 import oopdevelopgradle.model.Elements;
-
+/**
+ * The Interface ElementViewInterface provides the methods to display and remove
+ * the elements from the view of the game play.
+ */
 public interface ElementViewInterface {
 
     /**

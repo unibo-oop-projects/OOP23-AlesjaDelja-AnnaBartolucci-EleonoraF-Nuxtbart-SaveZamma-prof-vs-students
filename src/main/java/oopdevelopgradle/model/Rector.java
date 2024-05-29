@@ -1,14 +1,27 @@
 package oopdevelopgradle.model;
-
+/**
+ * The class Rector defines the properties of a rector in the game.
+ */
 public class Rector extends Professor {
 	private final Elements<Integer, Integer> currentPosition;
-	public static final int RECTOR_HIT_DAMAGE = 50; 
+	/**
+	 * The initial DAMAGE of the rector.
+	 */
+	public static final int RECTOR_HIT_DAMAGE = 50;
+	/**
+	 * The initial ENERGY of the rector.
+	 */
 	public static final int RECTOR_BUY_ENERGY = 30;
+	/**
+	 * The initial HEALTH POINTS of the rector.
+	 */
 	public static final int RECTOR_HEALTHPOINTS = 150;
+	/**
+	 * The ID of the rector.
+	 */
+	public static final int RECTOR_NAME = 3;
 	public Bullet rectorBullet;
 	private int bulletSpeed = 1;
-	private String pathImgR;
-	public static final int RECTOR_NAME = 3;
 	/**
      * Constructor for creating a Rector object.
      *

@@ -6,7 +6,6 @@ package oopdevelopgradle.model;
  * @param <X> The type of the first element.
  * @param <Y> The type of the second element.
  */
-
 public interface ElementsInterface<X, Y> {
 	/**
      * Returns the first element of the pair.

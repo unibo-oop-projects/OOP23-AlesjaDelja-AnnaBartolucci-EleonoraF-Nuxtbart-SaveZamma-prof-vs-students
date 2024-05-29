@@ -1,8 +1,11 @@
 package oopdevelopgradle.model;
 
-
 import java.util.Objects;
-
+/**
+ * A class representing a pair of elements.
+ * @param <X> type of the first element.
+ * @param <Y> type of the second element.
+ */
 public class Elements<X, Y> implements ElementsInterface<X, Y> {
 	 private final X x;
 	 private final Y y;
@@ -67,7 +70,7 @@ public class Elements<X, Y> implements ElementsInterface<X, Y> {
 			if (getClass() != obj.getClass()) {
 				return false;
 			}
-			Elements other = (Elements) obj;
+			final Elements other = (Elements) obj;
 			if (x == null) {
 				if (other.x != null) {
 					return false;

@@ -1,9 +1,7 @@
 package oopdevelopgradle.view;
 
 import java.util.List;
-
 import java.util.Iterator;
-
 import oopdevelopgradle.model.Bullet;
 import oopdevelopgradle.model.GamePlayModel;
 import oopdevelopgradle.model.NormalProfessor;
@@ -12,7 +10,6 @@ import oopdevelopgradle.model.Rector;
 import oopdevelopgradle.model.Student;
 import oopdevelopgradle.model.Tutor;
 import oopdevelopgradle.controller.GamePlayController;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
@@ -28,8 +25,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-
-
+/**
+ * The class GamePlayView implements the interface GamePlayViewInterface. 
+ * This class implements the methods of its interface in order to manage
+ * the view of the game play.
+ */
 public class GamePlayView implements GamePlayViewInterface {
 	@FXML
     private AnchorPane gamePlayRoot;
@@ -255,8 +255,8 @@ public class GamePlayView implements GamePlayViewInterface {
         final Integer columnIndex = GridPane.getColumnIndex((Region) event.getSource());
         final Integer rowIndex = GridPane.getRowIndex((Region) event.getSource());
         System.out.println("Clicked at column " + columnIndex + " and row " + rowIndex);
-	    if (profChoosen != -1) {
-	    	if (columnIndex != null && rowIndex != null && !isProfInCell(columnIndex, rowIndex) 
+	    	if (profChoosen != -1 && columnIndex != null && rowIndex != null 
+	    			&& !isProfInCell(columnIndex, rowIndex) 
 	    			&& !isStudentInCell(columnIndex, rowIndex)) {
 	    		setFirstProfPicked(true);
 	    		switch (profChoosen) {
@@ -298,7 +298,6 @@ public class GamePlayView implements GamePlayViewInterface {
 	    		        System.out.println("Il numero non è né 1, né 2, né 3");
 	    		        break;
 	    		 }
-	    	}
 	    }
     }
     /**
@@ -356,13 +355,12 @@ public class GamePlayView implements GamePlayViewInterface {
      * @return True if a professor is present in the cell, false otherwise.
      */
 	private boolean isProfInCell(final int columnIndex, final int rowIndex) {
-		return (rectorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex 
+		return rectorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex 
 				&& p.getPositionProf().getY() == rowIndex)
 				&& tutorInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex 
 				&& p.getPositionProf().getY() == rowIndex)
 				&& normalProfInGrid.stream().anyMatch(p -> p.getPositionProf().getX() == columnIndex 
-				&& p.getPositionProf().getY() == rowIndex)
-				);
+				&& p.getPositionProf().getY() == rowIndex);
 	}
 
 	/**

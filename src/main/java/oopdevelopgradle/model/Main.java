@@ -2,10 +2,15 @@ package oopdevelopgradle.model;
 
 
 import javafx.application.Application;
-
-public class Main {
+/**
+ * The Main class launches the application.
+ */
+class Main {
+	/**
+	 * This methods launches the JavaFX application by invoking the Application.launch.
+	 * @param args commend line arguments passed
+	 */
 	public static void main(final String[] args) {
 		Application.launch(MainMenuImp.class, args);
 		}
-
 }

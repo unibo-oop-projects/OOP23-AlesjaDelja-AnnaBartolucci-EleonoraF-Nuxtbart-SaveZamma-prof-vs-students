@@ -1,7 +1,9 @@
 package oopdevelopgradle.model;
 
 import java.util.Random;
-
+/**
+ * The class Student defines the features of a student in the game.
+ */
 public class Student extends AbstractGameElement {
 	private int health; // The health points of the student.
     private int energy; // The energy level of the student.
@@ -10,6 +12,9 @@ public class Student extends AbstractGameElement {
     private static final int DEFAULT_ENERGY = 10; // The default energy level of the student.
     private static final int DEFAULT_ROW = 5; // The default row position of the student.
     private static final int DEFAULT_COL = 8; // The default column position of the student.
+    /**
+     * Constructor for creating a Student object.
+     */
     public Student() {
     	super(DEFAULT_DAMAGE, null);
         this.health = DEFAULT_HEALTH;

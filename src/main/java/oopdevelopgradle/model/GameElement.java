@@ -1,11 +1,14 @@
 package oopdevelopgradle.model;
-
+/**
+ * The interface GameElement provides methods to interact 
+ * with the game elements during a match.
+ */
 public interface GameElement {
 	/**
-	 *  Gets the position of an element.
-	 * @return position
+	 * *  Gets the position of an element.
+	 * * @return position
 	 */
-    Elements<Integer, Integer> getPosition();
+	Elements<Integer, Integer> getPosition();
     /**
      * Sets the position of an element.
      * @param position

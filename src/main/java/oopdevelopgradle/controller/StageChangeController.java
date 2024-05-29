@@ -7,18 +7,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-/*
- * StageChangeController gestisce il passaggio da una schermata ad un altra
- * all'interno dell'applicazione. Implementa l'interfaccia StageChangeControllerInterface
- * e fornisce i metodi per cambiare la schermata corrente ed arrivare al main menù.
+/**
+ * StageChangeController handle the changing from a scene to another
+ * in the application. Implements StageChangeControllerInterface
+ * and provides the methods to change scene and to reach the main menù.
  */
 public class StageChangeController implements StageChangeControllerInterface {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    @Override
-    public void changeScene(final ActionEvent e, final String nameScene) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(nameScene));
+	@Override
+	public void changeScene(final ActionEvent e, final String nameScene) throws IOException {
+		final Stage stage;
+    	final Scene scene;
+    	final Parent root;
+    	root = FXMLLoader.load(getClass().getResource(nameScene));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

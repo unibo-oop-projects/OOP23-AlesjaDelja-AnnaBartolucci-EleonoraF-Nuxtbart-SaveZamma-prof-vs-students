@@ -15,7 +15,16 @@ class GamePlayModelTest {
 	private final GamePlayModel gameModel = new GamePlayModel();
 	private static final int INIT = 0;
 	private static final int INIT_ENERGY = 100;
-	
+	private static final int INIT_TIME = 100;
+	private static final int TIME1 = 150;
+	private static final int TIME2 = 80;
+	private static final int ENERGY1 = 150;
+	private static final int ENERGY2 = 80;
+	private static final int INCREASE1 = 50;
+	private static final int DECREASE1 = 70;
+	private static final int DECREASE2 = 100;
+	private static final int NUM_STUD = 5;
+	private static final int NEW_NUM_STUD = 6;
 	@Test
     void testInitialValues() {
         assertEquals(INIT, gameModel.getScoreMacth());
@@ -34,33 +43,33 @@ class GamePlayModelTest {
     void testDecreaseANDIncreaseEnergy() {
 		gameModel.setEnergy(INIT_ENERGY);
         assertEquals(INIT_ENERGY, gameModel.getEnergy());
-        gameModel.increaseEnergy(50);
-        assertEquals(150, gameModel.getEnergy());
-        assertTrue(gameModel.decreaseEnergy(70));
-        assertEquals(80, gameModel.getEnergy());
-        assertFalse(gameModel.decreaseEnergy(100)); // Trying to decrease more energy than available
-        assertEquals(80, gameModel.getEnergy()); // Energy should remain unchanged
+        gameModel.increaseEnergy(INCREASE1);
+        assertEquals(ENERGY1, gameModel.getEnergy());
+        assertTrue(gameModel.decreaseEnergy(DECREASE1));
+        assertEquals(ENERGY2, gameModel.getEnergy());
+        assertFalse(gameModel.decreaseEnergy(DECREASE2)); // Trying to decrease more energy than available
+        assertEquals(ENERGY2, gameModel.getEnergy()); // Energy should remain unchanged
     }
 	
 	@Test
     void testDecreaseANDIncreaseTimeTot() {
-		gameModel.setTimeTot(100);
-        assertEquals(100, gameModel.getTimeTot());
-        gameModel.increaseTimeTot(50);
-        assertEquals(150, gameModel.getTimeTot());
-        assertTrue(gameModel.decreaseTimeTot(70));
-        assertEquals(80, gameModel.getTimeTot());
-        assertFalse(gameModel.decreaseTimeTot(100)); // Trying to decrease more time than available
-        assertEquals(80, gameModel.getTimeTot()); // Time should remain unchanged
+		gameModel.setTimeTot(INIT_TIME);
+        assertEquals(INIT_TIME, gameModel.getTimeTot());
+        gameModel.increaseTimeTot(INCREASE1);
+        assertEquals(TIME1, gameModel.getTimeTot());
+        assertTrue(gameModel.decreaseTimeTot(DECREASE1));
+        assertEquals(TIME2, gameModel.getTimeTot());
+        assertFalse(gameModel.decreaseTimeTot(DECREASE2)); // Trying to decrease more time than available
+        assertEquals(TIME2, gameModel.getTimeTot()); // Time should remain unchanged
     }
 	
 	 @Test
 	 void testGenerateWaveAndStudents() {
-		 gameModel.generateWave(5);
+		 gameModel.generateWave(NUM_STUD);
 	        final List<Student> students = gameModel.getStudentList();
-	        assertEquals(5, students.size());
+	        assertEquals(NUM_STUD, students.size());
 	        gameModel.generateNewStudent();
-	        assertEquals(6, students.size());
+	        assertEquals(NEW_NUM_STUD, students.size());
 	    }
 	 @Test
 	 void testGenerateTutor() {

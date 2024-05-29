@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-
 import oopdevelopgradle.model.Bullet;
 import oopdevelopgradle.model.Elements;
 import oopdevelopgradle.model.GamePlayModel;
@@ -22,7 +21,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
+/**
+ * The class GamePlayController controls the game logic, manages the game state, 
+ * and communicates between the model and view components of the game.
+ */
 public class GamePlayController implements GamePlayControllerInterface {
 	private static GamePlayController instance;
 	public boolean gameStatus;
@@ -31,11 +33,12 @@ public class GamePlayController implements GamePlayControllerInterface {
 	public static final int TIME_TO_SHOOT = 4;
 	public static final int ENERGY_INIT = 20;
 	public static final int TEMPO_TOT_INIT = 60;
+	private static final int SLEEP_1 = 10_000;
+	private static final int SLEEP_2 = 6000;
 	private int numStudOndata;
 	private static GamePlayModel gameModel;
 	private GamePlayView gamePlayView;
 	private Score scoreMatch;
-	private boolean firstProfPicked;
 	private List<Bullet> bulletNormalList = new ArrayList<>();
 	private List<Bullet> bulletDiagonalList = new ArrayList<>();
 	private List<Tutor> tutorInGame = new ArrayList<>(); 
@@ -43,7 +46,12 @@ public class GamePlayController implements GamePlayControllerInterface {
 	private List<Rector> rectorInGame = new ArrayList<>(); 
 	private List<Student> studInGame = new ArrayList<>();
 	private final List<List<? extends Professor>> allProfessors = new ArrayList<>();
-	
+	/**
+	 * Function that create a list of lists of all types of professors in the game.
+	 * @param tutorInGame list of tutors in game
+	 * @param normalPInGame list of normal professors in game
+	 * @param rectorInGame list of rectors in game
+	 */
 	public void addAllLists(final List<Tutor> tutorInGame, final List<NormalProfessor> normalPInGame, 
 			final List<Rector> rectorInGame) {
 		allProfessors.clear();
@@ -98,11 +106,9 @@ public class GamePlayController implements GamePlayControllerInterface {
 	    while (studentIterator.hasNext()) {
 	        final Student student = studentIterator.next();
 	        if (student.getHealthStudent() > 0) {
-	        	if (!collisionProfAndStudent(student, allProfessors)) {
-		            if (student.getPosition().getX() > 0) {
+	        	if (!collisionProfAndStudent(student, allProfessors) && student.getPosition().getX() > 0) {
 		            	student.setPosition(new Elements<Integer, Integer>(student.getPosition().getX() - 1,
 		            			student.getPosition().getY()));
-		            }
 	        	}
 	            if (student.getPosition().getX() == 0) {
 	            	if (collisionProfAndStudent(student, allProfessors)) {
@@ -141,8 +147,8 @@ public class GamePlayController implements GamePlayControllerInterface {
 		                prof.setAttacked(false);
 		                professorsToRemove.add(prof);
 		                profIterator.remove();
-	    	  		} else if (!collisionProfAndStudents(studInGame, prof)) {
-	    	  			if (gameModel.getTimeTot() % TIME_TO_SHOOT == 0 && !prof.isAttacked()) {
+	    	  		} else if (!collisionProfAndStudents(studInGame, prof) 
+	    	  				&& gameModel.getTimeTot() % TIME_TO_SHOOT == 0 && !prof.isAttacked()) {
 	    	  				if (prof instanceof Tutor) {
 	    	  					final Tutor curr = (Tutor) prof;
 	    	  					bulletNormalList.add(new Bullet(curr.getBulletSpeed(), 
@@ -159,13 +165,13 @@ public class GamePlayController implements GamePlayControllerInterface {
 	    	  							curr.getDamageProf(), curr.getPositionProf()));
 	    	  					gameModel.setBulletListDiagonal(bulletDiagonalList);
 	    	  				}
-	    	  			}
 		  			}
 			   }
 		   }
 	   }
 	   for (final List<? extends Professor> professorList : allProfessors) {
-		   professorsToRemove.forEach(bullet -> { removeProfessorView(bullet); }); 
+		   professorsToRemove.forEach(bullet -> {
+			   removeProfessorView(bullet); }); 
 		   professorList.removeIf(professorsToRemove::contains);
  		}
    }
@@ -231,7 +237,7 @@ public class GamePlayController implements GamePlayControllerInterface {
 				}).start();
 		    new Thread(() -> {
 				while (gameStatus) {
-					sleep(6000);
+					sleep(SLEEP_2);
 	                synchronizeLists(() -> {
 	                    gamePlayView.updatePositions(studInGame, allProfessors, bulletNormalList, bulletDiagonalList);
 	                    moveStudents();
@@ -242,7 +248,7 @@ public class GamePlayController implements GamePlayControllerInterface {
 		    new Thread(() -> {
 		    	while (gameStatus) {
 			    	try {
-				    	sleep(10_000);
+				    	sleep(SLEEP_1);
 						initGamePlay();
 					} catch (IOException e) {
 						e.printStackTrace();

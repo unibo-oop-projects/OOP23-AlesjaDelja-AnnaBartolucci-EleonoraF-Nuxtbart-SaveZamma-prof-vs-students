@@ -2,9 +2,9 @@ package oopdevelopgradle.controller;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
-/*
- * L'interfaccia MainMenuControllerInterface definisce i metodi per
- * gestire le interazioni con il main menù del gioco.
+/**
+ * THe interface MainMenuControllerInterface defines the methods to handle
+ * the interaction with the main menu' of the application.
  */
 public interface MainMenuControllerInterface {
 

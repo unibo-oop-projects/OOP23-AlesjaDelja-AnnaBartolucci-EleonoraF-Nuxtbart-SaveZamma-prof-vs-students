@@ -8,7 +8,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-
+/**
+ * This class implements the methods of the main menu'.
+ */
 public class MainMenuImp extends Application implements MainMenu {
 	private static final String MAIN_MENU_PATH = "/MainMenuView.fxml";
 	private static final String EXIT_TITLE = "Exit";

@@ -1,12 +1,14 @@
 package oopdevelopgradle.model;
 
 import java.util.Random;
-
+/**
+ * The class Bullet implements the methods to interact with
+ * a bullet during the game.
+ */
 public final class Bullet extends AbstractGameElement {
 	private Elements<Integer, Integer> currentPosition;
     private final int bulletSpeed;
     private final int bulletDamage;
-
     /**
      * Constructor for BulletEntity.
      * 
@@ -24,6 +26,7 @@ public final class Bullet extends AbstractGameElement {
 	 * Gets the position of the Bullets.
 	 * @return the current position of the Bullets
 	 */
+    @Override
     public Elements<Integer, Integer> getPosition() {
         return currentPosition;
     }
@@ -56,8 +59,8 @@ public final class Bullet extends AbstractGameElement {
      */
     public void shootDiagonal() {
         // Calcola la nuova posizione del proiettile in diagonale
-        Random random = new Random();
-        int direction = random.nextInt(2); // Genera un numero casuale: 0 o 1
+        final Random random = new Random();
+        final int direction = random.nextInt(2); // Genera un numero casuale: 0 o 1
         int newBulletX = currentPosition.getX(); // Inizializziamo con la posizione corrente
         int newBulletY = currentPosition.getY(); // Inizializziamo con la posizione corrente
         // Verifica la direzione e aggiorna le coordinate di conseguenza

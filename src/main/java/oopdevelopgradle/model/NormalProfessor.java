@@ -1,13 +1,27 @@
 package oopdevelopgradle.model;
-
+/**
+ * The class NormalProfessor defines the properties of a normal 
+ * professor in the game.
+ */
 public class NormalProfessor extends Professor {
-	public static final int NORMALPROF_HIT_DAMAGE = 50; 
+	/**
+	 * The initial DAMAGE of the normal professor.
+	 */
+	public static final int NORMALPROF_HIT_DAMAGE = 50;
+	/**
+	 * The initial ENERGY of the normal professor.
+	 */
 	public static final int NORMALPROF_BUY_ENERGY = 20;
+	/**
+	 * The initial HEALTH POINTS of the normal professor.
+	 */
 	public static final int NORMALPROF_HEALTHPOINTS = 100;
+	/**
+	 * The ID of the normal professor.
+	 */
 	public static final int NORMAL_PROF_NAME = 2;
 	public Bullet normalProfBullet;
 	private int bulletSpeed = 1;
-	
 	/**
 	 * Constructor for creating a NormalProfessor object.
 	 *
@@ -19,7 +33,6 @@ public class NormalProfessor extends Professor {
 				new Elements<Integer, Integer>(col, row), NORMALPROF_BUY_ENERGY);
 		normalProfBullet = new Bullet(bulletSpeed, NORMALPROF_HIT_DAMAGE, new Elements<Integer, Integer>(col, row));
 	}
-
 	/**
      * Gets the bullet used by the NormalProfessor.
      *
@@ -28,7 +41,6 @@ public class NormalProfessor extends Professor {
 	public Bullet getNormalProfBullet() {
 		return normalProfBullet;
 	}
-
 	/**
      * Sets the bullet used by the NormalProfessor.
      *
@@ -37,7 +49,6 @@ public class NormalProfessor extends Professor {
 	public void setNormalProfBullet(final Bullet normalProfBullet) {
 		this.normalProfBullet = normalProfBullet;
 	}
-
 	/**
      * Gets the speed of the bullet used by the NormalProfessor.
      *
@@ -46,7 +57,6 @@ public class NormalProfessor extends Professor {
 	public int getBulletSpeed() {
 		return bulletSpeed;
 	}
-
 	/**
      * Sets the speed of the bullet used by the NormalProfessor.
      *

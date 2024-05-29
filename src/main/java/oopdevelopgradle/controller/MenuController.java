@@ -13,7 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
+/**
+ * This class implements the GameControllerInterface. It handles the changing scene from
+ * the game play to returning back to the main menu' or replay another match.
+ */
 public class MenuController implements GameControllerInterface {
 	@FXML
     private AnchorPane gameMainMenuRoot;
@@ -39,7 +42,7 @@ public class MenuController implements GameControllerInterface {
     @Override
 	public void back(final ActionEvent event) throws IOException {
         closeAllWindows();
-        StageChangeController stageChanger = new StageChangeController();
+        final StageChangeController stageChanger = new StageChangeController();
         stageChanger.mainMenu(event);
     }
     /**
@@ -51,13 +54,13 @@ public class MenuController implements GameControllerInterface {
      */
     @FXML
     void replay(final ActionEvent event) throws IOException {
-        Stage menuScene = (Stage) replayGameButton.getScene().getWindow();
+        final Stage menuScene = (Stage) replayGameButton.getScene().getWindow();
         menuScene.close();
         closeAllWindows();
-        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/GameView.fxml"));
-        AnchorPane game = gameLoader.load();
-        Scene gameScene = new Scene(game);
-        Stage newGameStage = new Stage();
+        final FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/GameView.fxml"));
+        final AnchorPane game = gameLoader.load();
+        final Scene gameScene = new Scene(game);
+        final Stage newGameStage = new Stage();
         newGameStage.setScene(gameScene);
         newGameStage.show();
 
@@ -66,11 +69,11 @@ public class MenuController implements GameControllerInterface {
      * Closes all windows except the main menu window.
      */
     private void closeAllWindows() {
-        ObservableList<Window> windows = Window.getWindows();
-        List<Window> windowsCopy = new ArrayList<>(windows);
-        for (Window window : windowsCopy) {
+        final ObservableList<Window> windows = Window.getWindows();
+        final List<Window> windowsCopy = new ArrayList<>(windows);
+        for (final Window window : windowsCopy) {
             if (window instanceof Stage) {
-                Stage stage = (Stage) window;
+                final Stage stage = (Stage) window;
                 if (!"MainMenu".equals(stage.getTitle())) {
                     stage.close();
                 }

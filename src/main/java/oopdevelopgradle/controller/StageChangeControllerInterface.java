@@ -2,7 +2,9 @@ package oopdevelopgradle.controller;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
-
+/**
+ * This interface provides methods to change scene in the application.
+ */
 public interface StageChangeControllerInterface {
 
     /**

@@ -11,14 +11,22 @@ import org.junit.jupiter.api.Test;
  * Test class for the {@link Professor} class.
  */
 class ProfessorTest {
-
     private Professor professor;
+    private static final int DAMAGE = 20;
+    private static final int HEALTH_POINT = 100;
+    private static final int ENERGY = 50;
+    private static final int X = 1;
+    private static final int Y = 1;
+    private static final int NEW_HEALTH_POINT = 80;
+    private static final int NEW_ENERGY = 60;
+    private static final int NEW_DAMAGE = 30;
+    private static final int DAMAGE_RECEIVED = 10;
     /**
      * Sets up a new instance of {@link Professor} before each test method.
      */
     @BeforeEach
     void setUp() {
-        professor = new Professor(20, 100, new Elements<>(1, 1), 50);
+        professor = new Professor(DAMAGE, HEALTH_POINT, new Elements<>(X, Y), ENERGY);
     }
 
     /**
@@ -46,7 +54,7 @@ class ProfessorTest {
      */
     @Test
     void testGetHealthPointsProf() {
-        assertEquals(100, professor.getHealthPointsProf());
+        assertEquals(HEALTH_POINT, professor.getHealthPointsProf());
     }
 
     /**
@@ -55,9 +63,8 @@ class ProfessorTest {
      */
     @Test
     void testSetHealthPointsProf() {
-        final int newHealthPoints = 80;
-        professor.setHealthPointsProf(newHealthPoints);
-        assertEquals(newHealthPoints, professor.getHealthPointsProf());
+        professor.setHealthPointsProf(NEW_HEALTH_POINT);
+        assertEquals(NEW_HEALTH_POINT, professor.getHealthPointsProf());
     }
 
     /**
@@ -66,7 +73,7 @@ class ProfessorTest {
      */
     @Test
     void testGetEnergyProfessor() {
-        assertEquals(50, professor.getEnergyProfessor());
+        assertEquals(ENERGY, professor.getEnergyProfessor());
     }
 
     /**
@@ -75,9 +82,8 @@ class ProfessorTest {
      */
     @Test
     void testSetEnergyProfessor() {
-       final int newEnergy = 60;
-        professor.setEnergyProfessor(newEnergy);
-        assertEquals(newEnergy, professor.getEnergyProfessor());
+        professor.setEnergyProfessor(NEW_ENERGY);
+        assertEquals(NEW_ENERGY, professor.getEnergyProfessor());
     }
 
     /**
@@ -86,7 +92,7 @@ class ProfessorTest {
      */
     @Test
     void testGetDamageProf() {
-        assertEquals(20, professor.getDamageProf());
+        assertEquals(DAMAGE, professor.getDamageProf());
     }
 
     /**
@@ -95,9 +101,8 @@ class ProfessorTest {
      */
     @Test
     void testSetDamageProf() {
-        final int newDamage = 30;
-        professor.setDamageProf(newDamage);
-        assertEquals(newDamage, professor.getDamageProf());
+        professor.setDamageProf(NEW_DAMAGE);
+        assertEquals(NEW_DAMAGE, professor.getDamageProf());
     }
 
     /**
@@ -106,7 +111,7 @@ class ProfessorTest {
      */
     @Test
     void testGetPositionProf() {
-        assertEquals(new Elements<>(1, 1), professor.getPositionProf());
+        assertEquals(new Elements<>(X, Y), professor.getPositionProf());
     }
 
     /**
@@ -116,8 +121,7 @@ class ProfessorTest {
     @Test
     void testReceiveDamageProf() {
        final int initialHealth = professor.getHealthPointsProf();
-       final int damageReceived = 10;
-        professor.receiveDamageProf(damageReceived);
-        assertEquals(initialHealth - damageReceived, professor.getHealthPointsProf());
+        professor.receiveDamageProf(DAMAGE_RECEIVED);
+        assertEquals(initialHealth - DAMAGE_RECEIVED, professor.getHealthPointsProf());
     }
 }
