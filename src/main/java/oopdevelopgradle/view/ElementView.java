@@ -10,8 +10,26 @@ import javafx.scene.layout.GridPane;
  * the grid pane.
  */
 public class ElementView implements ElementViewInterface {
-    protected GridPane gridPane;
-    protected ImageView imageView;
+    private GridPane gridPane;
+    
+    /**
+     * Retrieves the {@link GridPane} associated with this element.
+     *
+     * @return the {@link GridPane} associated with this element
+     */
+    public GridPane getGridPane() {
+		return gridPane;
+	}
+    /**
+     * Sets the {@link GridPane} for this element.
+     *
+     * @param gridPane the {@link GridPane} to set
+     */
+	public void setGridPane(GridPane gridPane) {
+		this.gridPane = gridPane;
+	}
+
+	protected ImageView imageView;
     private static final int WIDTH = 100;
     private static final int HEIGHT = 50;
 
