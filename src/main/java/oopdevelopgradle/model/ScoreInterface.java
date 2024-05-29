@@ -1,5 +1,5 @@
 package oopdevelopgradle.model;
-/*
+/**
  * ScoreInterface is an interface for the score of the game.
  */
 public interface ScoreInterface {

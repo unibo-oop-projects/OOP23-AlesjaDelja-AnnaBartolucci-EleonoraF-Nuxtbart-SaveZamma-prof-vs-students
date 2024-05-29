@@ -28,13 +28,34 @@ import javafx.stage.Stage;
  * and communicates between the model and view components of the game.
  */
 public class GamePlayController implements GamePlayControllerInterface {
-	public boolean gameStatus;
+	private boolean gameStatus;
+	/**
+	 * Game status when the player wins.
+	 */
 	public static final String STATUS_VITTORIA = "Vittoria";
+	/**
+	 * Game status when the player looses.
+	 */
 	public static final String STATUS_SCONFITTA = "Sconfitta";
+	/**
+	 * Time between consecutive shots fired by the professors.
+	 */
 	public static final int TIME_TO_SHOOT = 4;
+	/**
+	 * Initial energy of the player.
+	 */
 	public static final int ENERGY_INIT = 20;
+	/**
+	 * Initial total time of the game.
+	 */
 	public static final int TEMPO_TOT_INIT = 60;
+	/**
+	 * Seconds of sleep of threads.
+	 */
 	private static final int SLEEP_1 = 10_000;
+	/**
+	 * Seconds of sleep of threads.
+	 */
 	private static final int SLEEP_2 = 6000;
 	private int numStudOndata;
 	private static GamePlayModel gameModel;
