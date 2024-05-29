@@ -3,7 +3,7 @@ package oopdevelopgradle.model;
  * The class Professor defines the properties of a professor in the game.
  */
 public class Professor extends AbstractGameElement {
-	private int energyProfessor; // The energy level of the professor.
+private int energyProfessor; // The energy level of the professor.
     private boolean isAttacked; // Indicates whether the professor is currently under attack.
     private int damage; // The damage inflicted by the professor.
     private final Elements<Integer, Integer> position; // The position of the professor on the game grid.

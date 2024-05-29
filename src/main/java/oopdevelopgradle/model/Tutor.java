@@ -3,7 +3,7 @@ package oopdevelopgradle.model;
  * The class Tutor defines the properties of a tutor in the game.
  */
 public class Tutor extends Professor {
-	/**
+/**
 	 * The initial DAMAGE of the tutor.
 	 */
 	public static final int TUTOR_HIT_DAMAGE = 25;

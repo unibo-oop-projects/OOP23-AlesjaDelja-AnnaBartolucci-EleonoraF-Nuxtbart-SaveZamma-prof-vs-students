@@ -3,7 +3,7 @@ package oopdevelopgradle.model;
  * The class Rector defines the properties of a rector in the game.
  */
 public class Rector extends Professor {
-	/**
+/**
 	 * The initial DAMAGE of the rector.
 	 */
 	public static final int RECTOR_HIT_DAMAGE = 50;

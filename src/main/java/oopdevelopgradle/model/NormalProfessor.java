@@ -4,7 +4,7 @@ package oopdevelopgradle.model;
  * professor in the game.
  */
 public class NormalProfessor extends Professor {
-	/**
+/**
 	 * The initial DAMAGE of the normal professor.
 	 */
 	public static final int NORMALPROF_HIT_DAMAGE = 50;

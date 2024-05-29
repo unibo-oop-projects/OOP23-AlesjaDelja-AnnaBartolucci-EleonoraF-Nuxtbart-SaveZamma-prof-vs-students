@@ -16,7 +16,7 @@ import oopdevelopgradle.controller.GamePlayController;
  * This class implements the methods of the main menu'.
  */
 public class MainMenuImp extends Application implements MainMenu {
-	private static final String MAIN_MENU_PATH = "/MainMenuView.fxml";
+private static final String MAIN_MENU_PATH = "/MainMenuView.fxml";
 	private static final String EXIT_TITLE = "Exit";
 	private static final String EXIT_HEADER = "You are going to exit the game!";
 	private static final String EXIT_CONTENT = "Are you sure?";
