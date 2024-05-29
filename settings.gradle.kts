@@ -14,4 +14,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "OOP_develop_gradle"
+rootProject.name = "oopdevelopgradle"

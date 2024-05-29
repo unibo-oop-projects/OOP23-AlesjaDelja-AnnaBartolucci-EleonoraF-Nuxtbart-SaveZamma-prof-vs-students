@@ -34,7 +34,7 @@
          </font>
       </Label> 
        
-      <ImageView fx:id="GameMenuLoaderButton" fitHeight="91.0" fitWidth="150.0" layoutX="2.0" layoutY="505.0" onMouseClicked="#GameMenu" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="GameMenuLoaderButton" fitHeight="91.0" fitWidth="150.0" layoutX="2.0" layoutY="505.0" onMouseClicked="#gameMenu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/img/gameMenuButton.png" />
          </image>
@@ -59,7 +59,7 @@
             <Image url="@/img/cardRector.png" />
          </image>
       </ImageView>
-      <GridPane fx:id="lawn_grid" layoutX="322.0" layoutY="83.0" prefHeight="489.0" prefWidth="694.0">
+      <GridPane fx:id="lawnGrid" layoutX="322.0" layoutY="83.0" prefHeight="489.0" prefWidth="694.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="87.0" minWidth="10.0" prefWidth="74.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="74.0" minWidth="10.0" prefWidth="73.0" />

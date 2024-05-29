@@ -84,7 +84,7 @@ tasks.withType<JavaExec> {
 }
 
 application {
-    mainClass.set("_OOP_develop_gradle.model.Main")
+    mainClass.set("oopdevelopgradle.model.Main")
 }
 
 tasks.jar {
@@ -94,7 +94,7 @@ tasks.jar {
     
     manifest {
         attributes(
-            "Main-Class" to "_OOP_develop_gradle.model.Main"
+            "Main-Class" to "oopdevelopgradle.model.Main"
         )
     }
 }
@@ -104,7 +104,7 @@ tasks.jar {
     archiveClassifier.set("")
     manifest {
         attributes(
-            "Main-Class" to "_OOP_develop_gradle.model.Main"
+            "Main-Class" to "oopdevelopgradle.model.Main"
         )
     }
     mergeServiceFiles()
