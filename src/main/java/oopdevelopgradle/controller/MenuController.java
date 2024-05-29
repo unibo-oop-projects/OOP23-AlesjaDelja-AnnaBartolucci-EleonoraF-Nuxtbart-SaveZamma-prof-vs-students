@@ -25,14 +25,6 @@ public class MenuController implements GameControllerInterface {
     @FXML
     private Button returnToMainButton;
     /**
-     * This method is called when the FXML file is loaded and ready for use.
-     * It sets the game status to false, indicating that the game is over now.
-     */
-    @FXML
-    public void initData() {
-    	GamePlayController.getInstance().setGameStatus(false);
-    }
-    /**
      * Handles the action event triggered by clicking the "Return to main menu" button.
      * Closes all windows except the main menu and brings back to the main menu.
      * 

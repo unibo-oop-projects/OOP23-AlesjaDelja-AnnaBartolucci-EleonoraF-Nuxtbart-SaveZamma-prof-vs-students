@@ -28,7 +28,6 @@ import javafx.stage.Stage;
  * and communicates between the model and view components of the game.
  */
 public class GamePlayController implements GamePlayControllerInterface {
-	private static GamePlayController instance;
 	public boolean gameStatus;
 	public static final String STATUS_VITTORIA = "Vittoria";
 	public static final String STATUS_SCONFITTA = "Sconfitta";
@@ -389,18 +388,6 @@ public class GamePlayController implements GamePlayControllerInterface {
 		        return;
 		    }
 	}
-	
-	/**
-	 * Retrieves the current instance of the GamePlayController, ensuring that only one instance is created.
-	 *
-	 * @return The current instance of the GamePlayController.
-	 */
-	public static GamePlayController getInstance() {
-        if (instance == null) {
-            instance = new GamePlayController();
-        }
-        return instance;
-    }
 	@Override
     public Score getScoreMatch() {
 		return scoreMatch;

@@ -320,7 +320,7 @@ public class GamePlayView implements GamePlayViewInterface {
     void gameMenu(final MouseEvent event) throws IOException {
     	gameController.setGameStatus(false);
     	timerStop = true;
-    	GamePlayController.getInstance().setGameStatus(false);
+    	gameController.setGameStatus(false);
         final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MenuView.fxml"));
         final Parent gameMenu = (Parent) fxmlLoader.load();
         final Stage stage = new Stage();
