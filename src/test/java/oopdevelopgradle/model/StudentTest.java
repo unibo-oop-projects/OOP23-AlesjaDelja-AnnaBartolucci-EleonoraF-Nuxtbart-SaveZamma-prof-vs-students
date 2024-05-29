@@ -35,7 +35,7 @@ class StudentTest {
         assertEquals(DEMAGE, student.getDamage());
         assertEquals(DEFAULT_HEALTH, student.getHealthStudent());
         assertEquals(DEFAULT_ENERGY, student.getEnergy());
-        student.generateRandomPosition();       
+        student.generateRandomPosition();
         final Elements<Integer, Integer> position = student.getPosition();
         assertTrue(position.getX() >= 0 && position.getX() < MAX_WI); //???
     }
