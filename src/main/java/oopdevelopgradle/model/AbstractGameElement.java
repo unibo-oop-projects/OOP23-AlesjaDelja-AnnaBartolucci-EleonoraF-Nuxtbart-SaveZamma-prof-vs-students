@@ -5,7 +5,13 @@ package oopdevelopgradle.model;
  * elements.
  */
 public abstract class AbstractGameElement implements GameElement {
+    /**
+     * used for the position of the element.
+     */
     protected Elements<Integer, Integer> position;
+    /**
+     * used for the damage of the element.
+     */
     protected int damage;
 
     /**
@@ -19,22 +25,30 @@ public abstract class AbstractGameElement implements GameElement {
         this.position = position;
         this.damage = damage;
     }
-
+    /**
+     * gets the position of an element.
+     */
     @Override
     public Elements<Integer, Integer> getPosition() {
         return position;
     }
-
+    /**
+     * sets the position of an element.
+     */
     @Override
     public void setPosition(final Elements<Integer, Integer> position) {
         this.position = position;
     }
-
+    /**
+     * gets the damage of an element.
+     */
     @Override
     public int getDamage() {
         return damage;
     }
-
+    /**
+     * sets the damage of an element.
+     */
     @Override
     public void setDamage(final int damage) {
         this.damage = damage;

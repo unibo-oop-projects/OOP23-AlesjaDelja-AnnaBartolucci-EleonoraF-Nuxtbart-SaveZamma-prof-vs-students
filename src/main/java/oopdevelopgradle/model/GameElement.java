@@ -6,7 +6,8 @@ package oopdevelopgradle.model;
  */
 public interface GameElement {
     /**
-     * * Gets the position of an element. * @return position
+     * * Gets the position of an element. 
+     * @return position
      */
     Elements<Integer, Integer> getPosition();
 
