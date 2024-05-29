@@ -3,7 +3,6 @@ package oopdevelopgradle.model;
  * The class Rector defines the properties of a rector in the game.
  */
 public class Rector extends Professor {
-	private final Elements<Integer, Integer> currentPosition;
 	/**
 	 * The initial DAMAGE of the rector.
 	 */
@@ -30,7 +29,7 @@ public class Rector extends Professor {
      */
 	public Rector(final int col, final int row) {
 		super(RECTOR_HIT_DAMAGE, RECTOR_HEALTHPOINTS, new Elements<Integer, Integer>(col, row), RECTOR_BUY_ENERGY);
-		this.currentPosition = new Elements<>(col, row);
+		final Elements<Integer, Integer> currentPosition = new Elements<>(col, row);
 		final int bulletCol = currentPosition.getX() + bulletSpeed;
 	    final int bulletRow = currentPosition.getY() + bulletSpeed;
 	    rectorBullet = new Bullet(bulletSpeed, RECTOR_HIT_DAMAGE, new Elements<>(bulletCol, bulletRow));
