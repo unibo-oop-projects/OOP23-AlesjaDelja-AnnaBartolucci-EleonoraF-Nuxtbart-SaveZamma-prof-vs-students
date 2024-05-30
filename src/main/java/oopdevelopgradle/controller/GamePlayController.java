@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import oopdevelopgradle.model.Bullet;
 import oopdevelopgradle.model.Elements;
 import oopdevelopgradle.model.GamePlayModel;
@@ -85,7 +86,9 @@ public final class GamePlayController implements GamePlayControllerInterface {
         allProfessors.add(normalPInGame);
         allProfessors.add(rectorInGame);
     }
-
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
+    //Justification = "this method is used in a controlled manner within 
+    //the game controller and game view.
     @Override
     public void initData(final GamePlayView gamePlayView) {
         numStudOndata = 1;
@@ -425,15 +428,15 @@ public final class GamePlayController implements GamePlayControllerInterface {
         }
     }
 
-    @Override
+    /*@Override
     public Score getScoreMatch() {
         return scoreMatch;
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void setScoreMatch(final Score scoreMatch) {
         this.scoreMatch = scoreMatch;
-    }
+    }*/
 
     @Override
     public boolean isGameStatus() {
@@ -445,10 +448,10 @@ public final class GamePlayController implements GamePlayControllerInterface {
         gameStatus = status;
     }
 
-    @Override
+    /*@Override
     public GamePlayView getGamePlayView() {
         return gamePlayView;
-    }
+    }*/
 
     /**
      * Retrieves the GamePlayModel associated with this controller.
@@ -459,14 +462,14 @@ public final class GamePlayController implements GamePlayControllerInterface {
         return gameModel;
     }
 
-    @Override
+    /*@Override
     public List<Student> getStudInGame() {
         return studInGame;
-    }
-
+    }*/
+/*
     @Override
     public void setStudInGame(final List<Student> studInGame) {
         this.studInGame = studInGame;
-    }
+    }*/
 
 }

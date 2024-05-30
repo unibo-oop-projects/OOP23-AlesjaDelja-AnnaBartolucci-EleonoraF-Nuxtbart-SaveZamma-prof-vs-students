@@ -2,7 +2,7 @@ package oopdevelopgradle.model;
 
 import java.util.List;
 import java.util.ArrayList;
-
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * Class representing the model for the game play.
  */
@@ -10,13 +10,13 @@ public class GamePlayModel implements GamePlayModelInterface {
     private int scoreMacth;
     private int energy;
     private int timeTot;
-    private List<Student> studentList;
-    private List<Tutor> tutorList;
-    private List<NormalProfessor> normalProfList;
-    private List<Rector> rectorList;
+    private final List<Student> studentList;
+    private final List<Tutor> tutorList;
+    private final List<NormalProfessor> normalProfList;
+    private final List<Rector> rectorList;
     private List<Bullet> bulletListNormal;
     private List<Bullet> bulletListDiagonal;
-
+    private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
     /**
      * Constructs of the GamePlayModel.
      */
@@ -55,6 +55,9 @@ public class GamePlayModel implements GamePlayModelInterface {
      * 
      * @return The list of normalProf bullets.
      */
+    @SuppressFBWarnings({ EI_EXPOSE_REP })
+     //Justification:this list is used to update bullet positions and handle collisions,
+     //copying the list every time would bring degrade performance.
     @Override
     public List<Bullet> getBulletListNormal() {
         return bulletListNormal;
@@ -65,6 +68,9 @@ public class GamePlayModel implements GamePlayModelInterface {
      * 
      * @param bulletListNormal The list of normalProf bullets.
      */
+    @SuppressFBWarnings({ "EI_EXPOSE_REP2" })
+     //Justification = "this list is updated in a controlled manner within the controller,
+     //copying the list every time would bring degrade performance.
     @Override
     public void setBulletListNormal(final List<Bullet> bulletListNormal) {
         this.bulletListNormal = bulletListNormal;
@@ -75,6 +81,9 @@ public class GamePlayModel implements GamePlayModelInterface {
      * 
      * @return The list of diagonal bullets.
      */
+    @SuppressFBWarnings({ EI_EXPOSE_REP })
+     //Justification:this list is used to update bullet positions and handle collisions,
+     //copying the list every time would bring degrade performance.
     @Override
     public List<Bullet> getBulletListDiagonal() {
         return bulletListDiagonal;
@@ -85,6 +94,9 @@ public class GamePlayModel implements GamePlayModelInterface {
      * 
      * @param bulletListDiagonal The list of diagonal bullets.
      */
+    @SuppressFBWarnings({ "EI_EXPOSE_REP2" }) 
+    //Justification:this list is updated in a controlled manner within the controller,
+    //copying the list every time would bring degrade performance.
     @Override
     public void setBulletListDiagonal(final List<Bullet> bulletListDiagonal) {
         this.bulletListDiagonal = bulletListDiagonal;
@@ -135,6 +147,9 @@ public class GamePlayModel implements GamePlayModelInterface {
      * 
      * @return The list of students.
      */
+    @SuppressFBWarnings({ EI_EXPOSE_REP })
+     //Justification:this list is used to iterate and update the students positions,
+     //Avoiding copying the list improves performance without compromising security.
     @Override
     public List<Student> getStudentList() {
         return this.studentList;
@@ -157,6 +172,9 @@ public class GamePlayModel implements GamePlayModelInterface {
      * 
      * @return The list of tutors.
      */
+    @SuppressFBWarnings({ EI_EXPOSE_REP })
+     //justification:this list is used to iterate and update tutor positions,
+     //copying the list every time would bring degrade performance.
     @Override
     public List<Tutor> getTutorList() {
         return tutorList;
@@ -167,16 +185,19 @@ public class GamePlayModel implements GamePlayModelInterface {
      * 
      * @param tutorList The list of tutors.
      */
-    @Override
+    /*@Override
     public void setTutorList(final List<Tutor> tutorList) {
         this.tutorList = tutorList;
-    }
+    }*/
 
     /**
      * Takes the list of normal professors.
      * 
      * @return The list of normal professors.
      */
+    @SuppressFBWarnings({ EI_EXPOSE_REP }) 
+     //Justification:this list is used to update and handle the prof positions,
+     //copying the list every time would bring unnecessary overhead and degrade performance.
     @Override
     public List<NormalProfessor> getNormalProfList() {
         return normalProfList;
@@ -187,16 +208,19 @@ public class GamePlayModel implements GamePlayModelInterface {
      * 
      * @param normalProfList The list of normal professors.
      */
-    @Override
+    /*@Override
     public void setNormalProfList(final List<NormalProfessor> normalProfList) {
         this.normalProfList = normalProfList;
-    }
+    }*/
 
     /**
      * Takes the list of rectors.
      * 
      * @return The list of rectors.
      */
+    @SuppressFBWarnings({ EI_EXPOSE_REP })
+     //Justification:this list is used to iterate and update rector positions,
+     //copying the list every time would bring degrade performance.
     @Override
     public List<Rector> getRectorList() {
         return rectorList;
@@ -207,20 +231,20 @@ public class GamePlayModel implements GamePlayModelInterface {
      * 
      * @param rectorList The list of rectors.
      */
-    @Override
+    /*@Override
     public void setRectorList(final List<Rector> rectorList) {
         this.rectorList = rectorList;
-    }
+    }*/
 
     /**
      * Sets the list of students.
      * 
      * @param studentList The list of students.
      */
-    @Override
-    public void setStudentList(final List<Student> studentList) {
+    //@Override
+    /*public void setStudentList(final List<Student> studentList) {
         this.studentList = studentList;
-    }
+    }*/
 
     /**
      * Generates a new tutor and adds it to the list.

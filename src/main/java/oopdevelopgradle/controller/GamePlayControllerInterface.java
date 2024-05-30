@@ -5,7 +5,6 @@ import java.util.List;
 
 import oopdevelopgradle.model.Bullet;
 import oopdevelopgradle.model.Professor;
-import oopdevelopgradle.model.Score;
 import oopdevelopgradle.model.Student;
 import oopdevelopgradle.view.GamePlayView;
 
@@ -125,14 +124,14 @@ public interface GamePlayControllerInterface {
      *
      * @return The score of the current match.
      */
-    Score getScoreMatch();
+    //Score getScoreMatch();
 
     /**
      * Sets the score of the current match.
      *
      * @param scoreMatch The score of the current match to be set.
      */
-    void setScoreMatch(Score scoreMatch);
+    //void setScoreMatch(Score scoreMatch);
 
     /**
      * Checks the status of the game.
@@ -153,19 +152,19 @@ public interface GamePlayControllerInterface {
      *
      * @return The GamePlayView associated with this controller.
      */
-    GamePlayView getGamePlayView();
+    //GamePlayView getGamePlayView();
 
     /**
      * Retrieves the list of students currently in the game.
      *
      * @return The list of students currently in the game.
      */
-    List<Student> getStudInGame();
+    //List<Student> getStudInGame();
 
     /**
      * Sets the list of students currently in the game.
      *
      * @param studInGame The list of students currently in the game to be set.
      */
-    void setStudInGame(List<Student> studInGame);
+    //void setStudInGame(List<Student> studInGame);
 }
