@@ -41,11 +41,11 @@ public class BulletView extends ElementView {
     @Override
     public void displayElement(final Elements<Integer, Integer> positionElement) {
         final Image image = new Image(getClass().getResourceAsStream(getImagePath()));
-        imageView = new ImageView(image);
+        setImageView(new ImageView(image));
         // Impostare le dimensioni che siano addatte a quello che serve
-        imageView.setFitWidth(WIDTH);
-        imageView.setFitHeight(HEIGHT);
+        getImageView().setFitWidth(WIDTH);
+        getImageView().setFitHeight(HEIGHT);
         // Sets the position of student
-        getGridPane().add(imageView, positionElement.getX(), positionElement.getY());
+        getGridPane().add(getImageView(), positionElement.getX(), positionElement.getY());
     }
 }

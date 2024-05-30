@@ -24,13 +24,13 @@ public class ElementView implements ElementViewInterface {
      *
      * @param gridPane the {@link GridPane} to set
      */
-	public void setGridPane(GridPane gridPane) {
+	public void setGridPane(final GridPane gridPane) {
 		this.gridPane = gridPane;
 	}
 	/**
      * The image view used in this class.
      */
-	protected ImageView imageView;
+	private ImageView imageView;
 	/**
      * The width of the element.
      */
@@ -48,16 +48,20 @@ public class ElementView implements ElementViewInterface {
     public ElementView(final GridPane gridPane) {
         this.gridPane = gridPane;
     }
-
+    /**
+     * Displays the element at the specified position on the grid pane.
+     *
+     * @param positionElement the element containing the position (x, y) where the image should be displayed
+     */
     @Override
     public void displayElement(final Elements<Integer, Integer> positionElement) {
         final Image image = new Image(getClass().getResourceAsStream(getImagePath()));
-        imageView = new ImageView(image);
+        setImageView(new ImageView(image));
         // Impostare le dimensioni che siano adatte a quello che serve
-        imageView.setFitWidth(WIDTH);
-        imageView.setFitHeight(HEIGHT);
+        getImageView().setFitWidth(WIDTH);
+        getImageView().setFitHeight(HEIGHT);
         // Imposta la posizione dell'elemento
-        gridPane.add(imageView, positionElement.getX(), positionElement.getY());
+        gridPane.add(getImageView(), positionElement.getX(), positionElement.getY());
     }
 
     /**
@@ -65,9 +69,9 @@ public class ElementView implements ElementViewInterface {
      */
     @Override
     public void removeElement() {
-        gridPane.getChildren().remove(imageView);
-        imageView.setImage(null); // Libera il riferimento all'immagine per consentire la pulizia della memoria
-        imageView = null; // Libera il riferimento all'imageView
+        gridPane.getChildren().remove(getImageView());
+        getImageView().setImage(null); // Libera il riferimento all'immagine per consentire la pulizia della memoria
+        setImageView(null); // Libera il riferimento all'imageView
     }
 
     /**
@@ -78,4 +82,20 @@ public class ElementView implements ElementViewInterface {
     protected String getImagePath() {
         return "";
     }
+    /**
+     * Returns the image view used in this class.
+     *
+     * @return the current image view
+     */
+	public ImageView getImageView() {
+		return imageView;
+	}
+	/**
+     * Sets the image view to be used in this class.
+     *
+     * @param imageView the new image view to set
+     */
+	public void setImageView(final ImageView imageView) {
+		this.imageView = imageView;
+	}
 }
