@@ -281,7 +281,7 @@ public final class GamePlayView implements GamePlayViewInterface {
             switch (profChoosen) {
             case 1:
                 final Tutor tutornew = new Tutor(columnIndex, rowIndex);
-                final Bullet tutorBullet = tutornew.tutorBullet;
+                final Bullet tutorBullet = tutornew.getTutorBullet();
                 if (tutornew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
                     gamePlayModel.getTutorList().add(tutornew);
                     tutorInGrid.add(tutornew);

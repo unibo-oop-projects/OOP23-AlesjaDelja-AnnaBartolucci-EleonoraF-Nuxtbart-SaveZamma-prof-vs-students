@@ -20,6 +20,9 @@ public class Tutor extends Professor {
      * The ID of the tutor.
      */
     public static final int TUTOR_NAME = 1;
+    /**
+     * The bullet object used by the tutor in this class.
+     */
     private Bullet tutorBullet;
     /**
      * the speed of the bullet

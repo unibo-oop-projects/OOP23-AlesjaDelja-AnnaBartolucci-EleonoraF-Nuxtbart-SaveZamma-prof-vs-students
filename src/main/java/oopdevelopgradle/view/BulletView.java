@@ -46,6 +46,6 @@ public class BulletView extends ElementView {
         imageView.setFitWidth(WIDTH);
         imageView.setFitHeight(HEIGHT);
         // Sets the position of student
-        gridPane.add(imageView, positionElement.getX(), positionElement.getY());
+        getGridPane().add(imageView, positionElement.getX(), positionElement.getY());
     }
 }
