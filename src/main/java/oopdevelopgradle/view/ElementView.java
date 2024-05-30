@@ -17,7 +17,7 @@ public class ElementView implements ElementViewInterface {
      * @return the {@link GridPane} associated with this element
      */
     public GridPane getGridPane() {
-		return gridPane;
+    	return gridPane;
 	}
     /**
      * Sets the {@link GridPane} for this element.
