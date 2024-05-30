@@ -10,7 +10,7 @@ import javafx.scene.layout.GridPane;
  * the grid pane.
  */
 public class ElementView implements ElementViewInterface {
-    private GridPane gridPane;
+    private final GridPane gridPane;
     /**
      * The image view used in this class.
      */
@@ -45,9 +45,9 @@ public class ElementView implements ElementViewInterface {
      *
      * @param gridPane the {@link GridPane} to set
      */
-     public void setGridPane(final GridPane gridPane) {
+     /*public void setGridPane(final GridPane gridPane) {
         this.gridPane = gridPane;
-     }
+     }*/
     /**
      * Displays the element at the specified position on the grid pane.
      *

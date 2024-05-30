@@ -53,10 +53,13 @@ public class MenuController implements GameControllerInterface {
      */
     @FXML
     void replay(final ActionEvent event) throws IOException {
-        final Stage menuScene = (Stage) replayGameButton.getScene().getWindow();
-        menuScene.close();
+        final Window window = replayGameButton.getScene().getWindow();
+        if (window instanceof Stage) {
+           final Stage menuScene = (Stage) window;
+           menuScene.close();
+        }
         closeAllWindows();
-        final FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/GameView.fxml"));
+        final FXMLLoader gameLoader = new FXMLLoader(getClass().getClassLoader().getResource("GameView.fxml"));
         final AnchorPane game = gameLoader.load();
         final Scene gameScene = new Scene(game);
         final Stage newGameStage = new Stage();

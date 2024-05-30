@@ -5,7 +5,6 @@ import java.util.List;
 import oopdevelopgradle.model.Bullet;
 import oopdevelopgradle.model.Professor;
 import oopdevelopgradle.model.Student;
-import oopdevelopgradle.controller.GamePlayController;
 
 /**
  * The Interface GamePlayViewInterface represents the view in the game. It
@@ -13,13 +12,6 @@ import oopdevelopgradle.controller.GamePlayController;
  * the game controller and also manages the state of the view.
  */
 public interface GamePlayViewInterface {
-    /**
-     * Sets the controller associated with this view.
-     *
-     * @param gameController The GamePlayController to be set.
-     */
-    void setController(GamePlayController gameController);
-
     /**
      * Checks if a professor card has been picked for placement on the game grid.
      *

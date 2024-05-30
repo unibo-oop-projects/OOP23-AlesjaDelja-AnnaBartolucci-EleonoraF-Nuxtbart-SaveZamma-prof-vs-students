@@ -13,7 +13,7 @@ public class Student extends AbstractGameElement {
     private static final int DEFAULT_ENERGY = 10; // The default energy level of the student.
     private static final int DEFAULT_ROW = 5; // The default row position of the student.
     private static final int DEFAULT_COL = 8; // The default column position of the student.
-
+    private static final Random RANDOM = new Random();
     /**
      * Constructor for creating a Student object.
      */
@@ -21,8 +21,7 @@ public class Student extends AbstractGameElement {
         super(DEFAULT_DAMAGE, null);
         this.health = DEFAULT_HEALTH;
         this.energy = DEFAULT_ENERGY;
-        final Random random = new Random();
-        final int randomY = random.nextInt(DEFAULT_ROW);
+        final int randomY = RANDOM.nextInt(DEFAULT_ROW);
         this.setPosition(new Elements<>(DEFAULT_COL, randomY));
     }
 
@@ -30,8 +29,7 @@ public class Student extends AbstractGameElement {
      * Generates a random position for the student within the game grid.
      */
     void generateRandomPosition() {
-        final Random random = new Random();
-        final int randomY = random.nextInt(DEFAULT_ROW);
+        final int randomY = RANDOM.nextInt(DEFAULT_ROW);
         this.setPosition(new Elements<>(DEFAULT_COL, randomY));
     }
 

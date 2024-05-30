@@ -10,7 +10,7 @@ public final class Bullet extends AbstractGameElement {
     private Elements<Integer, Integer> currentPosition;
     private final int bulletSpeed;
     private final int bulletDamage;
-
+    private static final Random RANDOM = new Random();
     /**
      * Constructor for BulletEntity.
      * 
@@ -70,8 +70,8 @@ public final class Bullet extends AbstractGameElement {
      */
     public void shootDiagonal() {
         // Calcola la nuova posizione del proiettile in diagonale
-        final Random random = new Random();
-        final int direction = random.nextInt(2); // Genera un numero casuale: 0 o 1
+        //final Random random = new Random();
+        final int direction = RANDOM.nextInt(2); // Genera un numero casuale: 0 o 1
         int newBulletX = currentPosition.getX(); // Inizializziamo con la posizione corrente
         int newBulletY = currentPosition.getY(); // Inizializziamo con la posizione corrente
         // Verifica la direzione e aggiorna le coordinate di conseguenza

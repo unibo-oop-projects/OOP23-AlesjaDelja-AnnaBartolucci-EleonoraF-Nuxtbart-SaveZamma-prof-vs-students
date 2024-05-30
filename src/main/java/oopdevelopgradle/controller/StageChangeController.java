@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * StageChangeController handle the changing from a scene to another in the
@@ -20,10 +21,19 @@ public final class StageChangeController implements StageChangeControllerInterfa
         final Scene scene;
         final Parent root;
         root = FXMLLoader.load(getClass().getResource(nameScene));
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        if (e.getSource() instanceof Node) {
+            final Scene sourceScene = ((Node) e.getSource()).getScene();
+            if (sourceScene != null) {
+                final Window window = sourceScene.getWindow();
+                if (window instanceof Stage) {
+                    stage = (Stage) window;
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                    return;
+                } 
+               } 
+        }
     }
 
     @Override

@@ -68,11 +68,6 @@ public final class GamePlayView implements GamePlayViewInterface {
     private final Logger log = Logger.getLogger(GamePlayController.class.getName());
 
     @Override
-    public void setController(final GamePlayController gameController) {
-        this.gameController = gameController;
-    }
-
-    @Override
     public boolean isFirstProfPicked() {
         return firstProfPicked;
     }
