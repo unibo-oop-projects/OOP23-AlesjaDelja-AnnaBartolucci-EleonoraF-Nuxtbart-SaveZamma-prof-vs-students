@@ -8,6 +8,7 @@ import java.util.Random;
 public class Student extends AbstractGameElement {
     private int health; // The health points of the student.
     private int energy; // The energy level of the student.
+	private Elements<Integer, Integer> position;
     private static final int DEFAULT_DAMAGE = 25; // The default damage inflicted by the student.
     private static final int DEFAULT_HEALTH = 100; // The default health points of the student.
     private static final int DEFAULT_ENERGY = 10; // The default energy level of the student.

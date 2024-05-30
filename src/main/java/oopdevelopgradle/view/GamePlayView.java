@@ -292,7 +292,7 @@ public final class GamePlayView implements GamePlayViewInterface {
                 break;
             case 2:
                 final NormalProfessor normalProfNew = new NormalProfessor(columnIndex, rowIndex);
-                final Bullet nProfBullet = normalProfNew.normalProfBullet;
+                final Bullet nProfBullet = normalProfNew.getNormalProfBullet();
                 if (normalProfNew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
                     gamePlayModel.getNormalProfList().add(normalProfNew);
                     normalProfInGrid.add(normalProfNew);

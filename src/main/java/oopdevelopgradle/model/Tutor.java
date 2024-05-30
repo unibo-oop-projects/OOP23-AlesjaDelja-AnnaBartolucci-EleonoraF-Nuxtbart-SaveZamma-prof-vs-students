@@ -25,7 +25,7 @@ public class Tutor extends Professor {
      */
     private Bullet tutorBullet;
     /**
-     * the speed of the bullet
+     * the speed of the bullet.
      */
     private int bulletSpeed = 1;
 

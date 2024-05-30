@@ -21,7 +21,10 @@ public class NormalProfessor extends Professor {
      * The ID of the normal professor.
      */
     public static final int NORMAL_PROF_NAME = 2;
-    public Bullet normalProfBullet;
+    /**
+     * The bullet object used by the normal professor in this class.
+     */
+    private Bullet normalProfBullet;
     private int bulletSpeed = 1;
 
     /**

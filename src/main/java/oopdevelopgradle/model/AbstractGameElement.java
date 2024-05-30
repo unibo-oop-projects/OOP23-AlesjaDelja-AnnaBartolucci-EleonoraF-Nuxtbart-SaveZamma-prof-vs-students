@@ -8,11 +8,11 @@ public abstract class AbstractGameElement implements GameElement {
     /**
      * used for the position of the element.
      */
-    protected Elements<Integer, Integer> position;
+    private Elements<Integer, Integer> position;
     /**
      * used for the damage of the element.
      */
-    protected int damage;
+    private int damage;
 
     /**
      * Constructor of an abstract game element.
