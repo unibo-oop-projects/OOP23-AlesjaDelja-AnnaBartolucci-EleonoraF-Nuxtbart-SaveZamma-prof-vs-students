@@ -12,26 +12,10 @@ import javafx.scene.layout.GridPane;
 public class ElementView implements ElementViewInterface {
     private GridPane gridPane;
     /**
-     * Retrieves the {@link GridPane} associated with this element.
-     *
-     * @return the {@link GridPane} associated with this element
-     */
-    public GridPane getGridPane() {
-    	return gridPane;
-	}
-    /**
-     * Sets the {@link GridPane} for this element.
-     *
-     * @param gridPane the {@link GridPane} to set
-     */
-	public void setGridPane(final GridPane gridPane) {
-		this.gridPane = gridPane;
-	}
-	/**
      * The image view used in this class.
      */
-	private ImageView imageView;
-	/**
+    private ImageView imageView;
+    /**
      * The width of the element.
      */
     private static final int WIDTH = 100;
@@ -49,6 +33,22 @@ public class ElementView implements ElementViewInterface {
         this.gridPane = gridPane;
     }
     /**
+     * Retrieves the {@link GridPane} associated with this element.
+     *
+     * @return the {@link GridPane} associated with this element
+     */
+    public GridPane getGridPane() {
+        return gridPane;
+     }
+    /**
+     * Sets the {@link GridPane} for this element.
+     *
+     * @param gridPane the {@link GridPane} to set
+     */
+     public void setGridPane(final GridPane gridPane) {
+        this.gridPane = gridPane;
+     }
+    /**
      * Displays the element at the specified position on the grid pane.
      *
      * @param positionElement the element containing the position (x, y) where the image should be displayed
@@ -63,7 +63,6 @@ public class ElementView implements ElementViewInterface {
         // Imposta la posizione dell'elemento
         gridPane.add(getImageView(), positionElement.getX(), positionElement.getY());
     }
-
     /**
      * Removes the image that is not needed for a student that is dead.
      */
@@ -73,7 +72,6 @@ public class ElementView implements ElementViewInterface {
         getImageView().setImage(null); // Libera il riferimento all'immagine per consentire la pulizia della memoria
         setImageView(null); // Libera il riferimento all'imageView
     }
-
     /**
      * Needed to get the path of the image needed.
      * 
@@ -87,15 +85,15 @@ public class ElementView implements ElementViewInterface {
      *
      * @return the current image view
      */
-	public ImageView getImageView() {
-		return imageView;
-	}
-	/**
+    public ImageView getImageView() {
+        return imageView;
+     }
+     /**
      * Sets the image view to be used in this class.
      *
      * @param imageView the new image view to set
      */
-	public void setImageView(final ImageView imageView) {
-		this.imageView = imageView;
-	}
+     public void setImageView(final ImageView imageView) {
+         this.imageView = imageView;
+     }
 }

@@ -2,7 +2,6 @@ package oopdevelopgradle.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,12 +21,11 @@ class TutorTest {
 
     /**
      * Test case for the {@link Tutor#getTutorBullet()} method.
-     * It checks if the Tutor's bullet is not null and is an instance of {@link Bullet}.
+     * It checks if the Tutor's bullet is not null.
      */
     @Test
     void testGetTutorBullet() {
         assertNotNull(tutor.getTutorBullet());
-        assertTrue(tutor.getTutorBullet() instanceof Bullet);
     }
 
     /**

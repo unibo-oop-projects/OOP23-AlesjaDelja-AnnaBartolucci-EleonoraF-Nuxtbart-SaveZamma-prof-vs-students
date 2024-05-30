@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 public final class HelpGameController implements GameControllerInterface {
     @FXML
     private Label helpLabel;
-    private final String testLabel = "Prof vs. Students is a strategy and defense game where the player "
+    private static final String TEST_LABEL = "Prof vs. Students is a strategy and defense game where the player "
             + "must protect their house from waves of students using a variety of profs with special abilities.\r\n"
             + "Players can plant various types of profs each with unique defensive functions such as shooting direct "
             + "and diagonal projectiles . \r\n"
@@ -37,7 +37,7 @@ public final class HelpGameController implements GameControllerInterface {
      * @throws IOException
      */
     public void initialize() throws IOException {
-        helpLabel.setText(testLabel);
+        helpLabel.setText(TEST_LABEL);
     }
 
     @Override
