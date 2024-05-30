@@ -20,7 +20,10 @@ public class Rector extends Professor {
      * The ID of the rector.
      */
     public static final int RECTOR_NAME = 3;
-    public Bullet rectorBullet;
+    /**
+     * The bullet object used by the rector in this class.
+     */
+    private Bullet rectorBullet;
     private int bulletSpeed = 1;
 
     /**

@@ -303,7 +303,7 @@ public final class GamePlayView implements GamePlayViewInterface {
                 break;
             case 3:
                 final Rector rectornew = new Rector(columnIndex, rowIndex);
-                final Bullet rectorBullet = rectornew.rectorBullet;
+                final Bullet rectorBullet = rectornew.getRectorBullet();
                 if (rectornew.getEnergyProfessor() <= gamePlayModel.getEnergy()) {
                     gamePlayModel.getRectorList().add(rectornew);
                     rectorInGrid.add(rectornew);
