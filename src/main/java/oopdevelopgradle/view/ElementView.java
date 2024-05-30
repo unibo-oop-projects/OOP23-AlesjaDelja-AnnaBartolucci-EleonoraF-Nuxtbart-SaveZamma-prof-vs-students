@@ -11,7 +11,6 @@ import javafx.scene.layout.GridPane;
  */
 public class ElementView implements ElementViewInterface {
     private GridPane gridPane;
-    
     /**
      * Retrieves the {@link GridPane} associated with this element.
      *
@@ -28,9 +27,17 @@ public class ElementView implements ElementViewInterface {
 	public void setGridPane(GridPane gridPane) {
 		this.gridPane = gridPane;
 	}
-
+	/**
+     * The image view used in this class.
+     */
 	protected ImageView imageView;
+	/**
+     * The width of the element.
+     */
     private static final int WIDTH = 100;
+    /**
+     * The height of the element.
+     */
     private static final int HEIGHT = 50;
 
     /**
