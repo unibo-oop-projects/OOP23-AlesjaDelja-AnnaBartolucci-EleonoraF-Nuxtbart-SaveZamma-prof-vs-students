@@ -42,7 +42,8 @@ val javaFxVersion = "15"
 dependencies {
     // Dipendenza per javafx.media
     // implementation("org.openjfx:javafx-media:$javaFxVersion:$platform")
-    
+     // Suppressions for SpotBugs
+    compileOnly("com.github.spotbugs:spotbugs-annotations:4.8.5")
     // Use JUnit Jupiter for testing.
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
 
@@ -51,9 +52,6 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation("com.google.guava:guava:31.1-jre")
-    
-    // Suppressions for SpotBugs
-    compileOnly("com.github.spotbugs:spotbugs-annotations:4.8.3")
     
     // JavaFX: comment out if you do not need them
     supportedPlatforms.forEach { platform ->
