@@ -24,7 +24,7 @@ public class NormalProfessor extends Professor {
     /**
      * The bullet object used by the normal professor in this class.
      */
-    private Bullet normalProfBullet;
+    private final Bullet normalProfBullet;
     private int bulletSpeed = 1;
 
     /**
@@ -53,9 +53,9 @@ public class NormalProfessor extends Professor {
      *
      * @param normalProfBullet The bullet to be used by the NormalProfessor.
      */
-    public void setNormalProfBullet(final Bullet normalProfBullet) {
+    /*public void setNormalProfBullet(final Bullet normalProfBullet) {
         this.normalProfBullet = normalProfBullet;
-    }
+    }*/
 
     /**
      * Gets the speed of the bullet used by the NormalProfessor.

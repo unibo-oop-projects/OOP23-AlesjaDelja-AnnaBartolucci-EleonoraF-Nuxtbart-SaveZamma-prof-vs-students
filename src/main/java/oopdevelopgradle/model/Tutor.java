@@ -23,7 +23,7 @@ public class Tutor extends Professor {
     /**
      * The bullet object used by the tutor in this class.
      */
-    private Bullet tutorBullet;
+    private final Bullet tutorBullet;
     /**
      * the speed of the bullet.
      */
@@ -54,9 +54,9 @@ public class Tutor extends Professor {
      * 
      * @param tutorBullet Value of the Tutor
      */
-    public void setTutorBullet(final Bullet tutorBullet) {
+    /*public void setTutorBullet(final Bullet tutorBullet) {
         this.tutorBullet = tutorBullet;
-    }
+    }*/
 
     /**
      * Gets the BulletSpeed of a Tutor.
