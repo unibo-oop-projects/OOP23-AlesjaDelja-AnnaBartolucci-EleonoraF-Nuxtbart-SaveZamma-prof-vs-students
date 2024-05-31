@@ -54,15 +54,6 @@ public class Tutor extends Professor {
     }
 
     /**
-     * Sets the Bullet of a Tutor.
-     * 
-     * @param tutorBullet Value of the Tutor
-     */
-    /*public void setTutorBullet(final Bullet tutorBullet) {
-        this.tutorBullet = tutorBullet;
-    }*/
-
-    /**
      * Gets the BulletSpeed of a Tutor.
      * 
      * @return the bulletSpeed of the Tutor
