@@ -4,12 +4,14 @@ import oopdevelopgradle.model.Elements;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * The class ElementView implements the methods in order to display a element on
  * the grid pane.
  */
 public class ElementView implements ElementViewInterface {
+    private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
     private final GridPane gridPane;
     /**
      * The image view used in this class.
@@ -29,6 +31,8 @@ public class ElementView implements ElementViewInterface {
      * 
      * @param gridPane The GridPane where the element view will be added.
      */
+    @SuppressFBWarnings({ EI_EXPOSE_REP })
+    //Justification:this list is used to define the view of a selected element.
     public ElementView(final GridPane gridPane) {
         this.gridPane = gridPane;
     }
