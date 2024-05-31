@@ -2,6 +2,8 @@ package oopdevelopgradle.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -86,8 +88,11 @@ public final class GamePlayController implements GamePlayControllerInterface {
         allProfessors.add(normalPInGame);
         allProfessors.add(rectorInGame);
     }
+    private static synchronized void setDataSource(final GamePlayModel ds) {
+         gameModel = ds; 
+    }
     @SuppressFBWarnings({ "EI_EXPOSE_REP" })
-    //Justification = "this method is used in a controlled manner within 
+    //Justification = this method is used in a controlled manner within 
     //the game controller and game view.
     @Override
     public void initData(final GamePlayView gamePlayView) {
@@ -95,7 +100,7 @@ public final class GamePlayController implements GamePlayControllerInterface {
         scoreMatch = new Score();
         scoreMatch.resetScore();
         gameStatus = true;
-        gameModel = new GamePlayModel();
+        setDataSource(new GamePlayModel()); //gameModel = new GamePlayModel();
         gameModel.setScoreMacth(scoreMatch.getScore());
         gameModel.setTimeTot(TEMPO_TOT_INIT);
         gameModel.setEnergy(ENERGY_INIT);
@@ -458,10 +463,12 @@ public final class GamePlayController implements GamePlayControllerInterface {
      *
      * @return The GamePlayModel associated with this controller.
      */
-    public static GamePlayModel getGameModel() {
-        return gameModel;
+    public static List<GamePlayModel> getGameModel() {
+        return Collections.unmodifiableList(Arrays.asList(gameModel));
     }
-
+    /*public static GamePlayModel getGameModel() {
+    return gameModel;
+}*/
     /*@Override
     public List<Student> getStudInGame() {
         return studInGame;

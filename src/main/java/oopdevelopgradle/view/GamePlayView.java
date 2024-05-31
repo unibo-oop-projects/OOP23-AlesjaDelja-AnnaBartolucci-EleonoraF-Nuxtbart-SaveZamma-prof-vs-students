@@ -94,10 +94,12 @@ public final class GamePlayView implements GamePlayViewInterface {
     @Override
     public void initializeView() {
         profChoosen = -1;
-        gamePlayModel = GamePlayController.getGameModel();
-        timer = new AnimationTimer() {
-            @Override
-            public void handle(final long now) {
+        final List<GamePlayModel> gameModels = GamePlayController.getGameModel();
+        if (!gameModels.isEmpty()) {
+            this.gamePlayModel = gameModels.get(0);
+            timer = new AnimationTimer() {
+              @Override
+              public void handle(final long now) {
                 if (!timerStop) {
                     if (now - lastTimeUpdate >= ONE_SECOND) {
                         timeTot = gamePlayModel.getTimeTot();
@@ -113,9 +115,10 @@ public final class GamePlayView implements GamePlayViewInterface {
                 } else {
                     timer.stop();
                 }
-            }
-        };
-        timer.start();
+             }
+            };
+            timer.start();
+        }
     }
 
     @Override
