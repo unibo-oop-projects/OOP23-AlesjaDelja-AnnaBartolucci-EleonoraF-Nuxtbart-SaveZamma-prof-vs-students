@@ -40,7 +40,7 @@ public class BulletView extends ElementView {
      */
     @Override
     public void displayElement(final Elements<Integer, Integer> positionElement) {
-        final Image image = new Image(getClass().getResourceAsStream(getImagePath()));
+        final Image image = new Image(BulletView.class.getResourceAsStream(getImagePath()));
         setImageView(new ImageView(image));
         // Impostare le dimensioni che siano addatte a quello che serve
         getImageView().setFitWidth(WIDTH);

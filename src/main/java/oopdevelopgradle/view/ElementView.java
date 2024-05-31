@@ -55,7 +55,7 @@ public class ElementView implements ElementViewInterface {
      */
     @Override
     public void displayElement(final Elements<Integer, Integer> positionElement) {
-        final Image image = new Image(getClass().getResourceAsStream(getImagePath()));
+        final Image image = new Image(ElementView.class.getResourceAsStream(getImagePath()));
         setImageView(new ImageView(image));
         // Impostare le dimensioni che siano adatte a quello che serve
         getImageView().setFitWidth(WIDTH);
