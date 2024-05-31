@@ -1,5 +1,7 @@
 package oopdevelopgradle.model;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * The class Tutor defines the properties of a tutor in the game.
  */
@@ -45,6 +47,8 @@ public class Tutor extends Professor {
      * 
      * @return tutorBullet the Bullet of the Tutor
      */
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
+    //Justification = this method is used in a controlled manner and does not expose internal data.
     public Bullet getTutorBullet() {
         return tutorBullet;
     }

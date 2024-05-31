@@ -2,6 +2,7 @@
 .gradle
 #Ignore files not needed
 .class
+.classpath
 
 # Ignore Gradle build output directory
 build
