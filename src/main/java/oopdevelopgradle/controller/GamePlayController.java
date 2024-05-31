@@ -88,8 +88,8 @@ public final class GamePlayController implements GamePlayControllerInterface {
         allProfessors.add(normalPInGame);
         allProfessors.add(rectorInGame);
     }
-    private static synchronized void setDataSource(final GamePlayModel ds) {
-         gameModel = ds; 
+    private static synchronized void setGamePlayModel(final GamePlayModel gamePlayModel) {
+         gameModel = gamePlayModel; 
     }
     @SuppressFBWarnings({ "EI_EXPOSE_REP" })
     //Justification = this method is used in a controlled manner within 
@@ -100,7 +100,7 @@ public final class GamePlayController implements GamePlayControllerInterface {
         scoreMatch = new Score();
         scoreMatch.resetScore();
         gameStatus = true;
-        setDataSource(new GamePlayModel()); //gameModel = new GamePlayModel();
+        setGamePlayModel(new GamePlayModel()); 
         gameModel.setScoreMacth(scoreMatch.getScore());
         gameModel.setTimeTot(TEMPO_TOT_INIT);
         gameModel.setEnergy(ENERGY_INIT);
@@ -123,7 +123,6 @@ public final class GamePlayController implements GamePlayControllerInterface {
             startGame(gamePlayView);
         }
     }
-
     @Override
     public void initGamePlay() throws IOException {
         if (gameStatus) {
@@ -133,7 +132,6 @@ public final class GamePlayController implements GamePlayControllerInterface {
             });
         }
     }
-
     @Override
     public void moveStudents() {
         final List<Student> studentToRemove = new ArrayList<>();
@@ -169,7 +167,6 @@ public final class GamePlayController implements GamePlayControllerInterface {
         }
         studInGame.removeAll(studentToRemove);
     }
-
     @Override
     public void handleProfessors() {
         final List<Professor> professorsToRemove = new ArrayList<>();
@@ -433,16 +430,6 @@ public final class GamePlayController implements GamePlayControllerInterface {
         }
     }
 
-    /*@Override
-    public Score getScoreMatch() {
-        return scoreMatch;
-    }*/
-
-   /* @Override
-    public void setScoreMatch(final Score scoreMatch) {
-        this.scoreMatch = scoreMatch;
-    }*/
-
     @Override
     public boolean isGameStatus() {
         return gameStatus;
@@ -453,11 +440,6 @@ public final class GamePlayController implements GamePlayControllerInterface {
         gameStatus = status;
     }
 
-    /*@Override
-    public GamePlayView getGamePlayView() {
-        return gamePlayView;
-    }*/
-
     /**
      * Retrieves the GamePlayModel associated with this controller.
      *
@@ -466,17 +448,5 @@ public final class GamePlayController implements GamePlayControllerInterface {
     public static List<GamePlayModel> getGameModel() {
         return Collections.unmodifiableList(Arrays.asList(gameModel));
     }
-    /*public static GamePlayModel getGameModel() {
-    return gameModel;
-}*/
-    /*@Override
-    public List<Student> getStudInGame() {
-        return studInGame;
-    }*/
-/*
-    @Override
-    public void setStudInGame(final List<Student> studInGame) {
-        this.studInGame = studInGame;
-    }*/
 
 }

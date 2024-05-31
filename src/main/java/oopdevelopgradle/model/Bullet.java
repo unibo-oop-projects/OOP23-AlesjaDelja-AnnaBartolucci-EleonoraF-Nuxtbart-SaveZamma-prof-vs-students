@@ -70,11 +70,9 @@ public final class Bullet extends AbstractGameElement {
      */
     public void shootDiagonal() {
         // Calcola la nuova posizione del proiettile in diagonale
-        //final Random random = new Random();
-        final int direction = RANDOM.nextInt(2); // Genera un numero casuale: 0 o 1
-        int newBulletX = currentPosition.getX(); // Inizializziamo con la posizione corrente
-        int newBulletY = currentPosition.getY(); // Inizializziamo con la posizione corrente
-        // Verifica la direzione e aggiorna le coordinate di conseguenza
+        final int direction = RANDOM.nextInt(2); 
+        int newBulletX = currentPosition.getX(); 
+        int newBulletY = currentPosition.getY(); 
         if (direction == 0) {
             // Sparare sulla diagonale a destra
             newBulletX += bulletSpeed;
@@ -84,7 +82,6 @@ public final class Bullet extends AbstractGameElement {
             newBulletX += bulletSpeed;
             newBulletY -= bulletSpeed;
         }
-        // Aggiorna la posizione del proiettile
         currentPosition = new Elements<>(newBulletX, newBulletY);
     }
 }

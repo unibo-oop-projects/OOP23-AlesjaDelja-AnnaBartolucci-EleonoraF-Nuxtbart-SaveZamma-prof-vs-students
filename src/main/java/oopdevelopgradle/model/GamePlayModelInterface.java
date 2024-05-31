@@ -99,13 +99,6 @@ public interface GamePlayModelInterface {
     List<Tutor> getTutorList();
 
     /**
-     * Sets the list of tutors.
-     * 
-     * @param tutorList The list of tutors to set.
-     */
-    //void setTutorList(List<Tutor> tutorList);
-
-    /**
      * Retrieves the list of normal professors.
      * 
      * @return The list of normal professors.
@@ -113,32 +106,11 @@ public interface GamePlayModelInterface {
     List<NormalProfessor> getNormalProfList();
 
     /**
-     * Sets the list of normal professors.
-     * 
-     * @param normalProfList The list of normal professors to set.
-     */
-    //void setNormalProfList(List<NormalProfessor> normalProfList);
-
-    /**
      * Retrieves the list of rectors.
      * 
      * @return The list of rectors.
      */
     List<Rector> getRectorList();
-
-    /**
-     * Sets the list of rectors.
-     * 
-     * @param rectorList The list of rectors to set.
-     */
-    //void setRectorList(List<Rector> rectorList);
-
-    /**
-     * Sets the list of students.
-     * 
-     * @param studentList The list of students to set.
-     */
-    //void setStudentList(List<Student> studentList);
 
     /**
      * Generates a new tutor and adds it to the list.

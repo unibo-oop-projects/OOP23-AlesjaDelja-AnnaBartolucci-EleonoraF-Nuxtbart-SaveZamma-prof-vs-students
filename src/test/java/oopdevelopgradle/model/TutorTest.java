@@ -27,18 +27,6 @@ class TutorTest {
     void testGetTutorBullet() {
         assertNotNull(tutor.getTutorBullet());
     }
-
-    /**
-     * Test case for the {@link Tutor#setTutorBullet(Bullet)} method.
-     * It verifies if the Tutor's bullet can be set correctly.
-     */
-    /*@Test
-    void testSetTutorBullet() {
-        final Bullet newBullet = new Bullet(2, 30, new Elements<>(2, 2));
-        tutor.setTutorBullet(newBullet);
-        assertEquals(newBullet, tutor.getTutorBullet());
-    }*/
-
     /**
      * Test case for the {@link Tutor#getBulletSpeed()} method.
      * It checks if the Tutor's bullet speed is initialized correctly.

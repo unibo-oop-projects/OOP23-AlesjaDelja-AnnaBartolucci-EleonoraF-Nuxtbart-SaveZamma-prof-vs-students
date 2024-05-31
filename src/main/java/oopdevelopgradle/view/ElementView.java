@@ -43,15 +43,7 @@ public class ElementView implements ElementViewInterface {
      */
     public GridPane getGridPane() {
         return gridPane;
-     }
-    /**
-     * Sets the {@link GridPane} for this element.
-     *
-     * @param gridPane the {@link GridPane} to set
-     */
-     /*public void setGridPane(final GridPane gridPane) {
-        this.gridPane = gridPane;
-     }*/
+    }
     /**
      * Displays the element at the specified position on the grid pane.
      *
@@ -61,10 +53,8 @@ public class ElementView implements ElementViewInterface {
     public void displayElement(final Elements<Integer, Integer> positionElement) {
         final Image image = new Image(ElementView.class.getResourceAsStream(getImagePath()));
         setImageView(new ImageView(image));
-        // Impostare le dimensioni che siano adatte a quello che serve
         getImageView().setFitWidth(WIDTH);
         getImageView().setFitHeight(HEIGHT);
-        // Imposta la posizione dell'elemento
         gridPane.add(getImageView(), positionElement.getX(), positionElement.getY());
     }
     /**

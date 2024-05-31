@@ -106,32 +106,12 @@ public interface GamePlayControllerInterface {
     boolean collisionProfAndStudents(List<Student> students, Professor prof);
 
     /**
-     * Removes the graphical representation of a bullet from the game view.
-     *
-     * @param bullet The bullet to remove from the game view.
-     */
-    // public void removeBulletView(Bullet bullet);
-    /**
      * Removes the graphical representation of a professor from the game view and
      * updates the game state accordingly.
      *
      * @param prof The professor whose graphical representation needs to be removed.
      */
     void removeProfessorView(Professor prof);
-
-    /**
-     * Retrieves the score of the current match.
-     *
-     * @return The score of the current match.
-     */
-    //Score getScoreMatch();
-
-    /**
-     * Sets the score of the current match.
-     *
-     * @param scoreMatch The score of the current match to be set.
-     */
-    //void setScoreMatch(Score scoreMatch);
 
     /**
      * Checks the status of the game.
@@ -147,24 +127,4 @@ public interface GamePlayControllerInterface {
      */
     void setGameStatus(boolean status);
 
-    /**
-     * Retrieves the GamePlayView associated with this controller.
-     *
-     * @return The GamePlayView associated with this controller.
-     */
-    //GamePlayView getGamePlayView();
-
-    /**
-     * Retrieves the list of students currently in the game.
-     *
-     * @return The list of students currently in the game.
-     */
-    //List<Student> getStudInGame();
-
-    /**
-     * Sets the list of students currently in the game.
-     *
-     * @param studInGame The list of students currently in the game to be set.
-     */
-    //void setStudInGame(List<Student> studInGame);
 }

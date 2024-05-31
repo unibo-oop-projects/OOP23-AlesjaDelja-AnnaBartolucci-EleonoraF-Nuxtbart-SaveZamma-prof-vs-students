@@ -69,7 +69,7 @@ public class GamePlayModel implements GamePlayModelInterface {
      * @param bulletListNormal The list of normalProf bullets.
      */
     @SuppressFBWarnings({ "EI_EXPOSE_REP2" })
-     //Justification = "this list is updated in a controlled manner within the controller,
+     //Justification = this list is updated in a controlled manner within the controller,
      //copying the list every time would bring degrade performance.
     @Override
     public void setBulletListNormal(final List<Bullet> bulletListNormal) {
@@ -181,16 +181,6 @@ public class GamePlayModel implements GamePlayModelInterface {
     }
 
     /**
-     * Sets the list of tutors.
-     * 
-     * @param tutorList The list of tutors.
-     */
-    /*@Override
-    public void setTutorList(final List<Tutor> tutorList) {
-        this.tutorList = tutorList;
-    }*/
-
-    /**
      * Takes the list of normal professors.
      * 
      * @return The list of normal professors.
@@ -204,16 +194,6 @@ public class GamePlayModel implements GamePlayModelInterface {
     }
 
     /**
-     * Sets the list of normal professors.
-     * 
-     * @param normalProfList The list of normal professors.
-     */
-    /*@Override
-    public void setNormalProfList(final List<NormalProfessor> normalProfList) {
-        this.normalProfList = normalProfList;
-    }*/
-
-    /**
      * Takes the list of rectors.
      * 
      * @return The list of rectors.
@@ -225,26 +205,6 @@ public class GamePlayModel implements GamePlayModelInterface {
     public List<Rector> getRectorList() {
         return rectorList;
     }
-
-    /**
-     * Sets the list of rectors.
-     * 
-     * @param rectorList The list of rectors.
-     */
-    /*@Override
-    public void setRectorList(final List<Rector> rectorList) {
-        this.rectorList = rectorList;
-    }*/
-
-    /**
-     * Sets the list of students.
-     * 
-     * @param studentList The list of students.
-     */
-    //@Override
-    /*public void setStudentList(final List<Student> studentList) {
-        this.studentList = studentList;
-    }*/
 
     /**
      * Generates a new tutor and adds it to the list.
