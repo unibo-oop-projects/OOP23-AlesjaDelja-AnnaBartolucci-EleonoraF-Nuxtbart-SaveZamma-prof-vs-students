@@ -53,15 +53,6 @@ public class NormalProfessor extends Professor {
     }
 
     /**
-     * Sets the bullet used by the NormalProfessor.
-     *
-     * @param normalProfBullet The bullet to be used by the NormalProfessor.
-     */
-    /*public void setNormalProfBullet(final Bullet normalProfBullet) {
-        this.normalProfBullet = normalProfBullet;
-    }*/
-
-    /**
      * Gets the speed of the bullet used by the NormalProfessor.
      *
      * @return The speed of the bullet used by the NormalProfessor.

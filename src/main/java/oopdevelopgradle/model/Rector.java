@@ -54,15 +54,6 @@ public class Rector extends Professor {
     }
 
     /**
-     * Sets the bullet used by the Rector.
-     *
-     * @param rectorBullet The bullet to be used by the Rector.
-     */
-    /*public void setRectorBullet(final Bullet rectorBullet) {
-        this.rectorBullet = rectorBullet;
-    }*/
-
-    /**
      * Gets the speed of the bullet used by the Rector.
      *
      * @return The speed of the bullet used by the Rector.
