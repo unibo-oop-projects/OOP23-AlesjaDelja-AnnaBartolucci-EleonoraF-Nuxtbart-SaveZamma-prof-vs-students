@@ -1,5 +1,7 @@
 package oopdevelopgradle.model;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * The class NormalProfessor defines the properties of a normal professor in the
  * game.
@@ -44,6 +46,8 @@ public class NormalProfessor extends Professor {
      *
      * @return The bullet used by the NormalProfessor.
      */
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
+    //Justification = this method is used in a controlled manner and does not expose internal data.
     public Bullet getNormalProfBullet() {
         return normalProfBullet;
     }

@@ -1,5 +1,7 @@
 package oopdevelopgradle.model;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * The class Rector defines the properties of a rector in the game.
  */
@@ -45,6 +47,8 @@ public class Rector extends Professor {
      *
      * @return The bullet used by the Rector.
      */
+    @SuppressFBWarnings({ "EI_EXPOSE_REP" })
+    //Justification = this method is used in a controlled manner and does not expose internal data.
     public Bullet getRectorBullet() {
         return rectorBullet;
     }

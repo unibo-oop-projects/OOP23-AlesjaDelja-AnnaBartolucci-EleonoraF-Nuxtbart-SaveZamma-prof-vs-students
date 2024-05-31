@@ -32,7 +32,7 @@ public class ElementView implements ElementViewInterface {
      * @param gridPane The GridPane where the element view will be added.
      */
     @SuppressFBWarnings({ EI_EXPOSE_REP })
-    //Justification:this list is used to define the view of a selected element.
+    //Justification = this method is used in a controlled manner.
     public ElementView(final GridPane gridPane) {
         this.gridPane = gridPane;
     }
@@ -41,6 +41,8 @@ public class ElementView implements ElementViewInterface {
      *
      * @return the {@link GridPane} associated with this element
      */
+    @SuppressFBWarnings({ EI_EXPOSE_REP })
+    //Justification = this method is used in a controlled manner.
     public GridPane getGridPane() {
         return gridPane;
     }
@@ -79,6 +81,8 @@ public class ElementView implements ElementViewInterface {
      *
      * @return the current image view
      */
+    @SuppressFBWarnings({ EI_EXPOSE_REP })
+    //Justification = this method is used in a controlled manner.
     public ImageView getImageView() {
         return imageView;
      }
@@ -87,6 +91,8 @@ public class ElementView implements ElementViewInterface {
      *
      * @param imageView the new image view to set
      */
+    @SuppressFBWarnings({ EI_EXPOSE_REP })
+    //Justification = this method is used in a controlled.
      public void setImageView(final ImageView imageView) {
          this.imageView = imageView;
      }
